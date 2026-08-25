@@ -549,7 +549,13 @@ export class VehicleimagemasterComponent {
 
   // TEMP : pushing in the local store. Replace with
   // this.commonService.saveVehicleImageMapping(mappingObj).subscribe(...)
-  saveMapping() {
+  // the event is stopped here itself , because *ngIf removes this popup
+  // as soon as pending becomes null and after that the click was reaching
+  // the image and was creating one more point on the save / close button
+  saveMapping(ev?: Event) {
+    if (ev) {
+      ev.stopPropagation();
+    }
     if (!this.pending) {
       return;
     }
@@ -603,7 +609,10 @@ export class VehicleimagemasterComponent {
     this.getMappingData();
   }
 
-  cancelMapping() {
+  cancelMapping(ev?: Event) {
+    if (ev) {
+      ev.stopPropagation();
+    }
     this.pending = null;
     this.selectedLocation = null;
   }

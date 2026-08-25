@@ -150,12 +150,12 @@
               class="vi-pin vi-marker"
               [style.left.%]="map.X_Coordinate"
               [style.top.%]="map.Y_Coordinate"
+              (click)="selectMapping(map, $event)"
             >
               <button
                 class="vi-marker-btn"
                 [ngClass]="{ 'vi-marker-active': isCurrentMapping(map) }"
                 [style.background]="colorOf(map)"
-                (click)="selectMapping(map, $event)"
                 title="{{ map.Location_Name }}"
               >
                 {{ i + 1 }}
@@ -185,10 +185,11 @@
               class="vi-pin vi-pin-top"
               [style.left.%]="pending.x"
               [style.top.%]="pending.y"
+              (click)="$event.stopPropagation()"
             >
               <span class="vi-pending-dot"></span>
 
-              <div class="vi-pending-box" (click)="$event.stopPropagation()">
+              <div class="vi-pending-box">
                 <mat-form-field appearance="fill">
                   <mat-label>Select Location</mat-label>
                   <mat-select [(ngModel)]="selectedLocation">
@@ -204,14 +205,14 @@
                 <div class="vi-pending-btns">
                   <button
                     class="vi-mini-btn"
-                    (click)="saveMapping()"
+                    (click)="saveMapping($event)"
                     title="Save mapping"
                   >
                     &#10003;
                   </button>
                   <button
                     class="vi-mini-btn vi-cancel-btn"
-                    (click)="cancelMapping()"
+                    (click)="cancelMapping($event)"
                     title="Cancel"
                   >
                     &#10005;
