@@ -1,0 +1,35 @@
+img
+{
+    height: auto;
+    width: 700px;
+}
+
+.img
+{
+    width: 100%;
+    text-align: center;
+    background-color: #fff;
+}
+
+.error
+{
+    font-size: xxx-large;
+}
+
+@media (max-width:768px)
+{
+    img
+    {
+        width: -webkit-fill-available;
+    }
+    .error
+    {
+        font-size: x-large;
+
+    }
+
+    span
+    {
+        font-size: large!important;
+    }
+}

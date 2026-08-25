@@ -1,0 +1,144 @@
+/* .plantname{
+    line-height: 43px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.logo{
+    background-color: white !important;
+}
+.ngslide{
+    text-align: -webkit-center !important;
+}
+
+@media (max-width: 767px){
+.main-header .logo1 {
+    display: none;
+}
+} */
+
+.navbar,
+.user-header {
+  background-color: #e31837 !important;
+}
+
+.plant-name-section {
+  width: 100%;
+}
+
+.plantname {
+  line-height: 43px;
+  font-size: 16px;
+  font-weight: bold;
+  /* padding-left: 20px; */
+  color: #fff;
+}
+
+.empname {
+  color: #fff;
+}
+.logo {
+  background-color: white !important;
+}
+.ngslide {
+  text-align: -webkit-center !important;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    display: flex;
+    height: 30px !important;
+    min-height: 30px;
+  }
+  .user-image,
+  .logo {
+    width: 38% !important;
+    object-fit: contain;
+  }
+  .sidebar-toggle {
+    padding: 7px 7px !important;
+  }
+  .navbar-ul {
+    display: flex;
+  }
+  .user-menu {
+    width: 75%;
+  }
+  .logo2-li {
+    width: 25%;
+  }
+  .plant-name-section {
+    display: flex;
+    /* width: 80%; */
+    width: 50%;
+  }
+  .logo1 {
+    width: 100% !important;
+  }
+  .logo {
+    padding: 0 5px !important;
+    height: 30px;
+  }
+  .dropdown-toggle {
+    float: right;
+  }
+  .plantname,
+  .empname {
+    font-size: 9px;
+    align-items: center;
+    display: flex;
+  }
+  .plantname {
+    line-height: 1.42857143 !important;
+  }
+  .empname {
+    padding-left: 3px;
+  }
+  .user-image {
+    margin-top: 0px !important;
+    height: 15px !important;
+    width: 15px !important;
+  }
+  .user-name {
+    max-height: 30px;
+    align-items: center;
+    display: flex;
+  }
+
+  .navbar-custom-menu {
+    width: 30% !important;
+  }
+}
+@media (max-width: 768px) {
+  .navbar-custom-menu {
+    width: 50% !important;
+  }
+
+  .sidebar-mini.sidebar-collapse .main-header .logo {
+    /* width: fit-content!important; */
+    width: 38% !important;
+  }
+
+  .sidebar-mini.sidebar-collapse .main-header .logo1 {
+    width: 100% !important;
+  }
+}
+
+/* Track */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #db4848;
+  height: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+a {
+  cursor: pointer;
+}

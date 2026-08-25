@@ -1,0 +1,6 @@
+var formatters = GlobalConfiguration.Configuration.Formatters;
+formatters.Remove(formatters.XmlFormatter);
+GlobalConfiguration.Configuration.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
+
+
+ 

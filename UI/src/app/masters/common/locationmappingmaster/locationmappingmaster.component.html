@@ -1,0 +1,418 @@
+<div class="row">
+  <div class="master-headings q-strip" id="btn-add">
+    Location Mapping Master (TCF & BIW)
+  </div>
+  <div
+    *ngIf="canCreate || modifyFlag"
+    class="container"
+    style="margin-top: 15px"
+  >
+    <div class="mapping-wrapper">
+
+  <div class="mapping-grid">
+    <!-- COLUMN HEADERS -->
+    <div class="cell header" style="background-color: darkcyan; height: 30px;">TCF</div>
+    <div class="cell header" style="background-color: darkcyan; height: 30px;">BIW</div>
+
+    <!-- SHOP -->
+    <div class="cell">
+      <div class="center-dropdown">
+      <mat-form-field appearance="fill">
+        <mat-label>Shop</mat-label>
+        <mat-select [(ngModel)]="selectedShopTCF"
+                    (selectionChange)="selectShopTCF($event.value)">
+          <mat-option *ngFor="let s of shoplistTCF" [value]="s">
+            {{ s.Shop_Name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
+    </div>
+
+    <div class="cell">
+      <div class="center-dropdown">
+      <mat-form-field appearance="fill">
+        <mat-label>Shop</mat-label>
+        <mat-select [(ngModel)]="selectedShopBIW"
+                    (selectionChange)="selectShopBIW($event.value)">
+          <mat-option *ngFor="let s of shoplistBIW" [value]="s">
+            {{ s.Shop_Name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
+    </div>
+
+    <!-- MODEL -->
+    <div class="cell">
+      <div class="center-dropdown">
+      <mat-form-field appearance="fill">
+        <mat-label>Model</mat-label>
+        <mat-select [(ngModel)]="selectedmodelTCF"
+                    (selectionChange)="selectModelTCF($event.value)">
+          <mat-option *ngFor="let m of modelListTCF" [value]="m">
+            {{ m.Model_Name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
+    </div>
+
+    <div class="cell">
+      <div class="center-dropdown">
+      <mat-form-field appearance="fill">
+        <mat-label>Model</mat-label>
+        <mat-select [(ngModel)]="selectedmodelBIW"
+                    (selectionChange)="selectModelBIW($event.value)">
+          <mat-option *ngFor="let m of modelListBIW" [value]="m">
+            {{ m.Model_Name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
+    </div>
+
+    <!-- AREA -->
+    <div class="cell">
+      <div class="center-dropdown">
+      <mat-form-field appearance="fill">
+        <mat-label>Area</mat-label>
+        <mat-select [(ngModel)]="selectedAreaTCF"
+                    (selectionChange)="selectAreaTCF($event.value)">
+          <mat-option *ngFor="let a of AreaListTCF" [value]="a">
+            {{ a.Area_Name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
+    </div>
+
+    <div class="cell">
+      <div class="center-dropdown">
+      <mat-form-field appearance="fill">
+        <mat-label>Area</mat-label>
+        <mat-select [(ngModel)]="selectedAreaBIW"
+                    (selectionChange)="selectAreaBIW($event.value)">
+          <mat-option *ngFor="let a of AreaListBIW" [value]="a">
+            {{ a.Area_Name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
+    </div>
+
+    <!-- PART -->
+    <div class="cell">
+      <div class="center-dropdown">
+      <mat-form-field appearance="fill">
+        <mat-label>Part</mat-label>
+        <mat-select [(ngModel)]="selectedpartTCF"
+                    (selectionChange)="selectPartTCF($event.value)">
+          <mat-option *ngFor="let p of partlistTCF" [value]="p">
+            {{ p.Part_Name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
+    </div>
+
+    <div class="cell">
+      <div class="center-dropdown">
+      <mat-form-field appearance="fill">
+        <mat-label>Part</mat-label>
+        <mat-select [(ngModel)]="selectedpartBIW"
+                    (selectionChange)="selectPartBIW($event.value)">
+          <mat-option *ngFor="let p of partlistBIW" [value]="p">
+            {{ p.Part_Name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
+    </div>
+
+    <!-- CHECK POINT -->
+    <div class="cell">
+      <div class="center-dropdown">
+      <mat-form-field appearance="fill">
+        <mat-label>Check Point</mat-label>
+        <mat-select [(ngModel)]="selectedCPTCF"
+                    (selectionChange)="selectCPTCF($event.value)">
+          <mat-option *ngFor="let cp of cpListTCF" [value]="cp">
+            {{ cp.Checkpoint_Name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
+    </div>
+
+    <div class="cell">
+      <div class="center-dropdown">
+      <mat-form-field appearance="fill">
+        <mat-label>Check Point</mat-label>
+        <mat-select [(ngModel)]="selectedCPBIW"
+                    (selectionChange)="selectCPBIW($event.value)">
+          <mat-option *ngFor="let cp of cpListBIW" [value]="cp">
+            {{ cp.Checkpoint_Name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
+    </div>
+
+    <!-- LOCATION -->
+    <div class="cell highlight">
+      <div class="center-dropdown">
+      <mat-form-field appearance="fill">
+        <mat-label>TCF Location</mat-label>
+        <mat-select [(ngModel)]="selectedLocationTCF"
+                    (selectionChange)="onSelectLocationTCF($event)">
+          <mat-option *ngFor="let l of LocationListTCF" [value]="l">
+            {{ l.Location_Name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
+    </div>
+
+    <div class="cell highlight">
+      <div class="center-dropdown">
+      <mat-form-field appearance="fill">
+        <mat-label>BIW Location</mat-label>
+        <mat-select [(ngModel)]="selectedLocationBIW"
+                    (selectionChange)="onSelectLocationBIW($event)">
+          <mat-option *ngFor="let l of LocationListBIW" [value]="l">
+            {{ l.Location_Name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="save-row">
+    <button mat-raised-button style="background-color:#1c84c6; color:white"
+            (click)="saveLocationMapping()">
+      Save Mapping
+    </button>
+  </div>
+
+</div>
+    
+  </div>
+</div>
+<!-- BIW Start -->
+
+<!-- <div class="row">
+  <div class="master-headings q-strip" id="btn-add">
+    Location Mapping Master (BIW)
+  </div>
+  <div
+    *ngIf="canCreate || modifyFlag"
+    class="container"
+    style="margin-top: 15px"
+  >
+    <span class="selection-section">
+      <div class="col-md-2">
+        <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+          <mat-label> Shop </mat-label>
+          <mat-select
+            [(ngModel)]="selectedShopBIW"
+            (selectionChange)="selectShopBIW($event.value)"
+          >
+            <mat-option *ngFor="let ShopBIW of shoplistBIW" [value]="ShopBIW">{{
+              ShopBIW.Shop_Name
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+          <mat-label> Model </mat-label>
+          <mat-select
+            [(ngModel)]="selectedmodelBIW"
+            (selectionChange)="selectModelBIW($event.value)"
+          >
+            <mat-option>
+              <ngx-mat-select-search
+                [placeholderLabel]="'Search Model'"
+                noEntriesFoundLabel="No matching found for {{
+                  ModelFilterBIW.value
+                }}"
+                [formControl]="ModelFilterBIW"
+              >
+                <mat-icon ngxMatSelectSearchClear
+                  >delete</mat-icon
+                ></ngx-mat-select-search
+              >
+            </mat-option>
+            <mat-option
+              *ngFor="
+                let ModelBIW of modelListBIW | search: ModelFilterBIW.value
+              "
+              [value]="ModelBIW"
+              >{{ ModelBIW.Model_Name }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+          <mat-label> Area </mat-label>
+          <mat-select
+            [(ngModel)]="selectedAreaBIW"
+            (selectionChange)="selectAreaBIW($event.value)"
+          >
+            <mat-option>
+              <ngx-mat-select-search
+                [placeholderLabel]="'Search Area'"
+                noEntriesFoundLabel="No matching found for {{
+                  AreaFilterBIW.value
+                }}"
+                [formControl]="AreaFilterBIW"
+              >
+                <mat-icon ngxMatSelectSearchClear
+                  >delete</mat-icon
+                ></ngx-mat-select-search
+              >
+            </mat-option>
+            <mat-option
+              *ngFor="let AreaBIW of AreaListBIW | search: AreaFilterBIW.value"
+              [value]="AreaBIW"
+              >{{ AreaBIW.Area_Name }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+          <mat-label> Part </mat-label>
+          <mat-select
+            [(ngModel)]="selectedpartBIW"
+            (selectionChange)="selectPartBIW($event.value)"
+          >
+            <mat-option>
+              <ngx-mat-select-search
+                [placeholderLabel]="'Search Part'"
+                noEntriesFoundLabel="No matching found for {{
+                  PartFilterBIW.value
+                }}"
+                [formControl]="PartFilterBIW"
+              >
+                <mat-icon ngxMatSelectSearchClear
+                  >delete</mat-icon
+                ></ngx-mat-select-search
+              >
+            </mat-option>
+            <mat-option
+              *ngFor="let PartBIW of partlistBIW | search: PartFilterBIW.value"
+              [value]="PartBIW"
+              >{{ PartBIW.Part_Name }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+          <mat-label> Check Point </mat-label>
+          <mat-select
+            [(ngModel)]="selectedCPBIW"
+            (selectionChange)="selectCPBIW($event.value)"
+          >
+            <mat-option>
+              <ngx-mat-select-search
+                [placeholderLabel]="'Search Check Point'"
+                noEntriesFoundLabel="No matching found for {{
+                  CPFilterBIW.value
+                }}"
+                [formControl]="CPFilterBIW"
+              >
+                <mat-icon ngxMatSelectSearchClear
+                  >delete</mat-icon
+                ></ngx-mat-select-search
+              >
+            </mat-option>
+            <mat-option
+              *ngFor="let cpBIW of cpListBIW | search: CPFilterBIW.value"
+              [value]="cpBIW"
+              >{{ cpBIW.Checkpoint_Name }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </span>
+  </div>
+</div> -->
+
+<!-- BIW END -->
+ <div class="row" style="padding-top: 30px">
+  <div class="col-md-12">
+    <input
+      type="text"
+      style="
+        width: 100%;
+        border-radius: 13px !important;
+        height: 35px;
+        text-align: center;
+        font-weight: bold;
+        border: 1px solid #000 !important;
+      "
+      placeholder="Search Anything"
+      [(ngModel)]="searchInput"
+    />
+  </div>
+ </div>
+
+<div
+  style="border-top: 1px dotted gray"
+  class="row m-0"
+  *ngIf="locationMappings?.length > 0"
+  
+>
+  <div class="col-md-12" style="margin-top: 10px; padding: 0">
+    <div class="table-container">
+      <table style="margin-top: 10px" class="table table-bordered">
+        <thead class="sticky-header">
+          <tr>
+            <th class="header-background">TCF Location</th>
+            <th class="header-background">BIW Location</th>
+            <th class="header-background" style="width: 11%">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let item of locationMappings | search : searchInput;
+              trackBy: trackForLoop;
+              let i = index
+            "
+          >
+            <td>{{ item.TCF_Location_Name }}</td>
+            <td>{{ item.BIW_Location_Name }}</td>
+            
+            <td>
+              <!-- <span
+                style="
+                  border-radius: 50% !important;
+                  background-color: #0b9494;
+                  color: black !important;
+                "
+                class="btn fa fa-pencil"
+                (click)="modifySelectedMapping(item.LM_ID)"
+              ></span> -->
+              <span
+                style="
+                  border-radius: 50% !important;
+                  background-color: #d74f4f;
+                  color: black !important;
+                "
+                class="btn fa fa-trash deletebutton"
+                (click)="DeleteMapping(item.LM_ID)"
+              ></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

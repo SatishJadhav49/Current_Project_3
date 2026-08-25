@@ -1,0 +1,119 @@
+.q-strip {
+  background-color: black;
+  color: white;
+  margin-bottom: 0.3%;
+  box-shadow: 0 1px 0px rgba(0, 0, 0, 0.12), 3px 4px 1px rgba(66, 59, 59, 0.24);
+  border-radius: 0;
+  border-radius: 4px !important;
+  text-align: center;
+  height: 28px;
+  font-size: 17.5px;
+}
+.master-headings {
+  width: 100%;
+  font-weight: 900;
+  margin-top: 36px !important;
+  /* margin-top: 19px !important; */
+}
+input {
+  border: none !important;
+}
+
+::ng-deep datepicker-value-example .mat-form-field-label {
+  color: red;
+}
+
+::ng-deep .mat-datepicker-toggle {
+  color: red;
+}
+::ng-deep .mat-form-field-underline {
+  background: red;
+}
+
+::ng-deep.mdc-text-field--filled {
+  height: 48px !important;
+}
+
+th {
+  font-weight: bold;
+  font-size: 19px;
+  color: black !important;
+}
+
+/* Action plan section */
+
+.modal-dialog {
+  width: 100%;
+}
+.modal-content {
+  margin-top: 10px;
+}
+.modal-header {
+  padding: 5px;
+  width: 100%;
+  text-align: center;
+  height: fit-content;
+  background-color: var(--mdc-theme-secondary, #ff4081);
+}
+.example-full-width {
+  width: 100%;
+  height: 100px;
+}
+
+.modal {
+  z-index: 2000; /* set a value higher than the Datepicker's z-index */
+}
+
+.cdk-overlay-container {
+  z-index: 2500; /* or any value higher than your modal's z-index */
+}
+
+.mat-datepicker-content {
+  z-index: 3000; /* or any value higher than your modal's z-index */
+}
+
+.btn-forsave {
+  margin: 10px 0px;
+}
+
+.auditedDate {
+  background: orange;
+  border-radius: 100%;
+}
+
+.col-md-2 {
+  padding: 0px 3px;
+}
+@media only screen and (max-width: 768px) {
+  .master-headings {
+    margin-top: 16px !important;
+  }
+
+  .q-strip {
+    height: 24px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 992px) {
+  .row:nth-child(2) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .col-md-2 {
+    width: 50%;
+  }
+  .col-md-4 {
+    width: 100%;
+  }
+}
+
+.header-background {
+  background-color: darkcyan !important;
+  color: white !important;
+  font-size: 16px;
+}
+
+th {
+  vertical-align: middle !important;
+}

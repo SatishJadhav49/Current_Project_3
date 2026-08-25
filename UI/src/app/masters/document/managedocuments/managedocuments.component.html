@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="master-headings q-strip" style="width: 100%; font-weight: 900; margin-top: 36px" id="btn-add">
+        Manage Documents
+    </div>
+</div>
+<div *ngIf="canCreate" class="row" style="margin-top: 20px;">
+    <div class="col-md-4">
+        <input type="file" id="fileInput" (change)="onFileSelected($event)" class="form-control"
+            accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.png,.jpeg,.jpg" />
+    </div>
+    <div class="col-md-4">
+        <input type="text" id="documentTitle" placeholder="Enter document title" class="form-control"
+            [(ngModel)]="FileTitle" />
+    </div>
+    <div class="col-md-4">
+        <button (click)="onUpload()" class="btn-forsave">Upload</button>
+    </div>
+</div>
+
+<div class="row" style="margin-top: 20px;">
+    <div class="col-md-12" style="padding: 0" *ngIf="TableData?.length > 0">
+        <div class="table-container" style="overflow-x: auto;width: 100%;">
+            <table style="margin-top: 10px" class="table table-bordered">
+                <thead class="sticky-header">
+                    <tr>
+                        <th class="header-background">Title</th>
+                        <th class="header-background">Upload Date</th>
+                        <th class="header-background">Uploaded By</th>
+                        <th class="header-background">Download</th>
+                        <th *ngIf="canDelete" class="header-background" style="width: 115px">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="
+                                let item of TableData ;
+                                let i = index
+                              ">
+                        <td>{{ item.Document_Title }}</td>
+                        <td>{{ item.Inserted_Date | date:'dd-MMM-yyyy' }}</td>
+                        <td>{{ item.Employee_Name }}</td>
+                        <td><span style="border-radius: 50% !important;
+                                                                        background-color: #0b9494;
+                                                                        color: black !important;
+                                                                      " class="btn fa fa-download"
+                                (click)="downloadFile(item.Document_Path,item.Document_Title)"></span></td>
+                        <td *ngIf="canDelete">
+
+
+                            <span style="
+                                    border-radius: 50% !important;
+                                    background-color: #d74f4f;
+                                    color: black !important;
+                                  " class="btn fa fa-trash deletebutton"
+                                (click)="DeleteRecord(item.Document_ID)"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+.row {
+  margin-top: -17px;
+}
+
+@media (min-width: 1100px) {
+  .row {
+    margin-top: -17px;
+  }
+}
+@media (min-width: 568px) {
+  .row {
+    margin-top: -10px;
+  }
+}
+@media (max-width: 568px) {
+  .row {
+    margin-top: -5px;
+  }
+}
+
+.btn-forsave {
+  width: 200px !important;
+  height: 101px;
+  font-size: medium;
+}

@@ -1,0 +1,2433 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OneD_Module_DB" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Audit_Type_Master">
+    <Key>
+      <PropertyRef Name="Audit_Type_Id" />
+    </Key>
+    <Property Name="Audit_Type_Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Audit_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Plant_Code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Is_Transferred" Type="Boolean" />
+    <NavigationProperty Name="MM_AreaMaster" Relationship="Self.FK_MM_AreaMaster_Audit_Type_Master" FromRole="Audit_Type_Master" ToRole="MM_AreaMaster" />
+    <NavigationProperty Name="MM_Audit_BuildPhase_Mstr" Relationship="Self.FK_MM_Audit_BuildPhase_Mstr_Audit_Type_Master" FromRole="Audit_Type_Master" ToRole="MM_Audit_BuildPhase_Mstr" />
+    <NavigationProperty Name="MM_Audit_Plan_Master" Relationship="Self.FK_MM_Audit_Plan_Master_Audit_Type_Master" FromRole="Audit_Type_Master" ToRole="MM_Audit_Plan_Master" />
+    <NavigationProperty Name="MM_CheckpointMaster" Relationship="Self.FK_MM_CheckpointMaster_Audit_Type_Master" FromRole="Audit_Type_Master" ToRole="MM_CheckpointMaster" />
+    <NavigationProperty Name="MM_Employee" Relationship="Self.FK_MM_Employee_Audit_Type_Master" FromRole="Audit_Type_Master" ToRole="MM_Employee" />
+    <NavigationProperty Name="MM_FQ_Target_Master" Relationship="Self.FK_MM_FQ_Target_Master_Audit_Type_Master" FromRole="Audit_Type_Master" ToRole="MM_FQ_Target_Master" />
+    <NavigationProperty Name="MM_FY_Target_Master" Relationship="Self.FK_MM_FY_Target_Master_Audit_Type_Master" FromRole="Audit_Type_Master" ToRole="MM_FY_Target_Master" />
+    <NavigationProperty Name="MM_Image_Master" Relationship="Self.FK_MM_Image_Master_Audit_Type_Master" FromRole="Audit_Type_Master" ToRole="MM_Image_Master" />
+    <NavigationProperty Name="MM_LocationMaster" Relationship="Self.FK_MM_LocationMaster_Audit_Type_Master" FromRole="Audit_Type_Master" ToRole="MM_LocationMaster" />
+    <NavigationProperty Name="MM_Menus" Relationship="Self.FK_MM_Menus_MM_Menus" FromRole="Audit_Type_Master" ToRole="MM_Menus" />
+    <NavigationProperty Name="MM_Model" Relationship="Self.FK_MM_Model_Audit_Type_Master" FromRole="Audit_Type_Master" ToRole="MM_Model" />
+    <NavigationProperty Name="MM_PartMaster" Relationship="Self.FK_MM_PartMaster_Audit_Type_Master" FromRole="Audit_Type_Master" ToRole="MM_PartMaster" />
+    <NavigationProperty Name="MM_Shift" Relationship="Self.FK_MM_Shift_Audit_Type_Master" FromRole="Audit_Type_Master" ToRole="MM_Shift" />
+    <NavigationProperty Name="MM_Shop" Relationship="Self.FK_MM_Shop_Audit_Type_Master" FromRole="Audit_Type_Master" ToRole="MM_Shop" />
+    <NavigationProperty Name="MM_Track_Sheet" Relationship="Self.FK_MM_Track_Sheet_Audit_Type_Master" FromRole="Audit_Type_Master" ToRole="MM_Track_Sheet" />
+    <NavigationProperty Name="MM_Vehicle_Audit" Relationship="Self.FK_MM_Vehicle_Audit_Audit_Type_Master" FromRole="Audit_Type_Master" ToRole="MM_Vehicle_Audit" />
+  </EntityType>
+  <EntityType Name="MM_AreaMaster">
+    <Key>
+      <PropertyRef Name="Area_ID" />
+    </Key>
+    <Property Name="Area_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Area_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Area_Desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Shop_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Model_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Is_Gap" Type="Boolean" />
+    <Property Name="Is_Flushness" Type="Boolean" />
+    <Property Name="Is_Active" Type="Boolean" />
+    <Property Name="SORTORDER" Type="Int32" />
+    <Property Name="Plant_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Audit_Type_Id" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Is_Deleted" Type="Boolean" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Plant_Code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Is_Transferred" Type="Boolean" />
+    <NavigationProperty Name="Audit_Type_Master" Relationship="Self.FK_MM_AreaMaster_Audit_Type_Master" FromRole="MM_AreaMaster" ToRole="Audit_Type_Master" />
+    <NavigationProperty Name="MM_Model" Relationship="Self.FK_MM_AreaMaster_MM_Model" FromRole="MM_AreaMaster" ToRole="MM_Model" />
+    <NavigationProperty Name="MM_Plant" Relationship="Self.FK_MM_AreaMaster_MM_Plant" FromRole="MM_AreaMaster" ToRole="MM_Plant" />
+    <NavigationProperty Name="MM_Shop" Relationship="Self.FK_MM_AreaMaster_MM_Shop" FromRole="MM_AreaMaster" ToRole="MM_Shop" />
+    <NavigationProperty Name="MM_CheckpointMaster" Relationship="Self.FK_MM_CheckpointMaster_MM_AreaMaster" FromRole="MM_AreaMaster" ToRole="MM_CheckpointMaster" />
+    <NavigationProperty Name="MM_Image_Master" Relationship="Self.FK_MM_Image_Master_MM_AreaMaster" FromRole="MM_AreaMaster" ToRole="MM_Image_Master" />
+    <NavigationProperty Name="MM_LocationMaster" Relationship="Self.FK_MM_LocationMaster_MM_AreaMaster" FromRole="MM_AreaMaster" ToRole="MM_LocationMaster" />
+    <NavigationProperty Name="MM_PartMaster" Relationship="Self.FK_MM_PartMaster_MM_AreaMaster" FromRole="MM_AreaMaster" ToRole="MM_PartMaster" />
+    <NavigationProperty Name="MM_SpecificationMaster" Relationship="Self.FK_MM_SpecificationMaster_MM_AreaMaster" FromRole="MM_AreaMaster" ToRole="MM_SpecificationMaster" />
+  </EntityType>
+  <EntityType Name="MM_Audit_BuildPhase_Mstr">
+    <Key>
+      <PropertyRef Name="Build_Phase_ID" />
+    </Key>
+    <Property Name="Build_Phase_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Build_Phase_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Build_Phase_Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Plant_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Shop_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Line_ID" Type="Int32" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Is_Deleted" Type="Boolean" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Audit_Type_Id" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Plant_Code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Is_Transferred" Type="Boolean" />
+    <NavigationProperty Name="Audit_Type_Master" Relationship="Self.FK_MM_Audit_BuildPhase_Mstr_Audit_Type_Master" FromRole="MM_Audit_BuildPhase_Mstr" ToRole="Audit_Type_Master" />
+    <NavigationProperty Name="MM_Plant" Relationship="Self.FK_MM_Audit_BuildPhase_Mstr_MM_Plant" FromRole="MM_Audit_BuildPhase_Mstr" ToRole="MM_Plant" />
+    <NavigationProperty Name="MM_Shop" Relationship="Self.FK_MM_Audit_BuildPhase_Mstr_MM_Shop" FromRole="MM_Audit_BuildPhase_Mstr" ToRole="MM_Shop" />
+    <NavigationProperty Name="MM_Vehicle_Audit" Relationship="Self.FK_MM_Vehicle_Audit_MM_Audit_BuildPhase_Mstr" FromRole="MM_Audit_BuildPhase_Mstr" ToRole="MM_Vehicle_Audit" />
+  </EntityType>
+  <EntityType Name="MM_Audit_Plan_Log_Details">
+    <Key>
+      <PropertyRef Name="Audit_Plan_Log_ID" />
+    </Key>
+    <Property Name="Audit_Plan_Log_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Audit_Plan_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Audit_Due_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="StatusRemark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Model_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Shop_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Plant_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Audit_Type_Id" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Is_Deleted" Type="Boolean" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Plant_Code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Is_Transfered" Type="Boolean" />
+    <Property Name="Deleted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="MM_Audit_Plan_Master" Relationship="Self.FK_MM_Audit_Plan_Log_Details_MM_Audit_Plan_Master" FromRole="MM_Audit_Plan_Log_Details" ToRole="MM_Audit_Plan_Master" />
+    <NavigationProperty Name="MM_Plant" Relationship="Self.FK_MM_Audit_Plan_Log_Details_MM_Plant" FromRole="MM_Audit_Plan_Log_Details" ToRole="MM_Plant" />
+    <NavigationProperty Name="MM_Shop" Relationship="Self.FK_MM_Audit_Plan_Log_Details_MM_Shop" FromRole="MM_Audit_Plan_Log_Details" ToRole="MM_Shop" />
+    <NavigationProperty Name="MM_Vehicle_Audit" Relationship="Self.FK_MM_Vehicle_Audit_MM_Audit_Plan_Log_Details" FromRole="MM_Audit_Plan_Log_Details" ToRole="MM_Vehicle_Audit" />
+  </EntityType>
+  <EntityType Name="MM_Audit_Plan_Log_Details_Deleted">
+    <Key>
+      <PropertyRef Name="Deleted_Audit_Plan_Log_ID" />
+    </Key>
+    <Property Name="Deleted_Audit_Plan_Log_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Audit_Plan_Log_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Audit_Plan_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Audit_Due_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="StatusRemark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Model_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Shop_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Plant_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Audit_Type_Id" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Is_Deleted" Type="Boolean" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Plant_Code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Is_Transfered" Type="Boolean" />
+    <Property Name="Deleted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="MM_Audit_Plan_Master">
+    <Key>
+      <PropertyRef Name="Audit_Plan_ID" />
+    </Key>
+    <Property Name="Audit_Plan_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Model_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Shop_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Schedule_Type_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Assign_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Audit_Start_Date" Type="DateTime" Precision="3" />
+    <Property Name="Audit_End_Date" Type="DateTime" Precision="3" />
+    <Property Name="IS_Active" Type="Boolean" />
+    <Property Name="SHIFT_NO" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Plant_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Audit_Type_Id" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Is_Deleted" Type="Boolean" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Plant_Code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Is_Transfered" Type="Boolean" />
+    <Property Name="Deleted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Deleted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Frequency" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Audit_Type_Master" Relationship="Self.FK_MM_Audit_Plan_Master_Audit_Type_Master" FromRole="MM_Audit_Plan_Master" ToRole="Audit_Type_Master" />
+    <NavigationProperty Name="MM_Audit_Plan_Log_Details" Relationship="Self.FK_MM_Audit_Plan_Log_Details_MM_Audit_Plan_Master" FromRole="MM_Audit_Plan_Master" ToRole="MM_Audit_Plan_Log_Details" />
+    <NavigationProperty Name="MM_Employee" Relationship="Self.FK_MM_Audit_Plan_Master_MM_Employee" FromRole="MM_Audit_Plan_Master" ToRole="MM_Employee" />
+    <NavigationProperty Name="MM_Model" Relationship="Self.FK_MM_Audit_Plan_Master_MM_Model" FromRole="MM_Audit_Plan_Master" ToRole="MM_Model" />
+    <NavigationProperty Name="MM_Plant" Relationship="Self.FK_MM_Audit_Plan_Master_MM_Plant" FromRole="MM_Audit_Plan_Master" ToRole="MM_Plant" />
+    <NavigationProperty Name="MM_Schedule_Type_Master" Relationship="Self.FK_MM_Audit_Plan_Master_MM_Schedule_Type_Master" FromRole="MM_Audit_Plan_Master" ToRole="MM_Schedule_Type_Master" />
+    <NavigationProperty Name="MM_Shop" Relationship="Self.FK_MM_Audit_Plan_Master_MM_Shop" FromRole="MM_Audit_Plan_Master" ToRole="MM_Shop" />
+    <NavigationProperty Name="MM_Vehicle_Audit" Relationship="Self.FK_MM_Vehicle_Audit_MM_Audit_Plan_Master" FromRole="MM_Audit_Plan_Master" ToRole="MM_Vehicle_Audit" />
+  </EntityType>
+  <EntityType Name="MM_CheckpointMaster">
+    <Key>
+      <PropertyRef Name="Checkpoint_ID" />
+    </Key>
+    <Property Name="Checkpoint_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Checkpoint_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Checkpoint_Desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Shop_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Model_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Area_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Part_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Parallelism" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Is_Gap" Type="Boolean" />
+    <Property Name="Is_Flushness" Type="Boolean" />
+    <Property Name="Is_Active" Type="Boolean" />
+    <Property Name="SORTORDER" Type="Int32" />
+    <Property Name="Plant_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Audit_Type_Id" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Is_Deleted" Type="Boolean" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Plant_Code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Is_Transferred" Type="Boolean" />
+    <NavigationProperty Name="Audit_Type_Master" Relationship="Self.FK_MM_CheckpointMaster_Audit_Type_Master" FromRole="MM_CheckpointMaster" ToRole="Audit_Type_Master" />
+    <NavigationProperty Name="MM_AreaMaster" Relationship="Self.FK_MM_CheckpointMaster_MM_AreaMaster" FromRole="MM_CheckpointMaster" ToRole="MM_AreaMaster" />
+    <NavigationProperty Name="MM_Model" Relationship="Self.FK_MM_CheckpointMaster_MM_Model" FromRole="MM_CheckpointMaster" ToRole="MM_Model" />
+    <NavigationProperty Name="MM_PartMaster" Relationship="Self.FK_MM_CheckpointMaster_MM_PartMaster" FromRole="MM_CheckpointMaster" ToRole="MM_PartMaster" />
+    <NavigationProperty Name="MM_Plant" Relationship="Self.FK_MM_CheckpointMaster_MM_Plant" FromRole="MM_CheckpointMaster" ToRole="MM_Plant" />
+    <NavigationProperty Name="MM_Shop" Relationship="Self.FK_MM_CheckpointMaster_MM_Shop" FromRole="MM_CheckpointMaster" ToRole="MM_Shop" />
+    <NavigationProperty Name="MM_LocationMaster" Relationship="Self.FK_MM_LocationMaster_MM_CheckpointMaster" FromRole="MM_CheckpointMaster" ToRole="MM_LocationMaster" />
+    <NavigationProperty Name="MM_SpecificationMaster" Relationship="Self.FK_MM_SpecificationMaster_MM_CheckpointMaster" FromRole="MM_CheckpointMaster" ToRole="MM_SpecificationMaster" />
+    <NavigationProperty Name="MM_Track_Sheet" Relationship="Self.FK_MM_Track_Sheet_MM_CheckpointMaster" FromRole="MM_CheckpointMaster" ToRole="MM_Track_Sheet" />
+  </EntityType>
+  <EntityType Name="MM_Department">
+    <Key>
+      <PropertyRef Name="Department_ID" />
+    </Key>
+    <Property Name="Department_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Department_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Supervisor_Flag" Type="Boolean" />
+    <Property Name="Plant_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Shop_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Line_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Is_Deleted" Type="Boolean" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Category_Group" Type="Int32" />
+    <NavigationProperty Name="MM_Employee" Relationship="Self.FK_MM_Employee_MM_Department" FromRole="MM_Department" ToRole="MM_Employee" />
+  </EntityType>
+  <EntityType Name="MM_Documents_Master">
+    <Key>
+      <PropertyRef Name="Document_ID" />
+    </Key>
+    <Property Name="Document_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Document_Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Document_Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Inserted_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Plant_Code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="MM_Employee">
+    <Key>
+      <PropertyRef Name="Employee_ID" />
+    </Key>
+    <Property Name="Employee_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Employee_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Employee_Password" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Employee_No" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Email_Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DOB" Type="DateTime" Precision="0" />
+    <Property Name="Country_Code" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Contact_No" Type="Decimal" Precision="10" Scale="0" />
+    <Property Name="Role_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Gender" Type="Boolean" />
+    <Property Name="Department_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="BloodGroup" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Audit_Type_Id" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Plant_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Shop_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Is_Transfered" Type="Boolean" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Is_Deleted" Type="Boolean" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Is_AllShops" Type="Boolean" />
+    <NavigationProperty Name="Audit_Type_Master" Relationship="Self.FK_MM_Employee_Audit_Type_Master" FromRole="MM_Employee" ToRole="Audit_Type_Master" />
+    <NavigationProperty Name="MM_Audit_Plan_Master" Relationship="Self.FK_MM_Audit_Plan_Master_MM_Employee" FromRole="MM_Employee" ToRole="MM_Audit_Plan_Master" />
+    <NavigationProperty Name="MM_Department" Relationship="Self.FK_MM_Employee_MM_Department" FromRole="MM_Employee" ToRole="MM_Department" />
+    <NavigationProperty Name="MM_Plant" Relationship="Self.FK_MM_Employee_MM_Plant" FromRole="MM_Employee" ToRole="MM_Plant" />
+    <NavigationProperty Name="MM_Shop" Relationship="Self.FK_MM_Employee_MM_Shop" FromRole="MM_Employee" ToRole="MM_Shop" />
+  </EntityType>
+  <EntityType Name="MM_Error_Log">
+    <Key>
+      <PropertyRef Name="EL_ID" />
+    </Key>
+    <Property Name="EL_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Plant_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Shop_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Line_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="BuyoffCode" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Controller_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Action_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Meta_Class_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Method_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Exception_Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Inner_Exception" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Exception_Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Target_Site" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Stack_Trace" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Source" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="H_Result" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Is_Transferred" Type="Boolean" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="MM_FQ_Target_Master">
+    <Key>
+      <PropertyRef Name="FQ_Target_ID" />
+    </Key>
+    <Property Name="FQ_Target_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FY_Name" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="FQ_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FQ_Target_L3" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="FQ_Target_L4" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Shop_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Model_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="SORTORDER" Type="Int32" />
+    <Property Name="Plant_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Audit_Type_Id" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Is_Transferred" Type="Boolean" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Is_Deleted" Type="Boolean" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Plant_Code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Audit_Type_Master" Relationship="Self.FK_MM_FQ_Target_Master_Audit_Type_Master" FromRole="MM_FQ_Target_Master" ToRole="Audit_Type_Master" />
+    <NavigationProperty Name="MM_Model" Relationship="Self.FK_MM_FQ_Target_Master_MM_Model" FromRole="MM_FQ_Target_Master" ToRole="MM_Model" />
+    <NavigationProperty Name="MM_Plant" Relationship="Self.FK_MM_FQ_Target_Master_MM_Plant" FromRole="MM_FQ_Target_Master" ToRole="MM_Plant" />
+    <NavigationProperty Name="MM_Shop" Relationship="Self.FK_MM_FQ_Target_Master_MM_Shop" FromRole="MM_FQ_Target_Master" ToRole="MM_Shop" />
+  </EntityType>
+  <EntityType Name="MM_FY_Target_Master">
+    <Key>
+      <PropertyRef Name="FY_Target_ID" />
+    </Key>
+    <Property Name="FY_Target_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FY_Name" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="FY_Target_L3" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="FY_Target_L4" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Shop_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Model_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="SORTORDER" Type="Int32" />
+    <Property Name="Plant_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Audit_Type_Id" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Is_Transferred" Type="Boolean" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Is_Deleted" Type="Boolean" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Plant_Code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Audit_Type_Master" Relationship="Self.FK_MM_FY_Target_Master_Audit_Type_Master" FromRole="MM_FY_Target_Master" ToRole="Audit_Type_Master" />
+    <NavigationProperty Name="MM_Model" Relationship="Self.FK_MM_FY_Target_Master_MM_Model" FromRole="MM_FY_Target_Master" ToRole="MM_Model" />
+    <NavigationProperty Name="MM_Plant" Relationship="Self.FK_MM_FY_Target_Master_MM_Plant" FromRole="MM_FY_Target_Master" ToRole="MM_Plant" />
+    <NavigationProperty Name="MM_Shop" Relationship="Self.FK_MM_FY_Target_Master_MM_Shop" FromRole="MM_FY_Target_Master" ToRole="MM_Shop" />
+  </EntityType>
+  <EntityType Name="MM_Gap_And_FlushMaster">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Plant_Code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Is_Transferred" Type="Boolean" />
+    <NavigationProperty Name="MM_Track_Sheet" Relationship="Self.FK_MM_Track_Sheet_MM_Track_Sheet" FromRole="MM_Gap_And_FlushMaster" ToRole="MM_Track_Sheet" />
+  </EntityType>
+  <EntityType Name="MM_Image_Master">
+    <Key>
+      <PropertyRef Name="Image_ID" />
+    </Key>
+    <Property Name="Image_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FileContent" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="FileName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ImageName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FileType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ContentType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Shop_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Model_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Area_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Part_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Audit_Type_Id" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Plant_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Is_Active" Type="Boolean" />
+    <Property Name="Is_Transferred" Type="Boolean" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Audit_Type_Master" Relationship="Self.FK_MM_Image_Master_Audit_Type_Master" FromRole="MM_Image_Master" ToRole="Audit_Type_Master" />
+    <NavigationProperty Name="MM_AreaMaster" Relationship="Self.FK_MM_Image_Master_MM_AreaMaster" FromRole="MM_Image_Master" ToRole="MM_AreaMaster" />
+    <NavigationProperty Name="MM_Model" Relationship="Self.FK_MM_Image_Master_MM_Model" FromRole="MM_Image_Master" ToRole="MM_Model" />
+    <NavigationProperty Name="MM_PartMaster" Relationship="Self.FK_MM_Image_Master_MM_PartMaster" FromRole="MM_Image_Master" ToRole="MM_PartMaster" />
+    <NavigationProperty Name="MM_Plant" Relationship="Self.FK_MM_Image_Master_MM_Plant" FromRole="MM_Image_Master" ToRole="MM_Plant" />
+    <NavigationProperty Name="MM_Shop" Relationship="Self.FK_MM_Image_Master_MM_Shop" FromRole="MM_Image_Master" ToRole="MM_Shop" />
+    <NavigationProperty Name="MM_Track_Sheet" Relationship="Self.FK_MM_Track_Sheet_MM_Image_Master" FromRole="MM_Image_Master" ToRole="MM_Track_Sheet" />
+  </EntityType>
+  <EntityType Name="MM_Location_Mapping">
+    <Key>
+      <PropertyRef Name="LM_ID" />
+    </Key>
+    <Property Name="LM_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TCF_Location_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="BIW_Location_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Is_Transferred" Type="Boolean" />
+    <Property Name="Is_Deleted" Type="Boolean" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Plant_Code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="MM_LocationMaster">
+    <Key>
+      <PropertyRef Name="Location_ID" />
+    </Key>
+    <Property Name="Location_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Location_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Location_Desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Shop_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Model_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Area_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Part_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Checkpoint_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Is_Gap" Type="Boolean" />
+    <Property Name="Is_Flushness" Type="Boolean" />
+    <Property Name="Is_Active" Type="Boolean" />
+    <Property Name="SORTORDER" Type="Int32" />
+    <Property Name="Plant_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Audit_Type_Id" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Is_Deleted" Type="Boolean" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Plant_Code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Is_Transferred" Type="Boolean" />
+    <NavigationProperty Name="Audit_Type_Master" Relationship="Self.FK_MM_LocationMaster_Audit_Type_Master" FromRole="MM_LocationMaster" ToRole="Audit_Type_Master" />
+    <NavigationProperty Name="MM_AreaMaster" Relationship="Self.FK_MM_LocationMaster_MM_AreaMaster" FromRole="MM_LocationMaster" ToRole="MM_AreaMaster" />
+    <NavigationProperty Name="MM_CheckpointMaster" Relationship="Self.FK_MM_LocationMaster_MM_CheckpointMaster" FromRole="MM_LocationMaster" ToRole="MM_CheckpointMaster" />
+    <NavigationProperty Name="MM_Model" Relationship="Self.FK_MM_LocationMaster_MM_Model" FromRole="MM_LocationMaster" ToRole="MM_Model" />
+    <NavigationProperty Name="MM_PartMaster" Relationship="Self.FK_MM_LocationMaster_MM_PartMaster" FromRole="MM_LocationMaster" ToRole="MM_PartMaster" />
+    <NavigationProperty Name="MM_Plant" Relationship="Self.FK_MM_LocationMaster_MM_Plant" FromRole="MM_LocationMaster" ToRole="MM_Plant" />
+    <NavigationProperty Name="MM_Shop" Relationship="Self.FK_MM_LocationMaster_MM_Shop" FromRole="MM_LocationMaster" ToRole="MM_Shop" />
+    <NavigationProperty Name="MM_SpecificationMaster" Relationship="Self.FK_MM_SpecificationMaster_MM_LocationMaster" FromRole="MM_LocationMaster" ToRole="MM_SpecificationMaster" />
+    <NavigationProperty Name="MM_Track_Sheet" Relationship="Self.FK_MM_Track_Sheet_MM_LocationMaster" FromRole="MM_LocationMaster" ToRole="MM_Track_Sheet" />
+  </EntityType>
+  <EntityType Name="MM_Menu_Role">
+    <Key>
+      <PropertyRef Name="Menu_Role_ID" />
+    </Key>
+    <Property Name="Menu_Role_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Menu_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Sub_Menu_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Role_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Is_Transfered" Type="Boolean" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Plant_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Audit_Type_Id" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="MM_Roles" Relationship="Self.FK_MM_Menu_Role_MM_Roles" FromRole="MM_Menu_Role" ToRole="MM_Roles" />
+    <NavigationProperty Name="MM_Sub_Menus" Relationship="Self.FK_MM_Menu_Role_MM_Sub_Menus" FromRole="MM_Menu_Role" ToRole="MM_Sub_Menus" />
+  </EntityType>
+  <EntityType Name="MM_Menus">
+    <Key>
+      <PropertyRef Name="Menu_ID" />
+    </Key>
+    <Property Name="Menu_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LinkName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ActionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Is_Transfered" Type="Boolean" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Documents_Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Technical_Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Sort_Order" Type="Int32" Nullable="false" />
+    <Property Name="Audit_Type_Id" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Is_Active" Type="Boolean" />
+    <NavigationProperty Name="Audit_Type_Master" Relationship="Self.FK_MM_Menus_MM_Menus" FromRole="MM_Menus" ToRole="Audit_Type_Master" />
+  </EntityType>
+  <EntityType Name="MM_Model">
+    <Key>
+      <PropertyRef Name="Model_ID" />
+    </Key>
+    <Property Name="Model_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Model_Code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Variant_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Model_Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Plant_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Shop_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Variant_Code" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Sap_Code" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Is_Deleted" Type="Boolean" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_Host" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Audit_Type_Id" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Vehicle_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Plant_Code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Is_Transferred" Type="Boolean" />
+    <Property Name="Email_Addresses" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Audit_Type_Master" Relationship="Self.FK_MM_Model_Audit_Type_Master" FromRole="MM_Model" ToRole="Audit_Type_Master" />
+    <NavigationProperty Name="MM_AreaMaster" Relationship="Self.FK_MM_AreaMaster_MM_Model" FromRole="MM_Model" ToRole="MM_AreaMaster" />
+    <NavigationProperty Name="MM_Audit_Plan_Master" Relationship="Self.FK_MM_Audit_Plan_Master_MM_Model" FromRole="MM_Model" ToRole="MM_Audit_Plan_Master" />
+    <NavigationProperty Name="MM_CheckpointMaster" Relationship="Self.FK_MM_CheckpointMaster_MM_Model" FromRole="MM_Model" ToRole="MM_CheckpointMaster" />
+    <NavigationProperty Name="MM_FQ_Target_Master" Relationship="Self.FK_MM_FQ_Target_Master_MM_Model" FromRole="MM_Model" ToRole="MM_FQ_Target_Master" />
+    <NavigationProperty Name="MM_FY_Target_Master" Relationship="Self.FK_MM_FY_Target_Master_MM_Model" FromRole="MM_Model" ToRole="MM_FY_Target_Master" />
+    <NavigationProperty Name="MM_Image_Master" Relationship="Self.FK_MM_Image_Master_MM_Model" FromRole="MM_Model" ToRole="MM_Image_Master" />
+    <NavigationProperty Name="MM_LocationMaster" Relationship="Self.FK_MM_LocationMaster_MM_Model" FromRole="MM_Model" ToRole="MM_LocationMaster" />
+    <NavigationProperty Name="MM_Plant" Relationship="Self.FK_MM_Model_MM_Plant" FromRole="MM_Model" ToRole="MM_Plant" />
+    <NavigationProperty Name="MM_Shop" Relationship="Self.FK_MM_Model_MM_Shop" FromRole="MM_Model" ToRole="MM_Shop" />
+    <NavigationProperty Name="MM_PartMaster" Relationship="Self.FK_MM_PartMaster_MM_Model" FromRole="MM_Model" ToRole="MM_PartMaster" />
+    <NavigationProperty Name="MM_SpecificationMaster" Relationship="Self.FK_MM_SpecificationMaster_MM_Model" FromRole="MM_Model" ToRole="MM_SpecificationMaster" />
+    <NavigationProperty Name="MM_Vehicle_Audit" Relationship="Self.FK_MM_Vehicle_Audit_MM_Model" FromRole="MM_Model" ToRole="MM_Vehicle_Audit" />
+  </EntityType>
+  <EntityType Name="MM_PartMaster">
+    <Key>
+      <PropertyRef Name="Part_ID" />
+    </Key>
+    <Property Name="Part_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Part_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Part_Desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Shop_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Model_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Area_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Is_Active" Type="Boolean" />
+    <Property Name="SORTORDER" Type="Int32" />
+    <Property Name="Plant_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Audit_Type_Id" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Is_Deleted" Type="Boolean" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Is_Gap" Type="Boolean" />
+    <Property Name="Is_Flushness" Type="Boolean" />
+    <Property Name="Plant_Code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Is_Transferred" Type="Boolean" />
+    <NavigationProperty Name="Audit_Type_Master" Relationship="Self.FK_MM_PartMaster_Audit_Type_Master" FromRole="MM_PartMaster" ToRole="Audit_Type_Master" />
+    <NavigationProperty Name="MM_AreaMaster" Relationship="Self.FK_MM_PartMaster_MM_AreaMaster" FromRole="MM_PartMaster" ToRole="MM_AreaMaster" />
+    <NavigationProperty Name="MM_CheckpointMaster" Relationship="Self.FK_MM_CheckpointMaster_MM_PartMaster" FromRole="MM_PartMaster" ToRole="MM_CheckpointMaster" />
+    <NavigationProperty Name="MM_Image_Master" Relationship="Self.FK_MM_Image_Master_MM_PartMaster" FromRole="MM_PartMaster" ToRole="MM_Image_Master" />
+    <NavigationProperty Name="MM_LocationMaster" Relationship="Self.FK_MM_LocationMaster_MM_PartMaster" FromRole="MM_PartMaster" ToRole="MM_LocationMaster" />
+    <NavigationProperty Name="MM_Model" Relationship="Self.FK_MM_PartMaster_MM_Model" FromRole="MM_PartMaster" ToRole="MM_Model" />
+    <NavigationProperty Name="MM_Plant" Relationship="Self.FK_MM_PartMaster_MM_Plant" FromRole="MM_PartMaster" ToRole="MM_Plant" />
+    <NavigationProperty Name="MM_Shop" Relationship="Self.FK_MM_PartMaster_MM_Shop" FromRole="MM_PartMaster" ToRole="MM_Shop" />
+    <NavigationProperty Name="MM_SpecificationMaster" Relationship="Self.FK_MM_SpecificationMaster_MM_PartMaster" FromRole="MM_PartMaster" ToRole="MM_SpecificationMaster" />
+    <NavigationProperty Name="MM_Track_Sheet" Relationship="Self.FK_MM_Track_Sheet_MM_PartMaster" FromRole="MM_PartMaster" ToRole="MM_Track_Sheet" />
+  </EntityType>
+  <EntityType Name="MM_Plant">
+    <Key>
+      <PropertyRef Name="Plant_ID" />
+    </Key>
+    <Property Name="Plant_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Plant_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IS_Active" Type="Boolean" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Is_Deleted" Type="Boolean" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Sap_Code" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Plant_Code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Is_Transferred" Type="Boolean" />
+    <NavigationProperty Name="MM_AreaMaster" Relationship="Self.FK_MM_AreaMaster_MM_Plant" FromRole="MM_Plant" ToRole="MM_AreaMaster" />
+    <NavigationProperty Name="MM_Audit_BuildPhase_Mstr" Relationship="Self.FK_MM_Audit_BuildPhase_Mstr_MM_Plant" FromRole="MM_Plant" ToRole="MM_Audit_BuildPhase_Mstr" />
+    <NavigationProperty Name="MM_Audit_Plan_Log_Details" Relationship="Self.FK_MM_Audit_Plan_Log_Details_MM_Plant" FromRole="MM_Plant" ToRole="MM_Audit_Plan_Log_Details" />
+    <NavigationProperty Name="MM_Audit_Plan_Master" Relationship="Self.FK_MM_Audit_Plan_Master_MM_Plant" FromRole="MM_Plant" ToRole="MM_Audit_Plan_Master" />
+    <NavigationProperty Name="MM_CheckpointMaster" Relationship="Self.FK_MM_CheckpointMaster_MM_Plant" FromRole="MM_Plant" ToRole="MM_CheckpointMaster" />
+    <NavigationProperty Name="MM_Employee" Relationship="Self.FK_MM_Employee_MM_Plant" FromRole="MM_Plant" ToRole="MM_Employee" />
+    <NavigationProperty Name="MM_FQ_Target_Master" Relationship="Self.FK_MM_FQ_Target_Master_MM_Plant" FromRole="MM_Plant" ToRole="MM_FQ_Target_Master" />
+    <NavigationProperty Name="MM_FY_Target_Master" Relationship="Self.FK_MM_FY_Target_Master_MM_Plant" FromRole="MM_Plant" ToRole="MM_FY_Target_Master" />
+    <NavigationProperty Name="MM_Image_Master" Relationship="Self.FK_MM_Image_Master_MM_Plant" FromRole="MM_Plant" ToRole="MM_Image_Master" />
+    <NavigationProperty Name="MM_LocationMaster" Relationship="Self.FK_MM_LocationMaster_MM_Plant" FromRole="MM_Plant" ToRole="MM_LocationMaster" />
+    <NavigationProperty Name="MM_Model" Relationship="Self.FK_MM_Model_MM_Plant" FromRole="MM_Plant" ToRole="MM_Model" />
+    <NavigationProperty Name="MM_PartMaster" Relationship="Self.FK_MM_PartMaster_MM_Plant" FromRole="MM_Plant" ToRole="MM_PartMaster" />
+    <NavigationProperty Name="MM_Shift" Relationship="Self.FK_MM_Shift_MM_Plant" FromRole="MM_Plant" ToRole="MM_Shift" />
+    <NavigationProperty Name="MM_Shop" Relationship="Self.FK_MM_Shop_MM_Plant" FromRole="MM_Plant" ToRole="MM_Shop" />
+    <NavigationProperty Name="MM_Track_Sheet" Relationship="Self.FK_MM_Track_Sheet_MM_Plant" FromRole="MM_Plant" ToRole="MM_Track_Sheet" />
+    <NavigationProperty Name="MM_Vehicle_Audit" Relationship="Self.FK_MM_Vehicle_Audit_MM_Plant" FromRole="MM_Plant" ToRole="MM_Vehicle_Audit" />
+  </EntityType>
+  <EntityType Name="MM_Rights">
+    <Key>
+      <PropertyRef Name="Right_ID" />
+    </Key>
+    <Property Name="Right_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Right_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Right_Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Is_Transfered" Type="Boolean" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Inserted_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Is_Show_Documentations" Type="Boolean" />
+    <Property Name="Technical_Documentations" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Functional_Documentations" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Plant_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Is_Active" Type="Boolean" />
+    <Property Name="Plant_Code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MM_Roles">
+    <Key>
+      <PropertyRef Name="Role_ID" />
+    </Key>
+    <Property Name="Role_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Role_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Role_Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Is_Transfered" Type="Boolean" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Inserted_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Is_Show_Documentations" Type="Boolean" />
+    <Property Name="Technical_Documentations" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Functional_Documentations" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Plant_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Is_Active" Type="Boolean" />
+    <Property Name="Audit_Type_Id" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="MM_Menu_Role" Relationship="Self.FK_MM_Menu_Role_MM_Roles" FromRole="MM_Roles" ToRole="MM_Menu_Role" />
+    <NavigationProperty Name="MM_User_Roles" Relationship="Self.FK_MM_User_Roles_MM_Roles" FromRole="MM_Roles" ToRole="MM_User_Roles" />
+  </EntityType>
+  <EntityType Name="MM_Schedule_Type_Master">
+    <Key>
+      <PropertyRef Name="Schedule_Type_ID" />
+    </Key>
+    <Property Name="Schedule_Type_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Schedule_Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MM_Audit_Plan_Master" Relationship="Self.FK_MM_Audit_Plan_Master_MM_Schedule_Type_Master" FromRole="MM_Schedule_Type_Master" ToRole="MM_Audit_Plan_Master" />
+  </EntityType>
+  <EntityType Name="MM_Shift">
+    <Key>
+      <PropertyRef Name="SHIFT_NO" />
+    </Key>
+    <Property Name="SHIFT_NO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SHIFT_DESC" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="START_TIME" Type="Time" Precision="7" />
+    <Property Name="END_TIME" Type="Time" Precision="7" />
+    <Property Name="WORKING" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Plant_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Shop_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Line_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Is_Transferred" Type="Boolean" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" />
+    <Property Name="LUNCH_START_TIME" Type="Time" Precision="7" />
+    <Property Name="LUNCH_END_TIME" Type="Time" Precision="7" />
+    <Property Name="Is_PostshiftTimeNextDay" Type="Boolean" />
+    <Property Name="Audit_Type_Id" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Audit_Type_Master" Relationship="Self.FK_MM_Shift_Audit_Type_Master" FromRole="MM_Shift" ToRole="Audit_Type_Master" />
+    <NavigationProperty Name="MM_Plant" Relationship="Self.FK_MM_Shift_MM_Plant" FromRole="MM_Shift" ToRole="MM_Plant" />
+    <NavigationProperty Name="MM_Shop" Relationship="Self.FK_MM_Shift_MM_Shop" FromRole="MM_Shift" ToRole="MM_Shop" />
+    <NavigationProperty Name="MM_Vehicle_Audit" Relationship="Self.FK_MM_Vehicle_Audit_MM_Shift" FromRole="MM_Shift" ToRole="MM_Vehicle_Audit" />
+  </EntityType>
+  <EntityType Name="MM_Shop">
+    <Key>
+      <PropertyRef Name="Shop_ID" />
+    </Key>
+    <Property Name="Shop_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Shop_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Plant_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="IS_Active" Type="Boolean" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Is_Deleted" Type="Boolean" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Sap_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Is_SAP_Declaration" Type="Boolean" />
+    <Property Name="Is_Equipment_Creation" Type="Boolean" />
+    <Property Name="Audit_Type_Id" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Plant_Code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Is_Transferred" Type="Boolean" />
+    <NavigationProperty Name="Audit_Type_Master" Relationship="Self.FK_MM_Shop_Audit_Type_Master" FromRole="MM_Shop" ToRole="Audit_Type_Master" />
+    <NavigationProperty Name="MM_AreaMaster" Relationship="Self.FK_MM_AreaMaster_MM_Shop" FromRole="MM_Shop" ToRole="MM_AreaMaster" />
+    <NavigationProperty Name="MM_Audit_BuildPhase_Mstr" Relationship="Self.FK_MM_Audit_BuildPhase_Mstr_MM_Shop" FromRole="MM_Shop" ToRole="MM_Audit_BuildPhase_Mstr" />
+    <NavigationProperty Name="MM_Audit_Plan_Log_Details" Relationship="Self.FK_MM_Audit_Plan_Log_Details_MM_Shop" FromRole="MM_Shop" ToRole="MM_Audit_Plan_Log_Details" />
+    <NavigationProperty Name="MM_Audit_Plan_Master" Relationship="Self.FK_MM_Audit_Plan_Master_MM_Shop" FromRole="MM_Shop" ToRole="MM_Audit_Plan_Master" />
+    <NavigationProperty Name="MM_CheckpointMaster" Relationship="Self.FK_MM_CheckpointMaster_MM_Shop" FromRole="MM_Shop" ToRole="MM_CheckpointMaster" />
+    <NavigationProperty Name="MM_Employee" Relationship="Self.FK_MM_Employee_MM_Shop" FromRole="MM_Shop" ToRole="MM_Employee" />
+    <NavigationProperty Name="MM_FQ_Target_Master" Relationship="Self.FK_MM_FQ_Target_Master_MM_Shop" FromRole="MM_Shop" ToRole="MM_FQ_Target_Master" />
+    <NavigationProperty Name="MM_FY_Target_Master" Relationship="Self.FK_MM_FY_Target_Master_MM_Shop" FromRole="MM_Shop" ToRole="MM_FY_Target_Master" />
+    <NavigationProperty Name="MM_Image_Master" Relationship="Self.FK_MM_Image_Master_MM_Shop" FromRole="MM_Shop" ToRole="MM_Image_Master" />
+    <NavigationProperty Name="MM_LocationMaster" Relationship="Self.FK_MM_LocationMaster_MM_Shop" FromRole="MM_Shop" ToRole="MM_LocationMaster" />
+    <NavigationProperty Name="MM_Model" Relationship="Self.FK_MM_Model_MM_Shop" FromRole="MM_Shop" ToRole="MM_Model" />
+    <NavigationProperty Name="MM_PartMaster" Relationship="Self.FK_MM_PartMaster_MM_Shop" FromRole="MM_Shop" ToRole="MM_PartMaster" />
+    <NavigationProperty Name="MM_Plant" Relationship="Self.FK_MM_Shop_MM_Plant" FromRole="MM_Shop" ToRole="MM_Plant" />
+    <NavigationProperty Name="MM_Shift" Relationship="Self.FK_MM_Shift_MM_Shop" FromRole="MM_Shop" ToRole="MM_Shift" />
+    <NavigationProperty Name="MM_Track_Sheet" Relationship="Self.FK_MM_Track_Sheet_MM_Shop" FromRole="MM_Shop" ToRole="MM_Track_Sheet" />
+    <NavigationProperty Name="MM_Vehicle_Audit" Relationship="Self.FK_MM_Vehicle_Audit_MM_Shop" FromRole="MM_Shop" ToRole="MM_Vehicle_Audit" />
+  </EntityType>
+  <EntityType Name="MM_SpecificationMaster">
+    <Key>
+      <PropertyRef Name="Specification_ID" />
+    </Key>
+    <Property Name="Specification_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Specification_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Specification_Desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Shop_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Model_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Area_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Part_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Checkpoint_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Location_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Is_Gap" Type="Boolean" />
+    <Property Name="Is_Flushness" Type="Boolean" />
+    <Property Name="MinVal" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="MaxVal" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="LCL" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="UCL" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="UCLR" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Is_Active" Type="Boolean" />
+    <Property Name="SORTORDER" Type="Int32" />
+    <Property Name="Plant_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Audit_Type_Id" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Is_Deleted" Type="Boolean" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Plant_Code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Is_Transferred" Type="Boolean" />
+    <NavigationProperty Name="MM_AreaMaster" Relationship="Self.FK_MM_SpecificationMaster_MM_AreaMaster" FromRole="MM_SpecificationMaster" ToRole="MM_AreaMaster" />
+    <NavigationProperty Name="MM_CheckpointMaster" Relationship="Self.FK_MM_SpecificationMaster_MM_CheckpointMaster" FromRole="MM_SpecificationMaster" ToRole="MM_CheckpointMaster" />
+    <NavigationProperty Name="MM_LocationMaster" Relationship="Self.FK_MM_SpecificationMaster_MM_LocationMaster" FromRole="MM_SpecificationMaster" ToRole="MM_LocationMaster" />
+    <NavigationProperty Name="MM_Model" Relationship="Self.FK_MM_SpecificationMaster_MM_Model" FromRole="MM_SpecificationMaster" ToRole="MM_Model" />
+    <NavigationProperty Name="MM_PartMaster" Relationship="Self.FK_MM_SpecificationMaster_MM_PartMaster" FromRole="MM_SpecificationMaster" ToRole="MM_PartMaster" />
+    <NavigationProperty Name="MM_Track_Sheet" Relationship="Self.FK_MM_Track_Sheet_MM_SpecificationMaster" FromRole="MM_SpecificationMaster" ToRole="MM_Track_Sheet" />
+  </EntityType>
+  <EntityType Name="MM_Sub_Menus">
+    <Key>
+      <PropertyRef Name="Sub_Menu_ID" />
+    </Key>
+    <Property Name="Sub_Menu_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ActionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LinkName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Menu_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Is_Transfered" Type="Boolean" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Sort_Order" Type="Int32" Nullable="false" />
+    <Property Name="Is_Active" Type="Boolean" />
+    <Property Name="Audit_Type_Id" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="MM_Menu_Role" Relationship="Self.FK_MM_Menu_Role_MM_Sub_Menus" FromRole="MM_Sub_Menus" ToRole="MM_Menu_Role" />
+  </EntityType>
+  <EntityType Name="MM_Track_Sheet">
+    <Key>
+      <PropertyRef Name="Track_Sheet_ID" />
+    </Key>
+    <Property Name="Track_Sheet_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Audit_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Parameter_ID" Type="Int32" Nullable="false" />
+    <Property Name="Area_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Part_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Checkpoint_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Location_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Specification_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Image_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Reading" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Is_NA" Type="Boolean" />
+    <Property Name="Sap_Code" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Plant_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Shop_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Audit_Type_Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Is_Deleted" Type="Boolean" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Plant_Code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Is_Transferred" Type="Boolean" />
+    <NavigationProperty Name="Audit_Type_Master" Relationship="Self.FK_MM_Track_Sheet_Audit_Type_Master" FromRole="MM_Track_Sheet" ToRole="Audit_Type_Master" />
+    <NavigationProperty Name="MM_CheckpointMaster" Relationship="Self.FK_MM_Track_Sheet_MM_CheckpointMaster" FromRole="MM_Track_Sheet" ToRole="MM_CheckpointMaster" />
+    <NavigationProperty Name="MM_Gap_And_FlushMaster" Relationship="Self.FK_MM_Track_Sheet_MM_Track_Sheet" FromRole="MM_Track_Sheet" ToRole="MM_Gap_And_FlushMaster" />
+    <NavigationProperty Name="MM_Image_Master" Relationship="Self.FK_MM_Track_Sheet_MM_Image_Master" FromRole="MM_Track_Sheet" ToRole="MM_Image_Master" />
+    <NavigationProperty Name="MM_LocationMaster" Relationship="Self.FK_MM_Track_Sheet_MM_LocationMaster" FromRole="MM_Track_Sheet" ToRole="MM_LocationMaster" />
+    <NavigationProperty Name="MM_PartMaster" Relationship="Self.FK_MM_Track_Sheet_MM_PartMaster" FromRole="MM_Track_Sheet" ToRole="MM_PartMaster" />
+    <NavigationProperty Name="MM_Plant" Relationship="Self.FK_MM_Track_Sheet_MM_Plant" FromRole="MM_Track_Sheet" ToRole="MM_Plant" />
+    <NavigationProperty Name="MM_Shop" Relationship="Self.FK_MM_Track_Sheet_MM_Shop" FromRole="MM_Track_Sheet" ToRole="MM_Shop" />
+    <NavigationProperty Name="MM_SpecificationMaster" Relationship="Self.FK_MM_Track_Sheet_MM_SpecificationMaster" FromRole="MM_Track_Sheet" ToRole="MM_SpecificationMaster" />
+    <NavigationProperty Name="MM_Vehicle_Audit" Relationship="Self.FK_MM_Track_Sheet_MM_Vehicle_Audit" FromRole="MM_Track_Sheet" ToRole="MM_Vehicle_Audit" />
+  </EntityType>
+  <EntityType Name="MM_User_Activity_Logs">
+    <Key>
+      <PropertyRef Name="Log_ID" />
+    </Key>
+    <Property Name="Log_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User_Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="User_Token_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Logged_In_Time" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Audit_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Shop_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Plant_Code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MM_User_Log">
+    <Key>
+      <PropertyRef Name="Row_ID" />
+    </Key>
+    <Property Name="Row_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Log_In_User" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Log_In_Time" Type="DateTime" Precision="3" />
+    <Property Name="Log_out_Time" Type="DateTime" Precision="3" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Log_In" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="MM_User_Roles">
+    <Key>
+      <PropertyRef Name="User_Role_Key" />
+    </Key>
+    <Property Name="User_Role_Key" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Employee_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Role_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Is_Deleted" Type="Boolean" />
+    <Property Name="Is_Transfered" Type="Boolean" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Plant_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Audit_Type_Id" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Is_Create" Type="Boolean" />
+    <Property Name="Is_Edit" Type="Boolean" />
+    <Property Name="Is_Delete" Type="Boolean" />
+    <NavigationProperty Name="MM_Roles" Relationship="Self.FK_MM_User_Roles_MM_Roles" FromRole="MM_User_Roles" ToRole="MM_Roles" />
+  </EntityType>
+  <EntityType Name="MM_UserActivity_Log">
+    <Key>
+      <PropertyRef Name="Row_ID" />
+    </Key>
+    <Property Name="Row_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Module_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Remarks" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Shop_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Line_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="BuyoffCode" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Start_Time" Type="DateTime" Precision="3" />
+    <Property Name="End_Time" Type="DateTime" Precision="3" />
+    <Property Name="Is_Deleted" Type="Boolean" />
+    <Property Name="Is_Transfered" Type="Boolean" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="MM_Vehicle_Audit">
+    <Key>
+      <PropertyRef Name="Audit_ID" />
+    </Key>
+    <Property Name="Audit_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Audit_Plan_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Audit_Plan_Log_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Audit_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="VIN_No" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Body_No" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Model_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Model_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Model_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Variant_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Color_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Build_Phase_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Auditor1_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Auditor2_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Shift_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Gap_PIST" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Gap_Total_Check" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Gap_Ok" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Gap_Nok" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Gap_NA" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Flush_PIST" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Flush_Total_Check" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Flush_Ok" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Flush_Nok" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Flush_NA" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Total_PIST" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Plant_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Audit_Type_Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Shop_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Is_Purgeable" Type="Boolean" />
+    <Property Name="Is_Edited" Type="Boolean" />
+    <Property Name="Is_Deleted" Type="Boolean" />
+    <Property Name="Inserted_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Inserted_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Inserted_Date" Type="DateTime" Precision="3" />
+    <Property Name="Updated_Host" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Updated_User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Updated_Date" Type="DateTime" Precision="3" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Plant_Code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Is_Transferred" Type="Boolean" />
+    <Property Name="Is_Gapgun" Type="Boolean" />
+    <NavigationProperty Name="Audit_Type_Master" Relationship="Self.FK_MM_Vehicle_Audit_Audit_Type_Master" FromRole="MM_Vehicle_Audit" ToRole="Audit_Type_Master" />
+    <NavigationProperty Name="MM_Audit_BuildPhase_Mstr" Relationship="Self.FK_MM_Vehicle_Audit_MM_Audit_BuildPhase_Mstr" FromRole="MM_Vehicle_Audit" ToRole="MM_Audit_BuildPhase_Mstr" />
+    <NavigationProperty Name="MM_Audit_Plan_Log_Details" Relationship="Self.FK_MM_Vehicle_Audit_MM_Audit_Plan_Log_Details" FromRole="MM_Vehicle_Audit" ToRole="MM_Audit_Plan_Log_Details" />
+    <NavigationProperty Name="MM_Audit_Plan_Master" Relationship="Self.FK_MM_Vehicle_Audit_MM_Audit_Plan_Master" FromRole="MM_Vehicle_Audit" ToRole="MM_Audit_Plan_Master" />
+    <NavigationProperty Name="MM_Model" Relationship="Self.FK_MM_Vehicle_Audit_MM_Model" FromRole="MM_Vehicle_Audit" ToRole="MM_Model" />
+    <NavigationProperty Name="MM_Plant" Relationship="Self.FK_MM_Vehicle_Audit_MM_Plant" FromRole="MM_Vehicle_Audit" ToRole="MM_Plant" />
+    <NavigationProperty Name="MM_Shift" Relationship="Self.FK_MM_Vehicle_Audit_MM_Shift" FromRole="MM_Vehicle_Audit" ToRole="MM_Shift" />
+    <NavigationProperty Name="MM_Shop" Relationship="Self.FK_MM_Vehicle_Audit_MM_Shop" FromRole="MM_Vehicle_Audit" ToRole="MM_Shop" />
+    <NavigationProperty Name="MM_Track_Sheet" Relationship="Self.FK_MM_Track_Sheet_MM_Vehicle_Audit" FromRole="MM_Vehicle_Audit" ToRole="MM_Track_Sheet" />
+  </EntityType>
+  <Association Name="FK_MM_AreaMaster_Audit_Type_Master">
+    <End Role="Audit_Type_Master" Type="Self.Audit_Type_Master" Multiplicity="0..1" />
+    <End Role="MM_AreaMaster" Type="Self.MM_AreaMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Audit_Type_Master">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Principal>
+      <Dependent Role="MM_AreaMaster">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Audit_BuildPhase_Mstr_Audit_Type_Master">
+    <End Role="Audit_Type_Master" Type="Self.Audit_Type_Master" Multiplicity="0..1" />
+    <End Role="MM_Audit_BuildPhase_Mstr" Type="Self.MM_Audit_BuildPhase_Mstr" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Audit_Type_Master">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Principal>
+      <Dependent Role="MM_Audit_BuildPhase_Mstr">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Audit_Plan_Master_Audit_Type_Master">
+    <End Role="Audit_Type_Master" Type="Self.Audit_Type_Master" Multiplicity="0..1" />
+    <End Role="MM_Audit_Plan_Master" Type="Self.MM_Audit_Plan_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Audit_Type_Master">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Principal>
+      <Dependent Role="MM_Audit_Plan_Master">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_CheckpointMaster_Audit_Type_Master">
+    <End Role="Audit_Type_Master" Type="Self.Audit_Type_Master" Multiplicity="0..1" />
+    <End Role="MM_CheckpointMaster" Type="Self.MM_CheckpointMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Audit_Type_Master">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Principal>
+      <Dependent Role="MM_CheckpointMaster">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Employee_Audit_Type_Master">
+    <End Role="Audit_Type_Master" Type="Self.Audit_Type_Master" Multiplicity="0..1" />
+    <End Role="MM_Employee" Type="Self.MM_Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Audit_Type_Master">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Principal>
+      <Dependent Role="MM_Employee">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_FQ_Target_Master_Audit_Type_Master">
+    <End Role="Audit_Type_Master" Type="Self.Audit_Type_Master" Multiplicity="0..1" />
+    <End Role="MM_FQ_Target_Master" Type="Self.MM_FQ_Target_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Audit_Type_Master">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Principal>
+      <Dependent Role="MM_FQ_Target_Master">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_FY_Target_Master_Audit_Type_Master">
+    <End Role="Audit_Type_Master" Type="Self.Audit_Type_Master" Multiplicity="0..1" />
+    <End Role="MM_FY_Target_Master" Type="Self.MM_FY_Target_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Audit_Type_Master">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Principal>
+      <Dependent Role="MM_FY_Target_Master">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Image_Master_Audit_Type_Master">
+    <End Role="Audit_Type_Master" Type="Self.Audit_Type_Master" Multiplicity="0..1" />
+    <End Role="MM_Image_Master" Type="Self.MM_Image_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Audit_Type_Master">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Principal>
+      <Dependent Role="MM_Image_Master">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_LocationMaster_Audit_Type_Master">
+    <End Role="Audit_Type_Master" Type="Self.Audit_Type_Master" Multiplicity="0..1" />
+    <End Role="MM_LocationMaster" Type="Self.MM_LocationMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Audit_Type_Master">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Principal>
+      <Dependent Role="MM_LocationMaster">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Menus_MM_Menus">
+    <End Role="Audit_Type_Master" Type="Self.Audit_Type_Master" Multiplicity="0..1" />
+    <End Role="MM_Menus" Type="Self.MM_Menus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Audit_Type_Master">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Principal>
+      <Dependent Role="MM_Menus">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Model_Audit_Type_Master">
+    <End Role="Audit_Type_Master" Type="Self.Audit_Type_Master" Multiplicity="0..1" />
+    <End Role="MM_Model" Type="Self.MM_Model" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Audit_Type_Master">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Principal>
+      <Dependent Role="MM_Model">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_PartMaster_Audit_Type_Master">
+    <End Role="Audit_Type_Master" Type="Self.Audit_Type_Master" Multiplicity="0..1" />
+    <End Role="MM_PartMaster" Type="Self.MM_PartMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Audit_Type_Master">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Principal>
+      <Dependent Role="MM_PartMaster">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Shift_Audit_Type_Master">
+    <End Role="Audit_Type_Master" Type="Self.Audit_Type_Master" Multiplicity="0..1" />
+    <End Role="MM_Shift" Type="Self.MM_Shift" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Audit_Type_Master">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Principal>
+      <Dependent Role="MM_Shift">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Shop_Audit_Type_Master">
+    <End Role="Audit_Type_Master" Type="Self.Audit_Type_Master" Multiplicity="0..1" />
+    <End Role="MM_Shop" Type="Self.MM_Shop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Audit_Type_Master">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Principal>
+      <Dependent Role="MM_Shop">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Track_Sheet_Audit_Type_Master">
+    <End Role="Audit_Type_Master" Type="Self.Audit_Type_Master" Multiplicity="1" />
+    <End Role="MM_Track_Sheet" Type="Self.MM_Track_Sheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Audit_Type_Master">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Principal>
+      <Dependent Role="MM_Track_Sheet">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Vehicle_Audit_Audit_Type_Master">
+    <End Role="Audit_Type_Master" Type="Self.Audit_Type_Master" Multiplicity="1" />
+    <End Role="MM_Vehicle_Audit" Type="Self.MM_Vehicle_Audit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Audit_Type_Master">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Principal>
+      <Dependent Role="MM_Vehicle_Audit">
+        <PropertyRef Name="Audit_Type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_AreaMaster_MM_Model">
+    <End Role="MM_Model" Type="Self.MM_Model" Multiplicity="0..1" />
+    <End Role="MM_AreaMaster" Type="Self.MM_AreaMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Model">
+        <PropertyRef Name="Model_ID" />
+      </Principal>
+      <Dependent Role="MM_AreaMaster">
+        <PropertyRef Name="Model_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_AreaMaster_MM_Plant">
+    <End Role="MM_Plant" Type="Self.MM_Plant" Multiplicity="0..1" />
+    <End Role="MM_AreaMaster" Type="Self.MM_AreaMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Plant">
+        <PropertyRef Name="Plant_ID" />
+      </Principal>
+      <Dependent Role="MM_AreaMaster">
+        <PropertyRef Name="Plant_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_AreaMaster_MM_Shop">
+    <End Role="MM_Shop" Type="Self.MM_Shop" Multiplicity="0..1" />
+    <End Role="MM_AreaMaster" Type="Self.MM_AreaMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Shop">
+        <PropertyRef Name="Shop_ID" />
+      </Principal>
+      <Dependent Role="MM_AreaMaster">
+        <PropertyRef Name="Shop_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_CheckpointMaster_MM_AreaMaster">
+    <End Role="MM_AreaMaster" Type="Self.MM_AreaMaster" Multiplicity="0..1" />
+    <End Role="MM_CheckpointMaster" Type="Self.MM_CheckpointMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_AreaMaster">
+        <PropertyRef Name="Area_ID" />
+      </Principal>
+      <Dependent Role="MM_CheckpointMaster">
+        <PropertyRef Name="Area_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Image_Master_MM_AreaMaster">
+    <End Role="MM_AreaMaster" Type="Self.MM_AreaMaster" Multiplicity="1" />
+    <End Role="MM_Image_Master" Type="Self.MM_Image_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_AreaMaster">
+        <PropertyRef Name="Area_ID" />
+      </Principal>
+      <Dependent Role="MM_Image_Master">
+        <PropertyRef Name="Area_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_LocationMaster_MM_AreaMaster">
+    <End Role="MM_AreaMaster" Type="Self.MM_AreaMaster" Multiplicity="0..1" />
+    <End Role="MM_LocationMaster" Type="Self.MM_LocationMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_AreaMaster">
+        <PropertyRef Name="Area_ID" />
+      </Principal>
+      <Dependent Role="MM_LocationMaster">
+        <PropertyRef Name="Area_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_PartMaster_MM_AreaMaster">
+    <End Role="MM_AreaMaster" Type="Self.MM_AreaMaster" Multiplicity="0..1" />
+    <End Role="MM_PartMaster" Type="Self.MM_PartMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_AreaMaster">
+        <PropertyRef Name="Area_ID" />
+      </Principal>
+      <Dependent Role="MM_PartMaster">
+        <PropertyRef Name="Area_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_SpecificationMaster_MM_AreaMaster">
+    <End Role="MM_AreaMaster" Type="Self.MM_AreaMaster" Multiplicity="0..1" />
+    <End Role="MM_SpecificationMaster" Type="Self.MM_SpecificationMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_AreaMaster">
+        <PropertyRef Name="Area_ID" />
+      </Principal>
+      <Dependent Role="MM_SpecificationMaster">
+        <PropertyRef Name="Area_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Audit_BuildPhase_Mstr_MM_Plant">
+    <End Role="MM_Plant" Type="Self.MM_Plant" Multiplicity="1" />
+    <End Role="MM_Audit_BuildPhase_Mstr" Type="Self.MM_Audit_BuildPhase_Mstr" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Plant">
+        <PropertyRef Name="Plant_ID" />
+      </Principal>
+      <Dependent Role="MM_Audit_BuildPhase_Mstr">
+        <PropertyRef Name="Plant_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Audit_BuildPhase_Mstr_MM_Shop">
+    <End Role="MM_Shop" Type="Self.MM_Shop" Multiplicity="0..1" />
+    <End Role="MM_Audit_BuildPhase_Mstr" Type="Self.MM_Audit_BuildPhase_Mstr" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Shop">
+        <PropertyRef Name="Shop_ID" />
+      </Principal>
+      <Dependent Role="MM_Audit_BuildPhase_Mstr">
+        <PropertyRef Name="Shop_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Vehicle_Audit_MM_Audit_BuildPhase_Mstr">
+    <End Role="MM_Audit_BuildPhase_Mstr" Type="Self.MM_Audit_BuildPhase_Mstr" Multiplicity="0..1" />
+    <End Role="MM_Vehicle_Audit" Type="Self.MM_Vehicle_Audit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Audit_BuildPhase_Mstr">
+        <PropertyRef Name="Build_Phase_ID" />
+      </Principal>
+      <Dependent Role="MM_Vehicle_Audit">
+        <PropertyRef Name="Build_Phase_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Audit_Plan_Log_Details_MM_Audit_Plan_Master">
+    <End Role="MM_Audit_Plan_Master" Type="Self.MM_Audit_Plan_Master" Multiplicity="0..1" />
+    <End Role="MM_Audit_Plan_Log_Details" Type="Self.MM_Audit_Plan_Log_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Audit_Plan_Master">
+        <PropertyRef Name="Audit_Plan_ID" />
+      </Principal>
+      <Dependent Role="MM_Audit_Plan_Log_Details">
+        <PropertyRef Name="Audit_Plan_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Audit_Plan_Log_Details_MM_Plant">
+    <End Role="MM_Plant" Type="Self.MM_Plant" Multiplicity="0..1" />
+    <End Role="MM_Audit_Plan_Log_Details" Type="Self.MM_Audit_Plan_Log_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Plant">
+        <PropertyRef Name="Plant_ID" />
+      </Principal>
+      <Dependent Role="MM_Audit_Plan_Log_Details">
+        <PropertyRef Name="Plant_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Audit_Plan_Log_Details_MM_Shop">
+    <End Role="MM_Shop" Type="Self.MM_Shop" Multiplicity="0..1" />
+    <End Role="MM_Audit_Plan_Log_Details" Type="Self.MM_Audit_Plan_Log_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Shop">
+        <PropertyRef Name="Shop_ID" />
+      </Principal>
+      <Dependent Role="MM_Audit_Plan_Log_Details">
+        <PropertyRef Name="Shop_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Vehicle_Audit_MM_Audit_Plan_Log_Details">
+    <End Role="MM_Audit_Plan_Log_Details" Type="Self.MM_Audit_Plan_Log_Details" Multiplicity="0..1" />
+    <End Role="MM_Vehicle_Audit" Type="Self.MM_Vehicle_Audit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Audit_Plan_Log_Details">
+        <PropertyRef Name="Audit_Plan_Log_ID" />
+      </Principal>
+      <Dependent Role="MM_Vehicle_Audit">
+        <PropertyRef Name="Audit_Plan_Log_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Audit_Plan_Master_MM_Employee">
+    <End Role="MM_Employee" Type="Self.MM_Employee" Multiplicity="0..1" />
+    <End Role="MM_Audit_Plan_Master" Type="Self.MM_Audit_Plan_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Employee">
+        <PropertyRef Name="Employee_ID" />
+      </Principal>
+      <Dependent Role="MM_Audit_Plan_Master">
+        <PropertyRef Name="Assign_User_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Audit_Plan_Master_MM_Model">
+    <End Role="MM_Model" Type="Self.MM_Model" Multiplicity="0..1" />
+    <End Role="MM_Audit_Plan_Master" Type="Self.MM_Audit_Plan_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Model">
+        <PropertyRef Name="Model_ID" />
+      </Principal>
+      <Dependent Role="MM_Audit_Plan_Master">
+        <PropertyRef Name="Model_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Audit_Plan_Master_MM_Plant">
+    <End Role="MM_Plant" Type="Self.MM_Plant" Multiplicity="0..1" />
+    <End Role="MM_Audit_Plan_Master" Type="Self.MM_Audit_Plan_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Plant">
+        <PropertyRef Name="Plant_ID" />
+      </Principal>
+      <Dependent Role="MM_Audit_Plan_Master">
+        <PropertyRef Name="Plant_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Audit_Plan_Master_MM_Schedule_Type_Master">
+    <End Role="MM_Schedule_Type_Master" Type="Self.MM_Schedule_Type_Master" Multiplicity="0..1" />
+    <End Role="MM_Audit_Plan_Master" Type="Self.MM_Audit_Plan_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Schedule_Type_Master">
+        <PropertyRef Name="Schedule_Type_ID" />
+      </Principal>
+      <Dependent Role="MM_Audit_Plan_Master">
+        <PropertyRef Name="Schedule_Type_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Audit_Plan_Master_MM_Shop">
+    <End Role="MM_Shop" Type="Self.MM_Shop" Multiplicity="0..1" />
+    <End Role="MM_Audit_Plan_Master" Type="Self.MM_Audit_Plan_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Shop">
+        <PropertyRef Name="Shop_ID" />
+      </Principal>
+      <Dependent Role="MM_Audit_Plan_Master">
+        <PropertyRef Name="Shop_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Vehicle_Audit_MM_Audit_Plan_Master">
+    <End Role="MM_Audit_Plan_Master" Type="Self.MM_Audit_Plan_Master" Multiplicity="0..1" />
+    <End Role="MM_Vehicle_Audit" Type="Self.MM_Vehicle_Audit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Audit_Plan_Master">
+        <PropertyRef Name="Audit_Plan_ID" />
+      </Principal>
+      <Dependent Role="MM_Vehicle_Audit">
+        <PropertyRef Name="Audit_Plan_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_CheckpointMaster_MM_Model">
+    <End Role="MM_Model" Type="Self.MM_Model" Multiplicity="0..1" />
+    <End Role="MM_CheckpointMaster" Type="Self.MM_CheckpointMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Model">
+        <PropertyRef Name="Model_ID" />
+      </Principal>
+      <Dependent Role="MM_CheckpointMaster">
+        <PropertyRef Name="Model_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_CheckpointMaster_MM_PartMaster">
+    <End Role="MM_PartMaster" Type="Self.MM_PartMaster" Multiplicity="0..1" />
+    <End Role="MM_CheckpointMaster" Type="Self.MM_CheckpointMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_PartMaster">
+        <PropertyRef Name="Part_ID" />
+      </Principal>
+      <Dependent Role="MM_CheckpointMaster">
+        <PropertyRef Name="Part_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_CheckpointMaster_MM_Plant">
+    <End Role="MM_Plant" Type="Self.MM_Plant" Multiplicity="0..1" />
+    <End Role="MM_CheckpointMaster" Type="Self.MM_CheckpointMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Plant">
+        <PropertyRef Name="Plant_ID" />
+      </Principal>
+      <Dependent Role="MM_CheckpointMaster">
+        <PropertyRef Name="Plant_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_CheckpointMaster_MM_Shop">
+    <End Role="MM_Shop" Type="Self.MM_Shop" Multiplicity="0..1" />
+    <End Role="MM_CheckpointMaster" Type="Self.MM_CheckpointMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Shop">
+        <PropertyRef Name="Shop_ID" />
+      </Principal>
+      <Dependent Role="MM_CheckpointMaster">
+        <PropertyRef Name="Shop_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_LocationMaster_MM_CheckpointMaster">
+    <End Role="MM_CheckpointMaster" Type="Self.MM_CheckpointMaster" Multiplicity="0..1" />
+    <End Role="MM_LocationMaster" Type="Self.MM_LocationMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_CheckpointMaster">
+        <PropertyRef Name="Checkpoint_ID" />
+      </Principal>
+      <Dependent Role="MM_LocationMaster">
+        <PropertyRef Name="Checkpoint_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_SpecificationMaster_MM_CheckpointMaster">
+    <End Role="MM_CheckpointMaster" Type="Self.MM_CheckpointMaster" Multiplicity="0..1" />
+    <End Role="MM_SpecificationMaster" Type="Self.MM_SpecificationMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_CheckpointMaster">
+        <PropertyRef Name="Checkpoint_ID" />
+      </Principal>
+      <Dependent Role="MM_SpecificationMaster">
+        <PropertyRef Name="Checkpoint_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Track_Sheet_MM_CheckpointMaster">
+    <End Role="MM_CheckpointMaster" Type="Self.MM_CheckpointMaster" Multiplicity="1" />
+    <End Role="MM_Track_Sheet" Type="Self.MM_Track_Sheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_CheckpointMaster">
+        <PropertyRef Name="Checkpoint_ID" />
+      </Principal>
+      <Dependent Role="MM_Track_Sheet">
+        <PropertyRef Name="Checkpoint_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Employee_MM_Department">
+    <End Role="MM_Department" Type="Self.MM_Department" Multiplicity="1" />
+    <End Role="MM_Employee" Type="Self.MM_Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Department">
+        <PropertyRef Name="Department_ID" />
+      </Principal>
+      <Dependent Role="MM_Employee">
+        <PropertyRef Name="Department_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Employee_MM_Plant">
+    <End Role="MM_Plant" Type="Self.MM_Plant" Multiplicity="0..1" />
+    <End Role="MM_Employee" Type="Self.MM_Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Plant">
+        <PropertyRef Name="Plant_ID" />
+      </Principal>
+      <Dependent Role="MM_Employee">
+        <PropertyRef Name="Plant_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Employee_MM_Shop">
+    <End Role="MM_Shop" Type="Self.MM_Shop" Multiplicity="0..1" />
+    <End Role="MM_Employee" Type="Self.MM_Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Shop">
+        <PropertyRef Name="Shop_ID" />
+      </Principal>
+      <Dependent Role="MM_Employee">
+        <PropertyRef Name="Shop_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_FQ_Target_Master_MM_Model">
+    <End Role="MM_Model" Type="Self.MM_Model" Multiplicity="0..1" />
+    <End Role="MM_FQ_Target_Master" Type="Self.MM_FQ_Target_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Model">
+        <PropertyRef Name="Model_ID" />
+      </Principal>
+      <Dependent Role="MM_FQ_Target_Master">
+        <PropertyRef Name="Model_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_FQ_Target_Master_MM_Plant">
+    <End Role="MM_Plant" Type="Self.MM_Plant" Multiplicity="0..1" />
+    <End Role="MM_FQ_Target_Master" Type="Self.MM_FQ_Target_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Plant">
+        <PropertyRef Name="Plant_ID" />
+      </Principal>
+      <Dependent Role="MM_FQ_Target_Master">
+        <PropertyRef Name="Plant_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_FQ_Target_Master_MM_Shop">
+    <End Role="MM_Shop" Type="Self.MM_Shop" Multiplicity="0..1" />
+    <End Role="MM_FQ_Target_Master" Type="Self.MM_FQ_Target_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Shop">
+        <PropertyRef Name="Shop_ID" />
+      </Principal>
+      <Dependent Role="MM_FQ_Target_Master">
+        <PropertyRef Name="Shop_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_FY_Target_Master_MM_Model">
+    <End Role="MM_Model" Type="Self.MM_Model" Multiplicity="0..1" />
+    <End Role="MM_FY_Target_Master" Type="Self.MM_FY_Target_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Model">
+        <PropertyRef Name="Model_ID" />
+      </Principal>
+      <Dependent Role="MM_FY_Target_Master">
+        <PropertyRef Name="Model_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_FY_Target_Master_MM_Plant">
+    <End Role="MM_Plant" Type="Self.MM_Plant" Multiplicity="0..1" />
+    <End Role="MM_FY_Target_Master" Type="Self.MM_FY_Target_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Plant">
+        <PropertyRef Name="Plant_ID" />
+      </Principal>
+      <Dependent Role="MM_FY_Target_Master">
+        <PropertyRef Name="Plant_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_FY_Target_Master_MM_Shop">
+    <End Role="MM_Shop" Type="Self.MM_Shop" Multiplicity="0..1" />
+    <End Role="MM_FY_Target_Master" Type="Self.MM_FY_Target_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Shop">
+        <PropertyRef Name="Shop_ID" />
+      </Principal>
+      <Dependent Role="MM_FY_Target_Master">
+        <PropertyRef Name="Shop_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Track_Sheet_MM_Track_Sheet">
+    <End Role="MM_Gap_And_FlushMaster" Type="Self.MM_Gap_And_FlushMaster" Multiplicity="1" />
+    <End Role="MM_Track_Sheet" Type="Self.MM_Track_Sheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Gap_And_FlushMaster">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MM_Track_Sheet">
+        <PropertyRef Name="Parameter_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Image_Master_MM_Model">
+    <End Role="MM_Model" Type="Self.MM_Model" Multiplicity="1" />
+    <End Role="MM_Image_Master" Type="Self.MM_Image_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Model">
+        <PropertyRef Name="Model_ID" />
+      </Principal>
+      <Dependent Role="MM_Image_Master">
+        <PropertyRef Name="Model_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Image_Master_MM_PartMaster">
+    <End Role="MM_PartMaster" Type="Self.MM_PartMaster" Multiplicity="1" />
+    <End Role="MM_Image_Master" Type="Self.MM_Image_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_PartMaster">
+        <PropertyRef Name="Part_ID" />
+      </Principal>
+      <Dependent Role="MM_Image_Master">
+        <PropertyRef Name="Part_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Image_Master_MM_Plant">
+    <End Role="MM_Plant" Type="Self.MM_Plant" Multiplicity="1" />
+    <End Role="MM_Image_Master" Type="Self.MM_Image_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Plant">
+        <PropertyRef Name="Plant_ID" />
+      </Principal>
+      <Dependent Role="MM_Image_Master">
+        <PropertyRef Name="Plant_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Image_Master_MM_Shop">
+    <End Role="MM_Shop" Type="Self.MM_Shop" Multiplicity="1" />
+    <End Role="MM_Image_Master" Type="Self.MM_Image_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Shop">
+        <PropertyRef Name="Shop_ID" />
+      </Principal>
+      <Dependent Role="MM_Image_Master">
+        <PropertyRef Name="Shop_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Track_Sheet_MM_Image_Master">
+    <End Role="MM_Image_Master" Type="Self.MM_Image_Master" Multiplicity="0..1" />
+    <End Role="MM_Track_Sheet" Type="Self.MM_Track_Sheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Image_Master">
+        <PropertyRef Name="Image_ID" />
+      </Principal>
+      <Dependent Role="MM_Track_Sheet">
+        <PropertyRef Name="Image_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_LocationMaster_MM_Model">
+    <End Role="MM_Model" Type="Self.MM_Model" Multiplicity="0..1" />
+    <End Role="MM_LocationMaster" Type="Self.MM_LocationMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Model">
+        <PropertyRef Name="Model_ID" />
+      </Principal>
+      <Dependent Role="MM_LocationMaster">
+        <PropertyRef Name="Model_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_LocationMaster_MM_PartMaster">
+    <End Role="MM_PartMaster" Type="Self.MM_PartMaster" Multiplicity="0..1" />
+    <End Role="MM_LocationMaster" Type="Self.MM_LocationMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_PartMaster">
+        <PropertyRef Name="Part_ID" />
+      </Principal>
+      <Dependent Role="MM_LocationMaster">
+        <PropertyRef Name="Part_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_LocationMaster_MM_Plant">
+    <End Role="MM_Plant" Type="Self.MM_Plant" Multiplicity="0..1" />
+    <End Role="MM_LocationMaster" Type="Self.MM_LocationMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Plant">
+        <PropertyRef Name="Plant_ID" />
+      </Principal>
+      <Dependent Role="MM_LocationMaster">
+        <PropertyRef Name="Plant_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_LocationMaster_MM_Shop">
+    <End Role="MM_Shop" Type="Self.MM_Shop" Multiplicity="0..1" />
+    <End Role="MM_LocationMaster" Type="Self.MM_LocationMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Shop">
+        <PropertyRef Name="Shop_ID" />
+      </Principal>
+      <Dependent Role="MM_LocationMaster">
+        <PropertyRef Name="Shop_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_SpecificationMaster_MM_LocationMaster">
+    <End Role="MM_LocationMaster" Type="Self.MM_LocationMaster" Multiplicity="0..1" />
+    <End Role="MM_SpecificationMaster" Type="Self.MM_SpecificationMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_LocationMaster">
+        <PropertyRef Name="Location_ID" />
+      </Principal>
+      <Dependent Role="MM_SpecificationMaster">
+        <PropertyRef Name="Location_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Track_Sheet_MM_LocationMaster">
+    <End Role="MM_LocationMaster" Type="Self.MM_LocationMaster" Multiplicity="1" />
+    <End Role="MM_Track_Sheet" Type="Self.MM_Track_Sheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_LocationMaster">
+        <PropertyRef Name="Location_ID" />
+      </Principal>
+      <Dependent Role="MM_Track_Sheet">
+        <PropertyRef Name="Location_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Menu_Role_MM_Roles">
+    <End Role="MM_Roles" Type="Self.MM_Roles" Multiplicity="1" />
+    <End Role="MM_Menu_Role" Type="Self.MM_Menu_Role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Roles">
+        <PropertyRef Name="Role_ID" />
+      </Principal>
+      <Dependent Role="MM_Menu_Role">
+        <PropertyRef Name="Role_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Menu_Role_MM_Sub_Menus">
+    <End Role="MM_Sub_Menus" Type="Self.MM_Sub_Menus" Multiplicity="1" />
+    <End Role="MM_Menu_Role" Type="Self.MM_Menu_Role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Sub_Menus">
+        <PropertyRef Name="Sub_Menu_ID" />
+      </Principal>
+      <Dependent Role="MM_Menu_Role">
+        <PropertyRef Name="Sub_Menu_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Model_MM_Plant">
+    <End Role="MM_Plant" Type="Self.MM_Plant" Multiplicity="1" />
+    <End Role="MM_Model" Type="Self.MM_Model" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Plant">
+        <PropertyRef Name="Plant_ID" />
+      </Principal>
+      <Dependent Role="MM_Model">
+        <PropertyRef Name="Plant_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Model_MM_Shop">
+    <End Role="MM_Shop" Type="Self.MM_Shop" Multiplicity="0..1" />
+    <End Role="MM_Model" Type="Self.MM_Model" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Shop">
+        <PropertyRef Name="Shop_ID" />
+      </Principal>
+      <Dependent Role="MM_Model">
+        <PropertyRef Name="Shop_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_PartMaster_MM_Model">
+    <End Role="MM_Model" Type="Self.MM_Model" Multiplicity="0..1" />
+    <End Role="MM_PartMaster" Type="Self.MM_PartMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Model">
+        <PropertyRef Name="Model_ID" />
+      </Principal>
+      <Dependent Role="MM_PartMaster">
+        <PropertyRef Name="Model_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_SpecificationMaster_MM_Model">
+    <End Role="MM_Model" Type="Self.MM_Model" Multiplicity="0..1" />
+    <End Role="MM_SpecificationMaster" Type="Self.MM_SpecificationMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Model">
+        <PropertyRef Name="Model_ID" />
+      </Principal>
+      <Dependent Role="MM_SpecificationMaster">
+        <PropertyRef Name="Model_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Vehicle_Audit_MM_Model">
+    <End Role="MM_Model" Type="Self.MM_Model" Multiplicity="1" />
+    <End Role="MM_Vehicle_Audit" Type="Self.MM_Vehicle_Audit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Model">
+        <PropertyRef Name="Model_ID" />
+      </Principal>
+      <Dependent Role="MM_Vehicle_Audit">
+        <PropertyRef Name="Model_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_PartMaster_MM_Plant">
+    <End Role="MM_Plant" Type="Self.MM_Plant" Multiplicity="0..1" />
+    <End Role="MM_PartMaster" Type="Self.MM_PartMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Plant">
+        <PropertyRef Name="Plant_ID" />
+      </Principal>
+      <Dependent Role="MM_PartMaster">
+        <PropertyRef Name="Plant_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_PartMaster_MM_Shop">
+    <End Role="MM_Shop" Type="Self.MM_Shop" Multiplicity="0..1" />
+    <End Role="MM_PartMaster" Type="Self.MM_PartMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Shop">
+        <PropertyRef Name="Shop_ID" />
+      </Principal>
+      <Dependent Role="MM_PartMaster">
+        <PropertyRef Name="Shop_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_SpecificationMaster_MM_PartMaster">
+    <End Role="MM_PartMaster" Type="Self.MM_PartMaster" Multiplicity="0..1" />
+    <End Role="MM_SpecificationMaster" Type="Self.MM_SpecificationMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_PartMaster">
+        <PropertyRef Name="Part_ID" />
+      </Principal>
+      <Dependent Role="MM_SpecificationMaster">
+        <PropertyRef Name="Part_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Track_Sheet_MM_PartMaster">
+    <End Role="MM_PartMaster" Type="Self.MM_PartMaster" Multiplicity="1" />
+    <End Role="MM_Track_Sheet" Type="Self.MM_Track_Sheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_PartMaster">
+        <PropertyRef Name="Part_ID" />
+      </Principal>
+      <Dependent Role="MM_Track_Sheet">
+        <PropertyRef Name="Part_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Shift_MM_Plant">
+    <End Role="MM_Plant" Type="Self.MM_Plant" Multiplicity="0..1" />
+    <End Role="MM_Shift" Type="Self.MM_Shift" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Plant">
+        <PropertyRef Name="Plant_ID" />
+      </Principal>
+      <Dependent Role="MM_Shift">
+        <PropertyRef Name="Plant_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Shop_MM_Plant">
+    <End Role="MM_Plant" Type="Self.MM_Plant" Multiplicity="0..1" />
+    <End Role="MM_Shop" Type="Self.MM_Shop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Plant">
+        <PropertyRef Name="Plant_ID" />
+      </Principal>
+      <Dependent Role="MM_Shop">
+        <PropertyRef Name="Plant_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Track_Sheet_MM_Plant">
+    <End Role="MM_Plant" Type="Self.MM_Plant" Multiplicity="1" />
+    <End Role="MM_Track_Sheet" Type="Self.MM_Track_Sheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Plant">
+        <PropertyRef Name="Plant_ID" />
+      </Principal>
+      <Dependent Role="MM_Track_Sheet">
+        <PropertyRef Name="Plant_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Vehicle_Audit_MM_Plant">
+    <End Role="MM_Plant" Type="Self.MM_Plant" Multiplicity="1" />
+    <End Role="MM_Vehicle_Audit" Type="Self.MM_Vehicle_Audit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Plant">
+        <PropertyRef Name="Plant_ID" />
+      </Principal>
+      <Dependent Role="MM_Vehicle_Audit">
+        <PropertyRef Name="Plant_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_User_Roles_MM_Roles">
+    <End Role="MM_Roles" Type="Self.MM_Roles" Multiplicity="1" />
+    <End Role="MM_User_Roles" Type="Self.MM_User_Roles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Roles">
+        <PropertyRef Name="Role_ID" />
+      </Principal>
+      <Dependent Role="MM_User_Roles">
+        <PropertyRef Name="Role_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Shift_MM_Shop">
+    <End Role="MM_Shop" Type="Self.MM_Shop" Multiplicity="0..1" />
+    <End Role="MM_Shift" Type="Self.MM_Shift" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Shop">
+        <PropertyRef Name="Shop_ID" />
+      </Principal>
+      <Dependent Role="MM_Shift">
+        <PropertyRef Name="Shop_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Vehicle_Audit_MM_Shift">
+    <End Role="MM_Shift" Type="Self.MM_Shift" Multiplicity="0..1" />
+    <End Role="MM_Vehicle_Audit" Type="Self.MM_Vehicle_Audit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Shift">
+        <PropertyRef Name="SHIFT_NO" />
+      </Principal>
+      <Dependent Role="MM_Vehicle_Audit">
+        <PropertyRef Name="Shift_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Track_Sheet_MM_Shop">
+    <End Role="MM_Shop" Type="Self.MM_Shop" Multiplicity="1" />
+    <End Role="MM_Track_Sheet" Type="Self.MM_Track_Sheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Shop">
+        <PropertyRef Name="Shop_ID" />
+      </Principal>
+      <Dependent Role="MM_Track_Sheet">
+        <PropertyRef Name="Shop_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Vehicle_Audit_MM_Shop">
+    <End Role="MM_Shop" Type="Self.MM_Shop" Multiplicity="0..1" />
+    <End Role="MM_Vehicle_Audit" Type="Self.MM_Vehicle_Audit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Shop">
+        <PropertyRef Name="Shop_ID" />
+      </Principal>
+      <Dependent Role="MM_Vehicle_Audit">
+        <PropertyRef Name="Shop_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Track_Sheet_MM_SpecificationMaster">
+    <End Role="MM_SpecificationMaster" Type="Self.MM_SpecificationMaster" Multiplicity="1" />
+    <End Role="MM_Track_Sheet" Type="Self.MM_Track_Sheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_SpecificationMaster">
+        <PropertyRef Name="Specification_ID" />
+      </Principal>
+      <Dependent Role="MM_Track_Sheet">
+        <PropertyRef Name="Specification_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MM_Track_Sheet_MM_Vehicle_Audit">
+    <End Role="MM_Vehicle_Audit" Type="Self.MM_Vehicle_Audit" Multiplicity="1" />
+    <End Role="MM_Track_Sheet" Type="Self.MM_Track_Sheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MM_Vehicle_Audit">
+        <PropertyRef Name="Audit_ID" />
+      </Principal>
+      <Dependent Role="MM_Track_Sheet">
+        <PropertyRef Name="Audit_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OneD_DB_Entity" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Audit_Type_Master" EntityType="Self.Audit_Type_Master" />
+    <EntitySet Name="MM_AreaMaster" EntityType="Self.MM_AreaMaster" />
+    <EntitySet Name="MM_Audit_BuildPhase_Mstr" EntityType="Self.MM_Audit_BuildPhase_Mstr" />
+    <EntitySet Name="MM_Audit_Plan_Log_Details" EntityType="Self.MM_Audit_Plan_Log_Details" />
+    <EntitySet Name="MM_Audit_Plan_Log_Details_Deleted" EntityType="Self.MM_Audit_Plan_Log_Details_Deleted" />
+    <EntitySet Name="MM_Audit_Plan_Master" EntityType="Self.MM_Audit_Plan_Master" />
+    <EntitySet Name="MM_CheckpointMaster" EntityType="Self.MM_CheckpointMaster" />
+    <EntitySet Name="MM_Department" EntityType="Self.MM_Department" />
+    <EntitySet Name="MM_Documents_Master" EntityType="Self.MM_Documents_Master" />
+    <EntitySet Name="MM_Employee" EntityType="Self.MM_Employee" />
+    <EntitySet Name="MM_Error_Log" EntityType="Self.MM_Error_Log" />
+    <EntitySet Name="MM_FQ_Target_Master" EntityType="Self.MM_FQ_Target_Master" />
+    <EntitySet Name="MM_FY_Target_Master" EntityType="Self.MM_FY_Target_Master" />
+    <EntitySet Name="MM_Gap_And_FlushMaster" EntityType="Self.MM_Gap_And_FlushMaster" />
+    <EntitySet Name="MM_Image_Master" EntityType="Self.MM_Image_Master" />
+    <EntitySet Name="MM_Location_Mapping" EntityType="Self.MM_Location_Mapping" />
+    <EntitySet Name="MM_LocationMaster" EntityType="Self.MM_LocationMaster" />
+    <EntitySet Name="MM_Menu_Role" EntityType="Self.MM_Menu_Role" />
+    <EntitySet Name="MM_Menus" EntityType="Self.MM_Menus" />
+    <EntitySet Name="MM_Model" EntityType="Self.MM_Model" />
+    <EntitySet Name="MM_PartMaster" EntityType="Self.MM_PartMaster" />
+    <EntitySet Name="MM_Plant" EntityType="Self.MM_Plant" />
+    <EntitySet Name="MM_Rights" EntityType="Self.MM_Rights" />
+    <EntitySet Name="MM_Roles" EntityType="Self.MM_Roles" />
+    <EntitySet Name="MM_Schedule_Type_Master" EntityType="Self.MM_Schedule_Type_Master" />
+    <EntitySet Name="MM_Shift" EntityType="Self.MM_Shift" />
+    <EntitySet Name="MM_Shop" EntityType="Self.MM_Shop" />
+    <EntitySet Name="MM_SpecificationMaster" EntityType="Self.MM_SpecificationMaster" />
+    <EntitySet Name="MM_Sub_Menus" EntityType="Self.MM_Sub_Menus" />
+    <EntitySet Name="MM_Track_Sheet" EntityType="Self.MM_Track_Sheet" />
+    <EntitySet Name="MM_User_Activity_Logs" EntityType="Self.MM_User_Activity_Logs" />
+    <EntitySet Name="MM_User_Log" EntityType="Self.MM_User_Log" />
+    <EntitySet Name="MM_User_Roles" EntityType="Self.MM_User_Roles" />
+    <EntitySet Name="MM_UserActivity_Log" EntityType="Self.MM_UserActivity_Log" />
+    <EntitySet Name="MM_Vehicle_Audit" EntityType="Self.MM_Vehicle_Audit" />
+    <AssociationSet Name="FK_MM_AreaMaster_Audit_Type_Master" Association="Self.FK_MM_AreaMaster_Audit_Type_Master">
+      <End Role="Audit_Type_Master" EntitySet="Audit_Type_Master" />
+      <End Role="MM_AreaMaster" EntitySet="MM_AreaMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Audit_BuildPhase_Mstr_Audit_Type_Master" Association="Self.FK_MM_Audit_BuildPhase_Mstr_Audit_Type_Master">
+      <End Role="Audit_Type_Master" EntitySet="Audit_Type_Master" />
+      <End Role="MM_Audit_BuildPhase_Mstr" EntitySet="MM_Audit_BuildPhase_Mstr" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Audit_Plan_Master_Audit_Type_Master" Association="Self.FK_MM_Audit_Plan_Master_Audit_Type_Master">
+      <End Role="Audit_Type_Master" EntitySet="Audit_Type_Master" />
+      <End Role="MM_Audit_Plan_Master" EntitySet="MM_Audit_Plan_Master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_CheckpointMaster_Audit_Type_Master" Association="Self.FK_MM_CheckpointMaster_Audit_Type_Master">
+      <End Role="Audit_Type_Master" EntitySet="Audit_Type_Master" />
+      <End Role="MM_CheckpointMaster" EntitySet="MM_CheckpointMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Employee_Audit_Type_Master" Association="Self.FK_MM_Employee_Audit_Type_Master">
+      <End Role="Audit_Type_Master" EntitySet="Audit_Type_Master" />
+      <End Role="MM_Employee" EntitySet="MM_Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_FQ_Target_Master_Audit_Type_Master" Association="Self.FK_MM_FQ_Target_Master_Audit_Type_Master">
+      <End Role="Audit_Type_Master" EntitySet="Audit_Type_Master" />
+      <End Role="MM_FQ_Target_Master" EntitySet="MM_FQ_Target_Master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_FY_Target_Master_Audit_Type_Master" Association="Self.FK_MM_FY_Target_Master_Audit_Type_Master">
+      <End Role="Audit_Type_Master" EntitySet="Audit_Type_Master" />
+      <End Role="MM_FY_Target_Master" EntitySet="MM_FY_Target_Master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Image_Master_Audit_Type_Master" Association="Self.FK_MM_Image_Master_Audit_Type_Master">
+      <End Role="Audit_Type_Master" EntitySet="Audit_Type_Master" />
+      <End Role="MM_Image_Master" EntitySet="MM_Image_Master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_LocationMaster_Audit_Type_Master" Association="Self.FK_MM_LocationMaster_Audit_Type_Master">
+      <End Role="Audit_Type_Master" EntitySet="Audit_Type_Master" />
+      <End Role="MM_LocationMaster" EntitySet="MM_LocationMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Menus_MM_Menus" Association="Self.FK_MM_Menus_MM_Menus">
+      <End Role="Audit_Type_Master" EntitySet="Audit_Type_Master" />
+      <End Role="MM_Menus" EntitySet="MM_Menus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Model_Audit_Type_Master" Association="Self.FK_MM_Model_Audit_Type_Master">
+      <End Role="Audit_Type_Master" EntitySet="Audit_Type_Master" />
+      <End Role="MM_Model" EntitySet="MM_Model" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_PartMaster_Audit_Type_Master" Association="Self.FK_MM_PartMaster_Audit_Type_Master">
+      <End Role="Audit_Type_Master" EntitySet="Audit_Type_Master" />
+      <End Role="MM_PartMaster" EntitySet="MM_PartMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Shift_Audit_Type_Master" Association="Self.FK_MM_Shift_Audit_Type_Master">
+      <End Role="Audit_Type_Master" EntitySet="Audit_Type_Master" />
+      <End Role="MM_Shift" EntitySet="MM_Shift" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Shop_Audit_Type_Master" Association="Self.FK_MM_Shop_Audit_Type_Master">
+      <End Role="Audit_Type_Master" EntitySet="Audit_Type_Master" />
+      <End Role="MM_Shop" EntitySet="MM_Shop" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Track_Sheet_Audit_Type_Master" Association="Self.FK_MM_Track_Sheet_Audit_Type_Master">
+      <End Role="Audit_Type_Master" EntitySet="Audit_Type_Master" />
+      <End Role="MM_Track_Sheet" EntitySet="MM_Track_Sheet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Vehicle_Audit_Audit_Type_Master" Association="Self.FK_MM_Vehicle_Audit_Audit_Type_Master">
+      <End Role="Audit_Type_Master" EntitySet="Audit_Type_Master" />
+      <End Role="MM_Vehicle_Audit" EntitySet="MM_Vehicle_Audit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_AreaMaster_MM_Model" Association="Self.FK_MM_AreaMaster_MM_Model">
+      <End Role="MM_Model" EntitySet="MM_Model" />
+      <End Role="MM_AreaMaster" EntitySet="MM_AreaMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_AreaMaster_MM_Plant" Association="Self.FK_MM_AreaMaster_MM_Plant">
+      <End Role="MM_Plant" EntitySet="MM_Plant" />
+      <End Role="MM_AreaMaster" EntitySet="MM_AreaMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_AreaMaster_MM_Shop" Association="Self.FK_MM_AreaMaster_MM_Shop">
+      <End Role="MM_Shop" EntitySet="MM_Shop" />
+      <End Role="MM_AreaMaster" EntitySet="MM_AreaMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_CheckpointMaster_MM_AreaMaster" Association="Self.FK_MM_CheckpointMaster_MM_AreaMaster">
+      <End Role="MM_AreaMaster" EntitySet="MM_AreaMaster" />
+      <End Role="MM_CheckpointMaster" EntitySet="MM_CheckpointMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Image_Master_MM_AreaMaster" Association="Self.FK_MM_Image_Master_MM_AreaMaster">
+      <End Role="MM_AreaMaster" EntitySet="MM_AreaMaster" />
+      <End Role="MM_Image_Master" EntitySet="MM_Image_Master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_LocationMaster_MM_AreaMaster" Association="Self.FK_MM_LocationMaster_MM_AreaMaster">
+      <End Role="MM_AreaMaster" EntitySet="MM_AreaMaster" />
+      <End Role="MM_LocationMaster" EntitySet="MM_LocationMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_PartMaster_MM_AreaMaster" Association="Self.FK_MM_PartMaster_MM_AreaMaster">
+      <End Role="MM_AreaMaster" EntitySet="MM_AreaMaster" />
+      <End Role="MM_PartMaster" EntitySet="MM_PartMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_SpecificationMaster_MM_AreaMaster" Association="Self.FK_MM_SpecificationMaster_MM_AreaMaster">
+      <End Role="MM_AreaMaster" EntitySet="MM_AreaMaster" />
+      <End Role="MM_SpecificationMaster" EntitySet="MM_SpecificationMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Audit_BuildPhase_Mstr_MM_Plant" Association="Self.FK_MM_Audit_BuildPhase_Mstr_MM_Plant">
+      <End Role="MM_Plant" EntitySet="MM_Plant" />
+      <End Role="MM_Audit_BuildPhase_Mstr" EntitySet="MM_Audit_BuildPhase_Mstr" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Audit_BuildPhase_Mstr_MM_Shop" Association="Self.FK_MM_Audit_BuildPhase_Mstr_MM_Shop">
+      <End Role="MM_Shop" EntitySet="MM_Shop" />
+      <End Role="MM_Audit_BuildPhase_Mstr" EntitySet="MM_Audit_BuildPhase_Mstr" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Vehicle_Audit_MM_Audit_BuildPhase_Mstr" Association="Self.FK_MM_Vehicle_Audit_MM_Audit_BuildPhase_Mstr">
+      <End Role="MM_Audit_BuildPhase_Mstr" EntitySet="MM_Audit_BuildPhase_Mstr" />
+      <End Role="MM_Vehicle_Audit" EntitySet="MM_Vehicle_Audit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Audit_Plan_Log_Details_MM_Audit_Plan_Master" Association="Self.FK_MM_Audit_Plan_Log_Details_MM_Audit_Plan_Master">
+      <End Role="MM_Audit_Plan_Master" EntitySet="MM_Audit_Plan_Master" />
+      <End Role="MM_Audit_Plan_Log_Details" EntitySet="MM_Audit_Plan_Log_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Audit_Plan_Log_Details_MM_Plant" Association="Self.FK_MM_Audit_Plan_Log_Details_MM_Plant">
+      <End Role="MM_Plant" EntitySet="MM_Plant" />
+      <End Role="MM_Audit_Plan_Log_Details" EntitySet="MM_Audit_Plan_Log_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Audit_Plan_Log_Details_MM_Shop" Association="Self.FK_MM_Audit_Plan_Log_Details_MM_Shop">
+      <End Role="MM_Shop" EntitySet="MM_Shop" />
+      <End Role="MM_Audit_Plan_Log_Details" EntitySet="MM_Audit_Plan_Log_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Vehicle_Audit_MM_Audit_Plan_Log_Details" Association="Self.FK_MM_Vehicle_Audit_MM_Audit_Plan_Log_Details">
+      <End Role="MM_Audit_Plan_Log_Details" EntitySet="MM_Audit_Plan_Log_Details" />
+      <End Role="MM_Vehicle_Audit" EntitySet="MM_Vehicle_Audit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Audit_Plan_Master_MM_Employee" Association="Self.FK_MM_Audit_Plan_Master_MM_Employee">
+      <End Role="MM_Employee" EntitySet="MM_Employee" />
+      <End Role="MM_Audit_Plan_Master" EntitySet="MM_Audit_Plan_Master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Audit_Plan_Master_MM_Model" Association="Self.FK_MM_Audit_Plan_Master_MM_Model">
+      <End Role="MM_Model" EntitySet="MM_Model" />
+      <End Role="MM_Audit_Plan_Master" EntitySet="MM_Audit_Plan_Master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Audit_Plan_Master_MM_Plant" Association="Self.FK_MM_Audit_Plan_Master_MM_Plant">
+      <End Role="MM_Plant" EntitySet="MM_Plant" />
+      <End Role="MM_Audit_Plan_Master" EntitySet="MM_Audit_Plan_Master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Audit_Plan_Master_MM_Schedule_Type_Master" Association="Self.FK_MM_Audit_Plan_Master_MM_Schedule_Type_Master">
+      <End Role="MM_Schedule_Type_Master" EntitySet="MM_Schedule_Type_Master" />
+      <End Role="MM_Audit_Plan_Master" EntitySet="MM_Audit_Plan_Master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Audit_Plan_Master_MM_Shop" Association="Self.FK_MM_Audit_Plan_Master_MM_Shop">
+      <End Role="MM_Shop" EntitySet="MM_Shop" />
+      <End Role="MM_Audit_Plan_Master" EntitySet="MM_Audit_Plan_Master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Vehicle_Audit_MM_Audit_Plan_Master" Association="Self.FK_MM_Vehicle_Audit_MM_Audit_Plan_Master">
+      <End Role="MM_Audit_Plan_Master" EntitySet="MM_Audit_Plan_Master" />
+      <End Role="MM_Vehicle_Audit" EntitySet="MM_Vehicle_Audit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_CheckpointMaster_MM_Model" Association="Self.FK_MM_CheckpointMaster_MM_Model">
+      <End Role="MM_Model" EntitySet="MM_Model" />
+      <End Role="MM_CheckpointMaster" EntitySet="MM_CheckpointMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_CheckpointMaster_MM_PartMaster" Association="Self.FK_MM_CheckpointMaster_MM_PartMaster">
+      <End Role="MM_PartMaster" EntitySet="MM_PartMaster" />
+      <End Role="MM_CheckpointMaster" EntitySet="MM_CheckpointMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_CheckpointMaster_MM_Plant" Association="Self.FK_MM_CheckpointMaster_MM_Plant">
+      <End Role="MM_Plant" EntitySet="MM_Plant" />
+      <End Role="MM_CheckpointMaster" EntitySet="MM_CheckpointMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_CheckpointMaster_MM_Shop" Association="Self.FK_MM_CheckpointMaster_MM_Shop">
+      <End Role="MM_Shop" EntitySet="MM_Shop" />
+      <End Role="MM_CheckpointMaster" EntitySet="MM_CheckpointMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_LocationMaster_MM_CheckpointMaster" Association="Self.FK_MM_LocationMaster_MM_CheckpointMaster">
+      <End Role="MM_CheckpointMaster" EntitySet="MM_CheckpointMaster" />
+      <End Role="MM_LocationMaster" EntitySet="MM_LocationMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_SpecificationMaster_MM_CheckpointMaster" Association="Self.FK_MM_SpecificationMaster_MM_CheckpointMaster">
+      <End Role="MM_CheckpointMaster" EntitySet="MM_CheckpointMaster" />
+      <End Role="MM_SpecificationMaster" EntitySet="MM_SpecificationMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Track_Sheet_MM_CheckpointMaster" Association="Self.FK_MM_Track_Sheet_MM_CheckpointMaster">
+      <End Role="MM_CheckpointMaster" EntitySet="MM_CheckpointMaster" />
+      <End Role="MM_Track_Sheet" EntitySet="MM_Track_Sheet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Employee_MM_Department" Association="Self.FK_MM_Employee_MM_Department">
+      <End Role="MM_Department" EntitySet="MM_Department" />
+      <End Role="MM_Employee" EntitySet="MM_Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Employee_MM_Plant" Association="Self.FK_MM_Employee_MM_Plant">
+      <End Role="MM_Plant" EntitySet="MM_Plant" />
+      <End Role="MM_Employee" EntitySet="MM_Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Employee_MM_Shop" Association="Self.FK_MM_Employee_MM_Shop">
+      <End Role="MM_Shop" EntitySet="MM_Shop" />
+      <End Role="MM_Employee" EntitySet="MM_Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_FQ_Target_Master_MM_Model" Association="Self.FK_MM_FQ_Target_Master_MM_Model">
+      <End Role="MM_Model" EntitySet="MM_Model" />
+      <End Role="MM_FQ_Target_Master" EntitySet="MM_FQ_Target_Master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_FQ_Target_Master_MM_Plant" Association="Self.FK_MM_FQ_Target_Master_MM_Plant">
+      <End Role="MM_Plant" EntitySet="MM_Plant" />
+      <End Role="MM_FQ_Target_Master" EntitySet="MM_FQ_Target_Master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_FQ_Target_Master_MM_Shop" Association="Self.FK_MM_FQ_Target_Master_MM_Shop">
+      <End Role="MM_Shop" EntitySet="MM_Shop" />
+      <End Role="MM_FQ_Target_Master" EntitySet="MM_FQ_Target_Master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_FY_Target_Master_MM_Model" Association="Self.FK_MM_FY_Target_Master_MM_Model">
+      <End Role="MM_Model" EntitySet="MM_Model" />
+      <End Role="MM_FY_Target_Master" EntitySet="MM_FY_Target_Master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_FY_Target_Master_MM_Plant" Association="Self.FK_MM_FY_Target_Master_MM_Plant">
+      <End Role="MM_Plant" EntitySet="MM_Plant" />
+      <End Role="MM_FY_Target_Master" EntitySet="MM_FY_Target_Master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_FY_Target_Master_MM_Shop" Association="Self.FK_MM_FY_Target_Master_MM_Shop">
+      <End Role="MM_Shop" EntitySet="MM_Shop" />
+      <End Role="MM_FY_Target_Master" EntitySet="MM_FY_Target_Master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Track_Sheet_MM_Track_Sheet" Association="Self.FK_MM_Track_Sheet_MM_Track_Sheet">
+      <End Role="MM_Gap_And_FlushMaster" EntitySet="MM_Gap_And_FlushMaster" />
+      <End Role="MM_Track_Sheet" EntitySet="MM_Track_Sheet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Image_Master_MM_Model" Association="Self.FK_MM_Image_Master_MM_Model">
+      <End Role="MM_Model" EntitySet="MM_Model" />
+      <End Role="MM_Image_Master" EntitySet="MM_Image_Master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Image_Master_MM_PartMaster" Association="Self.FK_MM_Image_Master_MM_PartMaster">
+      <End Role="MM_PartMaster" EntitySet="MM_PartMaster" />
+      <End Role="MM_Image_Master" EntitySet="MM_Image_Master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Image_Master_MM_Plant" Association="Self.FK_MM_Image_Master_MM_Plant">
+      <End Role="MM_Plant" EntitySet="MM_Plant" />
+      <End Role="MM_Image_Master" EntitySet="MM_Image_Master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Image_Master_MM_Shop" Association="Self.FK_MM_Image_Master_MM_Shop">
+      <End Role="MM_Shop" EntitySet="MM_Shop" />
+      <End Role="MM_Image_Master" EntitySet="MM_Image_Master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Track_Sheet_MM_Image_Master" Association="Self.FK_MM_Track_Sheet_MM_Image_Master">
+      <End Role="MM_Image_Master" EntitySet="MM_Image_Master" />
+      <End Role="MM_Track_Sheet" EntitySet="MM_Track_Sheet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_LocationMaster_MM_Model" Association="Self.FK_MM_LocationMaster_MM_Model">
+      <End Role="MM_Model" EntitySet="MM_Model" />
+      <End Role="MM_LocationMaster" EntitySet="MM_LocationMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_LocationMaster_MM_PartMaster" Association="Self.FK_MM_LocationMaster_MM_PartMaster">
+      <End Role="MM_PartMaster" EntitySet="MM_PartMaster" />
+      <End Role="MM_LocationMaster" EntitySet="MM_LocationMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_LocationMaster_MM_Plant" Association="Self.FK_MM_LocationMaster_MM_Plant">
+      <End Role="MM_Plant" EntitySet="MM_Plant" />
+      <End Role="MM_LocationMaster" EntitySet="MM_LocationMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_LocationMaster_MM_Shop" Association="Self.FK_MM_LocationMaster_MM_Shop">
+      <End Role="MM_Shop" EntitySet="MM_Shop" />
+      <End Role="MM_LocationMaster" EntitySet="MM_LocationMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_SpecificationMaster_MM_LocationMaster" Association="Self.FK_MM_SpecificationMaster_MM_LocationMaster">
+      <End Role="MM_LocationMaster" EntitySet="MM_LocationMaster" />
+      <End Role="MM_SpecificationMaster" EntitySet="MM_SpecificationMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Track_Sheet_MM_LocationMaster" Association="Self.FK_MM_Track_Sheet_MM_LocationMaster">
+      <End Role="MM_LocationMaster" EntitySet="MM_LocationMaster" />
+      <End Role="MM_Track_Sheet" EntitySet="MM_Track_Sheet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Menu_Role_MM_Roles" Association="Self.FK_MM_Menu_Role_MM_Roles">
+      <End Role="MM_Roles" EntitySet="MM_Roles" />
+      <End Role="MM_Menu_Role" EntitySet="MM_Menu_Role" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Menu_Role_MM_Sub_Menus" Association="Self.FK_MM_Menu_Role_MM_Sub_Menus">
+      <End Role="MM_Sub_Menus" EntitySet="MM_Sub_Menus" />
+      <End Role="MM_Menu_Role" EntitySet="MM_Menu_Role" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Model_MM_Plant" Association="Self.FK_MM_Model_MM_Plant">
+      <End Role="MM_Plant" EntitySet="MM_Plant" />
+      <End Role="MM_Model" EntitySet="MM_Model" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Model_MM_Shop" Association="Self.FK_MM_Model_MM_Shop">
+      <End Role="MM_Shop" EntitySet="MM_Shop" />
+      <End Role="MM_Model" EntitySet="MM_Model" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_PartMaster_MM_Model" Association="Self.FK_MM_PartMaster_MM_Model">
+      <End Role="MM_Model" EntitySet="MM_Model" />
+      <End Role="MM_PartMaster" EntitySet="MM_PartMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_SpecificationMaster_MM_Model" Association="Self.FK_MM_SpecificationMaster_MM_Model">
+      <End Role="MM_Model" EntitySet="MM_Model" />
+      <End Role="MM_SpecificationMaster" EntitySet="MM_SpecificationMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Vehicle_Audit_MM_Model" Association="Self.FK_MM_Vehicle_Audit_MM_Model">
+      <End Role="MM_Model" EntitySet="MM_Model" />
+      <End Role="MM_Vehicle_Audit" EntitySet="MM_Vehicle_Audit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_PartMaster_MM_Plant" Association="Self.FK_MM_PartMaster_MM_Plant">
+      <End Role="MM_Plant" EntitySet="MM_Plant" />
+      <End Role="MM_PartMaster" EntitySet="MM_PartMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_PartMaster_MM_Shop" Association="Self.FK_MM_PartMaster_MM_Shop">
+      <End Role="MM_Shop" EntitySet="MM_Shop" />
+      <End Role="MM_PartMaster" EntitySet="MM_PartMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_SpecificationMaster_MM_PartMaster" Association="Self.FK_MM_SpecificationMaster_MM_PartMaster">
+      <End Role="MM_PartMaster" EntitySet="MM_PartMaster" />
+      <End Role="MM_SpecificationMaster" EntitySet="MM_SpecificationMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Track_Sheet_MM_PartMaster" Association="Self.FK_MM_Track_Sheet_MM_PartMaster">
+      <End Role="MM_PartMaster" EntitySet="MM_PartMaster" />
+      <End Role="MM_Track_Sheet" EntitySet="MM_Track_Sheet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Shift_MM_Plant" Association="Self.FK_MM_Shift_MM_Plant">
+      <End Role="MM_Plant" EntitySet="MM_Plant" />
+      <End Role="MM_Shift" EntitySet="MM_Shift" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Shop_MM_Plant" Association="Self.FK_MM_Shop_MM_Plant">
+      <End Role="MM_Plant" EntitySet="MM_Plant" />
+      <End Role="MM_Shop" EntitySet="MM_Shop" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Track_Sheet_MM_Plant" Association="Self.FK_MM_Track_Sheet_MM_Plant">
+      <End Role="MM_Plant" EntitySet="MM_Plant" />
+      <End Role="MM_Track_Sheet" EntitySet="MM_Track_Sheet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Vehicle_Audit_MM_Plant" Association="Self.FK_MM_Vehicle_Audit_MM_Plant">
+      <End Role="MM_Plant" EntitySet="MM_Plant" />
+      <End Role="MM_Vehicle_Audit" EntitySet="MM_Vehicle_Audit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_User_Roles_MM_Roles" Association="Self.FK_MM_User_Roles_MM_Roles">
+      <End Role="MM_Roles" EntitySet="MM_Roles" />
+      <End Role="MM_User_Roles" EntitySet="MM_User_Roles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Shift_MM_Shop" Association="Self.FK_MM_Shift_MM_Shop">
+      <End Role="MM_Shop" EntitySet="MM_Shop" />
+      <End Role="MM_Shift" EntitySet="MM_Shift" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Vehicle_Audit_MM_Shift" Association="Self.FK_MM_Vehicle_Audit_MM_Shift">
+      <End Role="MM_Shift" EntitySet="MM_Shift" />
+      <End Role="MM_Vehicle_Audit" EntitySet="MM_Vehicle_Audit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Track_Sheet_MM_Shop" Association="Self.FK_MM_Track_Sheet_MM_Shop">
+      <End Role="MM_Shop" EntitySet="MM_Shop" />
+      <End Role="MM_Track_Sheet" EntitySet="MM_Track_Sheet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Vehicle_Audit_MM_Shop" Association="Self.FK_MM_Vehicle_Audit_MM_Shop">
+      <End Role="MM_Shop" EntitySet="MM_Shop" />
+      <End Role="MM_Vehicle_Audit" EntitySet="MM_Vehicle_Audit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Track_Sheet_MM_SpecificationMaster" Association="Self.FK_MM_Track_Sheet_MM_SpecificationMaster">
+      <End Role="MM_SpecificationMaster" EntitySet="MM_SpecificationMaster" />
+      <End Role="MM_Track_Sheet" EntitySet="MM_Track_Sheet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MM_Track_Sheet_MM_Vehicle_Audit" Association="Self.FK_MM_Track_Sheet_MM_Vehicle_Audit">
+      <End Role="MM_Vehicle_Audit" EntitySet="MM_Vehicle_Audit" />
+      <End Role="MM_Track_Sheet" EntitySet="MM_Track_Sheet" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

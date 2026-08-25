@@ -1,0 +1,310 @@
+<div class="row">
+  <div class="master-headings q-strip" id="btn-add">
+    Quarterly Target Master
+  </div>
+
+  <div
+    *ngIf="canCreate || modifyFlag"
+    class="container"
+    style="margin-top: 15px"
+  >
+    <span class="selection-section">
+      <div class="col-md-2 q-full-height shop">
+        <h4 class="header-background">Shop</h4>
+        <div
+          class="flex"
+          style="border-bottom: 1px dotted black; display: flex"
+        >
+          <input
+            type="text"
+            class="form-control search-input"
+            autocomplete="off"
+            id="myInput"
+            placeholder="Search Shop"
+            [(ngModel)]="searchshopInput"
+          />
+        </div>
+        <div
+          class="q-card q-full-height q-scroll addpart dropdown-height"
+          style="height: 257px"
+        >
+          <ul class="q-listbox" id="myUL">
+            <li
+              style="cursor: pointer; font-size: 12px"
+              *ngFor="let shop of shoplist | search : searchshopInput"
+              (click)="selectShop(shop)"
+              [ngClass]="{ selected: isCurrentShop(shop) }"
+            >
+              <a style="color: black">{{ shop.Shop_Name }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-2 q-full-height shop model">
+        <h4 class="header-background">Model</h4>
+        <div
+          class="flex"
+          style="border-bottom: 1px dotted black; display: flex"
+        >
+          <input
+            type="text"
+            class="form-control search-input"
+            autocomplete="off"
+            id="modelsearchinput"
+            placeholder="Search Model"
+            [(ngModel)]="searchModelInput"
+          />
+        </div>
+        <div
+          class="q-card q-full-height q-scroll addpart dropdown-height"
+          style="height: 257px"
+        >
+          <ul class="q-listbox" id="modelUL">
+            <li
+              style="cursor: pointer; font-size: 12px"
+              *ngFor="let model of modelList | search : searchModelInput"
+              (click)="selectModel(model)"
+              [ngClass]="{ selected: isCurrentModel(model) }"
+            >
+              <a style="color: black">{{ model.Model_Code }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </span>
+    <div class="col-md-8 q-full-height part">
+      <button
+        type="button"
+        *ngIf="!newFQTarget && !modifyFlag"
+        class="new-part btn-forsave"
+        (click)="onnewFQTarget()"
+      >
+        New Target
+      </button>
+      <div class="row">
+        <div class="col-md-12">
+          <form
+            [formGroup]="createStageForm"
+            (ngSubmit)="onAddArea()"
+            class="example-form"
+            *ngIf="(newFQTarget && selectedShop) || modifyFlag"
+          >
+            <div class="row">
+              <div class="col-md-3 p-0">
+                <mat-form-field appearance="outline" style="width: 100%">
+                  <mat-label>Financial Year</mat-label>
+                  <input
+                    [(ngModel)]="selectYear"
+                    matInput
+                    [matDatepicker]="picker"
+                    [ngModelOptions]="{ standalone: true }"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker
+                    #picker
+                    startView="multi-year"
+                    (yearSelected)="chosenYearHandler($event, picker)"
+                  >
+                  </mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field
+                  appearance="fill"
+                  style="width: 100%; height: 70px"
+                >
+                  <!-- Financial  -->
+                  <mat-label>Quarter </mat-label>
+                  <mat-select formControlName="quarter">
+                    <mat-option *ngFor="let q of quarterList" [value]="q">{{
+                      q
+                    }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-2">
+                <div
+                  class="form-group form-animate-text"
+                  style="margin-top: 10px !important"
+                >
+                  <input
+                    type="text"
+                    class="form-text"
+                    title="Please enter shop name"
+                    required
+                    formControlName="l3"
+                    step="0.01"
+                  />
+                  <span class="bar"></span>
+                  <label>L3 target *</label>
+                  <div
+                    *ngIf="
+                      createStageForm.get('l3').errors &&
+                      (createStageForm.get('l3').dirty ||
+                        createStageForm.get('l3').touched)
+                    "
+                    class="form-errors-wrapper"
+                  >
+                    <span
+                      *ngIf="createStageForm.get('l3').hasError('required')"
+                    >
+                      L3 target field is required.
+                    </span>
+                    <span class="bar"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <div
+                  class="form-group form-animate-text"
+                  style="margin-top: 10px !important"
+                >
+                  <input
+                    type="text"
+                    class="form-text"
+                    title="Please enter shop name"
+                    required
+                    formControlName="l4"
+                    step="0.01"
+                  />
+                  <span class="bar"></span>
+                  <label>L4 target *</label>
+                  <div
+                    *ngIf="
+                      createStageForm.get('l4').errors &&
+                      (createStageForm.get('l4').dirty ||
+                        createStageForm.get('l4').touched)
+                    "
+                    class="form-errors-wrapper"
+                  >
+                    <span
+                      *ngIf="createStageForm.get('l4').hasError('required')"
+                    >
+                      L4 target field is required.
+                    </span>
+                    <span class="bar"></span>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="col-md-2"
+                style="margin-top: 10px"
+                *ngIf="!modifyFlag"
+              >
+                <button type="submit" class="btn-forsave new-part">
+                  <i
+                    class="fa fa-plus-circle"
+                    aria-hidden="true"
+                    style="padding-right: 10px"
+                  ></i>
+                  Add
+                </button>
+              </div>
+              <span *ngIf="modifyFlag">
+                <div class="col-md-2">
+                  <button
+                    class="btn-forsave"
+                    type="button"
+                    (click)="updateStage()"
+                  >
+                    Update
+                  </button>
+                </div>
+                <div class="col-md-2">
+                  <button
+                    class="btn-forsave bg-exit"
+                    type="button"
+                    (click)="refresh()"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- *ngIf="targetObj.length >0"  -->
+      <table
+        style="margin-top: 10px"
+        class="table table-bordered"
+        *ngIf="!modifyFlag && targetObj.length > 0"
+      >
+        <thead>
+          <tr>
+            <th class="header-background">Year</th>
+            <th class="header-background">Quarter</th>
+            <th class="header-background">L3 target</th>
+            <th class="header-background">L4 target</th>
+            <th class="header-background">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let area of targetObj; let i = index">
+            <td>{{ area.FY_Name }}</td>
+            <td>{{ area.FQ_Name }}</td>
+            <td>{{ area.FQ_Target_L3 }}</td>
+            <td>{{ area.FQ_Target_L4 }}</td>
+            <td>
+              <span
+                style="
+                  border-radius: 50% !important;
+                  background-color: #d74f4f;
+                  color: black !important;
+                "
+                class="btn fa fa-trash deletebutton"
+                (click)="removeObject(i)"
+              ></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="row btn-row" *ngIf="targetObj.length > 0 && !modifyFlag">
+        <div class="col-md-4">
+          <button class="btn-forsave" type="button" (click)="onSave()">
+            <!-- <i class="fa fa-save" style="padding-right: 15px"></i> -->
+            <span> Save </span>
+          </button>
+        </div>
+        <div class="col-md-4">
+          <a (click)="refresh()" class="btn-forsave bg-refresh" type="btn">
+            <!-- <i class="fa fa-refresh" style="padding-right: 15px"></i> -->
+            <span> Refresh </span>
+          </a>
+        </div>
+        <div class="col-md-4">
+          <a (click)="exit()" class="btn-forsave bg-exit" type="btn">
+            <!-- <i class="fa fa-times-circle-o" style="padding-right: 15px"></i> -->
+            <span> Exit </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12" style="margin-top: 10px">
+      <div class="panel">
+        <div class="panel-body defect-min-box">
+          <table id="shopmodeltable" class="display" width="100%"></table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div style="margin-top: 5px" *ngIf="loading">
+        <ngx-skeleton-loader
+          [theme]="{ height: '40px' }"
+          loadingText="Loading Data"
+          appearance="line"
+          count="4"
+          animation="pulse"
+        >
+        </ngx-skeleton-loader>
+      </div>
+    </div>
+  </div>
+</div>

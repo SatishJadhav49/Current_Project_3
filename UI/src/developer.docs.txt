@@ -1,0 +1,35 @@
+Developer => Satish Jadhav - Frontend Deveoper. (50005817)
+
+
+//********************* Technologies used in project *********************//
+Frontend - Angular
+Backend - Asp .net Web API
+Database - SQL
+Dashboards - PowerBI
+Reports- Crystal report (ssrs)
+
+//********************* Commands  *********************//
+
+=> insted of installing node_modules by npm i .copy node_modules zip file from following path 
+    \\10.3.44.44\MES DATA Nashik\PQ DashBoard\Angular_Codes_Backup_Satish\Other
+    OR
+=> if you face any issue after npm i then please run following Commands
+    1) npm i ngx-image-compress
+
+=> Apex charts :- npm install ng-apexcharts@1.7.4  , npm install apexcharts --save
+
+//********************* Notes *********************//
+
+=> in this project 1 means true and 0 means false
+=> localstorage  variables meanings :-
+    1) canCreate,canUpdate,canDelete  - this are the rights of user . 
+        if canCreate = 1 it means user can create/add records
+        if canUpdate = 1 it means user can Update records
+        if canDelete = 1 it means user can Delete records
+    2) isallshops - 
+        if isallshops = 1 it means user has right to access all shops data and shop master.
+    3) audittypeid - this is the module type id 
+        if audittypeid = 1 it means user is of cmm Module
+=> 
+
+

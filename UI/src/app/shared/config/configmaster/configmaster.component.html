@@ -1,0 +1,130 @@
+<body class="hold-transition skin-blue sidebar-mini" style="padding-right: 0px!important;">
+  <header class="main-header">
+    <nav class="navbar navbar-default navbar-fixed-top" style="height: 49px">
+      <span class="plant-name-section">
+        <img
+          src="assets/estimages/mahindra-rise-logo.png"
+          class="logo"
+          style="
+            background-color: white !important;
+            object-fit: contain;
+            padding: 2px 15px;
+          "
+        />
+        <a
+          href="#"
+          class="sidebar-toggle"
+          data-toggle="push-menu"
+          role="button"
+        >
+          <span class="sr-only">Toggle navigation</span>
+          <span class="glyphicon glyphicon-tasks"></span>
+        </a>
+        <span class="plantname">{{ plantname }}</span>
+      </span>
+      
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-ul navbar-nav">
+          <li class="dropdown user user-menu">
+            <a
+              href="#"
+              class="dropdown-toggle user-name"
+              data-toggle="dropdown"
+            >
+              <img
+                src="assets/images/defualtuser.jpg"
+                class="user-image"
+                alt="User Image" 
+              />
+              <span class="empname">{{ employeeName }}</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="user-header">
+                <img
+                  src="assets/images/defualtuser.jpg"
+                  class="img-circle"
+                  alt="User Image"
+                />
+
+                <p>
+                  {{ profile.Employee_Name }}
+                  <small>{{ profile.Employee_No }}</small>
+                </p>
+              </li>
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a class="btn btn-default btn-flat"></a>
+                </div>
+                <div class="pull-right">
+                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li class="logo2-li">
+            <img
+              src="assets/images/Drona Logo.png"
+              class="logo logo1"
+              style="background-color: white !important"
+            />
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <aside class="main-sidebar" >
+    <section class="sidebar">
+      <div class="user-panel">
+        <div class="pull-right image">
+          <a class="sidebar-toggle" style="cursor: pointer">
+            <i
+              id="footmaxmin"
+              class="fa fa-angle-double-left ngsize aa"
+              data-toggle="push-menu"
+              aria-hidden="true"
+            ></i>
+            <span class="sr-only">Toggle navigation</span>
+          </a>
+        </div>
+      </div>
+
+      <ul class="sidebar-menu" data-widget="tree">
+        <li
+          class="treeview"
+          *ngFor="let role of credUser"
+          (click)="ReloadSubmenu()"
+          #elem
+          attr.id="value_{{ role.Role_Name }}"
+        >
+          <a>
+            <i class="fa fa-dashboard"></i> <span>{{ role.Role_Name }}</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li
+              *ngFor="let submenu of role.SubMenuList"
+              (click)="onChildSelect(submenu)"
+            >
+              <a
+                *ngIf="submenu.ActionName"
+                routerLink="/{{ submenu.ActionName }}"
+                ><i class="fa fa-circle-o"></i> {{ submenu.LinkName }}</a
+              >
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </aside>
+
+  <div class="content-wrapper">
+    <section class="content">
+      <div id="ngslide" style="text-align: -webkit-center">
+        <app-slides></app-slides>
+      </div>
+      <router-outlet></router-outlet>
+    </section>
+  </div>
+</body>

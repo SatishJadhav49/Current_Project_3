@@ -1,0 +1,23 @@
+﻿#role-menu-lists h3{
+    background:#1e282c;
+    color:#fff;
+    padding:10px;
+    margin:0px;
+    font-size:1.2em;
+}
+#role-menu-lists div{
+    padding:5px;
+    font-size:1em;
+    background:#8aa4af;
+    color:#1e282c;
+    border:1px solid rgba(202, 202, 202, 0.81);
+}
+#role-menu-lists .treeview > a{
+    color: #fff;
+    background: #1e282c;
+    border-left-color: #e31837;
+    font-weight:bold;
+}
+    #role-menu-lists .treeview-menu{
+        display:block;
+    }

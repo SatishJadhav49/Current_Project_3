@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e5825beb8033424f807e0d766bba2529" Name="Diagram1">
+        <EntityTypeShape EntityType="OneD_Module_DB.Audit_Type_Master" Width="1.5" PointX="0.75" PointY="52.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_AreaMaster" Width="1.5" PointX="3" PointY="51.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_Audit_BuildPhase_Mstr" Width="1.5" PointX="6" PointY="52.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_Audit_Plan_Log_Details" Width="1.5" PointX="17.25" PointY="47.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_Audit_Plan_Log_Details_Deleted" Width="1.5" PointX="5.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_Audit_Plan_Master" Width="1.5" PointX="9" PointY="51.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_CheckpointMaster" Width="1.5" PointX="14.25" PointY="55.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_Department" Width="1.5" PointX="3.75" PointY="38.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_Documents_Master" Width="1.5" PointX="7.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_Employee" Width="1.5" PointX="6" PointY="44.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_Error_Log" Width="1.5" PointX="7.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_FQ_Target_Master" Width="1.5" PointX="6" PointY="59" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_FY_Target_Master" Width="1.5" PointX="3" PointY="44.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_Gap_And_FlushMaster" Width="1.5" PointX="24.75" PointY="51.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_Image_Master" Width="1.5" PointX="17.25" PointY="55" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_Location_Mapping" Width="1.5" PointX="9.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_LocationMaster" Width="1.5" PointX="22.5" PointY="55.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_Menu_Role" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_Menus" Width="1.5" PointX="3" PointY="95.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_Model" Width="1.5" PointX="3" PointY="59.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_PartMaster" Width="1.5" PointX="20.25" PointY="54.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_Plant" Width="1.5" PointX="0.75" PointY="59.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_Rights" Width="1.5" PointX="9.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_Roles" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_Schedule_Type_Master" Width="1.5" PointX="6.75" PointY="66.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_Shift" Width="1.5" PointX="9" PointY="43.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_Shop" Width="1.5" PointX="12" PointY="50.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_SpecificationMaster" Width="1.5" PointX="24.75" PointY="55.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_Sub_Menus" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_Track_Sheet" Width="1.5" PointX="27" PointY="49.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_User_Activity_Logs" Width="1.5" PointX="5.75" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_User_Log" Width="1.5" PointX="7.75" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_User_Roles" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_UserActivity_Log" Width="1.5" PointX="9.75" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OneD_Module_DB.MM_Vehicle_Audit" Width="1.5" PointX="14.25" PointY="43.5" IsExpanded="true" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_AreaMaster_Audit_Type_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Audit_BuildPhase_Mstr_Audit_Type_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Audit_Plan_Master_Audit_Type_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_CheckpointMaster_Audit_Type_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Employee_Audit_Type_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_FQ_Target_Master_Audit_Type_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_FY_Target_Master_Audit_Type_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Image_Master_Audit_Type_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_LocationMaster_Audit_Type_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Menus_MM_Menus" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Model_Audit_Type_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_PartMaster_Audit_Type_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Shift_Audit_Type_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Shop_Audit_Type_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Track_Sheet_Audit_Type_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Vehicle_Audit_Audit_Type_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_AreaMaster_MM_Model" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_AreaMaster_MM_Plant" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_AreaMaster_MM_Shop" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_CheckpointMaster_MM_AreaMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Image_Master_MM_AreaMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_LocationMaster_MM_AreaMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_PartMaster_MM_AreaMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_SpecificationMaster_MM_AreaMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Audit_BuildPhase_Mstr_MM_Plant" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Audit_BuildPhase_Mstr_MM_Shop" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Vehicle_Audit_MM_Audit_BuildPhase_Mstr" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Audit_Plan_Log_Details_MM_Audit_Plan_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Audit_Plan_Log_Details_MM_Plant" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Audit_Plan_Log_Details_MM_Shop" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Vehicle_Audit_MM_Audit_Plan_Log_Details" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Audit_Plan_Master_MM_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Audit_Plan_Master_MM_Model" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Audit_Plan_Master_MM_Plant" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Audit_Plan_Master_MM_Schedule_Type_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Audit_Plan_Master_MM_Shop" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Vehicle_Audit_MM_Audit_Plan_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_CheckpointMaster_MM_Model" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_CheckpointMaster_MM_PartMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_CheckpointMaster_MM_Plant" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_CheckpointMaster_MM_Shop" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_LocationMaster_MM_CheckpointMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_SpecificationMaster_MM_CheckpointMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Track_Sheet_MM_CheckpointMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Employee_MM_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Employee_MM_Plant" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Employee_MM_Shop" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_FQ_Target_Master_MM_Model" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_FQ_Target_Master_MM_Plant" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_FQ_Target_Master_MM_Shop" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_FY_Target_Master_MM_Model" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_FY_Target_Master_MM_Plant" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_FY_Target_Master_MM_Shop" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Track_Sheet_MM_Track_Sheet" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Image_Master_MM_Model" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Image_Master_MM_PartMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Image_Master_MM_Plant" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Image_Master_MM_Shop" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Track_Sheet_MM_Image_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_LocationMaster_MM_Model" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_LocationMaster_MM_PartMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_LocationMaster_MM_Plant" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_LocationMaster_MM_Shop" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_SpecificationMaster_MM_LocationMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Track_Sheet_MM_LocationMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Menu_Role_MM_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Menu_Role_MM_Sub_Menus" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Model_MM_Plant" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Model_MM_Shop" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_PartMaster_MM_Model" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_SpecificationMaster_MM_Model" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Vehicle_Audit_MM_Model" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_PartMaster_MM_Plant" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_PartMaster_MM_Shop" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_SpecificationMaster_MM_PartMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Track_Sheet_MM_PartMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Shift_MM_Plant" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Shop_MM_Plant" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Track_Sheet_MM_Plant" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Vehicle_Audit_MM_Plant" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_User_Roles_MM_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Shift_MM_Shop" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Vehicle_Audit_MM_Shift" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Track_Sheet_MM_Shop" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Vehicle_Audit_MM_Shop" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Track_Sheet_MM_SpecificationMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="OneD_Module_DB.FK_MM_Track_Sheet_MM_Vehicle_Audit" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

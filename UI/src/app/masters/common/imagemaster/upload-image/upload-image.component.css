@@ -1,0 +1,61 @@
+.upload-confirmation-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  button.chooseImage {
+    width:75%;
+    padding:5px;
+    margin-right:10px
+  } 
+  .upload-confirmation-content {
+    background-color: #fff;
+    max-width: 80%;
+    width: 380px;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  .form-animate-text{
+    display: flex;
+  }
+  .delete-confirmation-header {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 3rem;
+  }
+  
+ 
+  .delete-confirmation-body {
+    text-align: center;
+  }
+  
+  .delete-confirmation-title {
+    color: #3B71CA;
+    font-size: 20px;
+    background-color: transparent;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  .upload-confirmation-actions {
+    display: flex;
+    justify-content: space-around;
+  }
+  .upload-confirmation-actions input[type="file"] {
+    display: block;
+    width: 100%;
+    background: transparent;
+  }
+
+  @media (max-width: 600px) {
+    .delete-confirmation-content {
+      max-width: 90%;
+    }
+  }
+  

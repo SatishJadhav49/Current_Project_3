@@ -1,0 +1,867 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OneD_Module_DBStoreContainer" CdmEntityContainer="OneD_DB_Entity">
+    <EntitySetMapping Name="Audit_Type_Master">
+      <EntityTypeMapping TypeName="OneD_Module_DB.Audit_Type_Master">
+        <MappingFragment StoreEntitySet="Audit_Type_Master">
+          <ScalarProperty Name="Audit_Type_Id" ColumnName="Audit_Type_Id" />
+          <ScalarProperty Name="Audit_Type" ColumnName="Audit_Type" />
+          <ScalarProperty Name="Plant_Code" ColumnName="Plant_Code" />
+          <ScalarProperty Name="Is_Transferred" ColumnName="Is_Transferred" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_AreaMaster">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_AreaMaster">
+        <MappingFragment StoreEntitySet="MM_AreaMaster">
+          <ScalarProperty Name="Area_ID" ColumnName="Area_ID" />
+          <ScalarProperty Name="Area_Name" ColumnName="Area_Name" />
+          <ScalarProperty Name="Area_Desc" ColumnName="Area_Desc" />
+          <ScalarProperty Name="Shop_ID" ColumnName="Shop_ID" />
+          <ScalarProperty Name="Model_ID" ColumnName="Model_ID" />
+          <ScalarProperty Name="Is_Gap" ColumnName="Is_Gap" />
+          <ScalarProperty Name="Is_Flushness" ColumnName="Is_Flushness" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="SORTORDER" ColumnName="SORTORDER" />
+          <ScalarProperty Name="Plant_ID" ColumnName="Plant_ID" />
+          <ScalarProperty Name="Audit_Type_Id" ColumnName="Audit_Type_Id" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Plant_Code" ColumnName="Plant_Code" />
+          <ScalarProperty Name="Is_Transferred" ColumnName="Is_Transferred" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_Audit_BuildPhase_Mstr">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_Audit_BuildPhase_Mstr">
+        <MappingFragment StoreEntitySet="MM_Audit_BuildPhase_Mstr">
+          <ScalarProperty Name="Build_Phase_ID" ColumnName="Build_Phase_ID" />
+          <ScalarProperty Name="Build_Phase_Name" ColumnName="Build_Phase_Name" />
+          <ScalarProperty Name="Build_Phase_Description" ColumnName="Build_Phase_Description" />
+          <ScalarProperty Name="Plant_ID" ColumnName="Plant_ID" />
+          <ScalarProperty Name="Shop_ID" ColumnName="Shop_ID" />
+          <ScalarProperty Name="Line_ID" ColumnName="Line_ID" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Audit_Type_Id" ColumnName="Audit_Type_Id" />
+          <ScalarProperty Name="Plant_Code" ColumnName="Plant_Code" />
+          <ScalarProperty Name="Is_Transferred" ColumnName="Is_Transferred" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_Audit_Plan_Log_Details">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_Audit_Plan_Log_Details">
+        <MappingFragment StoreEntitySet="MM_Audit_Plan_Log_Details">
+          <ScalarProperty Name="Audit_Plan_Log_ID" ColumnName="Audit_Plan_Log_ID" />
+          <ScalarProperty Name="Audit_Plan_ID" ColumnName="Audit_Plan_ID" />
+          <ScalarProperty Name="Audit_Due_Date" ColumnName="Audit_Due_Date" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="StatusRemark" ColumnName="StatusRemark" />
+          <ScalarProperty Name="Model_ID" ColumnName="Model_ID" />
+          <ScalarProperty Name="Shop_ID" ColumnName="Shop_ID" />
+          <ScalarProperty Name="Plant_ID" ColumnName="Plant_ID" />
+          <ScalarProperty Name="Audit_Type_Id" ColumnName="Audit_Type_Id" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Plant_Code" ColumnName="Plant_Code" />
+          <ScalarProperty Name="Is_Transfered" ColumnName="Is_Transfered" />
+          <ScalarProperty Name="Deleted_User_ID" ColumnName="Deleted_User_ID" />
+          <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_Audit_Plan_Log_Details_Deleted">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_Audit_Plan_Log_Details_Deleted">
+        <MappingFragment StoreEntitySet="MM_Audit_Plan_Log_Details_Deleted">
+          <ScalarProperty Name="Deleted_Audit_Plan_Log_ID" ColumnName="Deleted_Audit_Plan_Log_ID" />
+          <ScalarProperty Name="Audit_Plan_Log_ID" ColumnName="Audit_Plan_Log_ID" />
+          <ScalarProperty Name="Audit_Plan_ID" ColumnName="Audit_Plan_ID" />
+          <ScalarProperty Name="Audit_Due_Date" ColumnName="Audit_Due_Date" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="StatusRemark" ColumnName="StatusRemark" />
+          <ScalarProperty Name="Model_ID" ColumnName="Model_ID" />
+          <ScalarProperty Name="Shop_ID" ColumnName="Shop_ID" />
+          <ScalarProperty Name="Plant_ID" ColumnName="Plant_ID" />
+          <ScalarProperty Name="Audit_Type_Id" ColumnName="Audit_Type_Id" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Plant_Code" ColumnName="Plant_Code" />
+          <ScalarProperty Name="Is_Transfered" ColumnName="Is_Transfered" />
+          <ScalarProperty Name="Deleted_User_ID" ColumnName="Deleted_User_ID" />
+          <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_Audit_Plan_Master">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_Audit_Plan_Master">
+        <MappingFragment StoreEntitySet="MM_Audit_Plan_Master">
+          <ScalarProperty Name="Audit_Plan_ID" ColumnName="Audit_Plan_ID" />
+          <ScalarProperty Name="Model_ID" ColumnName="Model_ID" />
+          <ScalarProperty Name="Shop_ID" ColumnName="Shop_ID" />
+          <ScalarProperty Name="Schedule_Type_ID" ColumnName="Schedule_Type_ID" />
+          <ScalarProperty Name="Assign_User_ID" ColumnName="Assign_User_ID" />
+          <ScalarProperty Name="Audit_Start_Date" ColumnName="Audit_Start_Date" />
+          <ScalarProperty Name="Audit_End_Date" ColumnName="Audit_End_Date" />
+          <ScalarProperty Name="IS_Active" ColumnName="IS_Active" />
+          <ScalarProperty Name="SHIFT_NO" ColumnName="SHIFT_NO" />
+          <ScalarProperty Name="Plant_ID" ColumnName="Plant_ID" />
+          <ScalarProperty Name="Audit_Type_Id" ColumnName="Audit_Type_Id" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Plant_Code" ColumnName="Plant_Code" />
+          <ScalarProperty Name="Is_Transfered" ColumnName="Is_Transfered" />
+          <ScalarProperty Name="Deleted_User_ID" ColumnName="Deleted_User_ID" />
+          <ScalarProperty Name="Deleted_Date" ColumnName="Deleted_Date" />
+          <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_CheckpointMaster">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_CheckpointMaster">
+        <MappingFragment StoreEntitySet="MM_CheckpointMaster">
+          <ScalarProperty Name="Checkpoint_ID" ColumnName="Checkpoint_ID" />
+          <ScalarProperty Name="Checkpoint_Name" ColumnName="Checkpoint_Name" />
+          <ScalarProperty Name="Checkpoint_Desc" ColumnName="Checkpoint_Desc" />
+          <ScalarProperty Name="Shop_ID" ColumnName="Shop_ID" />
+          <ScalarProperty Name="Model_ID" ColumnName="Model_ID" />
+          <ScalarProperty Name="Area_ID" ColumnName="Area_ID" />
+          <ScalarProperty Name="Part_ID" ColumnName="Part_ID" />
+          <ScalarProperty Name="Parallelism" ColumnName="Parallelism" />
+          <ScalarProperty Name="Is_Gap" ColumnName="Is_Gap" />
+          <ScalarProperty Name="Is_Flushness" ColumnName="Is_Flushness" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="SORTORDER" ColumnName="SORTORDER" />
+          <ScalarProperty Name="Plant_ID" ColumnName="Plant_ID" />
+          <ScalarProperty Name="Audit_Type_Id" ColumnName="Audit_Type_Id" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Plant_Code" ColumnName="Plant_Code" />
+          <ScalarProperty Name="Is_Transferred" ColumnName="Is_Transferred" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_Department">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_Department">
+        <MappingFragment StoreEntitySet="MM_Department">
+          <ScalarProperty Name="Department_ID" ColumnName="Department_ID" />
+          <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
+          <ScalarProperty Name="Supervisor_Flag" ColumnName="Supervisor_Flag" />
+          <ScalarProperty Name="Plant_ID" ColumnName="Plant_ID" />
+          <ScalarProperty Name="Shop_ID" ColumnName="Shop_ID" />
+          <ScalarProperty Name="Line_ID" ColumnName="Line_ID" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Category_Group" ColumnName="Category_Group" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_Documents_Master">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_Documents_Master">
+        <MappingFragment StoreEntitySet="MM_Documents_Master">
+          <ScalarProperty Name="Document_ID" ColumnName="Document_ID" />
+          <ScalarProperty Name="Document_Title" ColumnName="Document_Title" />
+          <ScalarProperty Name="Document_Path" ColumnName="Document_Path" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Plant_Code" ColumnName="Plant_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_Employee">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_Employee">
+        <MappingFragment StoreEntitySet="MM_Employee">
+          <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+          <ScalarProperty Name="Employee_Name" ColumnName="Employee_Name" />
+          <ScalarProperty Name="Employee_Password" ColumnName="Employee_Password" />
+          <ScalarProperty Name="Employee_No" ColumnName="Employee_No" />
+          <ScalarProperty Name="Email_Address" ColumnName="Email_Address" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Country_Code" ColumnName="Country_Code" />
+          <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+          <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Department_ID" ColumnName="Department_ID" />
+          <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+          <ScalarProperty Name="Audit_Type_Id" ColumnName="Audit_Type_Id" />
+          <ScalarProperty Name="Plant_ID" ColumnName="Plant_ID" />
+          <ScalarProperty Name="Shop_ID" ColumnName="Shop_ID" />
+          <ScalarProperty Name="Is_Transfered" ColumnName="Is_Transfered" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Is_AllShops" ColumnName="Is_AllShops" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_Error_Log">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_Error_Log">
+        <MappingFragment StoreEntitySet="MM_Error_Log">
+          <ScalarProperty Name="EL_ID" ColumnName="EL_ID" />
+          <ScalarProperty Name="Plant_ID" ColumnName="Plant_ID" />
+          <ScalarProperty Name="Shop_ID" ColumnName="Shop_ID" />
+          <ScalarProperty Name="Line_ID" ColumnName="Line_ID" />
+          <ScalarProperty Name="BuyoffCode" ColumnName="BuyoffCode" />
+          <ScalarProperty Name="Controller_Name" ColumnName="Controller_Name" />
+          <ScalarProperty Name="Action_Name" ColumnName="Action_Name" />
+          <ScalarProperty Name="Meta_Class_Name" ColumnName="Meta_Class_Name" />
+          <ScalarProperty Name="Method_Name" ColumnName="Method_Name" />
+          <ScalarProperty Name="Exception_Detail" ColumnName="Exception_Detail" />
+          <ScalarProperty Name="Inner_Exception" ColumnName="Inner_Exception" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="Exception_Data" ColumnName="Exception_Data" />
+          <ScalarProperty Name="Target_Site" ColumnName="Target_Site" />
+          <ScalarProperty Name="Stack_Trace" ColumnName="Stack_Trace" />
+          <ScalarProperty Name="Source" ColumnName="Source" />
+          <ScalarProperty Name="H_Result" ColumnName="H_Result" />
+          <ScalarProperty Name="Is_Transferred" ColumnName="Is_Transferred" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_FQ_Target_Master">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_FQ_Target_Master">
+        <MappingFragment StoreEntitySet="MM_FQ_Target_Master">
+          <ScalarProperty Name="FQ_Target_ID" ColumnName="FQ_Target_ID" />
+          <ScalarProperty Name="FY_Name" ColumnName="FY_Name" />
+          <ScalarProperty Name="FQ_Name" ColumnName="FQ_Name" />
+          <ScalarProperty Name="FQ_Target_L3" ColumnName="FQ_Target_L3" />
+          <ScalarProperty Name="FQ_Target_L4" ColumnName="FQ_Target_L4" />
+          <ScalarProperty Name="Shop_ID" ColumnName="Shop_ID" />
+          <ScalarProperty Name="Model_ID" ColumnName="Model_ID" />
+          <ScalarProperty Name="SORTORDER" ColumnName="SORTORDER" />
+          <ScalarProperty Name="Plant_ID" ColumnName="Plant_ID" />
+          <ScalarProperty Name="Audit_Type_Id" ColumnName="Audit_Type_Id" />
+          <ScalarProperty Name="Is_Transferred" ColumnName="Is_Transferred" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Plant_Code" ColumnName="Plant_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_FY_Target_Master">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_FY_Target_Master">
+        <MappingFragment StoreEntitySet="MM_FY_Target_Master">
+          <ScalarProperty Name="FY_Target_ID" ColumnName="FY_Target_ID" />
+          <ScalarProperty Name="FY_Name" ColumnName="FY_Name" />
+          <ScalarProperty Name="FY_Target_L3" ColumnName="FY_Target_L3" />
+          <ScalarProperty Name="FY_Target_L4" ColumnName="FY_Target_L4" />
+          <ScalarProperty Name="Shop_ID" ColumnName="Shop_ID" />
+          <ScalarProperty Name="Model_ID" ColumnName="Model_ID" />
+          <ScalarProperty Name="SORTORDER" ColumnName="SORTORDER" />
+          <ScalarProperty Name="Plant_ID" ColumnName="Plant_ID" />
+          <ScalarProperty Name="Audit_Type_Id" ColumnName="Audit_Type_Id" />
+          <ScalarProperty Name="Is_Transferred" ColumnName="Is_Transferred" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Plant_Code" ColumnName="Plant_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_Gap_And_FlushMaster">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_Gap_And_FlushMaster">
+        <MappingFragment StoreEntitySet="MM_Gap_And_FlushMaster">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Plant_Code" ColumnName="Plant_Code" />
+          <ScalarProperty Name="Is_Transferred" ColumnName="Is_Transferred" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_Image_Master">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_Image_Master">
+        <MappingFragment StoreEntitySet="MM_Image_Master">
+          <ScalarProperty Name="Image_ID" ColumnName="Image_ID" />
+          <ScalarProperty Name="FileContent" ColumnName="FileContent" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+          <ScalarProperty Name="FileType" ColumnName="FileType" />
+          <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+          <ScalarProperty Name="Shop_ID" ColumnName="Shop_ID" />
+          <ScalarProperty Name="Model_ID" ColumnName="Model_ID" />
+          <ScalarProperty Name="Area_ID" ColumnName="Area_ID" />
+          <ScalarProperty Name="Part_ID" ColumnName="Part_ID" />
+          <ScalarProperty Name="Audit_Type_Id" ColumnName="Audit_Type_Id" />
+          <ScalarProperty Name="Plant_ID" ColumnName="Plant_ID" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Is_Transferred" ColumnName="Is_Transferred" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_Location_Mapping">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_Location_Mapping">
+        <MappingFragment StoreEntitySet="MM_Location_Mapping">
+          <ScalarProperty Name="LM_ID" ColumnName="LM_ID" />
+          <ScalarProperty Name="TCF_Location_ID" ColumnName="TCF_Location_ID" />
+          <ScalarProperty Name="BIW_Location_ID" ColumnName="BIW_Location_ID" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Is_Transferred" ColumnName="Is_Transferred" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Plant_Code" ColumnName="Plant_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_LocationMaster">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_LocationMaster">
+        <MappingFragment StoreEntitySet="MM_LocationMaster">
+          <ScalarProperty Name="Location_ID" ColumnName="Location_ID" />
+          <ScalarProperty Name="Location_Name" ColumnName="Location_Name" />
+          <ScalarProperty Name="Location_Desc" ColumnName="Location_Desc" />
+          <ScalarProperty Name="Shop_ID" ColumnName="Shop_ID" />
+          <ScalarProperty Name="Model_ID" ColumnName="Model_ID" />
+          <ScalarProperty Name="Area_ID" ColumnName="Area_ID" />
+          <ScalarProperty Name="Part_ID" ColumnName="Part_ID" />
+          <ScalarProperty Name="Checkpoint_ID" ColumnName="Checkpoint_ID" />
+          <ScalarProperty Name="Is_Gap" ColumnName="Is_Gap" />
+          <ScalarProperty Name="Is_Flushness" ColumnName="Is_Flushness" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="SORTORDER" ColumnName="SORTORDER" />
+          <ScalarProperty Name="Plant_ID" ColumnName="Plant_ID" />
+          <ScalarProperty Name="Audit_Type_Id" ColumnName="Audit_Type_Id" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Plant_Code" ColumnName="Plant_Code" />
+          <ScalarProperty Name="Is_Transferred" ColumnName="Is_Transferred" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_Menu_Role">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_Menu_Role">
+        <MappingFragment StoreEntitySet="MM_Menu_Role">
+          <ScalarProperty Name="Menu_Role_ID" ColumnName="Menu_Role_ID" />
+          <ScalarProperty Name="Menu_ID" ColumnName="Menu_ID" />
+          <ScalarProperty Name="Sub_Menu_ID" ColumnName="Sub_Menu_ID" />
+          <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Is_Transfered" ColumnName="Is_Transfered" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Plant_ID" ColumnName="Plant_ID" />
+          <ScalarProperty Name="Audit_Type_Id" ColumnName="Audit_Type_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_Menus">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_Menus">
+        <MappingFragment StoreEntitySet="MM_Menus">
+          <ScalarProperty Name="Menu_ID" ColumnName="Menu_ID" />
+          <ScalarProperty Name="LinkName" ColumnName="LinkName" />
+          <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Is_Transfered" ColumnName="Is_Transfered" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Documents_Name" ColumnName="Documents_Name" />
+          <ScalarProperty Name="Technical_Name" ColumnName="Technical_Name" />
+          <ScalarProperty Name="Sort_Order" ColumnName="Sort_Order" />
+          <ScalarProperty Name="Audit_Type_Id" ColumnName="Audit_Type_Id" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_Model">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_Model">
+        <MappingFragment StoreEntitySet="MM_Model">
+          <ScalarProperty Name="Model_ID" ColumnName="Model_ID" />
+          <ScalarProperty Name="Model_Code" ColumnName="Model_Code" />
+          <ScalarProperty Name="Model_Name" ColumnName="Model_Name" />
+          <ScalarProperty Name="Variant_ID" ColumnName="Variant_ID" />
+          <ScalarProperty Name="Model_Description" ColumnName="Model_Description" />
+          <ScalarProperty Name="Plant_ID" ColumnName="Plant_ID" />
+          <ScalarProperty Name="Shop_ID" ColumnName="Shop_ID" />
+          <ScalarProperty Name="Variant_Code" ColumnName="Variant_Code" />
+          <ScalarProperty Name="Sap_Code" ColumnName="Sap_Code" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Audit_Type_Id" ColumnName="Audit_Type_Id" />
+          <ScalarProperty Name="Vehicle_Type" ColumnName="Vehicle_Type" />
+          <ScalarProperty Name="Plant_Code" ColumnName="Plant_Code" />
+          <ScalarProperty Name="Is_Transferred" ColumnName="Is_Transferred" />
+          <ScalarProperty Name="Email_Addresses" ColumnName="Email_Addresses" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_PartMaster">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_PartMaster">
+        <MappingFragment StoreEntitySet="MM_PartMaster">
+          <ScalarProperty Name="Part_ID" ColumnName="Part_ID" />
+          <ScalarProperty Name="Part_Name" ColumnName="Part_Name" />
+          <ScalarProperty Name="Part_Desc" ColumnName="Part_Desc" />
+          <ScalarProperty Name="Shop_ID" ColumnName="Shop_ID" />
+          <ScalarProperty Name="Model_ID" ColumnName="Model_ID" />
+          <ScalarProperty Name="Area_ID" ColumnName="Area_ID" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="SORTORDER" ColumnName="SORTORDER" />
+          <ScalarProperty Name="Plant_ID" ColumnName="Plant_ID" />
+          <ScalarProperty Name="Audit_Type_Id" ColumnName="Audit_Type_Id" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Is_Gap" ColumnName="Is_Gap" />
+          <ScalarProperty Name="Is_Flushness" ColumnName="Is_Flushness" />
+          <ScalarProperty Name="Plant_Code" ColumnName="Plant_Code" />
+          <ScalarProperty Name="Is_Transferred" ColumnName="Is_Transferred" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_Plant">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_Plant">
+        <MappingFragment StoreEntitySet="MM_Plant">
+          <ScalarProperty Name="Plant_ID" ColumnName="Plant_ID" />
+          <ScalarProperty Name="Plant_Name" ColumnName="Plant_Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="IS_Active" ColumnName="IS_Active" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Sap_Code" ColumnName="Sap_Code" />
+          <ScalarProperty Name="Plant_Code" ColumnName="Plant_Code" />
+          <ScalarProperty Name="Is_Transferred" ColumnName="Is_Transferred" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_Rights">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_Rights">
+        <MappingFragment StoreEntitySet="MM_Rights">
+          <ScalarProperty Name="Right_ID" ColumnName="Right_ID" />
+          <ScalarProperty Name="Right_Name" ColumnName="Right_Name" />
+          <ScalarProperty Name="Right_Description" ColumnName="Right_Description" />
+          <ScalarProperty Name="Is_Transfered" ColumnName="Is_Transfered" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Is_Show_Documentations" ColumnName="Is_Show_Documentations" />
+          <ScalarProperty Name="Technical_Documentations" ColumnName="Technical_Documentations" />
+          <ScalarProperty Name="Functional_Documentations" ColumnName="Functional_Documentations" />
+          <ScalarProperty Name="Plant_ID" ColumnName="Plant_ID" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Plant_Code" ColumnName="Plant_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_Roles">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_Roles">
+        <MappingFragment StoreEntitySet="MM_Roles">
+          <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+          <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
+          <ScalarProperty Name="Role_Description" ColumnName="Role_Description" />
+          <ScalarProperty Name="Is_Transfered" ColumnName="Is_Transfered" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Is_Show_Documentations" ColumnName="Is_Show_Documentations" />
+          <ScalarProperty Name="Technical_Documentations" ColumnName="Technical_Documentations" />
+          <ScalarProperty Name="Functional_Documentations" ColumnName="Functional_Documentations" />
+          <ScalarProperty Name="Plant_ID" ColumnName="Plant_ID" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Audit_Type_Id" ColumnName="Audit_Type_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_Schedule_Type_Master">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_Schedule_Type_Master">
+        <MappingFragment StoreEntitySet="MM_Schedule_Type_Master">
+          <ScalarProperty Name="Schedule_Type_ID" ColumnName="Schedule_Type_ID" />
+          <ScalarProperty Name="Schedule_Type" ColumnName="Schedule_Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_Shift">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_Shift">
+        <MappingFragment StoreEntitySet="MM_Shift">
+          <ScalarProperty Name="SHIFT_NO" ColumnName="SHIFT_NO" />
+          <ScalarProperty Name="SHIFT_DESC" ColumnName="SHIFT_DESC" />
+          <ScalarProperty Name="START_TIME" ColumnName="START_TIME" />
+          <ScalarProperty Name="END_TIME" ColumnName="END_TIME" />
+          <ScalarProperty Name="WORKING" ColumnName="WORKING" />
+          <ScalarProperty Name="Plant_ID" ColumnName="Plant_ID" />
+          <ScalarProperty Name="Shop_ID" ColumnName="Shop_ID" />
+          <ScalarProperty Name="Line_ID" ColumnName="Line_ID" />
+          <ScalarProperty Name="Is_Transferred" ColumnName="Is_Transferred" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="LUNCH_START_TIME" ColumnName="LUNCH_START_TIME" />
+          <ScalarProperty Name="LUNCH_END_TIME" ColumnName="LUNCH_END_TIME" />
+          <ScalarProperty Name="Is_PostshiftTimeNextDay" ColumnName="Is_PostshiftTimeNextDay" />
+          <ScalarProperty Name="Audit_Type_Id" ColumnName="Audit_Type_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_Shop">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_Shop">
+        <MappingFragment StoreEntitySet="MM_Shop">
+          <ScalarProperty Name="Shop_ID" ColumnName="Shop_ID" />
+          <ScalarProperty Name="Shop_Name" ColumnName="Shop_Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Plant_ID" ColumnName="Plant_ID" />
+          <ScalarProperty Name="IS_Active" ColumnName="IS_Active" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Sap_Code" ColumnName="Sap_Code" />
+          <ScalarProperty Name="Is_SAP_Declaration" ColumnName="Is_SAP_Declaration" />
+          <ScalarProperty Name="Is_Equipment_Creation" ColumnName="Is_Equipment_Creation" />
+          <ScalarProperty Name="Audit_Type_Id" ColumnName="Audit_Type_Id" />
+          <ScalarProperty Name="Plant_Code" ColumnName="Plant_Code" />
+          <ScalarProperty Name="Is_Transferred" ColumnName="Is_Transferred" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_SpecificationMaster">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_SpecificationMaster">
+        <MappingFragment StoreEntitySet="MM_SpecificationMaster">
+          <ScalarProperty Name="Specification_ID" ColumnName="Specification_ID" />
+          <ScalarProperty Name="Specification_Name" ColumnName="Specification_Name" />
+          <ScalarProperty Name="Specification_Desc" ColumnName="Specification_Desc" />
+          <ScalarProperty Name="Shop_ID" ColumnName="Shop_ID" />
+          <ScalarProperty Name="Model_ID" ColumnName="Model_ID" />
+          <ScalarProperty Name="Area_ID" ColumnName="Area_ID" />
+          <ScalarProperty Name="Part_ID" ColumnName="Part_ID" />
+          <ScalarProperty Name="Checkpoint_ID" ColumnName="Checkpoint_ID" />
+          <ScalarProperty Name="Location_ID" ColumnName="Location_ID" />
+          <ScalarProperty Name="Is_Gap" ColumnName="Is_Gap" />
+          <ScalarProperty Name="Is_Flushness" ColumnName="Is_Flushness" />
+          <ScalarProperty Name="MinVal" ColumnName="MinVal" />
+          <ScalarProperty Name="MaxVal" ColumnName="MaxVal" />
+          <ScalarProperty Name="LCL" ColumnName="LCL" />
+          <ScalarProperty Name="UCL" ColumnName="UCL" />
+          <ScalarProperty Name="UCLR" ColumnName="UCLR" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="SORTORDER" ColumnName="SORTORDER" />
+          <ScalarProperty Name="Plant_ID" ColumnName="Plant_ID" />
+          <ScalarProperty Name="Audit_Type_Id" ColumnName="Audit_Type_Id" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Plant_Code" ColumnName="Plant_Code" />
+          <ScalarProperty Name="Is_Transferred" ColumnName="Is_Transferred" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_Sub_Menus">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_Sub_Menus">
+        <MappingFragment StoreEntitySet="MM_Sub_Menus">
+          <ScalarProperty Name="Sub_Menu_ID" ColumnName="Sub_Menu_ID" />
+          <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+          <ScalarProperty Name="LinkName" ColumnName="LinkName" />
+          <ScalarProperty Name="Menu_ID" ColumnName="Menu_ID" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Is_Transfered" ColumnName="Is_Transfered" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Sort_Order" ColumnName="Sort_Order" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Audit_Type_Id" ColumnName="Audit_Type_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_Track_Sheet">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_Track_Sheet">
+        <MappingFragment StoreEntitySet="MM_Track_Sheet">
+          <ScalarProperty Name="Track_Sheet_ID" ColumnName="Track_Sheet_ID" />
+          <ScalarProperty Name="Audit_ID" ColumnName="Audit_ID" />
+          <ScalarProperty Name="Parameter_ID" ColumnName="Parameter_ID" />
+          <ScalarProperty Name="Area_ID" ColumnName="Area_ID" />
+          <ScalarProperty Name="Part_ID" ColumnName="Part_ID" />
+          <ScalarProperty Name="Checkpoint_ID" ColumnName="Checkpoint_ID" />
+          <ScalarProperty Name="Location_ID" ColumnName="Location_ID" />
+          <ScalarProperty Name="Specification_ID" ColumnName="Specification_ID" />
+          <ScalarProperty Name="Image_ID" ColumnName="Image_ID" />
+          <ScalarProperty Name="Reading" ColumnName="Reading" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Is_NA" ColumnName="Is_NA" />
+          <ScalarProperty Name="Sap_Code" ColumnName="Sap_Code" />
+          <ScalarProperty Name="Plant_ID" ColumnName="Plant_ID" />
+          <ScalarProperty Name="Shop_ID" ColumnName="Shop_ID" />
+          <ScalarProperty Name="Audit_Type_Id" ColumnName="Audit_Type_Id" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Plant_Code" ColumnName="Plant_Code" />
+          <ScalarProperty Name="Is_Transferred" ColumnName="Is_Transferred" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_User_Activity_Logs">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_User_Activity_Logs">
+        <MappingFragment StoreEntitySet="MM_User_Activity_Logs">
+          <ScalarProperty Name="Log_ID" ColumnName="Log_ID" />
+          <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+          <ScalarProperty Name="User_Token_No" ColumnName="User_Token_No" />
+          <ScalarProperty Name="Logged_In_Time" ColumnName="Logged_In_Time" />
+          <ScalarProperty Name="Audit_Type" ColumnName="Audit_Type" />
+          <ScalarProperty Name="Shop_Name" ColumnName="Shop_Name" />
+          <ScalarProperty Name="Plant_Code" ColumnName="Plant_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_User_Log">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_User_Log">
+        <MappingFragment StoreEntitySet="MM_User_Log">
+          <ScalarProperty Name="Row_ID" ColumnName="Row_ID" />
+          <ScalarProperty Name="Log_In_User" ColumnName="Log_In_User" />
+          <ScalarProperty Name="Log_In_Time" ColumnName="Log_In_Time" />
+          <ScalarProperty Name="Log_out_Time" ColumnName="Log_out_Time" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Log_In" ColumnName="Log_In" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_User_Roles">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_User_Roles">
+        <MappingFragment StoreEntitySet="MM_User_Roles">
+          <ScalarProperty Name="User_Role_Key" ColumnName="User_Role_Key" />
+          <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+          <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Transfered" ColumnName="Is_Transfered" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+          <ScalarProperty Name="Plant_ID" ColumnName="Plant_ID" />
+          <ScalarProperty Name="Audit_Type_Id" ColumnName="Audit_Type_Id" />
+          <ScalarProperty Name="Is_Create" ColumnName="Is_Create" />
+          <ScalarProperty Name="Is_Edit" ColumnName="Is_Edit" />
+          <ScalarProperty Name="Is_Delete" ColumnName="Is_Delete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_UserActivity_Log">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_UserActivity_Log">
+        <MappingFragment StoreEntitySet="MM_UserActivity_Log">
+          <ScalarProperty Name="Row_ID" ColumnName="Row_ID" />
+          <ScalarProperty Name="Module_Name" ColumnName="Module_Name" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Shop_ID" ColumnName="Shop_ID" />
+          <ScalarProperty Name="Line_ID" ColumnName="Line_ID" />
+          <ScalarProperty Name="BuyoffCode" ColumnName="BuyoffCode" />
+          <ScalarProperty Name="Start_Time" ColumnName="Start_Time" />
+          <ScalarProperty Name="End_Time" ColumnName="End_Time" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Transfered" ColumnName="Is_Transfered" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MM_Vehicle_Audit">
+      <EntityTypeMapping TypeName="OneD_Module_DB.MM_Vehicle_Audit">
+        <MappingFragment StoreEntitySet="MM_Vehicle_Audit">
+          <ScalarProperty Name="Audit_ID" ColumnName="Audit_ID" />
+          <ScalarProperty Name="Audit_Plan_ID" ColumnName="Audit_Plan_ID" />
+          <ScalarProperty Name="Audit_Plan_Log_ID" ColumnName="Audit_Plan_Log_ID" />
+          <ScalarProperty Name="Audit_Date" ColumnName="Audit_Date" />
+          <ScalarProperty Name="VIN_No" ColumnName="VIN_No" />
+          <ScalarProperty Name="Body_No" ColumnName="Body_No" />
+          <ScalarProperty Name="Model_ID" ColumnName="Model_ID" />
+          <ScalarProperty Name="Model_Code" ColumnName="Model_Code" />
+          <ScalarProperty Name="Model_Name" ColumnName="Model_Name" />
+          <ScalarProperty Name="Variant_Name" ColumnName="Variant_Name" />
+          <ScalarProperty Name="Color_Name" ColumnName="Color_Name" />
+          <ScalarProperty Name="Build_Phase_ID" ColumnName="Build_Phase_ID" />
+          <ScalarProperty Name="Auditor1_ID" ColumnName="Auditor1_ID" />
+          <ScalarProperty Name="Auditor2_ID" ColumnName="Auditor2_ID" />
+          <ScalarProperty Name="Shift_ID" ColumnName="Shift_ID" />
+          <ScalarProperty Name="Gap_PIST" ColumnName="Gap_PIST" />
+          <ScalarProperty Name="Gap_Total_Check" ColumnName="Gap_Total_Check" />
+          <ScalarProperty Name="Gap_Ok" ColumnName="Gap_Ok" />
+          <ScalarProperty Name="Gap_Nok" ColumnName="Gap_Nok" />
+          <ScalarProperty Name="Gap_NA" ColumnName="Gap_NA" />
+          <ScalarProperty Name="Flush_PIST" ColumnName="Flush_PIST" />
+          <ScalarProperty Name="Flush_Total_Check" ColumnName="Flush_Total_Check" />
+          <ScalarProperty Name="Flush_Ok" ColumnName="Flush_Ok" />
+          <ScalarProperty Name="Flush_Nok" ColumnName="Flush_Nok" />
+          <ScalarProperty Name="Flush_NA" ColumnName="Flush_NA" />
+          <ScalarProperty Name="Total_PIST" ColumnName="Total_PIST" />
+          <ScalarProperty Name="Plant_ID" ColumnName="Plant_ID" />
+          <ScalarProperty Name="Audit_Type_Id" ColumnName="Audit_Type_Id" />
+          <ScalarProperty Name="Shop_ID" ColumnName="Shop_ID" />
+          <ScalarProperty Name="Is_Purgeable" ColumnName="Is_Purgeable" />
+          <ScalarProperty Name="Is_Edited" ColumnName="Is_Edited" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Inserted_Host" ColumnName="Inserted_Host" />
+          <ScalarProperty Name="Inserted_User_ID" ColumnName="Inserted_User_ID" />
+          <ScalarProperty Name="Inserted_Date" ColumnName="Inserted_Date" />
+          <ScalarProperty Name="Updated_Host" ColumnName="Updated_Host" />
+          <ScalarProperty Name="Updated_User_ID" ColumnName="Updated_User_ID" />
+          <ScalarProperty Name="Updated_Date" ColumnName="Updated_Date" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Plant_Code" ColumnName="Plant_Code" />
+          <ScalarProperty Name="Is_Transferred" ColumnName="Is_Transferred" />
+          <ScalarProperty Name="Is_Gapgun" ColumnName="Is_Gapgun" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

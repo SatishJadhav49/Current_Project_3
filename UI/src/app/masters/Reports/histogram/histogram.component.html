@@ -1,0 +1,20 @@
+<div class="histogram-container">
+  <!-- <h2>Histogram of Readings</h2> -->
+  <div class="chart-wrapper">
+    <apx-chart
+      #chart
+      [series]="chartOptions.series!"
+      [chart]="chartOptions.chart!"
+      [dataLabels]="chartOptions.dataLabels!"
+      [plotOptions]="chartOptions.plotOptions!"
+      [xaxis]="chartOptions.xaxis!"
+      [yaxis]="chartOptions.yaxis!"
+      [stroke]="chartOptions.stroke!"
+      [grid]="chartOptions.grid!"
+      [colors]="chartOptions.colors!"
+      [tooltip]="chartOptions.tooltip!"
+      [annotations]="chartOptions.annotations!"
+      [title]="chartOptions.title"
+    ></apx-chart>
+  </div>
+</div>

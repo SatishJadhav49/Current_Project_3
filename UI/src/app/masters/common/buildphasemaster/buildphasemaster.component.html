@@ -1,0 +1,170 @@
+<div class="row">
+  <div
+    class="master-headings q-strip"
+    style="width: 100%; font-weight: 900; margin-top: 36px"
+    id="btn-add"
+  >
+    Build Phase Master
+  </div>
+  <div *ngIf="canCreate || modify" class="col-md-12 defect-min-box">
+    <form (ngSubmit)="onSave()" [formGroup]="buildphasemasterForm">
+      <div class="panel q-sm-btm-margin">
+        <div class="panel-body q-panel-body">
+          <div class="col-md-10 defect-min-box">
+            <div class="row">
+              <div class="col-md-6">
+                <div
+                  class="form-group form-animate-text"
+                  style="margin-top: 10px !important"
+                >
+                  <input
+                    type="text"
+                    class="form-text"
+                    title="Please enter build name"
+                    [(ngModel)]="selectedName"
+                    formControlName="buildname"
+                    required
+                  />
+                  <span class="bar"></span>
+
+                  <label>Build Name*</label>
+                  <div
+                    *ngIf="
+                      buildphasemasterForm.get('buildname').errors &&
+                      (buildphasemasterForm.get('buildname').dirty ||
+                        buildphasemasterForm.get('buildname').touched)
+                    "
+                    class="form-errors-wrapper"
+                  >
+                    <div
+                      *ngIf="
+                        buildphasemasterForm
+                          .get('buildname')
+                          .hasError('required')
+                      "
+                    >
+                      Please fill out this field
+                    </div>
+                    <div
+                      *ngIf="
+                        buildphasemasterForm
+                          .get('buildname')
+                          .hasError('minlength')
+                      "
+                    >
+                      MinLength 2 characters required.
+                    </div>
+                    <div
+                      *ngIf="
+                        buildphasemasterForm
+                          .get('buildname')
+                          .hasError('maxlength')
+                      "
+                    >
+                      MaxLength is 30 characters.
+                    </div>
+                    <div
+                      *ngIf="
+                        buildphasemasterForm
+                          .get('buildname')
+                          .hasError('pattern')
+                      "
+                    >
+                      Please enter valid characters.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div
+                  class="form-group form-animate-text"
+                  style="margin-top: 10px !important"
+                >
+                  <input
+                    type="text"
+                    class="form-text"
+                    title="Please enter build description"
+                    [(ngModel)]="selectedbuilddesc"
+                    formControlName="builddesc"
+                    required
+                  />
+                  <label>Build Description*</label>
+                  <span class="bar"></span>
+                  <div
+                    *ngIf="
+                      buildphasemasterForm.get('builddesc').errors &&
+                      (buildphasemasterForm.get('builddesc').dirty ||
+                        buildphasemasterForm.get('builddesc').touched)
+                    "
+                    class="form-errors-wrapper"
+                  >
+                    <div
+                      *ngIf="
+                        buildphasemasterForm
+                          .get('builddesc')
+                          .hasError('required')
+                      "
+                    >
+                      Please fill out this field
+                    </div>
+                    <div
+                      *ngIf="
+                        buildphasemasterForm
+                          .get('builddesc')
+                          .hasError('minlength')
+                      "
+                    >
+                      MinLength 2 characters required.
+                    </div>
+                    <div
+                      *ngIf="
+                        buildphasemasterForm
+                          .get('builddesc')
+                          .hasError('maxlength')
+                      "
+                    >
+                      MaxLength is 30 characters.
+                    </div>
+                    <div
+                      *ngIf="
+                        buildphasemasterForm
+                          .get('builddesc')
+                          .hasError('pattern')
+                      "
+                    >
+                      Please enter valid characters.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="q-btn-div">
+              <button class="btn-forsave" type="submit">Save</button>
+              <span class="bg-refresh btn-forsave" (click)="refresh()">
+                Refresh
+              </span>
+              <span class="bg-exit btn-forsave" (click)="exit()"> Exit </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div style="margin-top: 5px" *ngIf="loading">
+      <ngx-skeleton-loader
+        [theme]="{ height: '40px' }"
+        loadingText="Loading Data"
+        appearance="line"
+        count="4"
+        animation="pulse"
+      >
+      </ngx-skeleton-loader>
+    </div>
+  </div>
+</div>
+<table id="buildphasemaster" class="display" width="100%"></table>

@@ -1,0 +1,52 @@
+<!-- <div class="row" style="margin: 0 5px;" *ngIf="Show_Report">
+  <div id="chart">
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [xaxis]="chartOptions.xaxis"
+      [yaxis]="chartOptions.yaxis"
+      [dataLabels]="chartOptions.dataLabels"
+      [grid]="chartOptions.grid"
+      [stroke]="chartOptions.stroke"
+      [title]="chartOptions.title"
+      [markers]="chartOptions.markers"
+      [colors]="chartOptions.colors"
+    ></apx-chart>
+  </div>
+</div> -->
+<div class="row" style="margin: 0 5px;" *ngIf="Show_Report">
+  <!-- TCF Chart -->
+  <div id="chart" *ngIf="chartOptionsTCF">
+    <apx-chart
+      [series]="chartOptionsTCF.series"
+      [chart]="chartOptionsTCF.chart"
+      [xaxis]="chartOptionsTCF.xaxis"
+      [yaxis]="chartOptionsTCF.yaxis"
+      [dataLabels]="chartOptionsTCF.dataLabels"
+      [grid]="chartOptionsTCF.grid"
+      [stroke]="chartOptionsTCF.stroke"
+      [title]="chartOptionsTCF.title"
+      [markers]="chartOptionsTCF.markers"
+      [colors]="chartOptionsTCF.colors"
+    ></apx-chart>
+  </div>
+  </div>
+<div class="row" style="margin: 0 5px;" *ngIf="Show_Report">
+  <!-- BIW Chart -->
+  <div id="chart" *ngIf="chartOptionsBIW">
+    <apx-chart
+      [series]="chartOptionsBIW.series"
+      [chart]="chartOptionsBIW.chart"
+      [xaxis]="chartOptionsBIW.xaxis"
+      [yaxis]="chartOptionsBIW.yaxis"
+      [dataLabels]="chartOptionsBIW.dataLabels"
+      [grid]="chartOptionsBIW.grid"
+      [stroke]="chartOptionsBIW.stroke"
+      [title]="chartOptionsBIW.title"
+      [markers]="chartOptionsBIW.markers"
+      [colors]="chartOptionsBIW.colors"
+    ></apx-chart>
+  </div>
+  </div>
+
+

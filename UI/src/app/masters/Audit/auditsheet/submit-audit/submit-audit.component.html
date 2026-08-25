@@ -1,0 +1,37 @@
+<div class="delete-confirmation-overlay">
+  <div class="delete-confirmation-content">
+    <div class="row">
+      <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        class="example-radio-group"
+        [(ngModel)]="selectedOption"
+      >
+        <mat-radio-button
+          class="example-radio-button"
+          *ngFor="let item of optionsList"
+          [value]="item.ID"
+        >
+          <span style="font-weight: bold">{{ item.title }}</span>
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="row" *ngIf="selectedOption === 3">
+      <div class="col-md-12">
+        <input
+          style="width: 100%; text-align: center"
+          type="text"
+          placeholder="Reason"
+          [(ngModel)]="remark"
+        />
+      </div>
+    </div>
+    <div class="delete-confirmation-actions mt-15">
+      <button mat-raised-button color="warn" (click)="closefalse()">
+        Cancel
+      </button>
+      <button mat-raised-button color="primary" (click)="onSubmit()">
+        Submit
+      </button>
+    </div>
+  </div>
+</div>

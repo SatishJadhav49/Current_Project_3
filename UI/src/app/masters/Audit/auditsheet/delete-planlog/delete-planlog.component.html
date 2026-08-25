@@ -1,0 +1,23 @@
+<div class="delete-confirmation-overlay">
+    <div class="delete-confirmation-content">
+      <div class="delete-confirmation-header">
+        <img src="assets/images/icons/cross.jpg" alt="Close" />
+      </div>
+      <div class="delete-confirmation-body">
+        <h4 class="delete-confirmation-title">Are you sure?</h4>
+        <p class="delete-confirmation-message">
+          Do you really want to delete this record? This process cannot be undone.
+        </p>
+        <div class="delete-reason-input">
+          <mat-form-field appearance="fill" style="width: 100%;">
+            <mat-label>Reason for deletion</mat-label>
+            <input style="border: none!important;" matInput [(ngModel)]="deleteReason" placeholder="Enter reason for deletion" required>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="delete-confirmation-actions">
+        <button mat-raised-button color="warn" (click)="deleteRecord()" [disabled]="!deleteReason">Delete</button>
+        <button mat-raised-button color="primary" (click)="closeDeleteRecord()">Cancel</button>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,247 @@
+<div class="row">
+  <div
+    class="master-headings q-strip"
+    style="width: 100%; font-weight: 900; margin-top: 36px"
+    id="btn-add"
+  >
+    Create Role
+  </div>
+  <div class="col-md-12 defect-min-box">
+    <form (ngSubmit)="onSave()" [formGroup]="createroleForm">
+      <div class="panel q-sm-btm-margin">
+        <div class="panel-body q-panel-body">
+          <div class="col-md-10 defect-min-box">
+            <div class="col-md-6 defect-min-box">
+              <div
+                class="form-group form-animate-text"
+                style="margin-top: 10px !important"
+              >
+                <input
+                  type="text"
+                  class="form-text"
+                  title="please enter sort order"
+                  formControlName="rolename"
+                  required
+                />
+                <span class="bar"></span>
+                <label>Role Name*</label>
+                <div
+                  *ngIf="
+                    createroleForm.get('rolename').errors &&
+                    (createroleForm.get('rolename').dirty ||
+                      createroleForm.get('rolename').touched)
+                  "
+                  class="form-errors-wrapper"
+                >
+                  <div
+                    *ngIf="createroleForm.get('rolename').hasError('required')"
+                  >
+                    You must include a Role Name .
+                  </div>
+                  <div
+                    *ngIf="createroleForm.get('rolename').hasError('pattern')"
+                  >
+                    Only digits required.
+                  </div>
+                  <div
+                    *ngIf="createroleForm.get('rolename').hasError('minlength')"
+                  >
+                    minLength 3 characters required.
+                  </div>
+                  <div
+                    *ngIf="createroleForm.get('rolename').hasError('maxlength')"
+                  >
+                    MaxLength is 100 characters.
+                  </div>
+                  <div
+                    *ngIf="createroleForm.get('rolename').hasError('pattern')"
+                  >
+                    Please insert characters only.
+                  </div>
+                  <span class="bar"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <mat-form-field
+                  appearance="fill"
+                  style="width: 100%; height: 70px"
+                >
+                  <mat-label> Select Menu</mat-label>
+                  <mat-select
+                    [formControlName]="'menuName'"
+                    [compareWith]="compareMenuObjects"
+                    (selectionChange)="onmenuSelect($event)"
+                    multiple
+                  >
+                    <mat-option
+                      *ngFor="let menu of menulistObj"
+                      [value]="menu"
+                      >{{ menu.ActionName }}</mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-md-6 defect-min-box">
+              <div
+                class="form-group form-animate-text"
+                style="margin-top: 10px !important"
+              >
+                <input
+                  type="text"
+                  class="form-text"
+                  title="please enter location name"
+                  formControlName="roleDesc"
+                  required
+                />
+                <span class="bar"></span>
+                <label>Role Description</label>
+                <div
+                  *ngIf="
+                    createroleForm.get('roleDesc').errors &&
+                    (createroleForm.get('roleDesc').dirty ||
+                      createroleForm.get('roleDesc').touched)
+                  "
+                  class="form-errors-wrapper"
+                >
+                  <div
+                    *ngIf="createroleForm.get('roleDesc').hasError('required')"
+                  >
+                    You must include a Role Description.
+                  </div>
+                  <div
+                    *ngIf="createroleForm.get('roleDesc').hasError('minlength')"
+                  >
+                    minLength 3 characters required.
+                  </div>
+                  <div
+                    *ngIf="createroleForm.get('roleDesc').hasError('maxlength')"
+                  >
+                    MaxLength is 100 characters.
+                  </div>
+                  <span class="bar"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <mat-form-field
+                  appearance="fill"
+                  style="width: 100%; height: 70px"
+                >
+                  <mat-label> Select Submenues</mat-label>
+                  <mat-select
+                    [formControlName]="'submenuName'"
+                    [compareWith]="compareSubMenuObjects"
+                    (selectionChange)="onItemSelect($event)"
+                    multiple
+                  >
+                    <mat-option
+                      *ngFor="let menu of submenulistObj"
+                      [value]="menu"
+                      >{{ menu.LinkName }}</mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="q-btn-div">
+              <button
+                class="btn-forsave"
+                type="submit"
+              >
+                <!-- <i class="fa fa-save" style="padding-right: 15px"></i> -->
+                <span> Save </span>
+              </button>
+
+              <a
+                (click)="refresh()"
+                class="btn-forsave bg-refresh"
+                type="btn"
+              >
+                <!-- <i class="fa fa-refresh" style="padding-right: 15px"></i> -->
+                <span> Refresh </span>
+              </a>
+
+              <a
+                (click)="exit()"
+                class="btn-forsave bg-exit "
+                type="btn"
+              >
+                <!-- <i class="fa fa-times-circle-o" style="padding-right: 15px"></i> -->
+                <span> Exit </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- data table code start here -->
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-body defect-min-box">
+        <table id="createRoleTable" class="display" width="100%"></table>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div style="margin-top: 5px" *ngIf="loading">
+      <ngx-skeleton-loader
+        [theme]="{ height: '40px' }"
+        loadingText="Loading Data"
+        appearance="line"
+        count="4"
+        animation="pulse"
+      >
+      </ngx-skeleton-loader>
+    </div>
+  </div>
+</div>
+
+<!-- data table code end here -->
+
+<div class="container">
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <img style="width: 11%" src="assets/images/icons/cross.jpg" alt="" />
+        </div>
+        <div class="modal-body" style="text-align: center; padding-top: 0px">
+          <span style="display: flow; margin-bottom: 8% !important">
+            <h4 style="text-align: center; color: red; font-size: 20px">
+              Are you sure ?
+            </h4>
+            <p style="font-size: medium">
+              Do you really want to delete this record ? This process cannot be
+              undo .
+            </p>
+          </span>
+          <button
+            mat-raised-button
+            color="warn"
+            data-dismiss="modal"
+            (click)="DeleteRecord()"
+          >
+            Delete
+          </button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button
+            mat-raised-button
+            color="primary"
+            data-dismiss="modal"
+            (click)="closeDeleteRecord()"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

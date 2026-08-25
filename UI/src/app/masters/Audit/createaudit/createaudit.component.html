@@ -1,0 +1,259 @@
+<button data-toggle="modal" data-target="#alredyexist" id="existbiw"></button>
+<button data-toggle="modal" data-target="#alredyexistvin" id="existvin"></button>
+<div class="container">
+  <div class="modal fade" id="alredyexist" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 style="
+              text-align: center;
+              color: orange;
+              font-weight: bold;
+              font-size: 30px;
+            ">
+            Alredy Exist !!!
+          </h4>
+          <button type="button" class="close" data-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" style="text-align: center">
+          <h4 style="text-align: center">
+            <span style="color: red"> {{ BIWNo }} </span> -This BIW No. alredy
+            Configured.....
+          </h4>
+          <br /><br />
+          <span class="btn q-btn-refres del-yes" (click)="closeAlredyExist()" data-dismiss="modal">OK</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="modal fade" id="alredyexistvin" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 style="
+              text-align: center;
+              color: orange;
+              font-weight: bold;
+              font-size: 30px;
+            ">
+            Alredy Exist !!!
+          </h4>
+          <button type="button" class="close" data-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" style="text-align: center">
+          <h4 style="text-align: center">
+            <span style="color: red">
+              {{ VINNO }}
+            </span>
+            -This VIN No. alredy Configured.....
+          </h4>
+          <br /><br />
+          <span class="btn q-btn-refres del-yes" (click)="closeAlredyExist()" data-dismiss="modal">OK</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="master-headings q-strip" id="btn-add">
+    <i (click)="exit()" style="float: left; font-size: x-large; padding-left: 5px" class="fa fa-arrow-circle-left"></i>
+    Create Audit - {{ AuditName | uppercase }}
+  </div>
+  <form *ngIf="canCreate || isModify" [formGroup]="createauditform" (ngSubmit)="onSave()" autocomplete="off">
+    <div class="row second-row">
+      <span *ngIf="isTCF">
+        <div class="col-md-3">
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label style="font-weight: bold">VIN No.</mat-label>
+            <input id="biwno" matInput formControlName="vinno" required [autofocus]="isTCF" maxlength="17"
+              (blur)="onVinChange()" />
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-3">
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>BIW No.</mat-label>
+            <input matInput formControlName="biwno" (blur)="onBIWChange()" />
+            <!-- (keyup.enter)="onBIWChange()" -->
+          </mat-form-field>
+        </div>
+      </span>
+      <span *ngIf="!isTCF">
+        <div class="col-md-3">
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label style="font-weight: bold">BIW No.</mat-label>
+            <input [autofocus]="!isTCF" id="biwno" matInput formControlName="biwno" required (blur)="onBIWChange()" />
+            <!-- (keyup.enter)="onBIWChange()" -->
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-3">
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Vin No.</mat-label>
+            <input maxlength="17" (blur)="onVinChange()" matInput formControlName="vinno" />
+          </mat-form-field>
+        </div>
+      </span>
+
+      <!-- <div class="col-md-3">
+        <mat-form-field
+          appearance="outline"
+          style="width: 100%; font-weight: bold"
+        >
+          <mat-label>Plant</mat-label>
+          <input matInput formControlName="plant" required />
+        </mat-form-field>
+      </div> -->
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Audit Date</mat-label>
+          <input matInput formControlName="auditdate" required [matDatepicker]="picker" />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" style="width: 100%; font-weight: bold">
+          <mat-label>Model</mat-label>
+          <input matInput formControlName="model" required />
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" style="width: 100%; font-weight: bold">
+          <mat-label>Variant</mat-label>
+          <input matInput formControlName="variant" required />
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" style="width: 100%; font-weight: bold">
+          <mat-label>Color</mat-label>
+          <input matInput formControlName="color" required />
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" style="width: 100%; font-weight: bold">
+          <mat-label>Vehicle Type</mat-label>
+          <input matInput formControlName="vehicletype" required />
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+            <mat-label> Vehicle Model</mat-label>
+            <mat-select [formControlName]="'vehiclemodel'" (selectionChange)="onSelectModel($event)">
+              <mat-option *ngFor="let model of modellist" [value]="model.Model_ID">{{ model.Model_Code }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+            <mat-label>Build Phase</mat-label>
+            <mat-select [formControlName]="'buildphase'">
+              <mat-option *ngFor="let Buildphase of Buildphaselist" [value]="Buildphase.Build_Phase_ID">{{
+                Buildphase.Build_Phase_Name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- <div class="col-md-3">
+        <div class="form-group">
+          <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+            <mat-label>Shift</mat-label>
+            <mat-select [formControlName]="'shift'">
+              <mat-option
+                *ngFor="let shift of shiftlist"
+                [value]="shift.SHIFT_NO"
+                >{{ shift.SHIFT_DESC }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div> -->
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+            <mat-label>Auditor 1</mat-label>
+            <mat-select [formControlName]="'auditor1'">
+              <mat-option *ngFor="let emp of emplist" [value]="emp.Employee_ID">{{ emp.Employee_Name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+            <mat-label>Auditor 2</mat-label>
+            <mat-select [formControlName]="'auditor2'">
+              <mat-option *ngFor="let emp of emplist" [value]="emp.Employee_ID">{{ emp.Employee_Name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="margin: 0px 2px">
+      <span class="btn-section">
+        <div class="col-md-2" *ngIf="isModify">
+          <button class="btn-forsave" type="button" (click)="continue()">
+            <span> Continue </span>
+          </button>
+        </div>
+        <div class="col-md-2">
+          <button class="btn-forsave" [ngClass]="isModify?'bg-refresh':''" type="button" (click)="onSave()">
+            <span> {{ isModify ? "Update" : "Save" }} </span>
+          </button>
+        </div>
+        <div *ngIf="!isModify" class="col-md-2">
+          <a (click)="refresh()" class="btn-forsave bg-refresh" type="btn">
+            <span> Refresh </span>
+          </a>
+        </div>
+        <div class="col-md-2" *ngIf="isModify">
+          <a (click)="confirmDeleteAudit()" class="btn-forsave bg-exit" type="btn">
+            <span> Delete Audit </span>
+          </a>
+        </div>
+      </span>
+    </div>
+  </form>
+</div>
+<!-- <div class="row" style="margin-top: 20px">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-body defect-min-box">
+        <table id="AuditTable" class="display" width="100%"></table>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div style="margin-top: 5px" *ngIf="loadingTable">
+      <ngx-skeleton-loader
+        [theme]="{ height: '40px' }"
+        loadingText="Loading Data"
+        appearance="line"
+        count="4"
+        animation="pulse"
+      >
+      </ngx-skeleton-loader>
+    </div>
+  </div>
+</div> -->
+<div class="overlay" *ngIf="loading">
+  <span>
+    <img src="assets/loader/newloading.gif" class="logo" alt="Loading" />
+    <div class="overlay-text">
+      We are fetching data from Server for
+      {{
+      this.createauditform.get("biwno").value ||
+      this.createauditform.get("vinno").value
+      }}
+    </div>
+    <div class="overlay-text">Thanks for your patience</div>
+  </span>
+</div>

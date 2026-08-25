@@ -1,0 +1,16 @@
+﻿.radio-btn label 
+{
+    width:100%;
+    padding:10px;
+    text-align:center; 
+    background:#eaeaea;
+    cursor:pointer;   
+}
+.radio-btn > input[type=radio]
+{
+      display:none; 
+}
+.radio-btn > input[type=radio]:checked + label 
+{
+    background:#2ecc71;      
+}

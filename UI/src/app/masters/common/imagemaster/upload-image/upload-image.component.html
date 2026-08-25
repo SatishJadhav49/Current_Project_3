@@ -1,0 +1,43 @@
+<div class="upload-confirmation-overlay" *ngIf="isLoading">
+  <div class="upload-confirmation-content">
+    <div class="delete-confirmation-header">
+      <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+    </div>
+    <div class="delete-confirmation-body">
+      <h4 class="delete-confirmation-title">Uploading image, please wait...</h4>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!isLoading">
+  <div class="upload-confirmation-overlay">
+    <div class="upload-confirmation-content">
+      <div class="delete-confirmation-header">
+        <i class="fa fa-upload" aria-hidden="true"></i>
+      </div>
+      <div class="delete-confirmation-body">
+        <h4 class="delete-confirmation-title">
+          Please select the image you would like to upload.
+        </h4>
+      </div>
+      <div>
+        <!-- <form [formGroup]="uploadForm" (ngSubmit)="compressFileAndSubmit()" class="upload-confirmation-actions">
+            <input type="file" (change)="compressFileAndSubmit" class="form-control" accept="image/*" />
+            <button type="submit" class="btn primary" [disabled]="uploadForm.invalid || isLoading">Upload</button>
+          </form> -->
+        <div
+          class="form-group form-animate-text"
+          style="margin-top: 24px !important"
+        >
+          <button class="chooseImage" (click)="compressFile()">
+            Choose image
+          </button>
+          <button type="btn" (click)="onSubmit()" class="btn-forsave">
+            Upload
+          </button>
+        </div>
+        <span style="color: red">{{ errorMessage }}</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+#testy h1, h2 {
+	text-align: center;
+}
+#testy button {
+	width: 200px;
+	height: 50px;
+	border: none;
+	color: white;
+}
+#testy button#btn {
+	background: #3AAAFF;
+}
+#testy button#btn1 {
+	background: #33D594;
+}
+#testy button#btn2 {
+	background: #E5564E;
+}
+#testy button#btn3 {
+    background: #FFBB00;
+    color: yellow;
+}
+#testy {
+	position: fixed;
+	top: 0;
+	right: 20px;
+}
+#testy #buttons {
+	width: 620px;
+	height: 50px;
+	margin: 50px auto;
+}
+#testy article {
+	width: 600px;
+	margin: 30px auto;
+}
+#testy code {
+	color: blue;
+}

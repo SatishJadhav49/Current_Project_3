@@ -1,0 +1,169 @@
+<!-- <div class="row">
+    <div class="master-headings q-strip" style="width: 100%; font-weight: 900; margin-top: 36px" id="btn-add">
+        1D - Box Plot
+    </div>
+</div>
+
+
+<div class="row" style="font-size: 12px; margin-top: 15px">
+    
+    <div class="col-md-2">
+        <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+            <mat-label> Model</mat-label>
+            <mat-select [(ngModel)]="selectedModel" (selectionChange)="onSelectModel($event)">
+                <mat-option *ngFor="let model of modellist" [value]="model">{{
+                    model.Model_Code
+                    }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-md-2">
+        <mat-form-field appearance="outline"   style="height: 70px !important; width: 100%">
+            <mat-label>Financial Year</mat-label>
+            <input [(ngModel)]="selectYear" matInput [matDatepicker]="picker" [ngModelOptions]="{ standalone: true }" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker startView="multi-year" (yearSelected)="chosenYearHandler($event, picker)">
+            </mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-2">
+    <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+      <mat-label> Area </mat-label>
+      <mat-select
+        [(ngModel)]="selectedArea"
+        (selectionChange)="selectArea($event)"
+      >
+        <mat-option>
+          <ngx-mat-select-search
+            [placeholderLabel]="'Search Area'"
+            noEntriesFoundLabel="No matching found for {{ AreaFilter.value }}"
+            [formControl]="AreaFilter"
+          >
+            <mat-icon ngxMatSelectSearchClear
+              >delete</mat-icon
+            ></ngx-mat-select-search
+          >
+        </mat-option>
+        <mat-option
+          *ngFor="let Area of AreaList | search : AreaFilter.value"
+          [value]="Area"
+          >{{ Area.Area_Name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-3">
+    <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+      <mat-label> Part </mat-label>
+      <mat-select
+        [(ngModel)]="selectedPart"
+        (selectionChange)="selectPart($event)"
+      >
+        <mat-option>
+          <ngx-mat-select-search
+            [placeholderLabel]="'Search Parameter'"
+            noEntriesFoundLabel="No matching found for {{ PartFilter.value }}"
+            [formControl]="PartFilter"
+          >
+            <mat-icon ngxMatSelectSearchClear
+              >delete</mat-icon
+            ></ngx-mat-select-search
+          >
+        </mat-option>
+        <mat-option
+          *ngFor="let Parameter of PartList | search : PartFilter.value"
+          [value]="Parameter"
+          >{{ Parameter.Part_Name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-3">
+    <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+      <mat-label> Check Point </mat-label>
+      <mat-select
+        [(ngModel)]="selectedCheckPoint"
+        (selectionChange)="selectCP($event)"
+      >
+        <mat-option>
+          <ngx-mat-select-search
+            [placeholderLabel]="'Search Parameter'"
+            noEntriesFoundLabel="No matching found for {{
+              CheckPointFilter.value
+            }}"
+            [formControl]="CheckPointFilter"
+          >
+            <mat-icon ngxMatSelectSearchClear
+              >delete</mat-icon
+            ></ngx-mat-select-search
+          >
+        </mat-option>
+        <mat-option
+          *ngFor="
+            let Parameter of CheckPointList | search : CheckPointFilter.value
+          "
+          [value]="Parameter"
+          >{{ Parameter.Checkpoint_Name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-2">
+    <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+      <mat-label> Location </mat-label>
+      <mat-select
+        [(ngModel)]="selectedLocation"
+        (selectionChange)="onSelectLocation($event)"
+      >
+        <mat-option>
+          <ngx-mat-select-search
+            [placeholderLabel]="'Search Parameter'"
+            noEntriesFoundLabel="No matching found for {{
+              locationFilter.value
+            }}"
+            [formControl]="locationFilter"
+          >
+            <mat-icon ngxMatSelectSearchClear
+              >delete</mat-icon
+            ></ngx-mat-select-search
+          >
+        </mat-option>
+        <mat-option
+          *ngFor="let Parameter of locationList | search : locationFilter.value"
+          [value]="Parameter"
+          >{{ Parameter.Location_Name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-2">
+    <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+      <mat-label> Parameter </mat-label>
+      <mat-select
+        [(ngModel)]="selectedParameter"
+        (selectionChange)="selectParameter($event)"
+      >
+        <mat-option
+          *ngFor="let Parameter of ParameterList"
+          [value]="Parameter"
+          >{{ Parameter.Type }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+    <div class="col-md-2">
+        <button class="btn-forsave" type="button" (click)="viewBoxPlot()">
+            Get Report
+        </button>
+    </div>
+</div> -->
+
+
+<!-- box plot -->
+
+<div id="box" *ngIf="showBoxPlot">
+    <apx-chart [series]="boxOptions.series" [chart]="boxOptions.chart" [xaxis]="boxOptions.xaxis"
+        [title]="boxOptions.title" [colors]="boxOptions.colors" [dataLabels]="boxOptions.dataLabels"
+        [annotations]="boxOptions.annotations"></apx-chart>
+</div>

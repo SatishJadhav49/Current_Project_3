@@ -1,0 +1,92 @@
+.q-strip {
+  background-color: black;
+  color: white;
+  margin-bottom: 0.3%;
+  box-shadow: 0 1px 0px rgba(0, 0, 0, 0.12), 3px 4px 1px rgba(66, 59, 59, 0.24);
+  border-radius: 0;
+  border-radius: 4px !important;
+  text-align: center;
+  height: 28px;
+  font-size: 17.5px;
+}
+.master-headings {
+  width: 100%;
+  font-weight: 900;
+  margin-top: 36px !important;
+}
+
+th {
+  background-color: darkcyan !important;
+  font-size: 14px !important;
+}
+td {
+  vertical-align: middle !important;
+  font-size: 12px !important;
+}
+
+@media screen and (max-width: 768px) {
+  .master-headings {
+    margin-top: 16px !important;
+  }
+}
+.red {
+  color: #ff0303 !important;
+}
+.orange {
+  color: darkorange !important;
+}
+.blue {
+  color: blue !important;
+}
+.notfound {
+  width: 100%;
+  text-align: center;
+  font-weight: 700;
+  font-size: 17px;
+  margin-top: 15px;
+}
+
+.count-div {
+  height: 65px;
+  background-color: blueviolet;
+  border-radius: 15px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  /* margin: 0 5px; */
+}
+
+.count {
+  margin-left: 10px;
+  font-size: 25px;
+}
+
+.bg-exit {
+  background-color: orangered;
+}
+
+.bg-darkslategray {
+  background-color: darkslategray;
+}
+
+.filters {
+  border: 1px solid gray;
+  padding: 3px 10px;
+  text-align: center;
+  font-weight: bold;
+  color: black;
+  margin-left: 12px;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.filters-active {
+  background: cadetblue;
+}
+
+.filter-title {
+  padding: 3px 15px;
+}

@@ -1,0 +1,104 @@
+﻿#orderSequenceWrapper {
+    position:relative;
+}
+
+.btn-top-margin {
+    margin-top: 26px;
+}
+
+#orderSequenceWrapper table tbody tr {
+    cursor: pointer;
+}
+
+.sequenceArrowButtonWrapper .btn {
+    margin-right: 8px;
+    font-size: 1.4em;
+}
+
+#sequence-display-wrapper {
+    display: none;
+}
+#startedOrdersBlock{
+    position:relative;
+}
+#startedOrdersBlock h3 {
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+#startedOrdersBlock > h3 > button {
+    width: 100%;
+    text-align: center;
+}
+
+tr.hidden-order {
+    display: none;
+}
+
+tr td.sequence-series {
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+tr td.sequence-qty {
+    font-weight: bold;
+}
+
+td.spillover {
+    color: #DE9100;
+}
+
+.selected > td.spillover {
+    color: #FFD18A;
+}
+
+.spill {
+    background-color: yellow;
+}
+
+tr.not-hidden-order.selected {
+    border-top: solid 3px #323138;
+}
+
+.table-sequence tr {
+    -webkit-transition: display 0.5s ease-in-out;
+    -moz-transition: display 0.5s ease-in-out;
+    transition: display 0.5s ease-in-out;
+}
+.fixed{
+  top:0;
+  position:fixed;
+  width:auto;
+  display:none;
+  border:none;
+}
+.right-fixed-options{
+    width: 20%;
+    position: fixed;
+    right: 21px;
+}
+.hideFirst{
+    display:none;
+}
+.btn-topmargin{
+  margin-top: 14px;
+}
+.sequence-remarks input {
+    height: 27px;
+}
+#orderSequenceWrapper table tbody tr td.sequence-remarks {
+    padding: 0;
+}
+#save-unholdBtn{
+    display:none;
+}
+.btn.save-sequence,.btn.hold-order,.btn.delete-order{
+    width:100%;
+}
+.dailyPlanWrapper > div > p{
+    margin:0;
+}
+.dailyplan-notify{
+    margin:0;
+}

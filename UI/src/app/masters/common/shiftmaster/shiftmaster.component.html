@@ -1,0 +1,298 @@
+<div class="row">
+  <div class="master-headings q-strip" id="btn-add">Shift Master</div>
+  <div
+    *ngIf="canCreate || modifyFlag"
+    class="container"
+    style="margin-top: 15px"
+  >
+    <span class="selection-section">
+      <div class="col-md-2 q-full-height shop">
+        <h4 class="header-background">Shop</h4>
+        <div
+          class="flex"
+          style="border-bottom: 1px dotted black; display: flex"
+        >
+          <input
+            style="border: none !important"
+            type="text"
+            class="form-control search-input"
+            autocomplete="off"
+            id="myInput"
+            placeholder="Search shop"
+            [(ngModel)]="searchshopInput"
+          />
+        </div>
+        <div
+          class="q-card q-full-height q-scroll addpart dropdown-height"
+          style="height: 257px"
+        >
+          <ul class="q-listbox" id="myUL">
+            <li
+              style="cursor: pointer; font-size: 12px"
+              *ngFor="let shop of shoplist | search : searchshopInput"
+              (click)="selectShop(shop)"
+              [ngClass]="{ selected: isCurrentShop(shop) }"
+            >
+              <a style="color: black">{{ shop.Shop_Name }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </span>
+    <div class="col-md-10 q-full-height part">
+      <button
+        type="button"
+        *ngIf="!newShift && !modifyFlag"
+        class="new-part"
+        (click)="onnewShift()"
+      >
+        New Shift
+      </button>
+      <div class="row">
+        <div class="col-md-12">
+          <form
+            [formGroup]="createshiftform"
+            (ngSubmit)="onAddShift()"
+            class="example-form"
+            *ngIf="(newShift && selectedShop) || modifyFlag"
+          >
+            <div class="row">
+              <div class="col-md-2">
+                <div
+                  class="form-group form-animate-text"
+                  style="margin-top: 10px !important"
+                >
+                  <input
+                    autofocus
+                    type="text"
+                    class="form-text"
+                    title="Please enter shop name"
+                    required
+                    formControlName="shiftname"
+                  />
+                  <span class="bar"></span>
+                  <label>Shift Name *</label>
+                  <div
+                    *ngIf="
+                      createshiftform.get('shiftname').errors &&
+                      (createshiftform.get('shiftname').dirty ||
+                        createshiftform.get('shiftname').touched)
+                    "
+                    class="form-errors-wrapper"
+                  >
+                    <span
+                      *ngIf="
+                        createshiftform.get('shiftname').hasError('required')
+                      "
+                    >
+                      Shift Name field is required.
+                    </span>
+                    <span
+                      *ngIf="
+                        createshiftform.get('shiftname').hasError('maxlength')
+                      "
+                    >
+                      Shift name must be 10 Character.
+                    </span>
+                    <span class="bar"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div
+                  class="form-group form-animate-text"
+                  style="margin-top: 10px !important"
+                >
+                  <input
+                    type="text"
+                    class="form-text"
+                    title="Please enter shop name"
+                    required
+                    formControlName="starttime"
+                  />
+                  <span class="bar"></span>
+                  <label>Start Time *</label>
+                  <div
+                    *ngIf="
+                      createshiftform.get('starttime').errors &&
+                      (createshiftform.get('starttime').dirty ||
+                        createshiftform.get('starttime').touched)
+                    "
+                    class="form-errors-wrapper"
+                  >
+                    <span
+                      *ngIf="
+                        createshiftform.get('starttime').hasError('required')
+                      "
+                    >
+                      Start Time field is required.
+                    </span>
+                    <div
+                      *ngIf="
+                        createshiftform.get('starttime').hasError('pattern')
+                      "
+                    >
+                      Enter valid time - HH:MM
+                    </div>
+                    <span class="bar"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div
+                  class="form-group form-animate-text"
+                  style="margin-top: 10px !important"
+                >
+                  <input
+                    type="text"
+                    class="form-text"
+                    title="Please enter shop name"
+                    required
+                    formControlName="endtime"
+                  />
+                  <span class="bar"></span>
+                  <label>End Time *</label>
+                  <div
+                    *ngIf="
+                      createshiftform.get('endtime').errors &&
+                      (createshiftform.get('endtime').dirty ||
+                        createshiftform.get('endtime').touched)
+                    "
+                    class="form-errors-wrapper"
+                  >
+                    <span
+                      *ngIf="
+                        createshiftform.get('endtime').hasError('required')
+                      "
+                    >
+                      End Time field is required.
+                    </span>
+                    <div
+                      *ngIf="createshiftform.get('endtime').hasError('pattern')"
+                    >
+                      Enter valid time - HH:MM
+                    </div>
+                    <span class="bar"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div
+                  class="form-group form-animate-text"
+                  style="margin-top: 10px !important"
+                >
+                  <mat-checkbox formControlName="isactive"> </mat-checkbox>
+                  Active
+                </div>
+              </div>
+              <div
+                class="col-md-2"
+                style="margin-top: 10px"
+                *ngIf="!modifyFlag"
+              >
+                <button type="submit" class="btn-forsave new-part">
+                  <i
+                    class="fa fa-plus-circle"
+                    aria-hidden="true"
+                    style="padding-right: 10px"
+                  ></i>
+                  Add
+                </button>
+              </div>
+              <div class="col-md-2" *ngIf="modifyFlag">
+                <button
+                  class="btn-forsave"
+                  type="button"
+                  (click)="updateShift()"
+                >
+                  Update
+                </button>
+                <button
+                  class="btn-forsave bg-exit"
+                  type="button"
+                  (click)="refresh()"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- *ngIf="shiftobject.length >0"  -->
+      <table
+        style="margin-top: 10px"
+        class="table table-bordered"
+        *ngIf="!modifyFlag"
+      >
+        <thead>
+          <tr>
+            <th class="header-background">Shift Name</th>
+            <th class="header-background">Start Time</th>
+            <th class="header-background">End Time</th>
+            <th class="header-background">Active</th>
+            <th class="header-background">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let shift of shiftobject; let i = index">
+            <td>{{ shift.SHIFT_DESC }}</td>
+            <td>{{ shift.START_TIME }}</td>
+            <td>{{ shift.END_TIME }}</td>
+            <td>{{ shift.WORKING }}</td>
+            <td>
+              <span
+                style="
+                  border-radius: 50% !important;
+                  background-color: #0b9494;
+                  color: black !important;
+                "
+                class="btn fa fa-trash deletebutton"
+                (click)="removeObject(i)"
+              ></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="row btn-row" *ngIf="shiftobject.length > 0 && !modifyFlag">
+        <div class="col-md-4">
+          <button class="btn-forsave" type="button" (click)="onPartsSave()">
+            <span> Save </span>
+          </button>
+        </div>
+        <div class="col-md-4">
+          <a (click)="refresh()" class="btn-forsave bg-refresh" type="btn">
+            <span> Refresh </span>
+          </a>
+        </div>
+        <div class="col-md-4">
+          <a (click)="exit()" class="btn-forsave bg-exit" type="btn">
+            <span> Exit </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12" style="margin-top: 10px">
+    <div class="panel">
+      <div class="panel-body defect-min-box">
+        <table id="varianttable" class="display" width="100%"></table>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div style="margin-top: 5px" *ngIf="loading">
+      <ngx-skeleton-loader
+        [theme]="{ height: '40px' }"
+        loadingText="Loading Data"
+        appearance="line"
+        count="4"
+        animation="pulse"
+      >
+      </ngx-skeleton-loader>
+    </div>
+  </div>
+</div>

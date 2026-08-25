@@ -1,0 +1,27 @@
+﻿.content-wrapper, .right-side {
+        background-color: white;
+    }
+
+    .table-striped > tbody > tr:nth-of-type(2n+1) {
+        background-color: white;
+    }
+
+    .table th {
+        background: #ecf0f5 none repeat scroll 0 0;
+    }
+
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        border-left: 1px solid #cccccc;
+        border-top: 1px solid #cccccc;
+        text-align: center;
+
+        vertical-align: middle;
+    }
+
+    .table tr:last-child {
+        border-bottom: 1px solid #cccccc;
+    }
+
+    .table tr th:last-child, .table tr td:last-child {
+        border-right: 1px solid #cccccc;
+    }

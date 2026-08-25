@@ -1,0 +1,75 @@
+.container {
+    width: 100%;
+    margin-left: -138px;
+    margin-top: -100px;
+    line-height:19px;
+}
+.carousel-inner {
+    position: relative;
+    /* width: 100%; */
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+.carousel {
+    position: relative;
+    /* width: 69%; */
+    width: 90%;
+    /* margin-top: 85px; */
+    margin-top: 50px;
+
+}
+.carousel-inner>.item>a>img {
+    display: block;
+    width: 100%;
+    height: 450;
+}
+.carousel-inner>.item>img {
+    display: block;
+    /* width: 100%; */
+    /* height: 470px; */
+    width: auto;
+    height: 630px;
+}
+.carousel-indicators li {
+    background-color: red;
+    border:1 solid black;
+}
+/* .carousel {
+    position: relative;
+    width: 800px;
+} */
+
+.car-img
+{
+    /* width: auto!important;
+    height: auto!important; */
+    object-fit: contain!important;
+}
+
+/* //for responsive UI */
+@media (min-width: 320px) and (max-width: 479px)
+{
+	.container{
+        all: unset;
+        DISPLAY: BLOCK;
+        MARGIN-LEFT: -344PX;
+        margin-top: -55px;
+
+    }
+    .carousel-inner{
+        height: 353px;
+    }
+    .carousel-inner>.item>img {
+        height: 340px!important;
+    }
+}
+@media (max-width: 768px)
+
+{
+	
+    .carousel-inner>.item>img {
+        height: 340px!important;
+    }
+}
+

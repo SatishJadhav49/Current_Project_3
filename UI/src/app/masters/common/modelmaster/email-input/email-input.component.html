@@ -1,0 +1,23 @@
+<div class="row" style="margin: 0;padding: 15px;">
+    <div class="col-md-12">
+        <div class="form-group form-animate-text" style="margin-top: 10px !important">
+
+            <textarea style="height: 200px;" autofocus type="text" class="form-text" title="Please enter shop name"
+                required [(ngModel)]="EmailList"></textarea>
+            <span class="bar"></span>
+            <label>Email Id's *</label>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin: 0;padding: 15px;">
+    <div class="col-md-6">
+        <button class="btn-forsave" style="margin-top: 10px;" type="button" (click)="onSave()">
+            <span> Save </span>
+        </button>
+    </div>
+    <div class="col-md-6">
+        <button class="btn-forsave bg-exit" style="margin-top: 10px;" type="button" (click)="onDismiss(false)">
+            <span> Cancel </span>
+        </button>
+    </div>
+</div>

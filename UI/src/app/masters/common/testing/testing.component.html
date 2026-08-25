@@ -1,0 +1,34 @@
+<form class="container mt-5" (ngSubmit)="onSubmit()" style="margin-top: 80px;" >
+  <div class="form-group">
+    <label for="actionName">Action Name:</label>
+    <input type="text" class="form-control" id="actionName" [(ngModel)]="subMenu.ActionName" name="ActionName" required>
+  </div>
+
+  <div class="form-group">
+    <label for="linkName">Link Name:</label>
+    <input type="text" class="form-control" id="linkName" [(ngModel)]="subMenu.LinkName" name="LinkName" required>
+  </div>
+
+  <div class="form-group">
+    <label for="menuId">Menu ID:</label>
+    <input type="number" class="form-control" id="menuId" [(ngModel)]="subMenu.Menu_ID" name="Menu_ID" required>
+  </div>
+
+  <div class="form-group">
+    <label for="sortOrder">Sort Order:</label>
+    <input type="number" class="form-control" id="sortOrder" [(ngModel)]="subMenu.Sort_Order" name="Sort_Order" required>
+  </div>
+
+  <div class="form-group">
+    <label for="isActive">Is Active:</label>
+    <input type="number" class="form-control" id="isActive" [(ngModel)]="subMenu.Is_Active" name="Is_Active" required>
+  </div>
+
+  <div class="form-group">
+    <label for="auditTypeId">Audit Type ID:</label>
+    <input type="number" class="form-control" id="auditTypeId" [(ngModel)]="subMenu.Audit_Type_Id" name="Audit_Type_Id" required>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Add Sub Menu</button>
+
+</form>

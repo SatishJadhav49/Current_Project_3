@@ -1,0 +1,199 @@
+<!-- <div class="row">
+  <div
+    class="master-headings q-strip"
+    style="width: 100%; font-weight: 900; margin-top: 36px"
+    id="btn-add"
+  >
+    {{ AuditName }} : Graphical Reports
+  </div>
+</div>
+<div class="row" style="font-size: 12px; margin-top: 15px">
+  <div class="col-md-2">
+    <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+      <mat-label> Model</mat-label>
+      <mat-select
+        [(ngModel)]="selectedModel"
+        (selectionChange)="onSelectModel($event)"
+      >
+        <mat-option *ngFor="let model of modellist" [value]="model">{{
+          model.Model_Code
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+
+  <div class="col-md-2">
+    <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+      <mat-label>Start date</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        (dateChange)="onStartDateChange($event)"
+      />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div class="col-md-2">
+    <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+      <mat-label>End date</mat-label>
+      <input
+        [min]="realstartDate"
+        matInput
+        [matDatepicker]="picker2"
+        (dateChange)="onEndDateChange($event)"
+      />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker2"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-2">
+    <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+      <mat-label> Area </mat-label>
+      <mat-select
+        [(ngModel)]="selectedArea"
+        (selectionChange)="selectArea($event)"
+      >
+        <mat-option>
+          <ngx-mat-select-search
+            [placeholderLabel]="'Search Area'"
+            noEntriesFoundLabel="No matching found for {{ AreaFilter.value }}"
+            [formControl]="AreaFilter"
+          >
+            <mat-icon ngxMatSelectSearchClear
+              >delete</mat-icon
+            ></ngx-mat-select-search
+          >
+        </mat-option>
+        <mat-option
+          *ngFor="let Area of AreaList | search : AreaFilter.value"
+          [value]="Area"
+          >{{ Area.Area_Name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-3">
+    <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+      <mat-label> Part </mat-label>
+      <mat-select
+        [(ngModel)]="selectedPart"
+        (selectionChange)="selectPart($event)"
+      >
+        <mat-option>
+          <ngx-mat-select-search
+            [placeholderLabel]="'Search Parameter'"
+            noEntriesFoundLabel="No matching found for {{ PartFilter.value }}"
+            [formControl]="PartFilter"
+          >
+            <mat-icon ngxMatSelectSearchClear
+              >delete</mat-icon
+            ></ngx-mat-select-search
+          >
+        </mat-option>
+        <mat-option
+          *ngFor="let Parameter of PartList | search : PartFilter.value"
+          [value]="Parameter"
+          >{{ Parameter.Part_Name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-3">
+    <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+      <mat-label> Check Point </mat-label>
+      <mat-select
+        [(ngModel)]="selectedCheckPoint"
+        (selectionChange)="selectCP($event)"
+      >
+        <mat-option>
+          <ngx-mat-select-search
+            [placeholderLabel]="'Search Parameter'"
+            noEntriesFoundLabel="No matching found for {{
+              CheckPointFilter.value
+            }}"
+            [formControl]="CheckPointFilter"
+          >
+            <mat-icon ngxMatSelectSearchClear
+              >delete</mat-icon
+            ></ngx-mat-select-search
+          >
+        </mat-option>
+        <mat-option
+          *ngFor="
+            let Parameter of CheckPointList | search : CheckPointFilter.value
+          "
+          [value]="Parameter"
+          >{{ Parameter.Checkpoint_Name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-2">
+    <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+      <mat-label> Location </mat-label>
+      <mat-select
+        [(ngModel)]="selectedLocation"
+        (selectionChange)="onSelectLocation($event)"
+      >
+        <mat-option>
+          <ngx-mat-select-search
+            [placeholderLabel]="'Search Parameter'"
+            noEntriesFoundLabel="No matching found for {{
+              locationFilter.value
+            }}"
+            [formControl]="locationFilter"
+          >
+            <mat-icon ngxMatSelectSearchClear
+              >delete</mat-icon
+            ></ngx-mat-select-search
+          >
+        </mat-option>
+        <mat-option
+          *ngFor="let Parameter of locationList | search : locationFilter.value"
+          [value]="Parameter"
+          >{{ Parameter.Location_Name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-2">
+    <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+      <mat-label> Parameter </mat-label>
+      <mat-select
+        [(ngModel)]="selectedParameter"
+        (selectionChange)="onSelectParameter($event)"
+      >
+        <mat-option
+          *ngFor="let Parameter of ParameterList"
+          [value]="Parameter"
+          >{{ Parameter.Type }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-2">
+    <button class="btn-forsave" type="button" (click)="viewReport()">
+      Get Report
+    </button>
+  </div>
+</div> -->
+
+<div class="row">
+  <div class="col-md-12" *ngIf="Show_Report">
+    <iframe
+      style="width: 100%; height: 59em"
+      [src]="reportUrl"
+      class="report-frame"
+      id="pdfDocument"
+    ></iframe>
+  </div>
+</div>

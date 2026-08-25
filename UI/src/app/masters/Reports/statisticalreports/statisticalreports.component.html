@@ -1,0 +1,532 @@
+<div class="row">
+  <div
+    class="master-headings q-strip"
+    style="width: 100%; font-weight: 900; margin-top: 36px"
+    id="btn-add"
+  >
+    {{ AuditName }} : Statistical Reports
+  </div>
+</div>
+<div class="row" style="font-size: 12px; margin-top: 15px">
+  <div class="col-md-2">
+    <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+      <mat-label> Model</mat-label>
+      <mat-select
+        [(ngModel)]="selectedModel"
+        (selectionChange)="onSelectModel($event)"
+      >
+        <mat-option *ngFor="let model of modellist" [value]="model">{{
+          model.Model_Code
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-2">
+    <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+      <mat-label>From Date</mat-label>
+      <input
+        #startdatepicker1
+        matInput
+        [matDatepicker]="picker1"
+        (dateChange)="onStartDateChange($event)"
+      />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker1"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div class="col-md-2">
+    <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+      <mat-label>To Date</mat-label>
+      <input
+        [min]="actualStartDate"
+        #enddatepicker1
+        matInput
+        [matDatepicker]="picker"
+        (dateChange)="onEndDateChange($event)"
+      />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div class="col-md-2">
+    <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+      <mat-label> Area </mat-label>
+      <mat-select
+        [(ngModel)]="selectedArea"
+        (selectionChange)="selectArea($event)"
+      >
+        <mat-option>
+          <ngx-mat-select-search
+            [placeholderLabel]="'Search Area'"
+            noEntriesFoundLabel="No matching found for {{ AreaFilter.value }}"
+            [formControl]="AreaFilter"
+          >
+            <mat-icon ngxMatSelectSearchClear
+              >delete</mat-icon
+            ></ngx-mat-select-search
+          >
+        </mat-option>
+        <mat-option
+          *ngFor="let Area of AreaList | search : AreaFilter.value"
+          [value]="Area"
+          >{{ Area.Area_Name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-2">
+    <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+      <mat-label> Part </mat-label>
+      <mat-select
+        [(ngModel)]="selectedPart"
+        (selectionChange)="selectPart($event)"
+      >
+        <mat-option>
+          <ngx-mat-select-search
+            [placeholderLabel]="'Search Parameter'"
+            noEntriesFoundLabel="No matching found for {{ PartFilter.value }}"
+            [formControl]="PartFilter"
+          >
+            <mat-icon ngxMatSelectSearchClear
+              >delete</mat-icon
+            ></ngx-mat-select-search
+          >
+        </mat-option>
+        <mat-option
+          *ngFor="let Parameter of PartList | search : PartFilter.value"
+          [value]="Parameter"
+          >{{ Parameter.Part_Name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-2">
+    <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+      <mat-label> Check Point </mat-label>
+      <mat-select
+        [(ngModel)]="selectedCheckPoint"
+        (selectionChange)="selectCP($event)"
+      >
+        <mat-option>
+          <ngx-mat-select-search
+            [placeholderLabel]="'Search Parameter'"
+            noEntriesFoundLabel="No matching found for {{
+              CheckPointFilter.value
+            }}"
+            [formControl]="CheckPointFilter"
+          >
+            <mat-icon ngxMatSelectSearchClear
+              >delete</mat-icon
+            ></ngx-mat-select-search
+          >
+        </mat-option>
+        <mat-option
+          *ngFor="
+            let Parameter of CheckPointList | search : CheckPointFilter.value
+          "
+          [value]="Parameter"
+          >{{ Parameter.Checkpoint_Name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-2">
+    <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+      <mat-label> Location </mat-label>
+      <mat-select
+        [(ngModel)]="selectedLocation"
+        (selectionChange)="onSelectLocation($event)"
+      >
+        <mat-option>
+          <ngx-mat-select-search
+            [placeholderLabel]="'Search Parameter'"
+            noEntriesFoundLabel="No matching found for {{
+              locationFilter.value
+            }}"
+            [formControl]="locationFilter"
+          >
+            <mat-icon ngxMatSelectSearchClear
+              >delete</mat-icon
+            ></ngx-mat-select-search
+          >
+        </mat-option>
+        <mat-option
+          *ngFor="let Parameter of locationList | search : locationFilter.value"
+          [value]="Parameter"
+          >{{ Parameter.Location_Name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-2">
+    <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+      <mat-label> Parameter </mat-label>
+      <mat-select
+        [(ngModel)]="selectedParameter"
+        (selectionChange)="onSelectParameter($event)"
+      >
+        <mat-option
+          *ngFor="let Parameter of ParameterList"
+          [value]="Parameter"
+          >{{ Parameter.Type }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-4">
+    <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+      <mat-label> Report Type </mat-label>
+      <mat-select
+        [(ngModel)]="selectedReport"
+        (selectionChange)="onSelectReport($event)"
+      >
+        <mat-option
+          *ngFor="let Report of reportsList"
+          [value]="Report.REPORT_ID"
+          >{{ Report.REPORT_TITLE }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-4">
+    <span *ngIf="imagePath">
+      <img
+        style="
+          width: 95%;
+          height: 50px;
+          margin: 10px 10px;
+          object-fit: contain;
+          background-color: #fff;
+        "
+        [src]="'data:image/jpg;base64,' + imagePath"
+        alt=""
+        (click)="openDialog()"
+      />
+    </span>
+  </div>
+</div>
+<div class="row">
+  <div [ngSwitch]="selectedReport" *ngIf="Show_Report">
+    <!-- 1) for graphical control chart -->
+    <div *ngSwitchCase="1">
+      <app-graphicalreport
+        [audittypeid]="audittypeid"
+        [startdate]="startdate"
+        [enddate]="enddate"
+        [parameterId]="selectedParameter.ID"
+        [locationId]="selectedLocation.Location_ID"
+      />
+    </div>
+
+    <!-- 2) for graphical control chart with calculated limits -->
+    <div *ngSwitchCase="2">
+      <app-graphicalreport-calculated-limits
+        [audittypeid]="audittypeid"
+        [startdate]="startdate"
+        [enddate]="enddate"
+        [parameterId]="selectedParameter.ID"
+        [locationId]="selectedLocation.Location_ID"
+      />
+    </div>
+
+    <!-- 3) for Box plot -->
+    <div *ngSwitchCase="3">
+      <app-boxplot
+
+      (messageEvent)="receiveData($event)"
+        [audittypeid]="audittypeid"
+        [startdate]="startdate"
+        [enddate]="enddate"
+        [parameterId]="selectedParameter?.ID"
+        [locationId]="selectedLocation?.Location_ID"
+        [Model_ID]="selectedModel?.Model_ID"
+        [Area_ID]="selectedArea?.Area_ID"
+        [Part_ID]="selectedPart?.Part_ID"
+        [Checkpoint_ID]="selectedCheckPoint?.Checkpoint_ID"
+        [Part_Name]="
+          selectedPart?.Part_Name +
+          '  ' +
+          selectedCheckPoint?.Checkpoint_Name +
+          ' ' +
+          selectedLocation?.Location_Name +
+          ' ' +
+          selectedParameter?.Type
+        "
+      />
+    </div>
+
+    <!-- 4) for Trend chart -->
+    <div *ngSwitchCase="4">
+      <app-trendchart
+       (messageEvent)="receiveData($event)"
+        [audittypeid]="audittypeid"
+        [startdate]="startdate"
+        [enddate]="enddate"
+        [parameterId]="selectedParameter.ID"
+        [locationId]="selectedLocation.Location_ID"
+        [Model_ID]="selectedModel.Model_ID"
+        [Area_ID]="selectedArea.Area_ID"
+        [Part_ID]="selectedPart.Part_ID"
+        [Checkpoint_ID]="selectedCheckPoint.Checkpoint_ID"
+        [Part_Name]="
+          selectedPart?.Part_Name +
+          '  ' +
+          selectedCheckPoint?.Checkpoint_Name +
+          ' ' +
+          selectedLocation?.Location_Name +
+          ' ' +
+          selectedParameter?.Type
+        "
+      />
+    </div>
+    <!-- 5) for SPC rules -->
+    <div *ngSwitchCase="5">
+      <app-spcrules
+
+      (messageEvent)="receiveData($event)"
+        [audittypeid]="audittypeid"
+        [startdate]="startdate"
+        [enddate]="enddate"
+        [parameterId]="selectedParameter?.ID"
+        [locationId]="selectedLocation?.Location_ID"
+        [Model_ID]="selectedModel?.Model_ID"
+        [Area_ID]="selectedArea?.Area_ID"
+        [Part_ID]="selectedPart?.Part_ID"
+        [Checkpoint_ID]="selectedCheckPoint?.Checkpoint_ID"
+        [Part_Name]="
+          selectedPart?.Part_Name +
+          '  ' +
+          selectedCheckPoint?.Checkpoint_Name +
+          ' ' +
+          selectedLocation?.Location_Name +
+          ' ' +
+          selectedParameter?.Type
+        "
+      />
+    </div>
+    <!-- 6) for histogram -->
+    <div *ngSwitchCase="6">
+      <app-histogram
+        (messageEvent)="receiveData($event)"
+
+        [audittypeid]="audittypeid"
+        [startdate]="startdate"
+        [enddate]="enddate"
+        [parameterId]="selectedParameter?.ID"
+        [locationId]="selectedLocation?.Location_ID"
+        [Model_ID]="selectedModel?.Model_ID"
+        [Area_ID]="selectedArea?.Area_ID"
+        [Part_ID]="selectedPart?.Part_ID"
+        [Checkpoint_ID]="selectedCheckPoint?.Checkpoint_ID"
+        [Part_Name]="
+          selectedPart?.Part_Name +
+          '  ' +
+          selectedCheckPoint?.Checkpoint_Name +
+          ' ' +
+          selectedLocation?.Location_Name +
+          ' ' +
+          selectedParameter?.Type
+        "
+      />
+    </div>
+    <!-- 7) for Comparison Trend -->
+    <div *ngSwitchCase="7">
+      <app-comparisontrend
+       (messageEvent)="receiveData($event)"
+        [audittypeid]="audittypeid"
+        [startdate]="startdate"
+        [enddate]="enddate"
+        [parameterId]="selectedParameter.ID"
+        [locationId]="selectedLocation.Location_ID"
+        [Model_ID]="selectedModel.Model_ID"
+        [Area_ID]="selectedArea.Area_ID"
+        [Part_ID]="selectedPart.Part_ID"
+        [Checkpoint_ID]="selectedCheckPoint.Checkpoint_ID"
+        [Part_Name]="
+          selectedPart?.Part_Name +
+          '  ' +
+          selectedCheckPoint?.Checkpoint_Name +
+          ' ' +
+          selectedLocation?.Location_Name +
+          ' ' +
+          selectedParameter?.Type
+        "
+      />
+    </div>
+    <div *ngSwitchDefault>No graph available</div>
+  </div>
+</div>
+
+<div class="row" *ngIf="Readings && Readings.length > 0">
+  <!-- Statistical Report -->
+  <div class="col-md-6" >
+    <div style="padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin: 10px;">
+      <h3 style="text-align: center; color: #333; margin-bottom: 16px; font-size: 16px; font-weight: 600;">Statistical Analysis : {{ selectedPart?.Part_Name + ' - ' + selectedCheckPoint?.Checkpoint_Name + ' - ' + selectedLocation?.Location_Name + ' - ' + selectedParameter?.Type }}</h3>
+      <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr style="background-color: darkcyan; color: white;">
+            <th style="padding: 12px; text-align: left; border: 1px solid #ddd; font-weight: 600;">Statistics</th>
+            <th style="padding: 12px; text-align: right; border: 1px solid #ddd; font-weight: 600;">Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr style="background-color: #f9f9f9;">
+            <td style="padding: 10px; border: 1px solid #ddd; font-weight: 500;">
+              Sample Size (N)
+              <mat-icon 
+                title="Total number of measurements or observations in the dataset"
+                style="font-size: 16px; height: 16px; width: 16px; vertical-align: middle; margin-left: 5px; color: #666; cursor: help;">
+                info
+              </mat-icon>
+            </td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: right;">{{ statisticalData.sampleSize }}</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #ddd; font-weight: 500;">
+              Minimum
+              <mat-icon 
+                title="The smallest value in the dataset"
+                style="font-size: 16px; height: 16px; width: 16px; vertical-align: middle; margin-left: 5px; color: #666; cursor: help;">
+                info
+              </mat-icon>
+            </td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: right;">{{ statisticalData.min | number:'1.2-2' }}</td>
+          </tr>
+          <tr style="background-color: #f9f9f9;">
+            <td style="padding: 10px; border: 1px solid #ddd; font-weight: 500;">
+              Maximum
+              <mat-icon 
+                title="The largest value in the dataset"
+                style="font-size: 16px; height: 16px; width: 16px; vertical-align: middle; margin-left: 5px; color: #666; cursor: help;">
+                info
+              </mat-icon>
+            </td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: right;">{{ statisticalData.max | number:'1.2-2' }}</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #ddd; font-weight: 500;">
+              Mean (μ)
+              <mat-icon 
+                title="Average of all measurements. Represents the central tendency of the process. Calculated as sum of all values divided by sample size."
+                style="font-size: 16px; height: 16px; width: 16px; vertical-align: middle; margin-left: 5px; color: #666; cursor: help;">
+                info
+              </mat-icon>
+            </td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: right;">{{ statisticalData.mean | number:'1.2-2' }}</td>
+          </tr>
+          <tr style="background-color: #f9f9f9;">
+            <td style="padding: 10px; border: 1px solid #ddd; font-weight: 500;">
+              Median
+              <mat-icon 
+                title="Middle value when data is sorted. Less affected by extreme values (outliers) than the mean. If 50% of values are above and 50% below this value."
+                style="font-size: 16px; height: 16px; width: 16px; vertical-align: middle; margin-left: 5px; color: #666; cursor: help;">
+                info
+              </mat-icon>
+            </td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: right;">{{ statisticalData.median | number:'1.2-2' }}</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #ddd; font-weight: 500;">
+              Standard Deviation (σ)
+              <mat-icon 
+                title="Measure of variation or dispersion in the data. Shows how much measurements deviate from the mean. Lower value indicates more consistent process."
+                style="font-size: 16px; height: 16px; width: 16px; vertical-align: middle; margin-left: 5px; color: #666; cursor: help;">
+                info
+              </mat-icon>
+            </td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: right;">{{ statisticalData.stdDev | number:'1.2-4' }}</td>
+          </tr>
+          <tr style="background-color: #f9f9f9;">
+            <td style="padding: 10px; border: 1px solid #ddd; font-weight: 500;">
+              LSL
+              <mat-icon 
+                title="Lower Specification Limit - The minimum acceptable value for the measurement as defined by design requirements or customer specifications."
+                style="font-size: 16px; height: 16px; width: 16px; vertical-align: middle; margin-left: 5px; color: #666; cursor: help;">
+                info
+              </mat-icon>
+            </td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: right;">{{ statisticalData.lsl | number:'1.2-2' }}</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #ddd; font-weight: 500;">
+              USL
+              <mat-icon 
+                title="Upper Specification Limit - The maximum acceptable value for the measurement as defined by design requirements or customer specifications."
+                style="font-size: 16px; height: 16px; width: 16px; vertical-align: middle; margin-left: 5px; color: #666; cursor: help;">
+                info
+              </mat-icon>
+            </td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: right;">{{ statisticalData.usl | number:'1.2-2' }}</td>
+          </tr>
+          <tr style="background-color: #E3F2FD;">
+            <td style="padding: 10px; border: 1px solid #ddd; font-weight: 600; color: #1976D2;">
+              Cp
+              <mat-icon 
+                title="Process Capability Index - Measures potential capability. Formula: (USL - LSL) / (6σ). Cp ≥ 1.67 is excellent, 1.33-1.67 is adequate, < 1.33 needs improvement."
+                style="font-size: 16px; height: 16px; width: 16px; vertical-align: middle; margin-left: 5px; color: #1976D2; cursor: help;">
+                info
+              </mat-icon>
+            </td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: right; font-weight: 600; color: #1976D2;">{{ statisticalData.cp | number:'1.2-3' }}</td>
+          </tr>
+          <tr [style.background-color]="statisticalData.cpk < 1.67 ? '#FFEBEE' : '#E8F5E9'">
+            <td style="padding: 10px; border: 1px solid #ddd; font-weight: 600;" [style.color]="statisticalData.cpk < 1.67 ? '#D32F2F' : '#388E3C'">
+              CpK
+              <mat-icon 
+                title="Process Capability Index (actual) - Considers process centering. Formula: min((USL - μ)/(3σ), (μ - LSL)/(3σ)). Shows actual capability considering how centered the process is. Cpk ≥ 1.67 is excellent, < 1.67 needs action."
+                style="font-size: 16px; height: 16px; width: 16px; vertical-align: middle; margin-left: 5px; cursor: help;"
+                [style.color]="statisticalData.cpk < 1.67 ? '#D32F2F' : '#388E3C'">
+                info
+              </mat-icon>
+            </td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: right; font-weight: 600;" [style.color]="statisticalData.cpk < 1.67 ? '#D32F2F' : '#388E3C'">{{ statisticalData.cpk | number:'1.2-3' }}</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <!-- Readings Section -->
+      <div style="margin-top: 20px; padding: 7px; background: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 2px solid #1976D2;">
+          <h4 style="margin: 0; color: #1976D2; font-size: 16px; font-weight: 600;">All Readings ({{ Readings.length }})</h4>
+          <button 
+            (click)="copyReadings()" 
+            matTooltip="Copy all readings"
+            style="background-color: #1976D2; color: white; border: none; border-radius: 4px; padding: 6px 12px; cursor: pointer; display: flex; align-items: center; gap: 5px; font-size: 13px;">
+            <mat-icon style="font-size: 18px; height: 18px; width: 18px;">content_copy</mat-icon>
+            Copy
+          </button>
+        </div>
+        <div style="max-height: 150px; overflow-y: auto; padding: 10px; background-color: #f5f5f5; border-radius: 4px; word-wrap: break-word;">
+          <span style="font-size: 13px; line-height: 1.8; color: #333;">{{ Readings.join(', ') }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6" *ngIf="imagePath">
+    <div style="padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin: 10px; height: 600px; display: flex; flex-direction: column;">
+      <h3 style="text-align: center; color: #333; margin-bottom: 15px; font-size: 16px; font-weight: 600;">Part Image</h3>
+      <div style="flex: 1; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+        <img
+          style="
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            cursor: pointer;
+          "
+          [src]="'data:image/jpg;base64,' + imagePath"
+          alt="Part Image"
+          (click)="openDialog()"
+        />
+      </div>
+    </div>
+  </div>
+</div>

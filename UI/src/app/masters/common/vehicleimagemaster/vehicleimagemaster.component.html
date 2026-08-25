@@ -1,0 +1,136 @@
+<div class="vehicle-map-layout master-headings">
+
+      <!-- Image + markers -->
+      <div class="vehicle-image-card">
+
+        <!-- Empty state -->
+        <div *ngIf="!data.imageDataUrl" class="vehicle-empty-state">
+          <div class="empty-state-icon">&#128444;</div>
+          <p class="empty-state-text">Upload any image to start marking parts</p>
+          <label class="choose-image-button">
+            Choose Image
+            <input type="file" accept="image/*" class="hidden" (change)="onFileSelected($event)" />
+          </label>
+        </div>
+
+        <!-- Image with click-to-mark overlay -->
+        <div *ngIf="data.imageDataUrl" class="image-marking-area" (click)="onImageClick($event)">
+          <img [src]="data.imageDataUrl" alt="Defect map" class="defect-map-image" draggable="false" />
+
+          <!-- Existing part markers -->
+          <div *ngFor="let p of data.parts; let i = index"
+               class="part-marker group"
+               [style.left.%]="p.x" [style.top.%]="p.y">
+            <button (click)="selectPart(p, $event)" title="Open part details"
+                    class="part-marker-button"
+                    [class.marker-selected]="selectedPart?.id === p.id"
+                    [style.background]="colorOf(i)">
+              {{ p.defects.length }}
+            </button>
+            <div class="part-marker-label"
+                 [style.background]="colorOf(i)">
+              {{ p.name }}
+            </div>
+
+            <!-- Hover tooltip: defect list at the marked location -->
+            <div *ngIf="p.defects.length"
+                 class="part-marker-tooltip">
+              <div class="tooltip-title">{{ p.name }} &middot; {{ p.defects.length }} defect(s)</div>
+              <ul class="tooltip-list">
+                <li *ngFor="let d of p.defects" class="tooltip-item">&bull; {{ d }}</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Pending marker: name input at the clicked spot -->
+          <div *ngIf="pending" class="pending-marker"
+               [style.left.%]="pending.x" [style.top.%]="pending.y">
+            <span class="pending-dot"></span>
+            <div class="pending-editor"
+                 (click)="$event.stopPropagation()">
+              <input #pendingInput [(ngModel)]="pendingName" maxlength="40"
+                     (keyup.enter)="confirmPending()" (keyup.escape)="cancelPending()"
+                     placeholder="Part name, e.g. RH Door"
+                     class="pending-input" />
+              <button (click)="confirmPending()" title="Add part"
+                      class="pending-confirm">&#10003;</button>
+              <button (click)="cancelPending()" title="Cancel"
+                      class="pending-cancel">&#10005;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Side panel -->
+      <div class="vehicle-side-panel">
+
+        <!-- Report title -->
+        <div class="report-title-panel">
+          <label class="field-label">Report Title</label>
+          <input [(ngModel)]="titleText" (keyup.enter)="updateTitle()" (blur)="updateTitle()" maxlength="80"
+                 class="report-title-input" />
+        </div>
+
+        <!-- Selected part editor -->
+        <div *ngIf="selectedPart" class="selected-part-panel">
+          <div class="selected-part-header" [style.background]="colorOf(indexOfPart(selectedPart))">
+            <input [(ngModel)]="selectedPart.name" (change)="renameSelected()" maxlength="40"
+                   class="selected-part-name" />
+            <button (click)="closePanel()" title="Close"
+                    class="close-panel-button">&#10005;</button>
+          </div>
+
+          <div class="selected-part-content">
+            <div class="section-label">
+              Defects ({{ selectedPart.defects.length }}/{{ MAX_DEFECTS_PER_PART }})
+            </div>
+            <ul class="defect-list">
+              <li *ngFor="let d of selectedPart.defects; let j = index"
+                  class="defect-item">
+                <span class="defect-text">{{ d }}</span>
+                <button (click)="removeDefect(j)" title="Remove defect"
+                        class="remove-defect-button">&#10005;</button>
+              </li>
+              <li *ngIf="!selectedPart.defects.length" class="no-defects">No defects yet</li>
+            </ul>
+            <div class="defect-entry">
+              <input [(ngModel)]="newDefectText" (keyup.enter)="addDefect()" maxlength="80"
+                     [disabled]="selectedPart.defects.length >= MAX_DEFECTS_PER_PART"
+                     placeholder="Add defect..."
+                     class="new-defect-input" />
+              <button (click)="addDefect()"
+                      [disabled]="selectedPart.defects.length >= MAX_DEFECTS_PER_PART"
+                      class="add-defect-button">+</button>
+            </div>
+            <button (click)="removePart(selectedPart)"
+                    class="delete-part-button">
+              Delete this part
+            </button>
+          </div>
+        </div>
+
+        <!-- Parts list (when nothing selected) -->
+        <div *ngIf="!selectedPart" class="parts-list-panel">
+          <div class="section-label">
+            Marked Parts ({{ data.parts.length }}/{{ MAX_PARTS }})
+          </div>
+          <ul *ngIf="data.parts.length" class="parts-list">
+            <li *ngFor="let p of data.parts; let i = index">
+              <button (click)="selectPart(p)"
+                      class="part-list-button">
+                <span class="part-list-name">
+                  <span class="part-list-color" [style.background]="colorOf(i)"></span>
+                  <span class="part-list-label">{{ p.name }}</span>
+                </span>
+                <span class="defect-count">
+                  {{ p.defects.length }} defect{{ p.defects.length === 1 ? '' : 's' }}
+                </span>
+              </button>
+            </li>
+          </ul>
+          <p *ngIf="!data.parts.length" class="no-parts">
+            No parts marked yet &mdash; click anywhere on the image to add one.
+          </p>
+        </div>
+      </div>
+    </div>

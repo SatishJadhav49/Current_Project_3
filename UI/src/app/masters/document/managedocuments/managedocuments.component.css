@@ -1,0 +1,31 @@
+.master-headings {
+  width: 100%;
+  font-weight: 900;
+  margin-top: 36px !important;
+}
+
+.q-strip {
+  background-color: black;
+  color: white;
+  margin-bottom: 0.3%;
+  box-shadow: 0 1px 0px rgba(0, 0, 0, 0.12), 3px 4px 1px rgba(66, 59, 59, 0.24);
+  border-radius: 0;
+  border-radius: 4px !important;
+  text-align: center;
+  height: 28px;
+  font-size: 17.5px;
+  margin-top: -3.7%;
+}
+
+th {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.header-background {
+  background-color: darkcyan !important;
+  color: white !important;
+}
+td {
+  padding: 2px !important;
+}

@@ -1,0 +1,40 @@
+.q-strip {
+  background-color: black;
+  color: white;
+  margin-bottom: 0.3%;
+  box-shadow: 0 1px 0px rgba(0, 0, 0, 0.12), 3px 4px 1px rgba(66, 59, 59, 0.24);
+  border-radius: 0;
+  border-radius: 4px !important;
+  text-align: center;
+  height: 28px;
+  font-size: 17.5px;
+}
+.master-headings {
+  width: 100%;
+  font-weight: 900;
+  margin-top: 36px !important;
+}
+
+.col-md-2 {
+  padding: 0 5px;
+  width: 20%;
+}
+
+input {
+  border: none !important;
+}
+
+@media screen and (max-width: 768px) {
+  .master-headings {
+    margin-top: 16px !important;
+  }
+  .col-md-2 {
+    width: 33.33%;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .col-md-2 {
+    width: 50%;
+  }
+}

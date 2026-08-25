@@ -1,0 +1,348 @@
+<!-- <div class="row">
+  <div class="master-headings q-strip" style="width: 100%; font-weight: 900; margin-top: 36px" id="btn-add">
+    Pending Audit List
+  </div>
+</div>
+<div *ngIf="assignedPlanList?.length > 0" class="table-responsive" style="margin: 0 -15px !important">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Audit Type</th>
+        <th scope="col">Shop</th>
+        <th scope="col">Model</th>
+        <th scope="col">Audit Type</th>
+        <th scope="col">Due Date</th>
+        <th scope="col">{{audittypeid==1? 'VIN':'BIW'}} No</th>
+        <th scope="col">Remaining Days</th>
+        <th scope="col">Create Audit</th>
+        <th scope="col">Submit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of assignedPlanList; let i = index" [ngClass]="daysDiff(item.Day_Diff)">
+        <td>{{ i + 1 }}</td>
+        <td>{{ item.Audit_Type }}</td>
+        <td>{{ item.Shop_Name }}</td>
+        <td>{{ item.Model_Name }}</td>
+        <td>{{ item.Schedule_Type }}</td>
+        <td>
+          {{ item.Due_Date | date : "dd-MMM-yyyy" }}
+        </td>
+        <td>{{ item.VIN_No }}</td>
+        <td>{{ item.Day_Diff }}</td>
+        <td>
+          <span (click)="onCreateAudit(item)" class="btn fa fa-pencil"
+            style="border-radius: 50% !important; color: black" [ngClass]="daysDiff(item.Day_Diff)"></span>
+        </td>
+        <td>
+          <span (click)="
+              onSubmit(
+                item.Audit_Plan_ID,
+                item.Audit_Plan_Log_ID,
+                item.IS_Audit_Completed
+              )
+            " class="btn" style="border-radius: 50% !important; color: black" [ngClass]="daysDiff(item.Day_Diff)">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i></span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="notfound" *ngIf="assignedPlanList?.length <= 0">
+  No Pending Audits Found.
+</div>
+
+<div class="row mt-15">
+  <div class="col-md-12" style="
+      text-align: center;
+      background-color: black;
+      height: 28px;
+      padding: 0px !important;
+    ">
+    <h4 style="color: white; font-weight: 900; margin: 5px 0">
+      Completed Audits
+    </h4>
+  </div>
+</div>
+<div *ngIf="CompletedPlanList?.length > 0" class="table-responsive" style="margin: 0 -15px !important">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Audit Type</th>
+        <th scope="col">Shop</th>
+        <th scope="col">Model</th>
+        <th scope="col">Audit Type</th>
+        <th scope="col">VIN No</th>
+        <th scope="col">Status</th>
+        <th scope="col">Submission Date</th>
+        <th scope="col">Re-Open</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of CompletedPlanList; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ item.Audit_Type }}</td>
+        <td>{{ item.Shop_Name }}</td>
+        <td>{{ item.Model_Name }}</td>
+        <td>{{ item.Schedule_Type }}</td>
+        <td>{{ item.VIN_No }}</td>
+        <td>{{ item.Status_desc }}</td>
+        <td>{{ item.CompletionDate | date : "dd-MMM-yyyy" }}</td>
+        <td style="display: flex; justify-content: center">
+          <span id="action" style="
+              background-color: lightblue;
+              color: black !important;
+              font-weight: bold !important;
+              border-radius: 12px !important;
+              width: 75px !important;
+              font-size: 11px !important;
+            " class="action btn btn-forsave" (click)="reOpen(item)">Re-Open</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="notfound" *ngIf="CompletedPlanList?.length <= 0">
+  No Completed Audits Found.
+</div> -->
+
+<div class="row g-2" style="margin: 50px 0 0 0; border-bottom: 1px dotted gray">
+  <div class="col-md-2">
+    <div class="count-div">
+      Total Plans :
+      <span class="count">
+        {{ filteredAssignedPlan?.length + CompletedPlanList?.length }}</span
+      >
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="count-div bg-green">
+      Submitted : <span class="count"> {{ CompletedPlanList?.length }}</span>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="count-div bg-exit">
+      Pending : <span class="count"> {{ filteredAssignedPlan?.length }}</span>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="count-div bg-darkslategray">
+      In Progress : <span class="count">{{ inProgressCount }}</span>
+    </div>
+  </div>
+
+  <div class="col-md-2 mt-15">
+    <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+      <mat-label> Model</mat-label>
+      <mat-select
+        [(ngModel)]="selectedModel"
+        (selectionChange)="selectModel($event)"
+      >
+        <mat-option *ngFor="let model of modelList" [value]="model">{{
+          model.Shop_Name + " - " + model.Model_Code
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-2 mt-15">
+    <mat-form-field appearance="fill" style="width: 100%; height: 70px">
+      <mat-label>Filter By Timeline</mat-label>
+      <mat-select (selectionChange)="filterByTimeLine($event)">
+        <mat-option
+          *ngFor="let user of Timeline_Filters; let i = index"
+          [value]="i"
+          >{{ user.Name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+<div
+  class="row"
+  *ngIf="filteredAssignedPlan?.length > 5 || CompletedPlanList?.length > 5"
+>
+  <div class="col-md-12" style="padding: 0">
+    <input
+      type="text"
+      style="
+        width: 100%;
+        border-radius: 13px !important;
+        height: 35px;
+        text-align: center;
+        font-weight: bold;
+        border: 1px solid #000 !important;
+      "
+      placeholder="Search Anything"
+      [(ngModel)]="searchInput"
+    />
+  </div>
+</div>
+<span *ngIf="selectedModel">
+  <div class="row">
+    <div
+      class="master-headings q-strip"
+      style="width: 100%; font-weight: 900; margin-top: 12px !important"
+      id="btn-add"
+    >
+      Pending Audit List
+    </div>
+  </div>
+
+  <div
+    *ngIf="filteredAssignedPlan?.length > 0"
+    class="table-responsive"
+    style="margin: 0 -15px !important"
+  >
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Shop</th>
+          <th scope="col">Model</th>
+          <th scope="col">Audit Type</th>
+          <th scope="col">Due Date</th>
+          <th scope="col">Remaining Days</th>
+          <th scope="col">{{ audittypeid == 1 ? "VIN" : "BIW" }} No</th>
+          <th scope="col">Create Audit</th>
+          <th scope="col">Submit</th>
+          <th scope="col" *ngIf="isManager">Delete</th>   
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let item of filteredAssignedPlan | search : searchInput;
+            let i = index
+          "
+          [ngClass]="daysDiff(item.Day_Diff)"
+        >
+          <td>{{ i + 1 }}</td>
+          <td>{{ item.Shop_Name }}</td>
+          <td>{{ item.Model_Name }}</td>
+          <td>{{ item.Schedule_Type }}</td>
+          <td>
+            {{ item.Due_Date | date : "dd-MMM-yyyy" }}
+          </td>
+          <td>{{ item.Day_Diff }}</td>
+          <td>{{ item.VIN_No }}</td>
+          <td>
+            <span
+              (click)="onCreateAudit(item)"
+              class="btn fa fa-pencil"
+              style="border-radius: 50% !important; color: black"
+              [ngClass]="
+                item.VIN_No != null && item.VIN_No
+                  ? 'blue'
+                  : daysDiff(item.Day_Diff)
+              "
+            ></span>
+          </td>
+          <td>
+            <span
+              (click)="
+                onSubmit(
+                  item
+                )
+              "
+              class="btn"
+              style="border-radius: 50% !important; color: black"
+              [ngClass]="daysDiff(item.Day_Diff)"
+            >
+              <i class="fa fa-floppy-o" aria-hidden="true"></i
+            ></span>
+          </td>
+          <td *ngIf="isManager">
+            <span
+            (click)="deletePlanLog(item.Audit_Plan_Log_ID)"
+              class="btn"
+              style="border-radius: 50% !important; color: red"
+            >
+              <i class="fa fa-trash" aria-hidden="true"></i
+            ></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="notfound" *ngIf="filteredAssignedPlan?.length <= 0">
+    No Audits Found.
+  </div>
+
+  <div class="row mt-15">
+    <div
+      class="col-md-12"
+      style="
+        text-align: center;
+        background-color: black;
+        height: 28px;
+        padding: 0px !important;
+      "
+    >
+      <h4 style="color: white; font-weight: 900; margin: 5px 0">
+        Completed Audits
+      </h4>
+    </div>
+  </div>
+
+  <div
+    *ngIf="CompletedPlanList?.length > 0"
+    class="table-responsive"
+    style="margin: 0 -15px !important"
+  >
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Shop</th>
+          <th scope="col">Model</th>
+          <th scope="col">Audit Type</th>
+          <th scope="col">Status</th>
+          <th scope="col">Audit Date</th>
+          <th scope="col">{{ audittypeid == 1 ? "VIN" : "BIW" }} No</th>
+          <th scope="col">Submission Date</th>
+          <th scope="col">Re-Open</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let item of CompletedPlanList | search : searchInput;
+            let i = index
+          "
+        >
+          <td>{{ i + 1 }}</td>
+          <td>{{ item.Shop_Name }}</td>
+          <td>{{ item.Model_Name }}</td>
+          <td>{{ item.Schedule_Type }}</td>
+          <td>{{ item.Status_desc }}</td>
+          <td >{{ item.Status==1 ? (item.Audit_Date | date : "dd-MMM-yyyy") :''}}</td>
+          <td>{{ item.VIN_No }}</td>
+          <td>{{ item.CompletionDate | date : "dd-MMM-yyyy" }}</td>
+          <td style="display: flex; justify-content: center">
+            <span
+              id="action"
+              style="
+                background-color: lightblue;
+                color: black !important;
+                font-weight: bold !important;
+                border-radius: 12px !important;
+                width: 75px !important;
+                font-size: 11px !important;
+              "
+              class="action btn btn-forsave"
+              (click)="reOpen(item)"
+              >Re-Open</span
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="notfound" *ngIf="CompletedPlanList?.length <= 0">
+    No Completed Audits Found.
+  </div>
+</span>

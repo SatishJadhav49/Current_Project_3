@@ -1,0 +1,28 @@
+<div class="banner">
+  <div class="container">
+    <div class="panel">
+      <div class="panel-body text-center">
+        <img src="assets/images/name.png" class="logo1" />
+        <form [formGroup]="loginForm">
+          <label class="red">{{ errormsg }}</label>
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><i class="glyphicon glyphicon-globe"></i
+            ></span>
+            <select
+              [(ngModel)]="selectedPlantId"
+              formControlName="selectedplant"
+              title="please select plant name"
+              (ngModelChange)="onDropdownPlantChange($event)"
+              class="form-control master-select plant"
+            >
+              <option *ngFor="let item of plantlist" [value]="item.Plant_ID">
+                {{ item.Plant_Name }}
+              </option>
+            </select>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

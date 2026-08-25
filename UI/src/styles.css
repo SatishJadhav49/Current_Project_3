@@ -1,0 +1,799 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+/* @import "node_modules/placeholder-loading/src/scss/placeholder-loading"; */
+
+.min-width-control {
+  width: 79% !important;
+}
+tbody {
+  background-color: #f1f1f1;
+  color: black;
+  font-size: 14px;
+  font-weight: bold !important;
+}
+.showall-bt {
+  background-color: #2e6da6 !important;
+  font-weight: bold;
+  height: 40px;
+  width: 150px;
+  color: #fff !important;
+  border: none !important;
+  /* background-color: #27C24C !important; */
+  text-align: center;
+  margin: 5px;
+  padding-top: 11px;
+}
+.quality-main-header {
+  /* background-color: #e31837 !important; */
+  background-color: #ce0e2d !important;
+}
+.master-select {
+  font-size: 13px;
+  color: #999999;
+}
+.master-input {
+  font-size: 13px !important;
+}
+.mahindra-logo img {
+  width: 192px; /* (panel_height+panel_margin*2)*panels per row = (100px+(1px*2))*8 */
+  height: 68px;
+}
+.save-icon {
+  font-style: 20px;
+}
+.container1 {
+  margin-left: 1.5%;
+  margin-top: 3.8%;
+  margin-right: 1.5%;
+}
+
+.ngsize {
+  font-size: 16px;
+  margin-right: -6;
+}
+.mahindra-heading {
+  text-align: center;
+  color: rgb(243, 17, 17) !important;
+  font-weight: bold;
+  font-size: large;
+}
+.master-heading {
+  text-align: center;
+  color: #fff !important;
+  font-weight: bold;
+  font-size: large;
+  background-color: #333 !important;
+  height: 28px;
+  /* margin-top: -14px !important; */
+  margin-top: 36px;
+}
+.defect-min-box {
+  padding-left: 2px !important;
+  padding-right: 2px !important;
+}
+.form-group {
+  font-weight: bold;
+  color: black;
+}
+/* Loader */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loader {
+  border: 32px solid #f3f3f3;
+  border-radius: 50%;
+  text-align: center;
+  border-top: 16px solid blue;
+  border-right: 16px solid green;
+  border-bottom: 16px solid red;
+  border-left: 16px solid pink;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  margin-left: 50%;
+}
+/* Loader End */
+.q-show-all {
+  margin: 14px;
+  margin-right: -8px;
+  margin-left: 28px;
+}
+.form-errors-wrapper {
+  color: red;
+  font-weight: normal;
+}
+.master-select {
+  font-weight: bold;
+  color: black;
+  font-size: 14px;
+}
+.form-checkbox-label label {
+  font-size: 14px;
+  color: black;
+  margin-top: -1%;
+  font-weight: bold;
+}
+.form-checkbox-radio label {
+  font-size: 14px;
+  color: #999999;
+}
+
+.q-left-menu-width {
+  width: 151px !important;
+}
+.q-vertical-line {
+  border-left: 2px solid #fff;
+  height: 8%;
+  position: absolute;
+  left: 28%;
+  margin-left: -3px;
+  padding-top: 0px;
+}
+.q-icons {
+  float: left;
+}
+.selected {
+  color: rgb(230, 238, 229) !important;
+  /* background-color: #21abc7 !important; */
+  background-color: blanchedalmond;
+}
+.table-tr {
+  text-align: center;
+  border: 1px solid #1c84c6 !important;
+  padding: 2px !important;
+}
+.table-th {
+  background: #1c84c6 !important;
+  text-align: center;
+  font-size: small;
+  color: rgb(230, 238, 229);
+  height: 4px !important;
+}
+.table > thead > tr > th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #ddd;
+  color: #fff;
+}
+.q-ul-li li {
+  border-bottom: 1px solid #333;
+  border-left: 1px solid #333;
+  border-right: 1px solid #333;
+  white-space: normal;
+  word-wrap: break-word;
+  text-align: center;
+
+  padding: 2px !important;
+}
+.q-ul-li li:hover {
+  background-color: rgb(34, 202, 29) !important;
+}
+.q-ul-li h4:first-child {
+  padding: 2px;
+  text-align: center;
+  margin: 0px !important;
+  background-color: #333;
+  color: bisque;
+}
+
+.q-ul {
+  padding: 0px !important;
+}
+.q-btm-margin {
+  margin-bottom: 8px;
+}
+.q-panel-body {
+  padding: 0px;
+}
+
+.q-cnt-box-parent > .q-count-box {
+  border-right: 1px solid #333;
+}
+.q-cnt-box-parent > .q-count-box:first-child {
+  border-left: 1px solid #333;
+}
+
+.q-count-box h4 {
+  font-size: 1.1em;
+}
+.q-count-box small {
+  font-size: 0.8em;
+}
+.q-no-padding {
+  padding: 0px !important;
+}
+.q-no-margin {
+  margin: 0px !important;
+}
+.q-width-for-header {
+  font-size: 14px !important;
+
+  border-top-left-radius: 8px;
+}
+.q-icon-margin {
+  margin: -4px;
+  margin-left: -51px;
+}
+.q-gray-bg {
+  background: #f6f8f8;
+}
+
+.q-card {
+  background: #fff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 0;
+  position: relative;
+}
+.q-listbox-parent h4,
+h5 {
+  background: #333;
+  color: #fff !important;
+  padding: 10px;
+  text-align: center;
+  border-radius: 6px;
+}
+.q-panel-body {
+  padding: 5px;
+}
+.q-btn-add {
+  height: 40px;
+  width: 150px;
+  color: #fff !important;
+  border: none !important;
+  background-color: #0b9494 !important;
+  text-align: center;
+  margin: 5px;
+  font: bold;
+  padding-top: 11px;
+}
+.q-btn-no-def {
+  height: 40px;
+  width: 150px;
+  color: #fff !important;
+  border: none !important;
+  background-color: #5d6161 !important;
+  text-align: center;
+  margin: 5px;
+  padding-top: 11px;
+}
+.q-btn-save {
+  height: 40px;
+  width: 150px;
+  color: #fff !important;
+  border: none !important;
+  background-color: #1c84c6 !important;
+  text-align: center;
+  margin: 5px;
+  padding-top: 11px;
+}
+.q-btn-refresh {
+  height: 40px;
+  width: 150px;
+  color: #fff !important;
+  border: none !important;
+  background-color: #27c24c !important;
+  text-align: center;
+  margin: 5px;
+  padding-top: 11px;
+}
+.q-btn-rework {
+  height: 40px;
+  width: 150px;
+  color: #fff !important;
+  border: none !important;
+  background-color: rgb(247, 88, 15) !important;
+  text-align: center;
+  margin: 5px;
+  padding-top: 11px;
+}
+.q-btn-defect {
+  height: 40px;
+  width: 150px;
+  color: #fff !important;
+  border: none !important;
+  background-color: rgb(85, 85, 81) !important;
+  text-align: center;
+  margin: 5px;
+  vertical-align: 20px;
+  padding-top: 11px;
+}
+.q-btn-delete {
+  height: 40px;
+  width: 150px;
+  color: #fff !important;
+  border: none !important;
+  background-color: rgb(204, 41, 30) !important;
+  text-align: center;
+
+  margin: 5px;
+}
+.q-btn-div {
+  padding-top: 15px;
+  padding-left: none;
+  padding-left: none;
+}
+.q-listbox-parent {
+  padding: 1px;
+  /* border-right: 0.1em solid #333; */
+}
+ul.q-listbox {
+  list-style-type: none;
+  padding: 0px;
+}
+.q-scroll {
+  overflow-y: scroll;
+}
+.q-scroll::-webkit-scrollbar {
+  width: 0.5em;
+}
+.q-scroll::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.q-scroll::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+ul.q-listbox li {
+  border-bottom: 1px solid #e2e8e9;
+  margin: 0;
+  padding: 0.425em 1.25em;
+  font-weight: bold;
+}
+ul.q-listbox li:last-child {
+  border-bottom: none;
+}
+ul.q-listbox li:hover {
+  background: #cdd8da;
+}
+.q-sm-btm-margin {
+  margin-bottom: 5px;
+}
+.q-sm-panel-btm-margin {
+  margin-bottom: 1px;
+}
+.q-partwise-defect-box-parent {
+  height: 50vh;
+}
+.q-full-height {
+  height: 96% !important;
+}
+.navbar.header {
+  height: 40px;
+  background: #36d1dc;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#5b86e5),
+    to(#36d1dc)
+  );
+  background: linear-gradient(to right, rgba(241, 243, 245, 0.12), #eaefef);
+}
+.nav-list li:hover {
+  background-color: rgb(187, 192, 187) !important;
+}
+
+.icons {
+  font-size: 18px;
+}
+.vertical {
+  margin-left: 6px;
+}
+.q-for-add-button {
+  margin-left: 30px;
+}
+.q-for-rework-button {
+  margin: -3px;
+  margin-right: -17px;
+  margin-left: 25px;
+}
+.q-for-save-button {
+  margin: 14px;
+  margin-right: -3px;
+  margin-left: 26px;
+}
+.q-for-refresh-button {
+  margin: 14px;
+  margin-right: -3px;
+  margin-left: 30px;
+}
+.q-for-exit-button {
+  margin: 17px;
+  margin-right: 2px;
+  margin-left: 34px;
+}
+.q-for-nodefect-button {
+  margin: -3px;
+  margin-right: -17px;
+  margin-left: 11px;
+}
+.container-ng {
+  height: 650px;
+  position: fixed;
+}
+
+/* tbody { display: block; }  */
+
+/*
+   body {
+      background-color: #bdc3c7;
+    }
+
+    .table-fixed {
+      width: 100%;
+      background-color: #f3f3f3;
+    }
+    .table-fixed tbody {
+      height: 200px;
+      overflow-y: auto;
+      width: 100%;
+    }
+    .table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+      display: block;
+    }
+    .table-fixed tbody td {
+      float: left;
+    }
+    .table-fixed thead tr th {
+      float: left;
+      background-color: #f39c12;
+      border-color: #e67e22;
+    } */
+/* //for responsive UI */
+
+@media (min-width: 320px) and (max-width: 479px) {
+  /* .container1{
+          all: unset;
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-top: 53px;
+      display: block;
+      } */
+  /* .master-headings{
+          text-align: center;
+          color: #fff !important;
+          font-weight: bold;
+          font-size: large;
+          background-color: #333 !important;
+          height: 28px;
+          margin-top: -6px !important;
+
+          /* margin-top: 8px; */
+
+  /* all: unset;
+          position: fixed;
+          z-index: 999;
+          text-align: center;
+          color: #fff !important;
+          font-weight: bold;
+          font-size: large;
+          margin-top: -52px !important;
+          background-color: rgb(12, 12, 12) !important;
+          height: 1.3em;
+          width: 100%; */
+
+  /* .defect-min-box{
+          padding-left: 15px !important;
+          padding-right: 15px !important;
+      } */
+}
+
+/* for delete confirmation modal */
+.del-yes {
+  background-color: #d74f4f !important;
+  color: white;
+  width: 67px;
+}
+.del-no {
+  background-color: #8989e2 !important;
+  color: white;
+  width: 67px;
+}
+.modal-header {
+  height: 17px;
+  margin-top: -9px;
+}
+.modal-content {
+  margin-top: 187px;
+}
+/* for delete confirmation modal end */
+.breadcrumbd {
+  color: white;
+  float: left !important;
+  background: transparent;
+  margin-top: 29px;
+  margin-bottom: 0;
+  font-size: 13px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 7px 4px;
+  position: absolute;
+  top: 15px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+.breadcrumbd > li + li:before {
+  content: ">\00a0";
+  padding: 1px 1px 1px 8px;
+}
+
+.outofrange {
+  color: red !important;
+}
+
+table.dataTable thead th {
+  border: none !important;
+}
+
+.datatable > select,
+input {
+  border: 1px gray solid !important;
+}
+
+/* .display tbody td
+
+    {
+
+      color: black;
+
+    } */
+
+.outofrange {
+  color: red !important;
+}
+.outofcontrol {
+  color: orange !important;
+}
+
+.default {
+  color: black !important;
+}
+
+.displayNone > #modifyebtnrecord {
+  display: none;
+}
+
+.displayNoneDelete > #deletetabBtn {
+  display: none;
+}
+.displayNoneModify > #modifyebtnrecord {
+  display: none;
+}
+
+@media (min-width: 800px) and (max-width: 1030px) {
+  .dataTables_wrapper {
+    overflow: scroll;
+  }
+}
+
+.sidebar-mini.sidebar-collapse .main-header .logo {
+  width: 230px !important;
+}
+
+.del-yes,
+.del-no {
+  color: white !important;
+}
+
+.container {
+  width: 100% !important;
+}
+
+.btn-forsave {
+  margin-bottom: 0;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  touch-action: manipulation;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  user-select: none;
+  border-radius: 7px !important;
+  width: 100% !important;
+  align-items: center !important;
+  cursor: pointer !important;
+  justify-content: space-evenly !important;
+  display: flex !important;
+  color: #fff !important;
+  border: none !important;
+  font-weight: bold;
+  /* background-color: green; */
+  background-color: #1c84c6;
+}
+
+.btn-forsave:hover {
+  color: white !important;
+  background-color: darkgray;
+}
+
+.bg-refresh {
+  /* background-color: #1c84c6; */
+  background-color: green;
+}
+
+.bg-exit {
+  /* background-color: #0b9494; */
+  background-color: tomato;
+}
+
+.bg-na {
+  background-color: orange;
+}
+
+.q-btn-div {
+  padding-top: 0px !important;
+}
+
+.search-input {
+  border: none !important;
+  text-align: center !important;
+  height: 24px !important;
+  font-size: 12px !important;
+}
+
+.shop > h4 {
+  font-size: 13px !important;
+}
+
+.displaynone {
+  display: none;
+}
+.displayNoneModify > #modifyebtnrecord {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .q-btn-div {
+    display: flex !important;
+  }
+  .btn-forsave {
+    margin: 2px;
+  }
+}
+@media (max-width: 768px) {
+  .master-headings {
+    font-size: 13px !important;
+    height: 20px !important;
+  }
+  .master-select {
+    font-size: 12px !important ;
+  }
+  label {
+    font-size: 12px !important;
+  }
+  li {
+    font-size: 11px !important;
+  }
+
+  .header-background {
+    font-size: 12px !important;
+  }
+
+  .shop > h4 {
+    font-size: 12px !important;
+  }
+}
+::-webkit-scrollbar {
+  width: 3px !important; /* Remove scrollbar space */
+  height: 2px !important; /* Remove scrollbar space */
+  background: transparent !important; /* Optional: just make scrollbar invisible */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e31837 !important;
+}
+.display-none {
+  display: none;
+}
+
+.p-0 {
+  padding: 0px;
+}
+
+.pt-10 {
+  padding-top: 10px;
+}
+
+.mt-10 {
+  margin-top: 10px !important;
+}
+
+.mt-15 {
+  margin-top: 15px !important;
+}
+
+.mb-10 {
+  margin-bottom: 10px !important;
+}
+
+/* .content-wrapper {
+  cursor: url("./assets/new-logo.png") 25 15, auto !important;
+} */
+
+body,
+html {
+  /* cursor: url("./assets/new-logo.png"), auto; */
+}
+.red-bg {
+  background-color: #ff8585 !important;
+}
+
+::-webkit-scrollbar {
+  width: 3px !important; /* Remove scrollbar space */
+  height: 2px !important; /* Remove scrollbar space */
+  background: transparent !important; /* Optional: just make scrollbar invisible */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e31837 !important;
+}
+.m-0 {
+  margin: 0px !important;
+}
+table.dataTable thead th,
+table.dataTable tfoot th {
+  color: rgb(248, 246, 246);
+  background-color: #1c84c6;
+  border-radius: 12px;
+}
+body {
+  font-family: Source Sans Pro, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  background-color: #f0f3f4 !important;
+  line-height: 1.42857143 !important;
+}
+div.dataTables_wrapper div.dataTables_filter input {
+  margin-left: 0.5em;
+  display: inline-block;
+  width: 250px;
+  height: 30px;
+  font-size: 16px;
+}
+
+div.dataTables_wrapper div.dataTables_filter label {
+  font-weight: normal;
+  white-space: nowrap;
+  text-align: left;
+  font-size: 18px;
+  font-weight: bold !important;
+}
+
+.shop-none {
+  display: none !important;
+}
+
+.p-0 {
+  padding: 0px !important;
+}
+
+.red {
+  color: #ff0303;
+}
+.orange {
+  color: darkorange;
+}
+.checkbox:hover {
+  cursor: pointer;
+}
+.deletebutton {
+  background-color: #d74f4f !important;
+}

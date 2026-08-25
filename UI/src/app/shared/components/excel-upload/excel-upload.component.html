@@ -1,0 +1,42 @@
+<span *ngIf="!loading">
+  <h1 mat-dialog-title class="text-center">{{ data.title }}</h1>
+  <mat-dialog-content class="mat-typography" style="overflow: hidden">
+    <h2>Download Template</h2>
+    <h3 (click)="downloadTemplate()">
+      <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+      {{ data.title }} upload template.xlsx
+      <span style="font-size: 25px; color: red"
+        ><i class="fa fa-download" aria-hidden="true"></i
+      ></span>
+    </h3>
+    <h2>Upload Excel</h2>
+    <p>
+      <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Upload File
+      should not be more than 10MB
+    </p>
+    <input (input)="onFileChange($event)" type="file" accept=".xlsx" />
+    <!-- <hr /> -->
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button
+      class="btn-forsave flex-end"
+      style="width: auto !important; margin-left: 10px"
+      (click)="onUpload()"
+    >
+      Save
+    </button>
+  </mat-dialog-actions>
+</span>
+<span *ngIf="loading">
+  <div
+    class="loading"
+    style="padding: 10px 0px 0px; color: red; font-size: 25px"
+  >
+    Attention:
+  </div>
+  <div class="loading">
+    Do not close or navigate away from this page while excel is being uploaded.
+  </div>
+  <img src="assets/loading.gif" alt="" />
+</span>

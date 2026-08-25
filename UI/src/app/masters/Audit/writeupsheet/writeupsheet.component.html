@@ -1,0 +1,414 @@
+<div class="row">
+  <div class="master-headings q-strip" id="btn-add">
+    <i (click)="exit()" style="float: left; font-size: x-large; padding-left: 5px" class="fa fa-arrow-circle-left"></i>
+    Tracking Sheet - {{ AuditName | uppercase }}
+  </div>
+</div>
+<div class="custom-container">
+  <div class="custom-row">
+    <div class="custom-col" *ngIf="isTCF">
+      <span class="input-group-addon" style="width: 55% !important"><span class="fa fa-barcode"
+          style="padding-right: 2px"></span>
+        <b>VIN No.</b></span>
+      <input autofocus type="text" class="form-control" autocomplete="off" id="biwno" placeholder="Please Enter VIN No"
+        title="biwno" name="biwno" [(ngModel)]="vinno"  disabled/>
+    </div>
+    <div class="custom-col" *ngIf="!isTCF">
+      <span class="input-group-addon" style="width: 55% !important"><span class="fa fa-barcode"
+          style="padding-right: 2px"></span>
+        <b>BIW No.</b></span>
+      <input autofocus type="text" class="form-control" autocomplete="off" id="biwno" placeholder="Please Enter BIW No"
+        title="biwno" name="biwno" [(ngModel)]="biwno" disabled />
+    </div>
+    <div class="custom-col">
+      <span class="input-group-addon" style="width: 55% !important">
+        <b>Model</b></span>
+      <input [(ngModel)]="modelname" type="text" class="form-control" placeholder="Model Code" disabled />
+    </div>
+    <div class="custom-col">
+      <span class="input-group-addon" style="width: 55% !important">
+        <b>Audit Date</b></span>
+      <input [(ngModel)]="auditdate" class="form-control" placeholder="Audit Date" disabled />
+    </div>
+    <div class="custom-col">
+      <span class="input-group-addon total-pist"> <b>Total PIST</b></span>
+      <input *ngIf="!loading" [value]="totalPist + ' %'" class="form-control cal-tab pist" placeholder="0" disabled />
+      <span *ngIf="loading" class="form-control" style="
+          padding: 0px;
+          text-align: center;
+          background: #eee;
+          width: 104% !important;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        ">
+        <img src="assets/loader/loading_global_spinner.gif" class="loader-img" />
+      </span>
+    </div>
+  </div>
+</div>
+<div class="custom-container" style="margin-top: 0px; border-bottom: 1px dotted gray; padding-bottom: 9px">
+  <div class="custom-row">
+    <div class="custom-col-5">
+      <span class="input-group-addon total-pist" style="width: 54%">
+        <b>Gap PIST</b></span>
+      <input *ngIf="!loading" [value]="gapPist + ' %'" class="form-control cal-tab pist" placeholder="0" disabled />
+      <span *ngIf="loading" class="form-control" style="
+          padding: 0px;
+          text-align: center;
+          background: #eee;
+          width: 104% !important;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        ">
+        <img src="assets/loader/loading_global_spinner.gif" class="loader-img" />
+      </span>
+    </div>
+    <div class="custom-col-5">
+      <span class="input-group-addon total-pist" style="width: 67%">
+        <b>Gap Checked Point</b></span>
+      <input *ngIf="!loading" [value]="gapOk + gapNok + gapNA" class="form-control cal-tab" placeholder="0" disabled />
+      <span *ngIf="loading" class="form-control" style="
+          padding: 0px;
+          text-align: center;
+          background: #eee;
+          width: 104% !important;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        ">
+        <img src="assets/loader/loading_global_spinner.gif" class="loader-img" />
+      </span>
+    </div>
+    <div class="custom-col-5">
+      <span class="input-group-addon total-pist" style="width: 37%">
+        <b>Gap OK</b></span>
+      <input *ngIf="!loading" [value]="gapOk" class="form-control cal-tab ok" placeholder="0" disabled />
+      <span *ngIf="loading" class="form-control" style="
+          padding: 0px;
+          text-align: center;
+          background: #eee;
+          width: 104% !important;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        ">
+        <img src="assets/loader/loading_global_spinner.gif" class="loader-img" />
+      </span>
+    </div>
+    <div class="custom-col-5">
+      <span class="input-group-addon total-pist" style="width: 37%">
+        <b>Gap NOK</b></span>
+      <input *ngIf="!loading" [value]="gapNok" class="form-control cal-tab nok" placeholder="0" disabled />
+      <span *ngIf="loading" class="form-control" style="
+          padding: 0px;
+          text-align: center;
+          background: #eee;
+          width: 104% !important;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        ">
+        <img src="assets/loader/loading_global_spinner.gif" class="loader-img" />
+      </span>
+    </div>
+    <div class="custom-col-5">
+      <span class="input-group-addon total-pist" style="width: 37%">
+        <b>Gap NA</b></span>
+      <input *ngIf="!loading" [value]="gapNA" class="form-control cal-tab na" placeholder="0" disabled />
+      <span *ngIf="loading" class="form-control" style="
+          padding: 0px;
+          text-align: center;
+          background: #eee;
+          width: 104% !important;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        ">
+        <img src="assets/loader/loading_global_spinner.gif" class="loader-img" />
+      </span>
+    </div>
+    <div class="custom-col-5">
+      <span class="input-group-addon total-pist" style="width: 54%">
+        <b>Flushness PIST</b></span>
+      <input *ngIf="!loading" [value]="flushPist + ' %'" class="form-control cal-tab pist" placeholder="0" disabled />
+      <span *ngIf="loading" class="form-control" style="
+          padding: 0px;
+          text-align: center;
+          background: #eee;
+          width: 104% !important;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        ">
+        <img src="assets/loader/loading_global_spinner.gif" class="loader-img" />
+      </span>
+    </div>
+    <div class="custom-col-5">
+      <span class="input-group-addon total-pist" style="width: 67%">
+        <b>Flush Checked Point</b></span>
+      <input *ngIf="!loading" [value]="flushOk + flushNok + flushNA" class="form-control cal-tab" placeholder="0"
+        disabled />
+      <span *ngIf="loading" class="form-control" style="
+          padding: 0px;
+          text-align: center;
+          background: #eee;
+          width: 104% !important;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        ">
+        <img src="assets/loader/loading_global_spinner.gif" class="loader-img" />
+      </span>
+    </div>
+    <div class="custom-col-5">
+      <span class="input-group-addon total-pist" style="width: 37%">
+        <b>Flush OK</b></span>
+      <input *ngIf="!loading" [value]="flushOk" class="form-control cal-tab ok" placeholder="0" disabled />
+      <span *ngIf="loading" class="form-control" style="
+          padding: 0px;
+          text-align: center;
+          background: #eee;
+          width: 104% !important;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        ">
+        <img src="assets/loader/loading_global_spinner.gif" class="loader-img" />
+      </span>
+    </div>
+    <div class="custom-col-5">
+      <span class="input-group-addon total-pist" style="width: 37%">
+        <b>Flush NOK</b></span>
+      <input *ngIf="!loading" [value]="flushNok" class="form-control cal-tab nok" placeholder="0" disabled />
+      <span *ngIf="loading" class="form-control" style="
+          padding: 0px;
+          text-align: center;
+          background: #eee;
+          width: 104% !important;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        ">
+        <img src="assets/loader/loading_global_spinner.gif" class="loader-img" />
+      </span>
+    </div>
+    <div class="custom-col-5">
+      <span class="input-group-addon total-pist" style="width: 37%">
+        <b>Flush NA</b></span>
+      <input *ngIf="!loading" [value]="flushNA" class="form-control cal-tab na" placeholder="0" disabled />
+      <span *ngIf="loading" class="form-control" style="
+          padding: 0px;
+          text-align: center;
+          background: #eee;
+          width: 104% !important;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        ">
+        <img src="assets/loader/loading_global_spinner.gif" class="loader-img" />
+      </span>
+    </div>
+  </div>
+</div>
+
+<span>
+  <div class="row second-section" style="display: flex">
+    <div class="col-md-2 parameter">
+      <div class="q-full-height shop parameter-sec">
+        <h4 class="header-background">Parameter</h4>
+        <div class="q-card q-full-height dropdown-height" style="height: 95% !important">
+          <ul class="q-listbox" id="checkUL" *ngIf="auditId">
+            <li style="cursor: pointer; font-size: 12px" *ngFor="let para of parameterList"
+              (click)="onParameterSelect(para)" [class.selected]="para === selectedParameter">
+              <a style="color: black">{{ para.Type }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2 Area">
+      <div class="q-full-height shop parameter-sec">
+        <h4 class="header-background">Area</h4>
+        <div class="q-card q-full-height q-scroll dropdown-height" style="height: 95% !important">
+          <ul class="q-listbox" id="checkUL">
+            <li style="cursor: pointer; font-size: 12px" *ngFor="let area of areaList" (click)="onAreaSelect(area)"
+              [class.selected]="area === selectedarea">
+              <a style="color: black">{{ area.Area_Name }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2 Part">
+      <div class="q-full-height shop">
+        <h4 class="header-background">Part</h4>
+        <div class="flex" style="border-bottom: 1px dotted black; display: flex">
+          <input type="text" class="form-control search-input" autocomplete="off" id="checksearchinput"
+            placeholder="Search Part" [(ngModel)]="searchPart" />
+        </div>
+        <div class="q-card q-full-height q-scroll dropdown-height">
+          <ul class="q-listbox" id="checkUL">
+            <li style="cursor: pointer; font-size: 12px" *ngFor="let part of partlist | search : searchPart"
+              [class.selected]="part === selectedPart" (click)="onSelectPart(part)">
+              <a style="color: black">{{ part.Part_Name }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2 Part">
+      <div class="q-full-height shop">
+        <h4 class="header-background">Check-Point</h4>
+        <div class="flex" style="border-bottom: 1px dotted black; display: flex">
+          <input type="text" class="form-control search-input" autocomplete="off" id="checksearchinput"
+            placeholder="Search Check-Point" [(ngModel)]="searchCheckpoint" />
+        </div>
+        <div class="q-card q-full-height q-scroll dropdown-height">
+          <ul class="q-listbox" id="checkUL">
+            <li style="cursor: pointer; font-size: 12px" *ngFor="let CP of cpList | search : searchCheckpoint"
+              [class.selected]="CP === selectedCP" (click)="onSelectCP(CP)">
+              <a style="color: black">{{ CP.Checkpoint_Name }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2 location">
+      <div class="q-full-height shop parameter-sec">
+        <h4 class="header-background">Location</h4>
+        <div class="flex" style="border-bottom: 1px dotted black; display: flex">
+          <input type="text" class="form-control search-input" autocomplete="off" id="checksearchinput"
+            placeholder="Search Location" [(ngModel)]="searchLocation" />
+        </div>
+        <div class="q-card q-full-height q-scroll dropdown-height">
+          <ul class="q-listbox" id="checkUL">
+            <li style="cursor: pointer; font-size: 12px" *ngFor="let Location of locationList | search : searchLocation"
+              [class.selected]="Location === selectedLocation" (click)="onSelectLocation(Location)">
+              <a style="color: black"> {{ Location.Location_Name }} </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <span class="img-upper">
+      <span>
+        <div class="col-md-7 specs" style="padding: 0px 1px !important">
+          <div class="q-full-height shop">
+            <h4 class="header-background">Specification</h4>
+            <div class="q-card q-full-height dropdown-height" style="height: 37px !important">
+              <ul class="q-listbox" id="checkUL">
+                <li style="cursor: pointer; font-size: 12px" *ngFor="let Specs of specsList"
+                  [class.selected]="Specs === selectedSpecs" (click)="onSelectSpecs(Specs)">
+                  <a style="color: black">{{ Specs.Specification_Name }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2 reading" style="padding: 0px 1px !important">
+          <div class="q-full-height shop">
+            <h4 class="header-background">Reading</h4>
+            <div class="flex">
+              <input #readingInput id="reading" type="number" class="form-control reading-input" autocomplete="off"
+                id="reading" placeholder="Reading" [(ngModel)]="reading" [class.outofrange]="isDefect"
+                (ngModelChange)="onReadingChange()" [disabled]="!this.selectedSpecs"
+                (keyup.Enter)="nextInput('enter')" />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 remark" style="padding: 0px 1px !important">
+          <div class="q-full-height shop">
+            <h4 class="header-background">Remark</h4>
+            <div class="flex">
+              <input type="text" class="form-control" autocomplete="off" id="remark" placeholder="Remark"
+                [(ngModel)]="remark" disabled />
+            </div>
+          </div>
+        </div>
+      </span>
+      <div class="col-md-12">
+        <span *ngIf="imagePath">
+          <img style="
+              width: 95%;
+              height: 245px;
+              margin: 10px 10px;
+              object-fit: contain;
+              background-color: #fff;
+            " [src]="'data:image/jpg;base64,' + imagePath" alt="" (click)="openDialog()" />
+        </span>
+      </div>
+    </span>
+    <div class="col-md-2 buttons">
+      <!-- <div class=" shop">
+          <h4 class="header-background">Pointer</h4>
+          <div class="flex">
+            <input
+              type="number"
+              class="form-control"
+              autocomplete="off"
+              id="remark"
+              placeholder="0"
+              [(ngModel)]="pointer"
+              disabled
+            />
+          </div>
+        </div> -->
+      <div class="shop" *ngIf="canCreate">
+        <span>
+          <button class="btn-forsave" type="button" (click)="onSave()">
+            <span *ngIf="!loading"> {{ isModify ? "Update" : "Save" }} </span>
+            <span *ngIf="loading">
+              <img src="assets/loader/loading_global_spinner.gif" class="loader-img" />
+            </span>
+          </button>
+          <button *ngIf="isModify" class="btn-forsave" (click)="onCancel()" style="background-color: red !important">
+            Cancel
+          </button>
+          <button *ngIf="!isModify" class="btn-forsave bg-na" type="btn" (click)="updateNA()">
+            <span *ngIf="!loading"> {{ "NA" }} </span>
+            <span *ngIf="loading">
+              <img src="assets/loader/loading_global_spinner.gif" class="loader-img" />
+            </span>
+          </button>
+          <button class="btn-forsave bg-refresh" type="btn" (click)="hardRefresh()">
+            <span> Refresh </span>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+</span>
+<div class="container">
+  <div class="modal fade" id="imageshow1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body" style="text-align: center">
+          <img src="data:image/png;base64,{{ imagePath }}" style="width: 100%; height: 100%; object-fit: contain" alt=""
+            (click)="openDialog()" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Table section -->
+
+<div class="row" style="margin-top: 20px">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-body defect-min-box">
+        <table id="shopmodeltable" class="display" width="100%"></table>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <div style="margin-top: 5px" *ngIf="loading">
+      <ngx-skeleton-loader [theme]="{ height: '40px' }" loadingText="Loading Data" appearance="line" count="4"
+        animation="pulse">
+      </ngx-skeleton-loader>
+    </div>
+  </div>
+</div>

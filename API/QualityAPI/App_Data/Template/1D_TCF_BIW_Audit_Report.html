@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>[AUDIT_TYPE] Audit Report</title>
+    <style>
+      /* Outlook-specific CSS reset */
+      table,
+      td,
+      div,
+      h1,
+      h2,
+      h3,
+      p {
+        font-family: Arial, sans-serif;
+      }
+
+      /* Responsive design for modern email clients */
+      @media only screen and (min-width: 600px) {
+        .email-container {
+          width: 100% !important;
+          max-width: 100% !important;
+          min-width: 600px !important;
+        }
+      }
+
+      /* Outlook-specific styles */
+      .outlook-fallback {
+        mso-table-lspace: 0pt;
+        mso-table-rspace: 0pt;
+      }
+    </style>
+    <!--[if mso]>
+      <style>
+        table,
+        td,
+        div,
+        h1,
+        h2,
+        h3,
+        p,
+        span {
+          font-family: Arial, sans-serif !important;
+        }
+        .email-container {
+          width: 100% !important;
+        }
+      </style>
+    <![endif]-->
+  </head>
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    "
+  >
+    <!-- Email Container -->
+    <table
+      role="presentation"
+      cellspacing="0"
+      cellpadding="0"
+      border="0"
+      width="100%"
+      style="background-color: #f5f5f5"
+      class="outlook-fallback"
+    >
+      <tr>
+        <td align="center" style="padding: 20px 0">
+          <!--[if mso]>
+                <table align="center" cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%;">
+                <tr><td align="center" bgcolor="#ffffff" style="background-color: #ffffff; padding: 0;">
+                <![endif]-->
+          <!-- Email Content -->
+          <table
+            role="presentation"
+            cellspacing="0"
+            cellpadding="0"
+            border="0"
+            width="100%"
+            class="email-container"
+            style="
+              width: 100%;
+              max-width: 100%;
+              margin: 0 auto;
+              background-color: #ffffff;
+              border-radius: 8px;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            "
+            class="outlook-fallback"
+          >
+            <!-- Header -->
+            <tr>
+              <td
+                bgcolor="#10b981"
+                style="
+                  background-color: #10b981;
+                  padding: 30px;
+                  text-align: center;
+                "
+              >
+                <!--[if mso]>
+                            <table align="center" cellspacing="0" cellpadding="0" border="0" width="100%">
+                            <tr><td align="center" style="padding: 0;">
+                            <![endif]-->
+                <table
+                  role="presentation"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  width="100%"
+                  style="margin: 0 auto"
+                >
+                  <tr>
+                    <td align="center" style="padding: 0">
+                      <table
+                        role="presentation"
+                        cellspacing="0"
+                        cellpadding="0"
+                        border="0"
+                      >
+                        <tr>
+                          <td
+                            align="center"
+                            style="padding: 0 15px 0 0; vertical-align: middle"
+                          >
+                            <div
+                              style="
+                                color: white;
+                                width: 37px;
+                                height: 37px;
+                                border: 2px solid #fff;
+                                border-radius: 50%;
+                                text-align: center;
+                                line-height: 36px;
+                                font-weight: bold;
+                                font-size: 20px;
+                                font-family: Arial, sans-serif;
+                              "
+                            >
+                              ✓
+                            </div>
+                          </td>
+                          <td align="left" style="vertical-align: middle">
+                            <h1
+                              style="
+                                color: #ffffff;
+                                margin: 0;
+                                font-size: 24px;
+                                font-weight: bold;
+                                font-family: Arial, sans-serif;
+                              "
+                            >
+                              [AUDIT_TYPE] Audit Report
+                            </h1>
+                            <p
+                              style="
+                                color: #ffffff;
+                                margin: 5px 0 0 0;
+                                font-size: 14px;
+                                font-family: Arial, sans-serif;
+                                opacity: 0.9;
+                              "
+                            >
+                              Audit Report Summary
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+                <!--[if mso]>
+                            </td></tr></table>
+                            <![endif]-->
+              </td>
+            </tr>
+
+            <!-- Main Content -->
+            <tr>
+              <td style="padding: 30px">
+                <!-- Greeting -->
+                <div style="margin-bottom: 25px">
+                  <h2
+                    style="
+                      color: #1f2937;
+                      margin: 0 0 10px 0;
+                      font-size: 20px;
+                      font-weight: 600;
+                      font-family: Arial, sans-serif;
+                    "
+                  >
+                    Dear Team,
+                  </h2>
+                  <p
+                    style="
+                      color: #6b7280;
+                      margin: 0;
+                      font-size: 14px;
+                      line-height: 1.5;
+                      font-family: Arial, sans-serif;
+                    "
+                  >
+                    The [AUDIT_TYPE] audit has been successfully completed.
+                    Please find the summary below.
+                  </p>
+                </div>
+
+                <!-- 1. Audit Summary -->
+                <div
+                  style="
+                    background-color: #f9fafb;
+                    border: 1px solid #e5e7eb;
+                    border-radius: 8px;
+                    padding: 20px;
+                    margin-bottom: 25px;
+                  "
+                >
+                  <h3
+                    style="
+                      color: #1f2937;
+                      margin: 0 0 15px 0;
+                      font-size: 16px;
+                      font-weight: 600;
+                      border-bottom: 2px solid #10b981;
+                      padding-bottom: 8px;
+                      font-family: Arial, sans-serif;
+                    "
+                  >
+                    Audit Summary
+                  </h3>
+
+                  <table
+                    role="presentation"
+                    cellspacing="0"
+                    cellpadding="0"
+                    border="0"
+                    width="100%"
+                  >
+                    <tr>
+                      <td
+                        style="padding: 8px 0; width: 40%; vertical-align: top"
+                      >
+                        <strong style="color: #374151; font-size: 13px"
+                          >VIN No / BIW No :</strong
+                        >
+                      </td>
+                      <td
+                        style="
+                          padding: 8px 0;
+                          color: #1f2937;
+                          font-size: 13px;
+                          font-weight: 600;
+                        "
+                      >
+                        [VIN_NO]
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        style="padding: 8px 0; width: 40%; vertical-align: top"
+                      >
+                        <strong style="color: #374151; font-size: 13px"
+                          >Model:</strong
+                        >
+                      </td>
+                      <td
+                        style="padding: 8px 0; color: #1f2937; font-size: 13px"
+                      >
+                        [MODEL]
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        style="padding: 8px 0; width: 40%; vertical-align: top"
+                      >
+                        <strong style="color: #374151; font-size: 13px"
+                          >Variant:</strong
+                        >
+                      </td>
+                      <td
+                        style="padding: 8px 0; color: #1f2937; font-size: 13px"
+                      >
+                        [VARIANT]
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        style="padding: 8px 0; width: 40%; vertical-align: top"
+                      >
+                        <strong style="color: #374151; font-size: 13px"
+                          >Audit Date:</strong
+                        >
+                      </td>
+                      <td
+                        style="padding: 8px 0; color: #1f2937; font-size: 13px"
+                      >
+                        [AUDIT_DATE]
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        style="padding: 8px 0; width: 40%; vertical-align: top"
+                      >
+                        <strong style="color: #374151; font-size: 13px"
+                          >Auditor Name:</strong
+                        >
+                      </td>
+                      <td
+                        style="padding: 8px 0; color: #1f2937; font-size: 13px"
+                      >
+                        [AUDITOR_NAME]
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        style="padding: 8px 0; width: 40%; vertical-align: top"
+                      >
+                        <strong style="color: #374151; font-size: 13px"
+                          >Total PIST:</strong
+                        >
+                      </td>
+                      <td
+                        style="padding: 8px 0; color: #1f2937; font-size: 13px"
+                      >
+                        [TOTAL_PIST]
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        style="padding: 8px 0; width: 40%; vertical-align: top"
+                      >
+                        <strong style="color: #374151; font-size: 13px"
+                          >Total Checked:</strong
+                        >
+                      </td>
+                      <td
+                        style="padding: 8px 0; color: #1f2937; font-size: 13px"
+                      >
+                        [TOTAL_CHECKED]
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        style="padding: 8px 0; width: 40%; vertical-align: top"
+                      >
+                        <strong style="color: #374151; font-size: 13px"
+                          >Total OK:</strong
+                        >
+                      </td>
+                      <td
+                        style="padding: 8px 0; color: #1f2937; font-size: 13px"
+                      >
+                        [TOTAL_OK]
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        style="padding: 8px 0; width: 40%; vertical-align: top"
+                      >
+                        <strong style="color: #374151; font-size: 13px"
+                          >Total NOK:</strong
+                        >
+                      </td>
+                      <td
+                        style="padding: 8px 0; color: #1f2937; font-size: 13px"
+                      >
+                        [TOTAL_NOK]
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        style="padding: 8px 0; width: 40%; vertical-align: top"
+                      >
+                        <strong style="color: #374151; font-size: 13px"
+                          >Total_NA:</strong
+                        >
+                      </td>
+                      <td
+                        style="padding: 8px 0; color: #1f2937; font-size: 13px"
+                      >
+                        [TOTAL_NA]
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+
+                <!-- 2. Concern Details -->
+                <div
+                  style="
+                    background-color: #f9fafb;
+                    border: 1px solid #6b7280;
+                    border-radius: 8px;
+                    padding: 20px;
+                    margin-bottom: 25px;
+                  "
+                >
+                  <h3
+                    style="
+                      color: #1f2937;
+                      margin: 0 0 15px 0;
+                      font-size: 16px;
+                      font-weight: 600;
+                      font-family: Arial, sans-serif;
+                    "
+                  >
+                    Concern Details
+                  </h3>
+                  <table
+                    role="presentation"
+                    cellspacing="0"
+                    cellpadding="8"
+                    border="0"
+                    width="100%"
+                    style="
+                      border-collapse: collapse;
+                      background-color: #ffffff;
+                      border-radius: 6px;
+                    "
+                  >
+                    <!-- Section Header -->
+                    <tr style="background-color: #3b82f6">
+                      <td
+                        colspan="7"
+                        style="
+                          padding: 8px;
+                          color: #ffffff;
+                          font-size: 10px;
+                          font-weight: 600;
+                          border: 1px solid #3b82f6;
+                          text-align: center;
+                        "
+                      >
+                        Current Audit Data
+                      </td>
+                      <td
+                        colspan="5"
+                        style="
+                          padding: 8px;
+                          color: #ffffff;
+                          font-size: 10px;
+                          font-weight: 600;
+                          border: 1px solid #3b82f6;
+                          text-align: center;
+                        "
+                      >
+                        Last 5 Audits Data
+                      </td>
+                    </tr>
+
+                    <!-- Column Headers -->
+                    <tr style="background-color: #60a5fa">
+                      <td
+                        style="
+                          padding: 10px 8px;
+                          color: #ffffff;
+                          font-size: 10px;
+                          font-weight: 600;
+                          border: 1px solid #60a5fa;
+                        "
+                      >
+                        Type
+                      </td>
+                      <td
+                        style="
+                          padding: 10px 8px;
+                          color: #ffffff;
+                          font-size: 10px;
+                          font-weight: 600;
+                          border: 1px solid #60a5fa;
+                        "
+                      >
+                        Part
+                      </td>
+                      <td
+                        style="
+                          padding: 10px 8px;
+                          color: #ffffff;
+                          font-size: 10px;
+                          font-weight: 600;
+                          border: 1px solid #60a5fa;
+                        "
+                      >
+                        Checkpoint
+                      </td>
+                      <td
+                        style="
+                          padding: 10px 8px;
+                          color: #ffffff;
+                          font-size: 10px;
+                          font-weight: 600;
+                          border: 1px solid #60a5fa;
+                        "
+                      >
+                        Location
+                      </td>
+                      <td
+                        style="
+                          padding: 10px 8px;
+                          color: #ffffff;
+                          font-size: 10px;
+                          font-weight: 600;
+                          border: 1px solid #60a5fa;
+                        "
+                      >
+                        Specification
+                      </td>
+                      <td
+                        style="
+                          padding: 10px 8px;
+                          color: #ffffff;
+                          font-size: 10px;
+                          font-weight: 600;
+                          border: 1px solid #60a5fa;
+                        "
+                      >
+                        Reading
+                      </td>
+                      <td
+                        style="
+                          padding: 10px 8px;
+                          color: #ffffff;
+                          font-size: 10px;
+                          font-weight: 600;
+                          border: 1px solid #60a5fa;
+                        "
+                      >
+                        Remark
+                      </td>
+                      <td style="
+                          padding: 10px 8px;
+                          color: #ffffff;
+                          font-size: 10px;
+                          font-weight: 600;
+                          border: 1px solid #60a5fa;
+                        ">
+                          [READING_DATE1]
+                      </td>
+                      <td style="
+                          padding: 10px 8px;
+                          color: #ffffff;
+                          font-size: 10px;
+                          font-weight: 600;
+                          border: 1px solid #60a5fa;
+                        ">
+                          [READING_DATE2]
+                      </td>
+                      <td style="
+                          padding: 10px 8px;
+                          color: #ffffff;
+                          font-size: 10px;
+                          font-weight: 600;
+                          border: 1px solid #60a5fa;
+                        ">
+                          [READING_DATE3]
+                      </td>
+                      <td style="
+                          padding: 10px 8px;
+                          color: #ffffff;
+                          font-size: 10px;
+                          font-weight: 600;
+                          border: 1px solid #60a5fa;
+                        ">
+                          [READING_DATE4]
+                      </td>
+                      <td style="
+                          padding: 10px 8px;
+                          color: #ffffff;
+                          font-size: 10px;
+                          font-weight: 600;
+                          border: 1px solid #60a5fa;
+                        ">
+                          [READING_DATE5]
+                      </td>
+                    </tr>
+
+                    <!-- Dynamic Rows -->
+                    [CONCERN_ROWS]
+                  </table>
+                </div>
+
+                <!-- CTA Button -->
+                <div style="text-align: center; margin-bottom: 25px">
+                  <a
+                    href="[REPORT_URL]"
+                    target="_blank"
+                    style="
+                      background-color: #10b981;
+                      color: #ffffff;
+                      text-decoration: none;
+                      padding: 14px 30px;
+                      border-radius: 6px;
+                      font-weight: 600;
+                      font-size: 14px;
+                      display: inline-block;
+                      box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+                    "
+                  >
+                    View Detailed Report
+                  </a>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+              <td
+                style="
+                  background-color: #f9fafb;
+                  padding: 20px;
+                  text-align: center;
+                  border-radius: 0 0 8px 8px;
+                  border-top: 1px solid #e5e7eb;
+                "
+              >
+                <p style="color: #6b7280; margin: 0 0 5px 0; font-size: 12px">
+                  This is an automated notification from the [AUDIT_TYPE] Audit
+                  System
+                </p>
+                <p style="color: #9ca3af; margin: 0; font-size: 11px">
+                  © 2026 Mahindra & Mahindra Ltd. All rights reserved.
+                </p>
+                <p style="color: #9ca3af; margin: 5px 0 0 0; font-size: 11px">
+                  Plant: [PLANT_NAME] | Generated on: [GENERATED_DATE]
+                </p>
+              </td>
+            </tr>
+          </table>
+          <!--[if mso]>
+                </td></tr></table>
+                <![endif]-->
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
