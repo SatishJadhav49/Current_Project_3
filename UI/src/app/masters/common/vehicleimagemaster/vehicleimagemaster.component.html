@@ -1,136 +1,331 @@
-<div class="vehicle-map-layout master-headings">
+<div class="row">
+  <div class="master-headings q-strip" id="btn-add">Vehicle Image Master</div>
 
-      <!-- Image + markers -->
-      <div class="vehicle-image-card">
-
-        <!-- Empty state -->
-        <div *ngIf="!data.imageDataUrl" class="vehicle-empty-state">
-          <div class="empty-state-icon">&#128444;</div>
-          <p class="empty-state-text">Upload any image to start marking parts</p>
-          <label class="choose-image-button">
-            Choose Image
-            <input type="file" accept="image/*" class="hidden" (change)="onFileSelected($event)" />
-          </label>
-        </div>
-
-        <!-- Image with click-to-mark overlay -->
-        <div *ngIf="data.imageDataUrl" class="image-marking-area" (click)="onImageClick($event)">
-          <img [src]="data.imageDataUrl" alt="Defect map" class="defect-map-image" draggable="false" />
-
-          <!-- Existing part markers -->
-          <div *ngFor="let p of data.parts; let i = index"
-               class="part-marker group"
-               [style.left.%]="p.x" [style.top.%]="p.y">
-            <button (click)="selectPart(p, $event)" title="Open part details"
-                    class="part-marker-button"
-                    [class.marker-selected]="selectedPart?.id === p.id"
-                    [style.background]="colorOf(i)">
-              {{ p.defects.length }}
-            </button>
-            <div class="part-marker-label"
-                 [style.background]="colorOf(i)">
-              {{ p.name }}
-            </div>
-
-            <!-- Hover tooltip: defect list at the marked location -->
-            <div *ngIf="p.defects.length"
-                 class="part-marker-tooltip">
-              <div class="tooltip-title">{{ p.name }} &middot; {{ p.defects.length }} defect(s)</div>
-              <ul class="tooltip-list">
-                <li *ngFor="let d of p.defects" class="tooltip-item">&bull; {{ d }}</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Pending marker: name input at the clicked spot -->
-          <div *ngIf="pending" class="pending-marker"
-               [style.left.%]="pending.x" [style.top.%]="pending.y">
-            <span class="pending-dot"></span>
-            <div class="pending-editor"
-                 (click)="$event.stopPropagation()">
-              <input #pendingInput [(ngModel)]="pendingName" maxlength="40"
-                     (keyup.enter)="confirmPending()" (keyup.escape)="cancelPending()"
-                     placeholder="Part name, e.g. RH Door"
-                     class="pending-input" />
-              <button (click)="confirmPending()" title="Add part"
-                      class="pending-confirm">&#10003;</button>
-              <button (click)="cancelPending()" title="Cancel"
-                      class="pending-cancel">&#10005;</button>
-            </div>
-          </div>
-        </div>
+  <div class="container" style="margin-top: 15px">
+    <!-- ******************** Filter Section Start ( Shop / Model ) ******************** -->
+    <div class="vi-filter-bar">
+      <div class="vi-filter-item">
+        <mat-form-field appearance="fill">
+          <mat-label>Shop</mat-label>
+          <mat-select
+            [(ngModel)]="selectedShop"
+            (selectionChange)="selectShop($event.value)"
+          >
+            <mat-option *ngFor="let s of shoplist" [value]="s">
+              {{ s.Shop_Name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
 
-      <!-- Side panel -->
-      <div class="vehicle-side-panel">
+      <div class="vi-filter-item">
+        <mat-form-field appearance="fill">
+          <mat-label>Model</mat-label>
+          <mat-select
+            [(ngModel)]="selectedmodel"
+            (selectionChange)="selectModel($event.value)"
+          >
+            <mat-option *ngFor="let m of modelList" [value]="m">
+              {{ m.Model_Code }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-        <!-- Report title -->
-        <div class="report-title-panel">
-          <label class="field-label">Report Title</label>
-          <input [(ngModel)]="titleText" (keyup.enter)="updateTitle()" (blur)="updateTitle()" maxlength="80"
-                 class="report-title-input" />
+      <div class="vi-filter-btns">
+        <a (click)="refresh()" class="btn-forsave bg-refresh" type="btn">
+          <span> Refresh </span>
+        </a>
+        <a (click)="exit()" class="btn-forsave bg-exit" type="btn">
+          <span> Exit </span>
+        </a>
+      </div>
+    </div>
+    <!-- ******************** Filter Section End ******************** -->
+
+    <!-- ******************** Uploaded Images Section Start ******************** -->
+    <div *ngIf="selectedmodel" class="vi-card">
+      <h4 class="header-background">
+        Vehicle Images of {{ selectedmodel.Model_Code }}
+        <span class="vi-head-count">{{ modelImageList.length }}</span>
+      </h4>
+
+      <div class="vi-strip q-scroll">
+        <div
+          *ngFor="let img of modelImageList"
+          class="vi-thumb"
+          [ngClass]="{ selected: isCurrentImage(img) }"
+          (click)="selectImage(img)"
+          title="{{ img.Image_Name }}"
+        >
+          <img [src]="img.FileUrl" alt="{{ img.Image_Name }}" />
+          <span class="vi-thumb-name">{{ img.Image_Name }}</span>
         </div>
 
-        <!-- Selected part editor -->
-        <div *ngIf="selectedPart" class="selected-part-panel">
-          <div class="selected-part-header" [style.background]="colorOf(indexOfPart(selectedPart))">
-            <input [(ngModel)]="selectedPart.name" (change)="renameSelected()" maxlength="40"
-                   class="selected-part-name" />
-            <button (click)="closePanel()" title="Close"
-                    class="close-panel-button">&#10005;</button>
-          </div>
-
-          <div class="selected-part-content">
-            <div class="section-label">
-              Defects ({{ selectedPart.defects.length }}/{{ MAX_DEFECTS_PER_PART }})
-            </div>
-            <ul class="defect-list">
-              <li *ngFor="let d of selectedPart.defects; let j = index"
-                  class="defect-item">
-                <span class="defect-text">{{ d }}</span>
-                <button (click)="removeDefect(j)" title="Remove defect"
-                        class="remove-defect-button">&#10005;</button>
-              </li>
-              <li *ngIf="!selectedPart.defects.length" class="no-defects">No defects yet</li>
-            </ul>
-            <div class="defect-entry">
-              <input [(ngModel)]="newDefectText" (keyup.enter)="addDefect()" maxlength="80"
-                     [disabled]="selectedPart.defects.length >= MAX_DEFECTS_PER_PART"
-                     placeholder="Add defect..."
-                     class="new-defect-input" />
-              <button (click)="addDefect()"
-                      [disabled]="selectedPart.defects.length >= MAX_DEFECTS_PER_PART"
-                      class="add-defect-button">+</button>
-            </div>
-            <button (click)="removePart(selectedPart)"
-                    class="delete-part-button">
-              Delete this part
-            </button>
-          </div>
+        <div
+          *ngIf="canCreate"
+          class="vi-thumb vi-add-tile"
+          [ngClass]="{ selected: uploadMode }"
+          (click)="newImage()"
+          title="Upload new vehicle image"
+        >
+          <span class="vi-add-icon">+</span>
+          <span class="vi-thumb-name">Upload New</span>
         </div>
 
-        <!-- Parts list (when nothing selected) -->
-        <div *ngIf="!selectedPart" class="parts-list-panel">
-          <div class="section-label">
-            Marked Parts ({{ data.parts.length }}/{{ MAX_PARTS }})
-          </div>
-          <ul *ngIf="data.parts.length" class="parts-list">
-            <li *ngFor="let p of data.parts; let i = index">
-              <button (click)="selectPart(p)"
-                      class="part-list-button">
-                <span class="part-list-name">
-                  <span class="part-list-color" [style.background]="colorOf(i)"></span>
-                  <span class="part-list-label">{{ p.name }}</span>
-                </span>
-                <span class="defect-count">
-                  {{ p.defects.length }} defect{{ p.defects.length === 1 ? '' : 's' }}
-                </span>
-              </button>
-            </li>
-          </ul>
-          <p *ngIf="!data.parts.length" class="no-parts">
-            No parts marked yet &mdash; click anywhere on the image to add one.
-          </p>
+        <div *ngIf="!modelImageList.length && !canCreate" class="vi-muted">
+          No image uploaded for this model.
         </div>
       </div>
     </div>
+    <!-- ******************** Uploaded Images Section End ******************** -->
+
+    <!-- ******************** Upload Section Start ******************** -->
+    <div *ngIf="uploadMode" class="vi-card">
+      <h4 class="header-background">Upload New Vehicle Image</h4>
+
+      <div class="vi-upload-body">
+        <div class="vi-upload-fields">
+          <div class="form-group form-animate-text">
+            <input
+              type="text"
+              class="form-text"
+              title="Please enter Image name"
+              required
+              [(ngModel)]="imagename"
+              [ngModelOptions]="{ standalone: true }"
+            />
+            <span class="bar"></span>
+            <label>Image Name</label>
+          </div>
+
+          <button class="vi-choose-btn" (click)="compressFile()">
+            Choose Image
+          </button>
+          <span class="vi-error">{{ errorMessage }}</span>
+
+          <div class="vi-upload-btns">
+            <button class="btn-forsave" type="button" (click)="saveImage()">
+              <span> Save </span>
+            </button>
+            <a (click)="cancelUpload()" class="btn-forsave bg-exit" type="btn">
+              <span> Cancel </span>
+            </a>
+          </div>
+        </div>
+
+        <div class="vi-upload-preview">
+          <img *ngIf="imageDataUrl && !uploadingImage" [src]="imageDataUrl" />
+          <div *ngIf="uploadingImage" class="vi-muted">Uploading image ...</div>
+          <div *ngIf="!imageDataUrl && !uploadingImage" class="vi-muted">
+            <span class="vi-drop-icon">&#128247;</span>
+            Choose a vehicle image to see the preview
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ******************** Upload Section End ******************** -->
+
+    <!-- ******************** Mapping Section Start ******************** -->
+    <div *ngIf="selectedImage && !uploadMode" class="vi-workspace">
+      <!-- Image with click to map -->
+      <div class="vi-card vi-canvas">
+        <h4 class="header-background">
+          {{ selectedImage.Image_Name }}
+          <span class="vi-head-note">Click on the image to map a location</span>
+        </h4>
+
+        <div class="vi-canvas-body">
+          <div class="vi-image-area" (click)="onImageClick($event)">
+            <img
+              [src]="selectedImage.FileUrl"
+              class="vi-image"
+              alt="{{ selectedImage.Image_Name }}"
+              draggable="false"
+            />
+
+            <!-- Already mapped locations -->
+            <div
+              *ngFor="let map of filteredMappings; let i = index"
+              class="vi-pin vi-marker"
+              [style.left.%]="map.X_Coordinate"
+              [style.top.%]="map.Y_Coordinate"
+            >
+              <button
+                class="vi-marker-btn"
+                [ngClass]="{ 'vi-marker-active': isCurrentMapping(map) }"
+                [style.background]="colorOf(map)"
+                (click)="selectMapping(map, $event)"
+                title="{{ map.Location_Name }}"
+              >
+                {{ i + 1 }}
+              </button>
+
+              <span class="vi-marker-label" [style.background]="colorOf(map)">
+                {{ map.Location_Name }}
+              </span>
+
+              <div class="vi-marker-tip">
+                <div class="vi-tip-head" [style.color]="colorOf(map)">
+                  {{ map.Location_Name }}
+                </div>
+                <div><b>Check Point :</b> {{ map.Checkpoint_Name }}</div>
+                <div><b>Part :</b> {{ map.Part_Name }}</div>
+                <div><b>Area :</b> {{ map.Area_Name }}</div>
+                <div>
+                  <b>Co-ordinate :</b> {{ map.X_Coordinate }} % ,
+                  {{ map.Y_Coordinate }} %
+                </div>
+              </div>
+            </div>
+
+            <!-- New point , waiting for the location selection -->
+            <div
+              *ngIf="pending"
+              class="vi-pin vi-pin-top"
+              [style.left.%]="pending.x"
+              [style.top.%]="pending.y"
+            >
+              <span class="vi-pending-dot"></span>
+
+              <div class="vi-pending-box" (click)="$event.stopPropagation()">
+                <mat-form-field appearance="fill">
+                  <mat-label>Select Location</mat-label>
+                  <mat-select [(ngModel)]="selectedLocation">
+                    <mat-option
+                      *ngFor="let loc of unmappedLocations"
+                      [value]="loc"
+                    >
+                      {{ loc.Location_Name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <div class="vi-pending-btns">
+                  <button
+                    class="vi-mini-btn"
+                    (click)="saveMapping()"
+                    title="Save mapping"
+                  >
+                    &#10003;
+                  </button>
+                  <button
+                    class="vi-mini-btn vi-cancel-btn"
+                    (click)="cancelMapping()"
+                    title="Cancel"
+                  >
+                    &#10005;
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Area / Part / Check Point selection -->
+      <div class="vi-card vi-side-panel">
+        <h4 class="header-background">Mapping Details</h4>
+
+        <div class="vi-side-body">
+          <mat-form-field appearance="fill">
+            <mat-label>Area</mat-label>
+            <mat-select
+              [(ngModel)]="selectedArea"
+              (selectionChange)="selectArea($event.value)"
+            >
+              <mat-option *ngFor="let a of AreaList" [value]="a">
+                {{ a.Area_Name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Part</mat-label>
+            <mat-select
+              [(ngModel)]="selectedPart"
+              (selectionChange)="selectPart($event.value)"
+            >
+              <mat-option *ngFor="let p of partList" [value]="p">
+                {{ p.Part_Name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Check Point</mat-label>
+            <mat-select
+              [(ngModel)]="selectedCP"
+              (selectionChange)="selectCP($event.value)"
+            >
+              <mat-option *ngFor="let c of cpList" [value]="c">
+                {{ c.Checkpoint_Name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="vi-section-label">
+            <span>Mapped Locations</span>
+            <span class="vi-count-pill">{{ filteredMappings.length }}</span>
+          </div>
+
+          <ul class="vi-mapped-list q-scroll">
+            <li
+              *ngFor="let map of filteredMappings; let i = index"
+              class="vi-mapped-item"
+              [ngClass]="{ selected: isCurrentMapping(map) }"
+              (click)="selectMapping(map)"
+            >
+              <span class="vi-mapped-no" [style.background]="colorOf(map)">
+                {{ i + 1 }}
+              </span>
+              <span class="vi-mapped-name">
+                {{ map.Location_Name }}
+                <small>{{ map.Checkpoint_Name }}</small>
+              </span>
+              <span
+                class="btn fa fa-trash vi-del-btn"
+                title="Delete"
+                (click)="deleteMapping(map.Mapping_ID, $event)"
+              ></span>
+            </li>
+
+            <li *ngIf="!filteredMappings.length" class="vi-muted">
+              No location mapped yet.
+            </li>
+          </ul>
+
+          <div class="vi-hint">
+            Select <b>Area</b> , <b>Part</b> and <b>Check Point</b> , then click
+            on the vehicle image to map a location on that point.
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ******************** Mapping Section End ******************** -->
+  </div>
+
+  <!-- ******************** Table Section Start ******************** -->
+  <div class="row">
+    <div class="col-md-12" style="margin-top: 10px">
+      <div class="panel">
+        <div class="panel-body defect-min-box">
+          <table id="vehicleimagetable" class="display" width="100%"></table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div style="margin-top: 5px" *ngIf="loading">
+        <ngx-skeleton-loader
+          [theme]="{ height: '40px' }"
+          loadingText="Loading Data"
+          appearance="line"
+          count="4"
+          animation="pulse"
+        >
+        </ngx-skeleton-loader>
+      </div>
+    </div>
+  </div>
+  <!-- ******************** Table Section End ******************** -->
+</div>

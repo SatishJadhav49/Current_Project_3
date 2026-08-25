@@ -1,8 +1,637 @@
-:host{display:block;color:#334155}.master-headings{width:100%;font-weight:900;margin-top:36px!important}.vehicle-map-layout{display:flex;flex-direction:column;gap:16px}.vehicle-image-card,.report-title-panel,.selected-part-panel,.parts-list-panel{background:#fff;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 1px 2px #0f172a10}.vehicle-image-card{min-width:0;flex:1;padding:8px}.vehicle-empty-state{height:384px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;border:2px dashed #cbd5e1;border-radius:8px;color:#94a3b8}.empty-state-icon{font-size:36px}.empty-state-text,.no-parts{margin:0;font-size:14px;font-weight:500}.choose-image-button{cursor:pointer;border-radius:8px;background:#2563eb;padding:10px 20px;font-size:14px;font-weight:600;color:#fff}.choose-image-button:hover{background:#1d4ed8}.choose-image-button input{display:none}.image-marking-area{position:relative;cursor:crosshair;user-select:none}.defect-map-image{display:block;width:100%;border-radius:8px}.part-marker,.pending-marker{position:absolute;z-index:10;transform:translate(-50%,-50%)}.part-marker-button{display:flex;align-items:center;justify-content:center;width:28px;height:28px;margin:auto;cursor:pointer;border:2px solid #fff;border-radius:50%;color:#fff;font-size:12px;font-weight:700;box-shadow:0 4px 6px #0f172a33}.part-marker-button:hover{transform:scale(1.1)}.marker-selected{outline:2px solid currentColor;outline-offset:2px}.part-marker-label{position:absolute;top:32px;left:50%;transform:translateX(-50%);white-space:nowrap;border-radius:99px;padding:2px 10px;color:#fff;font-size:11px;font-weight:600;box-shadow:0 2px 4px #0f172a33}.part-marker-tooltip{visibility:hidden;pointer-events:none;position:absolute;z-index:20;bottom:36px;left:50%;width:224px;transform:translateX(-50%);border-radius:8px;background:#1e293b;padding:10px;box-shadow:0 10px 15px #0f172a40;text-align:left}.part-marker:hover .part-marker-tooltip{visibility:visible}.tooltip-title{margin-bottom:4px;color:#fff;font-size:11px;font-weight:700}.tooltip-list{margin:0;padding:0;list-style:none}.tooltip-item{color:#cbd5e1;font-size:10px}.pending-marker{z-index:30}.pending-dot{display:block;width:16px;height:16px;margin:auto;border:2px solid #fff;border-radius:50%;background:#ef4444;animation:pending-pulse 1.5s infinite}.pending-editor{display:flex;gap:4px;margin-top:6px;transform:translateX(calc(-50% + 8px));border:1px solid #e2e8f0;border-radius:8px;background:#fff;padding:6px;box-shadow:0 4px 6px #0f172a33}.pending-input{width:160px}.pending-input,.report-title-input,.new-defect-input{border:1px solid #cbd5e1;outline:0;padding:6px 8px;font-size:12px}.pending-input:focus,.report-title-input:focus,.new-defect-input:focus{border-color:#3b82f6}.pending-confirm,.pending-cancel,.add-defect-button{border:0;cursor:pointer;font-weight:700}.pending-confirm{background:#059669;color:#fff}.pending-cancel{background:#e2e8f0;color:#64748b}.pending-confirm,.pending-cancel{padding:0 8px;border-radius:4px}.vehicle-side-panel{width:100%;flex-shrink:0}.report-title-panel{margin-bottom:16px;padding:16px}.field-label,.section-label{display:block;margin-bottom:4px;color:#64748b;font-size:12px;font-weight:600}.report-title-input{width:100%;box-sizing:border-box;border-radius:8px;font-size:14px}.selected-part-header{display:flex;align-items:center;justify-content:space-between;border-radius:12px 12px 0 0;padding:12px 16px}.selected-part-name{width:100%;border:0;background:transparent;outline:0;color:#fff;font-size:14px;font-weight:700}.close-panel-button{margin-left:8px;border:0;background:transparent;cursor:pointer;color:#fffc}.selected-part-content,.parts-list-panel{padding:16px}.defect-list,.parts-list{margin:0 0 12px;padding:0;list-style:none;overflow-y:auto}.defect-list{max-height:256px}.defect-item{display:flex;align-items:center;justify-content:space-between;gap:8px;border-bottom:1px solid #f1f5f9;padding:6px 0;color:#475569;font-size:12px}.defect-item:last-child{border:0}.remove-defect-button{border:0;background:transparent;cursor:pointer;color:#cbd5e1}.remove-defect-button:hover,.delete-part-button:hover{color:#ef4444;background:#fef2f2}.no-defects{padding:6px 0;color:#94a3b8;font-size:12px;font-style:italic}.defect-entry{display:flex;gap:6px}.new-defect-input{width:100%;border-radius:4px}.add-defect-button{flex-shrink:0;border-radius:4px;background:#1e293b;padding:0 10px;color:#fff;font-size:12px}.add-defect-button:disabled{background:#cbd5e1}.delete-part-button{width:100%;margin-top:16px;border:1px solid #fecaca;border-radius:8px;background:#fff;padding:6px;cursor:pointer;color:#ef4444;font-size:12px;font-weight:600}.parts-list{max-height:384px}.part-list-button{display:flex;align-items:center;justify-content:space-between;width:100%;gap:8px;border:0;border-radius:8px;background:transparent;padding:8px;cursor:pointer;text-align:left}.part-list-button:hover{background:#f8fafc}.part-list-name{display:flex;min-width:0;align-items:center;gap:8px}.part-list-color{flex-shrink:0;width:12px;height:12px;border-radius:50%}.part-list-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#334155;font-size:12px;font-weight:600}.defect-count{flex-shrink:0;border-radius:99px;background:#f1f5f9;padding:2px 8px;color:#64748b;font-size:10px;font-weight:700}.no-parts{color:#94a3b8;font-style:italic}@keyframes pending-pulse{50%{opacity:.45;transform:scale(1.15)}}@media(min-width:768px){.vehicle-image-card{padding:16px}}@media(min-width:1024px){.vehicle-map-layout{flex-direction:row}.vehicle-side-panel{width:320px}}
-
-
+/* ******************** Common master styles ******************** */
 .master-headings {
   width: 100%;
   font-weight: 900;
   margin-top: 36px !important;
+}
+
+.q-strip {
+  background-color: black;
+  color: white;
+  margin-bottom: 0.3%;
+  box-shadow: 0 1px 0px rgba(0, 0, 0, 0.12), 3px 4px 1px rgba(66, 59, 59, 0.24);
+  border-radius: 4px !important;
+  text-align: center;
+  height: 28px;
+  font-size: 17.5px;
+  margin-top: -3.7%;
+}
+
+h4 {
+  position: relative;
+  width: 100%;
+  margin: 0px;
+  padding: 7px 12px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.header-background {
+  background-color: darkcyan !important;
+  color: white !important;
+  border-radius: 6px 6px 0px 0px;
+}
+
+/* small note / counter inside the card header */
+.vi-head-note {
+  margin-left: 10px;
+  opacity: 0.85;
+  font-size: 11px;
+  font-weight: normal;
+}
+
+.vi-head-count {
+  display: inline-block;
+  min-width: 20px;
+  margin-left: 8px;
+  padding: 0px 6px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.25);
+  font-size: 11px;
+}
+
+.btn-forsave {
+  width: 100% !important;
+  height: 30px !important;
+  padding: 6px 12px !important;
+  transition: background-color 0.15s ease;
+}
+
+mat-form-field {
+  width: 100%;
+  font-size: 13px;
+}
+
+.vi-muted {
+  padding: 14px;
+  color: #9aa2a2;
+  font-size: 12px;
+  font-style: italic;
+  text-align: center;
+}
+
+/* ******************** Filter bar ( Shop / Model ) ******************** */
+.vi-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding: 6px 12px 0px;
+  border: 1px solid #e3e8e8;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.14);
+}
+
+.vi-filter-item {
+  flex: 1 1 200px;
+  max-width: 260px;
+}
+
+.vi-filter-btns {
+  display: flex;
+  gap: 8px;
+  width: 200px;
+  margin: 0px 0px 14px auto;
+}
+
+/* ******************** Cards ******************** */
+.vi-card {
+  margin-bottom: 12px;
+  border: 1px solid #e3e8e8;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
+}
+
+/* ******************** Uploaded image strip ******************** */
+.vi-strip {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 12px;
+}
+
+.vi-thumb {
+  position: relative;
+  flex: 0 0 auto;
+  width: 118px;
+  padding: 5px;
+  border: 2px solid #e3e8e8;
+  border-radius: 6px;
+  background: #fafbfb;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+
+.vi-thumb:hover {
+  border-color: #0b9494;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
+  transform: translateY(-2px);
+}
+
+.vi-thumb.selected {
+  border-color: #0b9494;
+  background: #e9f6f6 !important;
+  box-shadow: 0 0 0 3px rgba(11, 148, 148, 0.18);
+}
+
+/* tick badge on the selected image */
+.vi-thumb.selected::after {
+  content: "\2713";
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #0b9494;
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 20px;
+}
+
+.vi-thumb img {
+  width: 100%;
+  height: 70px;
+  border-radius: 3px;
+  background: #fff;
+  object-fit: contain;
+}
+
+.vi-thumb-name {
+  display: block;
+  margin-top: 3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.vi-add-tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 102px;
+  border-style: dashed;
+  border-color: #b9cccc;
+  color: #0b9494;
+}
+
+/* colour is set here as well , because the global .selected class
+   forces its own colour on the tile when it is selected */
+.vi-add-icon {
+  color: #0b9494;
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 32px;
+}
+
+/* ******************** Upload panel ******************** */
+.vi-upload-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  padding: 12px 16px 18px;
+}
+
+.vi-upload-fields {
+  flex: 1 1 260px;
+}
+
+.vi-choose-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 7px;
+  border: none;
+  border-radius: 6px;
+  background-color: #1c84c6;
+  color: #fff;
+  font-weight: bold;
+  transition: background-color 0.15s ease;
+}
+
+.vi-choose-btn:hover {
+  background-color: #156a9f;
+}
+
+.vi-error {
+  display: block;
+  min-height: 16px;
+  color: red;
+  font-size: 12px;
+}
+
+.vi-upload-btns {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.vi-upload-preview {
+  flex: 1 1 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 170px;
+  padding: 8px;
+  border: 2px dashed #cfdada;
+  border-radius: 6px;
+  background: #fafbfb;
+}
+
+.vi-upload-preview img {
+  max-width: 100%;
+  max-height: 230px;
+  border-radius: 4px;
+  object-fit: contain;
+}
+
+.vi-drop-icon {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 26px;
+  font-style: normal;
+}
+
+/* ******************** Mapping work area ******************** */
+.vi-workspace {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.vi-canvas {
+  flex: 1 1 480px;
+  min-width: 0;
+}
+
+.vi-side-panel {
+  flex: 0 0 330px;
+}
+
+.vi-canvas-body {
+  padding: 12px;
+  border-radius: 0px 0px 6px 6px;
+  background: #f4f7f7;
+}
+
+/* the click area wraps the image exactly , so the % co-ordinates
+   always point to the same spot of the vehicle on any screen size */
+.vi-image-area {
+  position: relative;
+  display: block;
+  line-height: 0;
+  border-radius: 4px;
+  background: #fff;
+  cursor: crosshair;
+  user-select: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.14);
+}
+
+.vi-image {
+  display: block;
+  width: 100%;
+  border-radius: 4px;
+}
+
+/* ******************** Markers ******************** */
+.vi-pin {
+  position: absolute;
+  z-index: 10;
+  line-height: normal;
+  transform: translate(-50%, -50%);
+}
+
+.vi-pin-top {
+  z-index: 30;
+}
+
+.vi-marker-btn {
+  display: block;
+  width: 26px;
+  height: 26px;
+  margin: auto;
+  padding: 0px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.45);
+  transition: transform 0.12s ease;
+}
+
+.vi-marker-btn:hover {
+  transform: scale(1.18);
+}
+
+.vi-marker-active {
+  outline: 2px solid #333;
+  outline-offset: 2px;
+}
+
+.vi-marker-label {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  max-width: 130px;
+  overflow: hidden;
+  padding: 1px 8px;
+  transform: translateX(-50%);
+  border-radius: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+.vi-marker-tip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  z-index: 20;
+  bottom: 36px;
+  left: 50%;
+  width: 220px;
+  padding: 9px 11px;
+  transform: translateX(-50%);
+  border-radius: 6px;
+  background: #2b3333;
+  color: #e8eded;
+  font-size: 10.5px;
+  font-weight: normal;
+  line-height: 1.6;
+  text-align: left;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+  transition: opacity 0.15s ease;
+}
+
+/* tooltip arrow */
+.vi-marker-tip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -6px;
+  border: 6px solid transparent;
+  border-top-color: #2b3333;
+}
+
+.vi-pin:hover .vi-marker-tip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.vi-tip-head {
+  margin-bottom: 3px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 11.5px;
+  font-weight: bold;
+}
+
+/* new point waiting for the location */
+.vi-pending-dot {
+  display: block;
+  width: 14px;
+  height: 14px;
+  margin: auto;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #e11d48;
+  box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.55);
+  animation: vi-pulse 1.4s infinite;
+}
+
+@keyframes vi-pulse {
+  70% {
+    box-shadow: 0 0 0 12px rgba(225, 29, 72, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(225, 29, 72, 0);
+  }
+}
+
+.vi-pending-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 6px 10px 0px;
+  transform: translateX(-50%);
+  border: 1px solid #dde4e4;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+.vi-pending-box mat-form-field {
+  width: 190px;
+  font-size: 12px;
+}
+
+.vi-pending-btns {
+  display: flex;
+  gap: 5px;
+  padding-bottom: 20px;
+}
+
+.vi-mini-btn {
+  padding: 4px 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #0b9494;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.vi-mini-btn:hover {
+  opacity: 0.85;
+}
+
+.vi-cancel-btn {
+  background-color: tomato;
+}
+
+/* ******************** Side panel ******************** */
+.vi-side-body {
+  padding: 12px;
+}
+
+.vi-section-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 6px 0px 8px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #eceff0;
+  color: #5b6666;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.vi-count-pill {
+  min-width: 22px;
+  padding: 1px 7px;
+  border-radius: 10px;
+  background: #eef3f3;
+  color: #0b9494;
+  font-size: 11px;
+  text-align: center;
+}
+
+.vi-mapped-list {
+  max-height: 270px;
+  overflow-y: auto;
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+
+.vi-mapped-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 5px;
+  padding: 6px 8px;
+  border: 1px solid #eceff0;
+  border-left: 3px solid #dfe6e6;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.12s ease, border-color 0.12s ease;
+}
+
+.vi-mapped-item:hover {
+  background: #f6fafa;
+  border-left-color: #0b9494;
+}
+
+.vi-mapped-item.selected {
+  background: #e9f6f6 !important;
+  border-color: #bfe0e0;
+  border-left-color: #0b9494;
+}
+
+.vi-mapped-no {
+  flex: 0 0 auto;
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 21px;
+  text-align: center;
+}
+
+.vi-mapped-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.vi-mapped-name small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #8a9494;
+  font-size: 10px;
+  font-weight: normal;
+}
+
+.vi-del-btn {
+  flex: 0 0 auto;
+  border-radius: 50% !important;
+  background-color: #0b9494;
+  color: black !important;
+  opacity: 0.55;
+  transition: opacity 0.12s ease;
+}
+
+.vi-mapped-item:hover .vi-del-btn {
+  opacity: 1;
+}
+
+.vi-hint {
+  margin-top: 12px;
+  padding: 9px 11px;
+  border-left: 3px solid #0b9494;
+  border-radius: 3px;
+  background: #f4f8f8;
+  color: #5b6666;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+/* ******************** Responsive ******************** */
+@media (max-width: 992px) {
+  .container {
+    padding: 0px;
+  }
+  .vi-side-panel {
+    flex: 1 1 100%;
+  }
+  .vi-pending-box mat-form-field {
+    width: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .master-headings {
+    margin-top: 15px !important;
+  }
+  .vi-filter-item {
+    max-width: 100%;
+  }
+  .vi-filter-btns {
+    width: 100%;
+    margin-left: 0px;
+  }
+  .vi-head-note {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .container {
+    margin-top: 3px !important;
+  }
+  .vi-thumb {
+    width: 96px;
+  }
+  .vi-canvas-body {
+    padding: 6px;
+  }
+  .vi-marker-label {
+    display: none;
+  }
+  .vi-pending-box {
+    padding: 6px 6px 0px;
+  }
+  .vi-pending-box mat-form-field {
+    width: 120px;
+  }
+  h4 {
+    font-size: 12px;
+  }
 }
