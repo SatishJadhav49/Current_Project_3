@@ -627,6 +627,82 @@ export class CommonService {
     });
   }
   // ---------- Image end---------------------------//
+  // ---------- Vehicle Image Master Start---------------------------//
+
+  getVehicleImages(plantid, audittypeid, shopid: number, modelid: number) {
+    return this.apiRequest.get(
+      'api/MM_Vehicle_Image_Master/GetVehicleImages/' +
+      plantid +
+      ',' +
+      audittypeid +
+      ',' +
+      shopid +
+      ',' +
+      modelid
+    );
+  }
+
+  saveVehicleImage(fileToUpload: File, imagemodel: any): any {
+    const endpoint =
+      this.appConfig.baseApiPath + 'api/MM_Vehicle_Image_Master/ImageUpload';
+    const formData: FormData = new FormData();
+    formData.append('Image', fileToUpload, fileToUpload.name);
+    formData.append('imagemodel', JSON.stringify(imagemodel));
+    return this.http.post(endpoint, formData);
+  }
+
+  // keepmapping = true  -> mapped locations are kept ( co-ordinates are in % )
+  // keepmapping = false -> all the mapped locations of this image are removed
+  changeVehicleImage(
+    id: number,
+    keepmapping: boolean,
+    fileToUpload: File,
+    imagemodel: any
+  ): any {
+    const endpoint =
+      this.appConfig.baseApiPath +
+      'api/MM_Vehicle_Image_Master/ChangeImage/' +
+      id +
+      ',' +
+      keepmapping;
+    const formData: FormData = new FormData();
+    formData.append('Image', fileToUpload, fileToUpload.name);
+    formData.append('imagemodel', JSON.stringify(imagemodel));
+    return this.http.post(endpoint, formData);
+  }
+
+  deleteVehicleImage(id: number) {
+    return this.apiRequest.delete(
+      'api/MM_Vehicle_Image_Master/DeleteImage/' + id,
+      id
+    );
+  }
+
+  getVehicleImageMapping(plantid, audittypeid, vehicleimageid: number) {
+    return this.apiRequest.get(
+      'api/MM_Vehicle_Image_Master/GetMapping/' +
+      plantid +
+      ',' +
+      audittypeid +
+      ',' +
+      vehicleimageid
+    );
+  }
+
+  saveVehicleImageMapping(payload) {
+    return this.apiRequest.post(
+      'api/MM_Vehicle_Image_Master/SaveMapping',
+      payload
+    );
+  }
+
+  deleteVehicleImageMapping(id: number) {
+    return this.apiRequest.delete(
+      'api/MM_Vehicle_Image_Master/DeleteMapping/' + id,
+      id
+    );
+  }
+  // ---------- Vehicle Image Master End---------------------------//
   // ---------- Document Start---------------------------//
   getDocumentTableData() {
     return this.apiRequest.get(

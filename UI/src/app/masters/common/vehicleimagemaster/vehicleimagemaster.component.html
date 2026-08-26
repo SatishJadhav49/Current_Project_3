@@ -60,6 +60,13 @@
         >
           <img [src]="img.FileUrl" alt="{{ img.Image_Name }}" />
           <span class="vi-thumb-name">{{ img.Image_Name }}</span>
+          <span
+            *ngIf="img.Mapping_Count"
+            class="vi-thumb-count"
+            title="{{ img.Mapping_Count }} location(s) mapped"
+          >
+            {{ img.Mapping_Count }}
+          </span>
         </div>
 
         <div
@@ -134,6 +141,28 @@
           {{ selectedImage.Image_Name }}
           <span class="vi-head-note">Click on the image to map a location</span>
         </h4>
+
+        <div class="vi-canvas-tools">
+          <span class="vi-tool-info">
+            {{ imageMappings.length }} location(s) mapped on this image
+          </span>
+          <button
+            *ngIf="canUpdate"
+            class="vi-tool-btn"
+            (click)="changeImage()"
+            title="Replace this picture"
+          >
+            <i class="fa fa-picture-o"></i> Change Image
+          </button>
+          <button
+            *ngIf="canDelete"
+            class="vi-tool-btn vi-tool-danger"
+            (click)="deleteImage()"
+            title="Delete this image with all its mapped locations"
+          >
+            <i class="fa fa-trash"></i> Delete Image
+          </button>
+        </div>
 
         <div class="vi-canvas-body">
           <div class="vi-image-area" (click)="onImageClick($event)">

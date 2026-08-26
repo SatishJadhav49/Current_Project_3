@@ -1,0 +1,28 @@
+<div class="change-image-overlay">
+  <div class="change-image-content">
+    <div class="change-image-body">
+      <h4 class="change-image-title">Change Vehicle Image</h4>
+      <p class="change-image-message">
+        This image already has
+        <b>{{ data?.mappingCount }}</b> mapped location(s).
+        <br />
+        Do you want to keep them on the new image ?
+      </p>
+
+      <div class="change-image-note">
+        Co-ordinates are stored in percentage , so the mapped locations will
+        stay on the same spot of the new image.
+      </div>
+    </div>
+
+    <div class="change-image-actions">
+      <button mat-raised-button color="primary" (click)="keepMapping()">
+        Keep Mapping
+      </button>
+      <button mat-raised-button color="warn" (click)="removeMapping()">
+        Remove Mapping
+      </button>
+      <button mat-raised-button (click)="closePopup()">Cancel</button>
+    </div>
+  </div>
+</div>

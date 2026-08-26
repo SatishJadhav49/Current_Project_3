@@ -14,6 +14,7 @@ import {
   VehicleImageMapping,
 } from 'src/app/shared/models/vehicleimage.model';
 import { DeletePopupComponent } from 'src/app/shared/components/delete-popup/delete-popup.component';
+import { ChangeImagePopupComponent } from 'src/app/shared/components/change-image-popup/change-image-popup.component';
 import { CommonService } from '../common.service';
 declare var $: any;
 
@@ -34,6 +35,8 @@ export class VehicleimagemasterComponent {
   shopid: number;
   allshops: boolean;
   canCreate: boolean = true;
+  canUpdate: boolean = true;
+  canDelete: boolean = true;
   loading: boolean = true;
   modifyFlag: boolean = false;
 
@@ -88,16 +91,6 @@ export class VehicleimagemasterComponent {
     '#e11d48',
   ];
 
-  //****************** TEMP LOCAL STORE ( replace with API in next phase ) ******************//
-  // Both the lists below are kept in memory only. Once the API is ready,
-  // getVehicleImages() / saveImage() / saveMapping() / DeleteRecord() have to call
-  // the commonService methods exactly like the other masters are doing.
-  vehicleImageStore: VehicleImage[] = [];
-  mappingStore: VehicleImageMapping[] = [];
-  private tempImageID: number = 0;
-  private tempMappingID: number = 0;
-  //****************** TEMP LOCAL STORE End ******************//
-
   constructor(
     private commonService: CommonService,
     private toaster: ToastrService,
@@ -124,19 +117,36 @@ export class VehicleimagemasterComponent {
   ngAfterViewChecked() {
     this.commonService.getUserRights();
     this.canCreate = this.commonService.canCreate();
-    localStorage.setItem(
-      'canCreate',
-      this.commonService.canCreate() ? '1' : '0'
-    );
-    localStorage.setItem(
-      'canUpdate',
-      this.commonService.canUpdate() ? '1' : '0'
-    );
-    localStorage.setItem(
-      'canDelete',
-      this.commonService.canDelete() ? '1' : '0'
-    );
+    this.canUpdate = this.commonService.canUpdate();
+    this.canDelete = this.commonService.canDelete();
+    localStorage.setItem('canCreate', this.canCreate ? '1' : '0');
+    localStorage.setItem('canUpdate', this.canUpdate ? '1' : '0');
+    localStorage.setItem('canDelete', this.canDelete ? '1' : '0');
     this.cdref.detectChanges();
+  }
+
+  // common handler for every save / update / delete response ( ValidationModel )
+  private handleResponse(data: any, onSuccess: () => void) {
+    if (data === null || data === undefined || data === '') {
+      this.toaster.error('Unable to Connect to server !');
+      return;
+    }
+    if (data.IsSuccessAlert) {
+      this.toaster.success(data.IsMassege, data.IsTitle);
+      onSuccess();
+    } else if (data.IsErrorAlertDuplicate) {
+      this.toaster.warning(data.IsMassege, data.IsTitle);
+    } else if (
+      data.IsErrorAlertNotFound ||
+      data.IsErrorAlert ||
+      data.IsErrorAlertRef
+    ) {
+      this.toaster.error(data.IsMassege, data.IsTitle);
+    } else if (data.isExceptionMessage || data.isErrorMessage) {
+      this.toaster.error(data.IsMassege, data.IsTitle);
+    } else {
+      this.toaster.error('Something went wrong');
+    }
   }
   // ********************************** Declaration Section End *******************************//
 
@@ -211,22 +221,46 @@ export class VehicleimagemasterComponent {
   // ********************************** Model Section End *******************************//
 
   // ********************************** Vehicle Image Section Start *******************************//
-  // TEMP : reading from the local store. Replace with
-  // this.commonService.getVehicleImages(plantid,audittypeid,shopid,modelid).subscribe(...)
-  getVehicleImages() {
+  getVehicleImages(selectImageId?: number) {
     this.modelImageList = [];
-    if (!this.selectedmodel) {
+    if (!this.selectedShop || !this.selectedmodel) {
       return;
     }
-    this.modelImageList = this.vehicleImageStore.filter(
-      (img) =>
-        img.Model_ID == this.selectedmodel.Model_ID &&
-        img.Shop_ID == this.selectedShop.Shop_ID
-    );
-    this.modelImageList.forEach((img) => this.setImageUrl(img));
+    this.commonService
+      .getVehicleImages(
+        this.plantid,
+        this.audittypeid,
+        this.selectedShop.Shop_ID,
+        this.selectedmodel.Model_ID
+      )
+      .subscribe((data) => {
+        this.modelImageList = data ? data : [];
+        this.modelImageList.forEach((img) => this.setImageUrl(img));
+
+        // user has already opened the upload panel , do not pull him out of it
+        if (this.uploadMode) {
+          return;
+        }
+
+        // keep the same image selected after a save / change / reload
+        if (this.modelImageList.length) {
+          const keepId = selectImageId
+            ? selectImageId
+            : this.selectedImage
+            ? this.selectedImage.Vehicle_Image_ID
+            : null;
+          const temp = keepId
+            ? this.modelImageList.find((i) => i.Vehicle_Image_ID == keepId)
+            : null;
+          this.selectImage(temp ? temp : this.modelImageList[0]);
+        } else {
+          this.selectedImage = null;
+          this.getMappingData();
+        }
+      });
   }
 
-  // API sends the image as base64, the locally uploaded one is already a data url
+  // API sends the image as base64 , the locally selected one is already a data url
   setImageUrl(img: VehicleImage) {
     if (!img.FileContent) {
       img.FileUrl = null;
@@ -273,6 +307,39 @@ export class VehicleimagemasterComponent {
   cancelUpload() {
     this.uploadMode = false;
     this.refreshImage();
+    // come back to the image which was open before
+    this.getVehicleImages();
+  }
+
+  // opens the file browser and returns the compressed file
+  private pickAndCompress(filename: string): Promise<File> {
+    return new Promise<File>((resolve, reject) => {
+      this.imageCompress.uploadFile().then(
+        ({ image, orientation }) => {
+          // This function compress image as per given quality, max height and width and returns string (Bytes)
+          this.imageCompress
+            .compressFile(image, orientation, 70, 100)
+            .then((compressedImage) => {
+              // This convert Bytes image to file format
+              const imgFile = new File(
+                [this.convertDataUrlToBlob(compressedImage)],
+                filename,
+                { type: 'image/png' }
+              );
+              if (!imgFile) {
+                reject('Error while uploading image');
+                return;
+              }
+              if (imgFile.size > 3.5 * 1024 * 1024) {
+                reject('File size should be below 3.5 MB.');
+                return;
+              }
+              resolve(imgFile);
+            }, reject);
+        },
+        (err) => reject(err)
+      );
+    });
   }
 
   compressFile() {
@@ -281,46 +348,28 @@ export class VehicleimagemasterComponent {
       return;
     }
     this.uploadingImage = true;
-    // This callback function return image in DataUrl (String ) format
-    this.imageCompress.uploadFile().then(
-      ({ image, orientation }) => {
-        // This function compress image as per given quality, max height and width and returns string (Bytes)
-        this.imageCompress
-          .compressFile(image, orientation, 70, 100)
-          .then((compressedImage) => {
-            // This convert Bytes image to file format
-            const imgFile = new File(
-              [this.convertDataUrlToBlob(compressedImage)],
-              this.imagename,
-              { type: 'image/png' }
-            );
-            if (imgFile) {
-              this.ImageToUpload = imgFile;
-              if (this.ImageToUpload.size > 3.5 * 1024 * 1024) {
-                this.errorMessage = 'File size should be below 3.5 MB.';
-                this.ImageToUpload = null;
-                this.imageDataUrl = null;
-                this.uploadingImage = false;
-                $('input[type=file]').val(null);
-                return;
-              }
-              this.errorMessage = '';
-              const reader = new FileReader();
-              this.uploadingImage = false;
-              reader.onload = (e) => {
-                this.imageDataUrl = e.target.result as string;
-              };
-              reader.readAsDataURL(this.ImageToUpload);
-            } else {
-              this.uploadingImage = false;
-              this.toaster.error('Error while uploading image');
-            }
-          });
+    this.pickAndCompress(this.imagename).then(
+      (imgFile) => {
+        this.ImageToUpload = imgFile;
+        this.errorMessage = '';
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.imageDataUrl = e.target.result as string;
+          this.uploadingImage = false;
+        };
+        reader.readAsDataURL(imgFile);
       },
       (err) => {
         this.uploadingImage = false;
-        console.log(err);
-        this.toaster.error('Something went wrong , Please try later');
+        this.ImageToUpload = null;
+        this.imageDataUrl = null;
+        $('input[type=file]').val(null);
+        if (typeof err === 'string') {
+          this.errorMessage = err;
+        } else {
+          console.log(err);
+          this.toaster.error('Something went wrong , Please try later');
+        }
       }
     );
   }
@@ -339,8 +388,6 @@ export class VehicleimagemasterComponent {
     return new Blob([u8arr], { type: mime });
   }
 
-  // TEMP : pushing in the local store. Replace with
-  // this.commonService.saveVehicleImage(this.ImageToUpload,imageModel).subscribe(...)
   saveImage() {
     if (!this.selectedShop) {
       this.toaster.warning('Please select Shop .');
@@ -354,50 +401,137 @@ export class VehicleimagemasterComponent {
       this.toaster.error('Please Enter Image Name');
       return;
     }
-    if (!this.ImageToUpload || !this.imageDataUrl) {
+    if (!this.ImageToUpload) {
       this.toaster.error('Please Choose Image');
       return;
     }
-    const duplicate = this.vehicleImageStore.find(
-      (img) =>
-        img.Model_ID == this.selectedmodel.Model_ID &&
-        img.Shop_ID == this.selectedShop.Shop_ID &&
-        img.Image_Name.toLowerCase() == this.imagename.trim().toLowerCase()
-    );
-    if (duplicate) {
-      this.toaster.warning(
-        'Image Name is already used for : ' + this.selectedmodel.Model_Code,
-        'Duplicate Record'
-      );
-      return;
-    }
 
-    this.tempImageID = this.tempImageID + 1;
     const imageModel: VehicleImage = {
-      Vehicle_Image_ID: this.tempImageID,
       Image_Name: this.imagename.trim(),
-      FileContent: this.imageDataUrl,
-      FileName: this.ImageToUpload.name,
-      FileType: '.png',
-      ContentType: this.ImageToUpload.type,
       Shop_ID: this.selectedShop.Shop_ID,
       Model_ID: this.selectedmodel.Model_ID,
       Plant_ID: this.plantid,
       Audit_Type_Id: this.audittypeid,
-      Is_Active: true,
       Inserted_Host: this.hostname,
       Inserted_User_ID: this.userid,
-      Inserted_Date: new Date(),
-      Shop_Name: this.selectedShop.Shop_Name,
-      Model_Name: this.selectedmodel.Model_Code,
     };
-    this.vehicleImageStore.push(imageModel);
-    console.log('Vehicle image object :', imageModel);
-    this.toaster.success('Image saved successfully', 'Success');
-    this.uploadMode = false;
-    this.refreshImage();
-    this.getVehicleImages();
-    this.selectImage(imageModel);
+
+    this.commonService
+      .saveVehicleImage(this.ImageToUpload, imageModel)
+      .subscribe(
+        (data) => {
+          this.handleResponse(data, () => {
+            this.uploadMode = false;
+            this.refreshImage();
+            // newest image comes first from the API , so it gets selected
+            this.selectedImage = null;
+            this.getVehicleImages();
+          });
+        },
+        (err) => {
+          console.log(err);
+          this.toaster.error('Unable to Connect to server !');
+        }
+      );
+  }
+
+  // Change the picture of the selected image .
+  // The user decides whether the already mapped locations should stay or go.
+  changeImage() {
+    if (!this.selectedImage) {
+      this.toaster.warning('Please select Vehicle Image .');
+      return;
+    }
+    this.pickAndCompress(this.selectedImage.Image_Name).then(
+      (imgFile) => {
+        if (this.imageMappings.length) {
+          const dialogRef = this.dialog.open(ChangeImagePopupComponent, {
+            width: '420px',
+            enterAnimationDuration: '0ms',
+            exitAnimationDuration: '0ms',
+            data: { mappingCount: this.imageMappings.length },
+          });
+          dialogRef.afterClosed().subscribe((result) => {
+            if (result === 'keep' || result === 'remove') {
+              this.uploadChangedImage(imgFile, result === 'keep');
+            }
+          });
+        } else {
+          this.uploadChangedImage(imgFile, true);
+        }
+      },
+      (err) => {
+        if (typeof err === 'string') {
+          this.toaster.error(err);
+        } else {
+          console.log(err);
+          this.toaster.error('Something went wrong , Please try later');
+        }
+      }
+    );
+  }
+
+  private uploadChangedImage(imgFile: File, keepMapping: boolean) {
+    const imageModel: VehicleImage = {
+      Vehicle_Image_ID: this.selectedImage.Vehicle_Image_ID,
+      Image_Name: this.selectedImage.Image_Name,
+      Shop_ID: this.selectedImage.Shop_ID,
+      Model_ID: this.selectedImage.Model_ID,
+      Plant_ID: this.plantid,
+      Audit_Type_Id: this.audittypeid,
+      Updated_Host: this.hostname,
+      Updated_User_ID: this.userid,
+    };
+
+    const imageid = this.selectedImage.Vehicle_Image_ID;
+
+    this.commonService
+      .changeVehicleImage(imageid, keepMapping, imgFile, imageModel)
+      .subscribe(
+        (data) => {
+          this.handleResponse(data, () => {
+            this.pending = null;
+            this.selectedMapping = null;
+            this.getVehicleImages(imageid);
+          });
+        },
+        (err) => {
+          console.log(err);
+          this.toaster.error('Unable to Connect to server !');
+        }
+      );
+  }
+
+  // Deleting the image removes every location mapped on it as well
+  deleteImage() {
+    if (!this.selectedImage) {
+      this.toaster.warning('Please select Vehicle Image .');
+      return;
+    }
+    const imageid = this.selectedImage.Vehicle_Image_ID;
+    const dialogRef = this.dialog.open(DeletePopupComponent, {
+      width: '250px',
+      enterAnimationDuration: '0ms',
+      exitAnimationDuration: '0ms',
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.commonService.deleteVehicleImage(imageid).subscribe(
+          (data) => {
+            this.handleResponse(data, () => {
+              this.selectedImage = null;
+              this.pending = null;
+              this.selectedMapping = null;
+              this.getVehicleImages();
+            });
+          },
+          (err) => {
+            console.log(err);
+            this.toaster.error('Unable to Connect to server !');
+          }
+        );
+      }
+    });
   }
   // ********************************** Vehicle Image Section End *******************************//
 
@@ -547,8 +681,6 @@ export class VehicleimagemasterComponent {
     };
   }
 
-  // TEMP : pushing in the local store. Replace with
-  // this.commonService.saveVehicleImageMapping(mappingObj).subscribe(...)
   // the event is stopped here itself , because *ngIf removes this popup
   // as soon as pending becomes null and after that the click was reaching
   // the image and was creating one more point on the save / close button
@@ -563,21 +695,8 @@ export class VehicleimagemasterComponent {
       this.toaster.error('Please select Location');
       return;
     }
-    const duplicate = this.imageMappings.find(
-      (map) => map.Location_ID == this.selectedLocation.Location_ID
-    );
-    if (duplicate) {
-      this.toaster.warning(
-        'Location is already mapped on this image : ' +
-          this.selectedLocation.Location_Name,
-        'Duplicate Record'
-      );
-      return;
-    }
 
-    this.tempMappingID = this.tempMappingID + 1;
     const mappingObj: VehicleImageMapping = {
-      Mapping_ID: this.tempMappingID,
       Vehicle_Image_ID: this.selectedImage.Vehicle_Image_ID,
       Shop_ID: this.selectedShop.Shop_ID,
       Model_ID: this.selectedmodel.Model_ID,
@@ -589,24 +708,23 @@ export class VehicleimagemasterComponent {
       Y_Coordinate: this.pending.y,
       Plant_ID: this.plantid,
       Audit_Type_Id: this.audittypeid,
-      Is_Active: true,
       Inserted_Host: this.hostname,
       Inserted_User_ID: this.userid,
-      Inserted_Date: new Date(),
-      Area_Name: this.selectedArea.Area_Name,
-      Part_Name: this.selectedPart.Part_Name,
-      Checkpoint_Name: this.selectedCP.Checkpoint_Name,
-      Location_Name: this.selectedLocation.Location_Name,
     };
-    this.mappingStore.push(mappingObj);
-    console.log('Vehicle image mapping object :', mappingObj);
-    this.toaster.success(
-      this.selectedLocation.Location_Name + ' mapped successfully',
-      'Success'
+
+    this.commonService.saveVehicleImageMapping(mappingObj).subscribe(
+      (data) => {
+        this.handleResponse(data, () => {
+          this.pending = null;
+          this.selectedLocation = null;
+          this.getMappingData();
+        });
+      },
+      (err) => {
+        console.log(err);
+        this.toaster.error('Unable to Connect to server !');
+      }
     );
-    this.pending = null;
-    this.selectedLocation = null;
-    this.getMappingData();
   }
 
   cancelMapping(ev?: Event) {
@@ -633,17 +751,23 @@ export class VehicleimagemasterComponent {
     }
   }
 
-  // TEMP : removing from the local store. Replace with
-  // this.commonService.deleteVehicleImageMapping(id).subscribe(...)
   DeleteRecord() {
     if (this.selectedForDelete) {
-      this.mappingStore = this.mappingStore.filter(
-        (map) => map.Mapping_ID != this.selectedForDelete
-      );
-      this.selectedForDelete = null;
-      this.selectedMapping = null;
-      this.toaster.success('Record deleted successfully', 'Success');
-      this.getMappingData();
+      this.commonService
+        .deleteVehicleImageMapping(this.selectedForDelete)
+        .subscribe(
+          (data) => {
+            this.handleResponse(data, () => {
+              this.selectedForDelete = null;
+              this.selectedMapping = null;
+              this.getMappingData();
+            });
+          },
+          (err) => {
+            console.log(err);
+            this.toaster.error('Unable to Connect to server !');
+          }
+        );
     }
   }
 
@@ -670,19 +794,24 @@ export class VehicleimagemasterComponent {
   // ********************************** Mapping Section End *******************************//
 
   // ********************************** Table Section Start *******************************//
-  // TEMP : reading from the local store. Replace with
-  // this.commonService.getVehicleImageMapping(plantid,audittypeid,imageid).subscribe(...)
   getMappingData() {
     this.imageMappings = [];
     if (!this.selectedImage) {
       this.filteredMappings = [];
+      this.filterLocations();
       this.LoadTable([]);
       return;
     }
-    this.imageMappings = this.mappingStore.filter(
-      (map) => map.Vehicle_Image_ID == this.selectedImage.Vehicle_Image_ID
-    );
-    this.filterMappings();
+    this.commonService
+      .getVehicleImageMapping(
+        this.plantid,
+        this.audittypeid,
+        this.selectedImage.Vehicle_Image_ID
+      )
+      .subscribe((data) => {
+        this.imageMappings = data ? data : [];
+        this.filterMappings();
+      });
   }
 
   // markers are shown only for the selected Area / Part / Check Point

@@ -224,6 +224,7 @@
     <Compile Include="Controllers\Common Masters\MM_Shift_MasterController.cs" />
     <Compile Include="Controllers\Common Masters\MM_ShopController.cs" />
     <Compile Include="Controllers\Common Masters\MM_SpecificationMasterController.cs" />
+    <Compile Include="Controllers\Common Masters\MM_Vehicle_Image_MasterController.cs" />
     <Compile Include="Controllers\CommonAPIs\MasterAPISController.cs" />
     <Compile Include="Controllers\Reports\MIS_ReportController.cs" />
     <Compile Include="Controllers\Transactions\DigitalGapgun_AutoMailController.cs" />

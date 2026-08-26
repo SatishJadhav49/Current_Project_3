@@ -24,6 +24,7 @@ export class VehicleImage {
   public Updated_Date?: Date;
   public Shop_Name?: string;
   public Model_Name?: string;
+  public Mapping_Count?: number; // how many locations are mapped on this image
 }
 
 // MM_Vehicle_Image_Mapping
