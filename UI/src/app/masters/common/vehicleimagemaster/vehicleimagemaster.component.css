@@ -344,6 +344,14 @@ mat-form-field {
   background: #f4f7f7;
 }
 
+/* max-width is set from the component ( fixed height x aspect ratio of the picture ) ,
+   so the frame is never wider than the picture and the picture is never letterboxed */
+.vi-image-frame {
+  display: block;
+  width: 100%;
+  margin: 0px auto;
+}
+
 /* the click area wraps the image exactly , so the % co-ordinates
    always point to the same spot of the vehicle on any screen size */
 .vi-image-area {
@@ -360,6 +368,7 @@ mat-form-field {
 .vi-image {
   display: block;
   width: 100%;
+  height: auto;
   border-radius: 4px;
 }
 
@@ -371,6 +380,16 @@ mat-form-field {
   transform: translate(-50%, -50%);
 }
 
+/* Every marker is its own stacking context ( it is positioned and transformed ) ,
+   so the z-index given to the tooltip works only inside that marker. When two
+   points are very close , the tooltip of one was going behind the dot and the
+   name of the other one. Lifting the whole hovered marker fixes it , because
+   then its tooltip is painted above every other marker. */
+.vi-pin:hover {
+  z-index: 20;
+}
+
+/* the point which is waiting for the location stays above everything */
 .vi-pin-top {
   z-index: 30;
 }
@@ -383,10 +402,6 @@ mat-form-field {
   padding: 0px;
   border: 1px solid #fff;
   border-radius: 50%;
-  color: #fff;
-  font-size: 8px;
-  font-weight: bold;
-  line-height: 12px;
   cursor: pointer;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
   transition: transform 0.12s ease;

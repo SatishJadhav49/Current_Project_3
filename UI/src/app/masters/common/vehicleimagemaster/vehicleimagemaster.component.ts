@@ -1,4 +1,9 @@
-import { ChangeDetectorRef, Component, NgZone } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  HostListener,
+  NgZone,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -259,6 +264,41 @@ export class VehicleimagemasterComponent {
         }
       });
   }
+
+  // ******************** Image display size ********************//
+  // The image is shown in a fixed height box so that a tall photo does not make
+  // the page scroll. The box is limited by WIDTH ( height x aspect ratio ) and not
+  // by height , because the marker co-ordinates are % of the image box : if the box
+  // were bigger than the picture the image would sit letterboxed inside it and every
+  // marker would shift. Limiting the width keeps the box exactly equal to the picture.
+  imageMaxWidth: string = 'none';
+  private imageRatio: number = 0;
+
+  onImageLoad(ev: Event) {
+    const img = ev.target as HTMLImageElement;
+    if (img && img.naturalHeight > 0) {
+      this.imageRatio = img.naturalWidth / img.naturalHeight;
+    }
+    this.setImageBox();
+  }
+
+  @HostListener('window:resize')
+  setImageBox() {
+    if (!this.imageRatio) {
+      this.imageMaxWidth = 'none';
+      return;
+    }
+    // 58% of the screen height , keeps the whole master visible on a laptop
+    let maxheight = Math.round(window.innerHeight * 0.58);
+    if (maxheight < 260) {
+      maxheight = 260;
+    }
+    if (maxheight > 620) {
+      maxheight = 620;
+    }
+    this.imageMaxWidth = Math.round(maxheight * this.imageRatio) + 'px';
+  }
+  // ******************** Image display size End ********************//
 
   // API sends the image as base64 , the locally selected one is already a data url
   setImageUrl(img: VehicleImage) {

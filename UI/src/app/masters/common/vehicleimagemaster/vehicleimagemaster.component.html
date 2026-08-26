@@ -165,87 +165,90 @@
         </div>
 
         <div class="vi-canvas-body">
-          <div class="vi-image-area" (click)="onImageClick($event)">
-            <img
-              [src]="selectedImage.FileUrl"
-              class="vi-image"
-              alt="{{ selectedImage.Image_Name }}"
-              draggable="false"
-            />
+          <!-- max-width = fixed height x aspect ratio , so the box always hugs
+               the picture and the marker co-ordinates stay exact -->
+          <div class="vi-image-frame" [style.max-width]="imageMaxWidth">
+            <div class="vi-image-area" (click)="onImageClick($event)">
+              <img
+                [src]="selectedImage.FileUrl"
+                class="vi-image"
+                alt="{{ selectedImage.Image_Name }}"
+                draggable="false"
+                (load)="onImageLoad($event)"
+              />
 
-            <!-- Already mapped locations -->
-            <div
-              *ngFor="let map of filteredMappings; let i = index"
-              class="vi-pin vi-marker"
-              [style.left.%]="map.X_Coordinate"
-              [style.top.%]="map.Y_Coordinate"
-              (click)="selectMapping(map, $event)"
-            >
-              <button
-                class="vi-marker-btn"
-                [ngClass]="{ 'vi-marker-active': isCurrentMapping(map) }"
-                [style.background]="colorOf(map)"
-                title="{{ map.Location_Name }}"
+              <!-- Already mapped locations -->
+              <div
+                *ngFor="let map of filteredMappings"
+                class="vi-pin vi-marker"
+                [style.left.%]="map.X_Coordinate"
+                [style.top.%]="map.Y_Coordinate"
+                (click)="selectMapping(map, $event)"
               >
-                {{ i + 1 }}
-              </button>
+                <button
+                  class="vi-marker-btn"
+                  [ngClass]="{ 'vi-marker-active': isCurrentMapping(map) }"
+                  [style.background]="colorOf(map)"
+                  title="{{ map.Location_Name }}"
+                ></button>
 
-              <span class="vi-marker-label" [style.background]="colorOf(map)">
-                {{ map.Location_Name }}
-              </span>
-
-              <div class="vi-marker-tip">
-                <div class="vi-tip-head" [style.color]="colorOf(map)">
+                <span class="vi-marker-label" [style.background]="colorOf(map)">
                   {{ map.Location_Name }}
-                </div>
-                <div><b>Check Point :</b> {{ map.Checkpoint_Name }}</div>
-                <div><b>Part :</b> {{ map.Part_Name }}</div>
-                <div><b>Area :</b> {{ map.Area_Name }}</div>
-                <div>
-                  <b>Co-ordinate :</b> {{ map.X_Coordinate }} % ,
-                  {{ map.Y_Coordinate }} %
+                </span>
+
+                <div class="vi-marker-tip">
+                  <div class="vi-tip-head" [style.color]="colorOf(map)">
+                    {{ map.Location_Name }}
+                  </div>
+                  <div><b>Check Point :</b> {{ map.Checkpoint_Name }}</div>
+                  <div><b>Part :</b> {{ map.Part_Name }}</div>
+                  <div><b>Area :</b> {{ map.Area_Name }}</div>
+                  <div>
+                    <b>Co-ordinate :</b> {{ map.X_Coordinate }} % ,
+                    {{ map.Y_Coordinate }} %
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <!-- New point , waiting for the location selection -->
-            <div
-              *ngIf="pending"
-              class="vi-pin vi-pin-top"
-              [style.left.%]="pending.x"
-              [style.top.%]="pending.y"
-              (click)="$event.stopPropagation()"
-            >
-              <span class="vi-pending-dot"></span>
+              <!-- New point , waiting for the location selection -->
+              <div
+                *ngIf="pending"
+                class="vi-pin vi-pin-top"
+                [style.left.%]="pending.x"
+                [style.top.%]="pending.y"
+                (click)="$event.stopPropagation()"
+              >
+                <span class="vi-pending-dot"></span>
 
-              <div class="vi-pending-box">
-                <mat-form-field appearance="fill">
-                  <mat-label>Select Location</mat-label>
-                  <mat-select [(ngModel)]="selectedLocation">
-                    <mat-option
-                      *ngFor="let loc of unmappedLocations"
-                      [value]="loc"
+                <div class="vi-pending-box">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Select Location</mat-label>
+                    <mat-select [(ngModel)]="selectedLocation">
+                      <mat-option
+                        *ngFor="let loc of unmappedLocations"
+                        [value]="loc"
+                      >
+                        {{ loc.Location_Name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <div class="vi-pending-btns">
+                    <button
+                      class="vi-mini-btn"
+                      (click)="saveMapping($event)"
+                      title="Save mapping"
                     >
-                      {{ loc.Location_Name }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-
-                <div class="vi-pending-btns">
-                  <button
-                    class="vi-mini-btn"
-                    (click)="saveMapping($event)"
-                    title="Save mapping"
-                  >
-                    &#10003;
-                  </button>
-                  <button
-                    class="vi-mini-btn vi-cancel-btn"
-                    (click)="cancelMapping($event)"
-                    title="Cancel"
-                  >
-                    &#10005;
-                  </button>
+                      &#10003;
+                    </button>
+                    <button
+                      class="vi-mini-btn vi-cancel-btn"
+                      (click)="cancelMapping($event)"
+                      title="Cancel"
+                    >
+                      &#10005;
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
