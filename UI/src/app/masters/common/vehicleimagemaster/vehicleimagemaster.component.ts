@@ -86,6 +86,10 @@ export class VehicleimagemasterComponent {
   selectedMapping: VehicleImageMapping;
   selectedForDelete: number;
   pending: { x: number; y: number } = null;
+  // where the location popup should open , so that it never goes outside the image
+  pendingOpenRight: boolean = false;
+  pendingOpenLeft: boolean = false;
+  pendingOpenAbove: boolean = false;
   readonly MAX_MAPPING_PER_IMAGE = 100;
   private readonly COLORS = [
     '#1c84c6',
@@ -719,6 +723,28 @@ export class VehicleimagemasterComponent {
       x: +(((ev.clientX - rect.left) / rect.width) * 100).toFixed(2),
       y: +(((ev.clientY - rect.top) / rect.height) * 100).toFixed(2),
     };
+    this.setPendingSide(ev.clientX - rect.left, ev.clientY - rect.top, rect);
+  }
+
+  // The popup is normally opened in the centre below the point. When the point is
+  // near an edge of the image the popup is turned to the other side , otherwise it
+  // goes outside the image and the location can not be selected.
+  private setPendingSide(px: number, py: number, rect: DOMRect) {
+    const half = this.popupWidth() / 2;
+    this.pendingOpenRight = px < half;
+    this.pendingOpenLeft = !this.pendingOpenRight && rect.width - px < half;
+    this.pendingOpenAbove = rect.height - py < 120;
+  }
+
+  // approximate width of the popup , it changes with the screen ( see the media query )
+  private popupWidth(): number {
+    if (window.innerWidth <= 500) {
+      return 240;
+    }
+    if (window.innerWidth <= 992) {
+      return 270;
+    }
+    return 320;
   }
 
   // the event is stopped here itself , because *ngIf removes this popup

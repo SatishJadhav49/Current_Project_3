@@ -220,7 +220,12 @@
               >
                 <span class="vi-pending-dot"></span>
 
-                <div class="vi-pending-box">
+                <div
+                  class="vi-pending-box"
+                  [class.vi-box-right]="pendingOpenRight"
+                  [class.vi-box-left]="pendingOpenLeft"
+                  [class.vi-box-above]="pendingOpenAbove"
+                >
                   <mat-form-field appearance="fill">
                     <mat-label>Select Location</mat-label>
                     <mat-select [(ngModel)]="selectedLocation">

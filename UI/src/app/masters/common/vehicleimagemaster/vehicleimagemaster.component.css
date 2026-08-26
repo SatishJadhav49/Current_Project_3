@@ -500,17 +500,42 @@ mat-form-field {
   }
 }
 
+/* The popup is taken out of the flow on purpose. When it was in the flow the pin
+   was becoming as big as the popup , and because the pin is centred on the point ,
+   the popup was always sitting on the left of the point and the red dot was
+   drawn above the clicked spot. Now the pin is only the dot itself. */
 .vi-pending-box {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-top: 8px;
   padding: 6px 10px 0px;
-  transform: translateX(-50%);
   border: 1px solid #dde4e4;
   border-radius: 6px;
   background: #fff;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+/* point is near the LEFT edge  -> popup opens towards the right */
+.vi-box-right {
+  left: 0px;
+  transform: none;
+}
+
+/* point is near the RIGHT edge -> popup opens towards the left */
+.vi-box-left {
+  left: auto;
+  right: 0px;
+  transform: none;
+}
+
+/* point is near the BOTTOM edge -> popup opens above the point */
+.vi-box-above {
+  top: auto;
+  bottom: 20px;
 }
 
 .vi-pending-box mat-form-field {
