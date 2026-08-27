@@ -277,4 +277,54 @@ export class ReportsService {
   //   );
   // }
   
+
+  // ---------- Vehicle Image Report Start ---------------------------//
+
+  // vehicles audited for this model in the range , used for the VIN / BIW
+  // dropdown and for the " vehicles audited " count on the top
+  getAuditedVehicles(plantid, audittypeid, modelid, fromdate, todate) {
+    return this.apirequest.get(
+      'api/MM_Vehicle_Image_Report/GetAuditedVehicles/' +
+      plantid +
+      ',' +
+      audittypeid +
+      ',' +
+      modelid +
+      ',' +
+      fromdate +
+      ',' +
+      todate
+    );
+  }
+
+  // readings of one vehicle
+  getVinImageReport(plantid, audittypeid, vehicleimageid, auditid) {
+    return this.apirequest.get(
+      'api/MM_Vehicle_Image_Report/GetVinReport/' +
+      plantid +
+      ',' +
+      audittypeid +
+      ',' +
+      vehicleimageid +
+      ',' +
+      auditid
+    );
+  }
+
+  // average of every reading taken in the range
+  getRangeImageReport(plantid, audittypeid, vehicleimageid, fromdate, todate) {
+    return this.apirequest.get(
+      'api/MM_Vehicle_Image_Report/GetRangeReport/' +
+      plantid +
+      ',' +
+      audittypeid +
+      ',' +
+      vehicleimageid +
+      ',' +
+      fromdate +
+      ',' +
+      todate
+    );
+  }
+  // ---------- Vehicle Image Report End ---------------------------//
 }

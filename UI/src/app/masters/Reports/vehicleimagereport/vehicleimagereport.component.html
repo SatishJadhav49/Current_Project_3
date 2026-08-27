@@ -1,0 +1,387 @@
+<div class="row">
+  <div class="master-headings q-strip" id="btn-add">Vehicle Image Report</div>
+
+  <div class="container" style="margin-top: 15px">
+    <!-- ******************** Filter Section Start ******************** -->
+    <div class="vr-filter-bar">
+      <div class="vr-filter-item">
+        <mat-form-field appearance="fill">
+          <mat-label>Shop</mat-label>
+          <mat-select
+            [(ngModel)]="selectedShop"
+            (selectionChange)="selectShop($event.value)"
+          >
+            <mat-option *ngFor="let s of shoplist" [value]="s">
+              {{ s.Shop_Name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="vr-filter-item">
+        <mat-form-field appearance="fill">
+          <mat-label>Model</mat-label>
+          <mat-select
+            [(ngModel)]="selectedmodel"
+            (selectionChange)="selectModel($event.value)"
+          >
+            <mat-option *ngFor="let m of modelList" [value]="m">
+              {{ m.Model_Code }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="vr-filter-item">
+        <mat-form-field appearance="fill">
+          <mat-label>Start date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            [value]="startDateValue"
+            (dateChange)="onStartDateChange($event)"
+          />
+          <mat-datepicker-toggle matIconSuffix [for]="picker1">
+          </mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="vr-filter-item">
+        <mat-form-field appearance="fill">
+          <mat-label>End date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            [value]="endDateValue"
+            (dateChange)="onEndDateChange($event)"
+          />
+          <mat-datepicker-toggle matIconSuffix [for]="picker2">
+          </mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="vr-filter-btns">
+        <a (click)="refresh()" class="btn-forsave bg-refresh" type="btn">
+          <span> Refresh </span>
+        </a>
+        <a (click)="exit()" class="btn-forsave bg-exit" type="btn">
+          <span> Exit </span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Report type + vehicle -->
+    <div class="vr-filter-bar">
+      <div class="vr-type-toggle">
+        <button
+          class="vr-toggle-btn"
+          [ngClass]="{ 'vr-toggle-on': reportType === 'vin' }"
+          (click)="reportType = 'vin'; changeReportType()"
+        >
+          VIN / BIW wise
+        </button>
+        <button
+          class="vr-toggle-btn"
+          [ngClass]="{ 'vr-toggle-on': reportType === 'range' }"
+          (click)="reportType = 'range'; changeReportType()"
+        >
+          Date range wise
+        </button>
+      </div>
+
+      <div class="vr-filter-item vr-vin-item" *ngIf="reportType === 'vin'">
+        <mat-form-field appearance="fill">
+          <mat-label>VIN / BIW No.</mat-label>
+          <mat-select
+            [(ngModel)]="selectedVehicle"
+            (selectionChange)="selectVehicle($event.value)"
+          >
+            <mat-option *ngFor="let v of vehicleList" [value]="v">
+              {{ vehicleLabel(v) }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="vr-range-note" *ngIf="reportType === 'range'">
+        Average of every reading taken between the selected dates.
+      </div>
+    </div>
+    <!-- ******************** Filter Section End ******************** -->
+
+    <!-- ******************** Summary Section Start ******************** -->
+    <div class="vr-tiles" *ngIf="selectedmodel">
+      <div class="vr-tile">
+        <span class="vr-tile-value">{{ vehicleCount }}</span>
+        <span class="vr-tile-label">Vehicles Audited</span>
+      </div>
+      <div class="vr-tile">
+        <span class="vr-tile-value">{{ filteredPoints.length }}</span>
+        <span class="vr-tile-label">Points Shown</span>
+      </div>
+      <div class="vr-tile vr-tile-ok">
+        <span class="vr-tile-value">{{ okCount }}</span>
+        <span class="vr-tile-label">Ok</span>
+      </div>
+      <div class="vr-tile vr-tile-nok">
+        <span class="vr-tile-value">{{ nokCount }}</span>
+        <span class="vr-tile-label">Not Ok</span>
+      </div>
+      <div class="vr-tile vr-tile-na">
+        <span class="vr-tile-value">{{ nodataCount }}</span>
+        <span class="vr-tile-label">No Data</span>
+      </div>
+    </div>
+    <!-- ******************** Summary Section End ******************** -->
+
+    <!-- ******************** Image Strip Section Start ******************** -->
+    <div *ngIf="selectedmodel" class="vr-card">
+      <h4 class="header-background">
+        Vehicle Images of {{ selectedmodel.Model_Code }}
+        <span class="vr-head-count">{{ modelImageList.length }}</span>
+      </h4>
+
+      <div class="vr-strip q-scroll">
+        <div
+          *ngFor="let img of modelImageList"
+          class="vr-thumb"
+          [ngClass]="{ selected: isCurrentImage(img) }"
+          (click)="selectImage(img)"
+          title="{{ img.Image_Name }}"
+        >
+          <img [src]="img.FileUrl" alt="{{ img.Image_Name }}" />
+          <span class="vr-thumb-name">{{ img.Image_Name }}</span>
+        </div>
+
+        <div *ngIf="!modelImageList.length" class="vr-muted">
+          No vehicle image is uploaded for this model.
+        </div>
+      </div>
+    </div>
+    <!-- ******************** Image Strip Section End ******************** -->
+
+    <!-- ******************** Report Section Start ******************** -->
+    <div *ngIf="selectedImage" class="vr-workspace">
+      <!-- Image with the readings -->
+      <div class="vr-card vr-canvas">
+        <h4 class="header-background">
+          {{ selectedImage.Image_Name }}
+          <span class="vr-head-note" *ngIf="reportType === 'vin'">
+            {{ selectedVehicle ? vehicleLabel(selectedVehicle) : "" }}
+          </span>
+          <span class="vr-head-note" *ngIf="reportType === 'range'">
+            {{ startdate }} to {{ enddate }}
+          </span>
+        </h4>
+
+        <div class="vr-canvas-tools">
+          <span class="vr-legend">
+            <span class="vr-dot-ok"></span> Ok
+            <span class="vr-dot-nok"></span> Not Ok
+            <span class="vr-dot-na"></span> No Data
+          </span>
+          <button
+            class="vr-tool-btn"
+            [ngClass]="{ 'vr-tool-on': viewMode === 'all' }"
+            (click)="setViewMode('all')"
+          >
+            Overall
+          </button>
+          <button
+            class="vr-tool-btn vr-tool-nok"
+            [ngClass]="{ 'vr-tool-on-nok': viewMode === 'nok' }"
+            (click)="setViewMode('nok')"
+          >
+            Not Ok only
+          </button>
+        </div>
+
+        <div class="vr-canvas-body">
+          <div class="vr-image-frame" [style.max-width]="imageMaxWidth">
+            <div class="vr-image-area">
+              <img
+                [src]="selectedImage.FileUrl"
+                class="vr-image"
+                alt="{{ selectedImage.Image_Name }}"
+                draggable="false"
+                (load)="onImageLoad($event)"
+              />
+
+              <div
+                *ngFor="let point of filteredPoints"
+                class="vr-pin"
+                [style.left.%]="point.X_Coordinate"
+                [style.top.%]="point.Y_Coordinate"
+                (click)="selectPoint(point, $event)"
+              >
+                <button
+                  class="vr-pin-btn"
+                  [ngClass]="{ 'vr-pin-active': isCurrentPoint(point) }"
+                  [style.background]="colorOf(point)"
+                  title="{{ point.Location_Name }}"
+                ></button>
+
+                <div class="vr-pin-tip">
+                  <div class="vr-tip-head" [style.color]="colorOf(point)">
+                    {{ point.Location_Name }}
+                  </div>
+                  <div><b>Check Point :</b> {{ point.Checkpoint_Name }}</div>
+                  <div><b>Part :</b> {{ point.Part_Name }}</div>
+
+                  <div
+                    *ngFor="let row of point.readings"
+                    class="vr-tip-reading"
+                  >
+                    <b>{{ row.Parameter_Type }} :</b>
+                    {{ readingText(row) }}
+                    <span
+                      class="vr-tip-flag"
+                      [ngClass]="{ 'vr-tip-nok': isReadingNok(row) }"
+                    >
+                      {{ isReadingNok(row) ? "NOT OK" : "OK" }}
+                    </span>
+                    <div class="vr-tip-spec">
+                      Spec : {{ specText(row) }}
+                      <span *ngIf="reportType === 'range'">
+                        &nbsp;&#8226;&nbsp; {{ row.Reading_Count }} reading(s) ,
+                        {{ row.Nok_Count }} not ok
+                      </span>
+                    </div>
+                  </div>
+
+                  <div *ngIf="!point.readings.length" class="vr-tip-spec">
+                    No reading available
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Side filters + point list -->
+      <div class="vr-card vr-side-panel">
+        <h4 class="header-background">Filters</h4>
+
+        <div class="vr-side-body">
+          <mat-form-field appearance="fill">
+            <mat-label>Area</mat-label>
+            <mat-select
+              [(ngModel)]="selectedArea"
+              (selectionChange)="selectArea($event.value)"
+            >
+              <mat-option [value]="null">All Areas</mat-option>
+              <mat-option *ngFor="let a of AreaList" [value]="a">
+                {{ a.Area_Name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Part</mat-label>
+            <mat-select
+              [(ngModel)]="selectedPart"
+              (selectionChange)="selectPart($event.value)"
+            >
+              <mat-option [value]="null">All Parts</mat-option>
+              <mat-option *ngFor="let p of partList" [value]="p">
+                {{ p.Part_Name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Check Point</mat-label>
+            <mat-select
+              [(ngModel)]="selectedCP"
+              (selectionChange)="selectCP($event.value)"
+            >
+              <mat-option [value]="null">All Check Points</mat-option>
+              <mat-option *ngFor="let c of cpList" [value]="c">
+                {{ c.Checkpoint_Name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Parameter</mat-label>
+            <mat-select
+              [(ngModel)]="selectedParameter"
+              (selectionChange)="selectParameter($event.value)"
+            >
+              <mat-option *ngFor="let pr of parameterList" [value]="pr">
+                {{ pr.Type }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <button class="vr-clear-btn" (click)="clearFilters()">
+            Clear Filters
+          </button>
+
+          <div class="vr-section-label">
+            <span>Locations</span>
+            <span class="vr-count-pill">{{ filteredPoints.length }}</span>
+          </div>
+
+          <ul class="vr-point-list q-scroll">
+            <li
+              *ngFor="let point of filteredPoints"
+              class="vr-point-item"
+              [ngClass]="{ selected: isCurrentPoint(point) }"
+              (click)="selectPoint(point)"
+            >
+              <span class="vr-point-dot" [style.background]="colorOf(point)">
+              </span>
+              <span class="vr-point-name">
+                {{ point.Location_Name }}
+                <small>{{ point.Checkpoint_Name }}</small>
+              </span>
+              <span class="vr-point-read">
+                <span *ngFor="let row of point.readings">
+                  {{ row.Parameter_Type }} {{ readingText(row) }}<br />
+                </span>
+                <span *ngIf="!point.readings.length">-</span>
+              </span>
+            </li>
+
+            <li *ngIf="!filteredPoints.length" class="vr-muted">
+              No location to show for the selected filters.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- ******************** Report Section End ******************** -->
+  </div>
+
+  <!-- ******************** Table Section Start ******************** -->
+  <div class="row">
+    <div class="col-md-12" style="margin-top: 10px">
+      <div class="panel">
+        <div class="panel-body defect-min-box">
+          <table
+            id="vehicleimagereporttable"
+            class="display"
+            width="100%"
+          ></table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div style="margin-top: 5px" *ngIf="loading">
+        <ngx-skeleton-loader
+          [theme]="{ height: '40px' }"
+          loadingText="Loading Data"
+          appearance="line"
+          count="4"
+          animation="pulse"
+        >
+        </ngx-skeleton-loader>
+      </div>
+    </div>
+  </div>
+  <!-- ******************** Table Section End ******************** -->
+</div>

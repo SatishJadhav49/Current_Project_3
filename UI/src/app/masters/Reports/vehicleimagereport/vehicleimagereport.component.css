@@ -1,0 +1,621 @@
+/* ******************** Common report styles ******************** */
+.master-headings {
+  width: 100%;
+  font-weight: 900;
+  margin-top: 36px !important;
+}
+
+.q-strip {
+  background-color: black;
+  color: white;
+  margin-bottom: 0.3%;
+  box-shadow: 0 1px 0px rgba(0, 0, 0, 0.12), 3px 4px 1px rgba(66, 59, 59, 0.24);
+  border-radius: 4px !important;
+  text-align: center;
+  height: 28px;
+  font-size: 17.5px;
+  margin-top: -3.7%;
+}
+
+h4 {
+  position: relative;
+  width: 100%;
+  margin: 0px;
+  padding: 7px 12px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.header-background {
+  background-color: darkcyan !important;
+  color: white !important;
+  border-radius: 6px 6px 0px 0px;
+}
+
+.vr-head-note {
+  margin-left: 10px;
+  opacity: 0.85;
+  font-size: 11px;
+  font-weight: normal;
+}
+
+.vr-head-count {
+  display: inline-block;
+  min-width: 20px;
+  margin-left: 8px;
+  padding: 0px 6px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.25);
+  font-size: 11px;
+}
+
+.btn-forsave {
+  width: 100% !important;
+  height: 30px !important;
+  padding: 6px 12px !important;
+}
+
+mat-form-field {
+  width: 100%;
+  font-size: 13px;
+}
+
+.vr-muted {
+  padding: 14px;
+  color: #9aa2a2;
+  font-size: 12px;
+  font-style: italic;
+  text-align: center;
+}
+
+/* ******************** Filter bar ******************** */
+.vr-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 6px 12px 0px;
+  border: 1px solid #e3e8e8;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.14);
+}
+
+.vr-filter-item {
+  flex: 1 1 180px;
+  max-width: 230px;
+}
+
+.vr-vin-item {
+  max-width: 320px;
+}
+
+.vr-filter-btns {
+  display: flex;
+  gap: 8px;
+  width: 190px;
+  margin: 0px 0px 14px auto;
+}
+
+.vr-type-toggle {
+  display: flex;
+  gap: 0px;
+  margin-bottom: 12px;
+}
+
+.vr-toggle-btn {
+  padding: 6px 16px;
+  border: 1px solid #cfdada;
+  background: #fff;
+  color: #5b6666;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.vr-toggle-btn:first-child {
+  border-radius: 4px 0px 0px 4px;
+}
+
+.vr-toggle-btn:last-child {
+  border-radius: 0px 4px 4px 0px;
+  border-left: none;
+}
+
+.vr-toggle-on {
+  background: darkcyan;
+  border-color: darkcyan;
+  color: #fff;
+}
+
+.vr-range-note {
+  margin-bottom: 12px;
+  color: #5b6666;
+  font-size: 11px;
+  font-style: italic;
+}
+
+/* ******************** Summary tiles ******************** */
+.vr-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.vr-tile {
+  flex: 1 1 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 8px;
+  border: 1px solid #e3e8e8;
+  border-top: 3px solid #1c84c6;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.vr-tile-value {
+  color: #2b3333;
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 26px;
+}
+
+.vr-tile-label {
+  color: #7a8585;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.vr-tile-ok {
+  border-top-color: #2e7d32;
+}
+
+.vr-tile-nok {
+  border-top-color: #d32f2f;
+}
+
+.vr-tile-na {
+  border-top-color: #9e9e9e;
+}
+
+/* ******************** Cards ******************** */
+.vr-card {
+  margin-bottom: 12px;
+  border: 1px solid #e3e8e8;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
+}
+
+/* ******************** Image strip ******************** */
+.vr-strip {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 12px;
+}
+
+.vr-thumb {
+  position: relative;
+  flex: 0 0 auto;
+  width: 118px;
+  padding: 5px;
+  border: 2px solid #e3e8e8;
+  border-radius: 6px;
+  background: #fafbfb;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.vr-thumb:hover {
+  border-color: #0b9494;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
+}
+
+.vr-thumb.selected {
+  border-color: #0b9494;
+  background: #e9f6f6 !important;
+  box-shadow: 0 0 0 3px rgba(11, 148, 148, 0.18);
+}
+
+.vr-thumb img {
+  width: 100%;
+  height: 70px;
+  border-radius: 3px;
+  background: #fff;
+  object-fit: contain;
+}
+
+.vr-thumb-name {
+  display: block;
+  margin-top: 3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+/* ******************** Work area ******************** */
+.vr-workspace {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.vr-canvas {
+  flex: 1 1 480px;
+  min-width: 0;
+}
+
+.vr-side-panel {
+  flex: 0 0 330px;
+}
+
+.vr-canvas-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid #eceff0;
+}
+
+.vr-legend {
+  flex: 1 1 auto;
+  color: #5b6666;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.vr-dot-ok,
+.vr-dot-nok,
+.vr-dot-na {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 0px 4px 0px 10px;
+  border-radius: 50%;
+}
+
+.vr-dot-ok {
+  background: #2e7d32;
+  margin-left: 0px;
+}
+
+.vr-dot-nok {
+  background: #d32f2f;
+}
+
+.vr-dot-na {
+  background: #9e9e9e;
+}
+
+.vr-tool-btn {
+  flex: 0 0 auto;
+  padding: 4px 12px;
+  border: 1px solid #cfdada;
+  border-radius: 4px;
+  background: #fff;
+  color: #5b6666;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.vr-tool-on {
+  background: darkcyan;
+  border-color: darkcyan;
+  color: #fff;
+}
+
+.vr-tool-nok {
+  color: #d32f2f;
+  border-color: #f3c8c0;
+}
+
+.vr-tool-on-nok {
+  background: #d32f2f;
+  border-color: #d32f2f;
+  color: #fff;
+}
+
+.vr-canvas-body {
+  padding: 12px;
+  border-radius: 0px 0px 6px 6px;
+  background: #f4f7f7;
+}
+
+.vr-image-frame {
+  display: block;
+  width: 100%;
+  margin: 0px auto;
+}
+
+/* the box wraps the picture exactly , so the % co-ordinates of the mapped
+   locations point to the same spot on any screen size */
+.vr-image-area {
+  position: relative;
+  display: block;
+  line-height: 0;
+  border-radius: 4px;
+  background: #fff;
+  user-select: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.14);
+}
+
+.vr-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* ******************** Points on the picture ******************** */
+.vr-pin {
+  position: absolute;
+  z-index: 10;
+  line-height: normal;
+  transform: translate(-50%, -50%);
+}
+
+/* the hovered point is lifted , otherwise its tooltip goes behind
+   the point which is drawn next to it */
+.vr-pin:hover {
+  z-index: 20;
+}
+
+.vr-pin-btn {
+  display: block;
+  width: 14px;
+  height: 14px;
+  margin: auto;
+  padding: 0px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+  transition: transform 0.12s ease;
+}
+
+.vr-pin-btn:hover {
+  transform: scale(1.35);
+}
+
+.vr-pin-active {
+  outline: 2px solid #333;
+  outline-offset: 1px;
+}
+
+.vr-pin-tip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  z-index: 20;
+  bottom: 24px;
+  left: 50%;
+  width: 240px;
+  padding: 9px 11px;
+  transform: translateX(-50%);
+  border-radius: 6px;
+  background: #2b3333;
+  color: #e8eded;
+  font-size: 10.5px;
+  font-weight: normal;
+  line-height: 1.6;
+  text-align: left;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+  transition: opacity 0.15s ease;
+}
+
+.vr-pin-tip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -6px;
+  border: 6px solid transparent;
+  border-top-color: #2b3333;
+}
+
+.vr-pin:hover .vr-pin-tip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.vr-tip-head {
+  margin-bottom: 3px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 11.5px;
+  font-weight: bold;
+}
+
+.vr-tip-reading {
+  margin-top: 5px;
+  padding-top: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.vr-tip-flag {
+  padding: 0px 6px;
+  border-radius: 8px;
+  background: #2e7d32;
+  color: #fff;
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.vr-tip-nok {
+  background: #d32f2f;
+}
+
+.vr-tip-spec {
+  color: #a9b4b4;
+  font-size: 9.5px;
+}
+
+/* ******************** Side panel ******************** */
+.vr-side-body {
+  padding: 12px;
+}
+
+.vr-clear-btn {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #cfdada;
+  border-radius: 4px;
+  background: #fff;
+  color: #5b6666;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.vr-clear-btn:hover {
+  background: #f4f8f8;
+}
+
+.vr-section-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 12px 0px 8px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #eceff0;
+  color: #5b6666;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.vr-count-pill {
+  min-width: 22px;
+  padding: 1px 7px;
+  border-radius: 10px;
+  background: #eef3f3;
+  color: #0b9494;
+  font-size: 11px;
+  text-align: center;
+}
+
+.vr-point-list {
+  max-height: 300px;
+  overflow-y: auto;
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+
+.vr-point-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 5px;
+  padding: 6px 8px;
+  border: 1px solid #eceff0;
+  border-left: 3px solid #dfe6e6;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+}
+
+.vr-point-item:hover {
+  background: #f6fafa;
+}
+
+.vr-point-item.selected {
+  background: #e9f6f6 !important;
+  border-color: #bfe0e0;
+  border-left-color: #0b9494;
+}
+
+.vr-point-dot {
+  flex: 0 0 auto;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.vr-point-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.vr-point-name small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #8a9494;
+  font-size: 10px;
+  font-weight: normal;
+}
+
+.vr-point-read {
+  flex: 0 0 auto;
+  color: #5b6666;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: right;
+}
+
+/* ******************** Responsive ******************** */
+@media (max-width: 992px) {
+  .container {
+    padding: 0px;
+  }
+  .vr-side-panel {
+    flex: 1 1 100%;
+  }
+  .vr-filter-item {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .master-headings {
+    margin-top: 15px !important;
+  }
+  .vr-filter-btns {
+    width: 100%;
+    margin-left: 0px;
+  }
+  .vr-head-note {
+    display: none;
+  }
+  .vr-tile {
+    flex: 1 1 90px;
+  }
+}
+
+@media (max-width: 500px) {
+  .container {
+    margin-top: 3px !important;
+  }
+  .vr-thumb {
+    width: 96px;
+  }
+  .vr-canvas-body {
+    padding: 6px;
+  }
+  h4 {
+    font-size: 12px;
+  }
+}

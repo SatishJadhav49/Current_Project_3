@@ -227,6 +227,7 @@
     <Compile Include="Controllers\Common Masters\MM_Vehicle_Image_MasterController.cs" />
     <Compile Include="Controllers\CommonAPIs\MasterAPISController.cs" />
     <Compile Include="Controllers\Reports\MIS_ReportController.cs" />
+    <Compile Include="Controllers\Reports\MM_Vehicle_Image_ReportController.cs" />
     <Compile Include="Controllers\Transactions\DigitalGapgun_AutoMailController.cs" />
     <Compile Include="Controllers\Transactions\AutoMailController.cs" />
     <Compile Include="Controllers\Transactions\MM_Audit_Plan_MasterController.cs" />

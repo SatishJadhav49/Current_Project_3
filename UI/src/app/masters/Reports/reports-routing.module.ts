@@ -10,6 +10,7 @@ import { HistogramComponent } from './histogram/histogram.component';
 import { TrendchartComponent } from './trendchart/trendchart.component';
 import { StatisticalreportsComponent } from './statisticalreports/statisticalreports.component';
 import { ComparisontrendComponent } from './comparisontrend/comparisontrend.component';
+import { VehicleimagereportComponent } from './vehicleimagereport/vehicleimagereport.component';
 
 const routes: Routes = [
   {
@@ -51,6 +52,10 @@ const routes: Routes = [
   {
     path: 'comparisontrend',
     component: ComparisontrendComponent,
+  },
+  {
+    path: 'vehicleimagereport',
+    component: VehicleimagereportComponent,
   }
 ];
 

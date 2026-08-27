@@ -15,9 +15,11 @@ import { HistogramComponent } from './histogram/histogram.component';
 import { TrendchartComponent } from './trendchart/trendchart.component';
 import { StatisticalreportsComponent } from './statisticalreports/statisticalreports.component';
 import { ComparisontrendComponent } from './comparisontrend/comparisontrend.component';
+import { VehicleimagereportComponent } from './vehicleimagereport/vehicleimagereport.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
-  declarations: [ReportComponent, GraphicalreportComponent, MonthlyReportComponent,BoxplotComponent,SpcrulesComponent, GraphicalreportCalculatedLimitsComponent, HistogramComponent,TrendchartComponent, StatisticalreportsComponent, ComparisontrendComponent],
+  declarations: [ReportComponent, GraphicalreportComponent, MonthlyReportComponent,BoxplotComponent,SpcrulesComponent, GraphicalreportCalculatedLimitsComponent, HistogramComponent,TrendchartComponent, StatisticalreportsComponent, ComparisontrendComponent, VehicleimagereportComponent],
   imports: [
     CommonModule,
     ReportsRoutingModule,
@@ -25,7 +27,8 @@ import { ComparisontrendComponent } from './comparisontrend/comparisontrend.comp
     FormsModule,
     MaterialModule,
     SharedModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    NgxSkeletonLoaderModule
   ]
 })
 export class ReportsModule { }
