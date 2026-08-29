@@ -5,6 +5,7 @@ import {
   HostListener,
   NgZone,
 } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { shop } from 'src/app/shared/models/shop.model';
@@ -20,6 +21,7 @@ import {
 } from 'src/app/shared/models/vehicleimagereport.model';
 import { CommonService } from 'src/app/masters/common/common.service';
 import { ReportsService } from '../reports.service';
+import { ReadingChartsComponent } from './reading-charts/reading-charts.component';
 declare var $: any;
 
 @Component({
@@ -50,6 +52,9 @@ export class VehicleimagereportComponent {
   //               'lastn' = last N audits
   reportType: string = 'vin';
   lastNCount: number = 10;
+  // VIN wise shows one reading only , the charts need a series , so they
+  // fall back to the last 30 audits
+  readonly DEFAULT_CHART_AUDITS = 30;
   startdate: string;
   enddate: string;
   startDateValue: Date;
@@ -95,6 +100,7 @@ export class VehicleimagereportComponent {
     private router: Router,
     private ngZone: NgZone,
     private datePipe: DatePipe,
+    private dialog: MatDialog,
     private cdref: ChangeDetectorRef
   ) {}
 
@@ -666,6 +672,78 @@ export class VehicleimagereportComponent {
       ev.stopPropagation();
     }
     this.selectedPoint = point;
+    this.openCharts(point);
+  }
+
+  /*  X bar , Histogram , MR charts and the Cp / Cpk box of the clicked location.
+   *
+   *  The charts always need a series of readings , so :
+   *      Date range wise -> the same two dates
+   *      Last N audits   -> the same N
+   *      VIN / BIW wise  -> one vehicle is only one reading , which can not make a
+   *                         chart , so the last 30 audits are taken by default
+   */
+  openCharts(point: ReportPoint) {
+    if (!point || !this.selectedmodel) {
+      return;
+    }
+
+    // the parameters ( Gap / Flushness ) which this location actually has
+    const parameters = [];
+    this.reportRows.forEach((row) => {
+      if (row.Location_ID !== point.Location_ID || !row.Parameter_ID) {
+        return;
+      }
+      if (!parameters.some((p) => p.Parameter_ID === row.Parameter_ID)) {
+        parameters.push({
+          Parameter_ID: row.Parameter_ID,
+          Parameter_Type: row.Parameter_Type,
+        });
+      }
+    });
+
+    // This vehicle / range has no reading on that location , but its history
+    // can still be charted , so every real parameter is offered instead.
+    if (!parameters.length) {
+      this.parameterList.forEach((p) => {
+        if (p.ID) {
+          parameters.push({ Parameter_ID: p.ID, Parameter_Type: p.Type });
+        }
+      });
+    }
+
+    if (!parameters.length) {
+      this.toaster.warning(
+        'No parameter is available for ' + point.Location_Name + ' .'
+      );
+      return;
+    }
+
+    this.dialog.open(ReadingChartsComponent, {
+      width: '92vw',
+      maxWidth: '1250px',
+      panelClass: 'reading-charts-panel',
+      enterAnimationDuration: '0ms',
+      exitAnimationDuration: '0ms',
+      data: {
+        plantid: this.plantid,
+        audittypeid: this.audittypeid,
+        modelid: this.selectedmodel.Model_ID,
+        locationid: point.Location_ID,
+        locationName: point.Location_Name,
+        partName: point.Part_Name,
+        checkpointName: point.Checkpoint_Name,
+        parameters: parameters,
+        fromdate: this.startdate,
+        todate: this.enddate,
+        topn:
+          this.reportType === 'lastn'
+            ? this.lastNCount
+            : this.reportType === 'vin'
+            ? this.DEFAULT_CHART_AUDITS
+            : 0,
+      },
+    });
   }
 
   isCurrentPoint(point: ReportPoint) {

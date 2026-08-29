@@ -345,5 +345,37 @@ export class ReportsService {
       topn
     );
   }
+  // every individual reading of one mapped location + one parameter ,
+  // used by the X bar / Histogram / MR charts and the Cp - Cpk box.
+  // topn > 0 -> last N readings ( dates ignored ) , topn = 0 -> date range
+  getLocationReadings(
+    plantid,
+    audittypeid,
+    modelid,
+    locationid,
+    parameterid,
+    fromdate,
+    todate,
+    topn
+  ) {
+    return this.apirequest.get(
+      'api/MM_Vehicle_Image_Report/GetLocationReadings/' +
+      plantid +
+      ',' +
+      audittypeid +
+      ',' +
+      modelid +
+      ',' +
+      locationid +
+      ',' +
+      parameterid +
+      ',' +
+      fromdate +
+      ',' +
+      todate +
+      ',' +
+      topn
+    );
+  }
   // ---------- Vehicle Image Report End ---------------------------//
 }

@@ -16,10 +16,11 @@ import { TrendchartComponent } from './trendchart/trendchart.component';
 import { StatisticalreportsComponent } from './statisticalreports/statisticalreports.component';
 import { ComparisontrendComponent } from './comparisontrend/comparisontrend.component';
 import { VehicleimagereportComponent } from './vehicleimagereport/vehicleimagereport.component';
+import { ReadingChartsComponent } from './vehicleimagereport/reading-charts/reading-charts.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
-  declarations: [ReportComponent, GraphicalreportComponent, MonthlyReportComponent,BoxplotComponent,SpcrulesComponent, GraphicalreportCalculatedLimitsComponent, HistogramComponent,TrendchartComponent, StatisticalreportsComponent, ComparisontrendComponent, VehicleimagereportComponent],
+  declarations: [ReportComponent, GraphicalreportComponent, MonthlyReportComponent,BoxplotComponent,SpcrulesComponent, GraphicalreportCalculatedLimitsComponent, HistogramComponent,TrendchartComponent, StatisticalreportsComponent, ComparisontrendComponent, VehicleimagereportComponent, ReadingChartsComponent],
   imports: [
     CommonModule,
     ReportsRoutingModule,

@@ -1,0 +1,148 @@
+<div class="rc-wrap">
+  <!-- ******************** Header ******************** -->
+  <div class="rc-head">
+    <div class="rc-title">
+      {{ data.locationName }}
+      <small>
+        {{ data.partName }} &nbsp;&#8226;&nbsp; {{ data.checkpointName }}
+        &nbsp;&#8226;&nbsp; {{ rangeText }}
+      </small>
+    </div>
+
+    <!-- Gap / Flushness , shown only when the location has both -->
+    <div class="rc-param" *ngIf="parameterList.length > 1">
+      <button
+        *ngFor="let p of parameterList"
+        class="rc-param-btn"
+        [ngClass]="{ 'rc-param-on': isCurrentParameter(p.Parameter_ID) }"
+        (click)="selectParameter(p.Parameter_ID)"
+      >
+        {{ p.Parameter_Type }}
+      </button>
+    </div>
+
+    <button class="rc-close" (click)="close()" title="Close">&#10005;</button>
+  </div>
+
+  <!-- ******************** Body ******************** -->
+  <div class="rc-body">
+    <div *ngIf="loading" class="rc-muted">Loading readings ...</div>
+
+    <div *ngIf="!loading && !readings.length" class="rc-muted">
+      No reading found for this location in the selected range.
+    </div>
+
+    <div *ngIf="!loading && readings.length">
+      <!-- Statistics box -->
+      <div class="rc-stats">
+        <div class="rc-stat">
+          <span class="rc-stat-label">Sample Size</span>
+          <span class="rc-stat-value">{{ stats.count }}</span>
+        </div>
+        <div class="rc-stat">
+          <span class="rc-stat-label">Mean</span>
+          <span class="rc-stat-value">{{ round(stats.mean) }}</span>
+        </div>
+        <div class="rc-stat">
+          <span class="rc-stat-label">Median</span>
+          <span class="rc-stat-value">{{ round(stats.median) }}</span>
+        </div>
+        <div class="rc-stat">
+          <span class="rc-stat-label">Std. Deviation</span>
+          <span class="rc-stat-value">{{ round(stats.stdDev) }}</span>
+        </div>
+        <div class="rc-stat">
+          <span class="rc-stat-label">Cp</span>
+          <span class="rc-stat-value">{{ round(stats.cp, 2) }}</span>
+        </div>
+        <div class="rc-stat" [ngClass]="cpkClass()">
+          <span class="rc-stat-label">Cpk</span>
+          <span class="rc-stat-value">{{ round(stats.cpk, 2) }}</span>
+        </div>
+        <div class="rc-stat">
+          <span class="rc-stat-label">Min Reading</span>
+          <span class="rc-stat-value">{{ round(stats.min) }}</span>
+        </div>
+        <div class="rc-stat">
+          <span class="rc-stat-label">Max Reading</span>
+          <span class="rc-stat-value">{{ round(stats.max) }}</span>
+        </div>
+        <div class="rc-stat rc-spec">
+          <span class="rc-stat-label">LSL</span>
+          <span class="rc-stat-value">
+            {{ stats.lsl === null ? "-" : stats.lsl }}
+          </span>
+        </div>
+        <div class="rc-stat rc-spec">
+          <span class="rc-stat-label">USL</span>
+          <span class="rc-stat-value">
+            {{ stats.usl === null ? "-" : stats.usl }}
+          </span>
+        </div>
+      </div>
+
+      <div class="rc-note" *ngIf="stats.cp === null">
+        Cp / Cpk need both LSL and USL and more than one distinct reading , so
+        they are not shown for this location.
+      </div>
+
+      <!-- Charts -->
+      <div class="rc-charts">
+        <div class="rc-chart rc-chart-wide">
+          <apx-chart
+            [series]="xbarOptions.series!"
+            [chart]="xbarOptions.chart!"
+            [dataLabels]="xbarOptions.dataLabels!"
+            [stroke]="xbarOptions.stroke!"
+            [colors]="xbarOptions.colors!"
+            [markers]="xbarOptions.markers!"
+            [xaxis]="xbarOptions.xaxis!"
+            [yaxis]="xbarOptions.yaxis!"
+            [grid]="xbarOptions.grid!"
+            [legend]="xbarOptions.legend!"
+            [tooltip]="xbarOptions.tooltip!"
+            [annotations]="xbarOptions.annotations!"
+            [title]="xbarOptions.title!"
+          ></apx-chart>
+        </div>
+
+        <div class="rc-chart">
+          <apx-chart
+            [series]="histogramOptions.series!"
+            [chart]="histogramOptions.chart!"
+            [plotOptions]="histogramOptions.plotOptions!"
+            [dataLabels]="histogramOptions.dataLabels!"
+            [stroke]="histogramOptions.stroke!"
+            [colors]="histogramOptions.colors!"
+            [markers]="histogramOptions.markers!"
+            [xaxis]="histogramOptions.xaxis!"
+            [yaxis]="histogramOptions.yaxis!"
+            [grid]="histogramOptions.grid!"
+            [legend]="histogramOptions.legend!"
+            [tooltip]="histogramOptions.tooltip!"
+            [annotations]="histogramOptions.annotations!"
+            [title]="histogramOptions.title!"
+          ></apx-chart>
+        </div>
+
+        <div class="rc-chart">
+          <apx-chart
+            [series]="mrOptions.series!"
+            [chart]="mrOptions.chart!"
+            [dataLabels]="mrOptions.dataLabels!"
+            [stroke]="mrOptions.stroke!"
+            [colors]="mrOptions.colors!"
+            [markers]="mrOptions.markers!"
+            [xaxis]="mrOptions.xaxis!"
+            [yaxis]="mrOptions.yaxis!"
+            [grid]="mrOptions.grid!"
+            [legend]="mrOptions.legend!"
+            [tooltip]="mrOptions.tooltip!"
+            [annotations]="mrOptions.annotations!"
+            [title]="mrOptions.title!"
+          ></apx-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

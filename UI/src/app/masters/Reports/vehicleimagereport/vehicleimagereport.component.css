@@ -437,6 +437,15 @@ mat-form-field {
   font-size: 9.5px;
 }
 
+.vr-tip-hint {
+  margin-top: 6px;
+  padding-top: 5px;
+  border-top: 1px solid #f1f4f4;
+  color: #0b9494;
+  font-size: 9.5px;
+  font-weight: bold;
+}
+
 /* ******************** Side panel ******************** */
 .vr-side-body {
   padding: 12px;

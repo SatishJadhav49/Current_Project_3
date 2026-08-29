@@ -292,6 +292,98 @@ namespace QualityAPI.Controllers.Reports
             }
             return list;
         }
+        // ********************************** Chart Section Start *******************************//
+
+        /*  Every individual reading of ONE mapped location + ONE parameter , in the
+         *  order in which the vehicles were audited. The charts ( X bar , Histogram ,
+         *  MR ) and the Cp / Cpk box are all drawn from this one series.
+         *
+         *  topn > 0 -> the last N readings , the two dates are ignored
+         *  topn = 0 -> every reading between the two dates
+         */
+        [Route("api/MM_Vehicle_Image_Report/GetLocationReadings/{plantid},{audittypeid},{modelid},{locationid},{parameterid},{fromdate},{todate},{topn}")]
+        [HttpGet]
+        [ActionName("GetLocationReadings")]
+        public IHttpActionResult GetLocationReadings(decimal plantid, decimal audittypeid, decimal modelid,
+                                                     decimal locationid, decimal parameterid,
+                                                     DateTime fromdate, DateTime todate, int topn)
+        {
+            try
+            {
+                string inner = @"
+                    SELECT   " + (topn > 0 ? "TOP (@TopN)" : "") + @"
+                             va.Audit_ID , va.Audit_Date , va.VIN_No , va.Body_No ,
+                             TRY_CONVERT(decimal(18,4) , ts.Reading) AS Reading ,
+                             sp.MinVal , sp.MaxVal
+                    FROM     MM_Vehicle_Audit va
+                             INNER JOIN MM_Track_Sheet ts
+                                     ON ts.Audit_ID      = va.Audit_ID
+                                    AND ts.Location_ID   = @Location_ID
+                                    AND ts.Parameter_ID  = @Parameter_ID
+                                    AND ISNULL(ts.Is_NA , 0) = 0
+                                    AND ISNULL(ts.Is_Deleted , 0) = 0
+                             LEFT JOIN MM_SpecificationMaster sp
+                                    ON sp.Specification_ID = ts.Specification_ID
+                    WHERE    va.Plant_ID         = @Plant_ID
+                             AND va.Audit_Type_Id = @Audit_Type_Id
+                             AND va.Model_ID      = @Model_ID
+                             AND ISNULL(va.Is_Deleted , 0) = 0
+                             AND TRY_CONVERT(decimal(18,4) , ts.Reading) IS NOT NULL "
+                    + (topn > 0 ? "" : " AND va.Audit_Date >= @FromDate AND va.Audit_Date < @ToDate ")
+                    + @" ORDER BY va.Audit_Date DESC , va.Audit_ID DESC";
+
+                // the newest rows are picked first , then turned back into
+                // audit order so that the charts read left to right by date
+                string sql = "SELECT * FROM ( " + inner + " ) t ORDER BY t.Audit_Date , t.Audit_ID";
+
+                var list = new List<LocationReadingRow>();
+
+                using (SqlConnection con = new SqlConnection(ConnectionString))
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.AddWithValue("@Plant_ID", plantid);
+                    cmd.Parameters.AddWithValue("@Audit_Type_Id", audittypeid);
+                    cmd.Parameters.AddWithValue("@Model_ID", modelid);
+                    cmd.Parameters.AddWithValue("@Location_ID", locationid);
+                    cmd.Parameters.AddWithValue("@Parameter_ID", parameterid);
+                    if (topn > 0)
+                    {
+                        cmd.Parameters.AddWithValue("@TopN", topn);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@FromDate", fromdate.Date);
+                        cmd.Parameters.AddWithValue("@ToDate", todate.Date.AddDays(1));
+                    }
+                    con.Open();
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            list.Add(new LocationReadingRow
+                            {
+                                Audit_ID = Dec(dr, "Audit_ID"),
+                                Audit_Date = Date(dr, "Audit_Date"),
+                                VIN_No = Str(dr, "VIN_No"),
+                                Body_No = Str(dr, "Body_No"),
+                                Reading = Dec(dr, "Reading"),
+                                MinVal = NullDec(dr, "MinVal"),
+                                MaxVal = NullDec(dr, "MaxVal")
+                            });
+                        }
+                    }
+                }
+                return Ok(list);
+            }
+            catch (Exception e)
+            {
+                generalLogObj.addControllerException(e, "MM_Vehicle_Image_Report",
+                    "GetLocationReadings(" + locationid + "," + parameterid + ")");
+                return Ok(new List<LocationReadingRow>());
+            }
+        }
+        // ********************************** Chart Section End *******************************//
+
         // ********************************** Report Section End *******************************//
 
         // ********************************** Helper Section Start *******************************//
@@ -328,6 +420,17 @@ namespace QualityAPI.Controllers.Reports
         public string VIN_No { get; set; }
         public string Body_No { get; set; }
         public Nullable<DateTime> Audit_Date { get; set; }
+    }
+
+    public class LocationReadingRow
+    {
+        public decimal Audit_ID { get; set; }
+        public Nullable<DateTime> Audit_Date { get; set; }
+        public string VIN_No { get; set; }
+        public string Body_No { get; set; }
+        public decimal Reading { get; set; }
+        public Nullable<decimal> MinVal { get; set; }
+        public Nullable<decimal> MaxVal { get; set; }
     }
 
     public class ImageReportRow

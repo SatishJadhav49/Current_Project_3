@@ -797,3 +797,16 @@ div.dataTables_wrapper div.dataTables_filter label {
 .deletebutton {
   background-color: #d74f4f !important;
 }
+
+/* Vehicle Image Report - reading charts popup.
+   The dialog container has its own padding , the popup draws its own
+   header and body so the padding is removed here. */
+.reading-charts-panel .mat-mdc-dialog-container .mdc-dialog__surface {
+  padding: 0px;
+  overflow: hidden;
+}
+
+.reading-charts-panel .mat-mdc-dialog-container .mat-mdc-dialog-surface {
+  padding: 0px;
+  overflow: hidden;
+}

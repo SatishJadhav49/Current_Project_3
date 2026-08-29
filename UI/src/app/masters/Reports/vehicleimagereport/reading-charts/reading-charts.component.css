@@ -1,0 +1,188 @@
+.rc-wrap {
+  display: flex;
+  flex-direction: column;
+  max-height: 88vh;
+}
+
+/* ******************** Header ******************** */
+.rc-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 4px 4px 0px 0px;
+  background: darkcyan;
+  color: #fff;
+}
+
+.rc-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.rc-title small {
+  display: block;
+  opacity: 0.9;
+  font-size: 11px;
+  font-weight: normal;
+}
+
+.rc-param {
+  display: flex;
+  flex: 0 0 auto;
+}
+
+.rc-param-btn {
+  padding: 4px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: transparent;
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.rc-param-btn:first-child {
+  border-radius: 4px 0px 0px 4px;
+}
+
+.rc-param-btn:last-child {
+  border-radius: 0px 4px 4px 0px;
+  border-left: none;
+}
+
+.rc-param-on {
+  background: #fff;
+  color: darkcyan;
+}
+
+.rc-close {
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.rc-close:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* ******************** Body ******************** */
+.rc-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 12px 14px 16px;
+  background: #f4f7f7;
+}
+
+.rc-muted {
+  padding: 40px;
+  color: #9aa2a2;
+  font-size: 13px;
+  font-style: italic;
+  text-align: center;
+}
+
+/* ******************** Statistics box ******************** */
+.rc-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.rc-stat {
+  flex: 1 1 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 6px;
+  border: 1px solid #e3e8e8;
+  border-top: 3px solid #1c84c6;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.rc-stat-label {
+  color: #7a8585;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.rc-stat-value {
+  color: #2b3333;
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 22px;
+}
+
+.rc-spec {
+  border-top-color: #9e9e9e;
+}
+
+/* Cpk quality hint : >= 1.33 good , >= 1 watch , below 1 poor */
+.rc-good {
+  border-top-color: #2e7d32;
+}
+
+.rc-warn {
+  border-top-color: #f57c00;
+}
+
+.rc-bad {
+  border-top-color: #d32f2f;
+}
+
+.rc-note {
+  margin-bottom: 12px;
+  padding: 8px 10px;
+  border-left: 3px solid #f57c00;
+  border-radius: 3px;
+  background: #fff8ef;
+  color: #7a6a55;
+  font-size: 11px;
+}
+
+/* ******************** Charts ******************** */
+.rc-charts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.rc-chart {
+  flex: 1 1 420px;
+  min-width: 0;
+  padding: 6px;
+  border: 1px solid #e3e8e8;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* the X chart is the main one , it takes the full width */
+.rc-chart-wide {
+  flex: 1 1 100%;
+}
+
+@media (max-width: 992px) {
+  .rc-chart {
+    flex: 1 1 100%;
+  }
+  .rc-stat {
+    flex: 1 1 90px;
+  }
+  .rc-stat-value {
+    font-size: 15px;
+  }
+}
