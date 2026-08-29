@@ -52,14 +52,26 @@ export class ReadingChartsComponent {
   readings: number[] = [];
   labels: string[] = []; // audit date , this is what the x axis shows
   vinLabels: string[] = []; // VIN / BIW number , shown inside the tooltip
+  remarks: string[] = []; // 'OK' / 'NA' / status of every reading
   LSL: number = null;
   USL: number = null;
-  // control limits maintained in the Specification Master ( Calculations screen ).
-  // When they are empty the chart falls back to the calculated ones.
-  specLCL: number = null;
-  specUCL: number = null;
-  specUCLR: number = null;
-  // told to the user when the limits could not be worked out at all
+
+  /*  Control limits are worked out from the readings on the screen every time ,
+   *  using the same formula as the Calculations screen of the Specification
+   *  Master ( MM_SpecificationMaster / UpdateCalculation ) :
+   *
+   *      X Bar  = average of the OK readings
+   *      MR     = | this reading - previous reading | , a zero MR is left out
+   *      MR Bar = average of those MR values , rounded to 2
+   *      UCL    = X Bar + 3 x ( MR Bar / 1.13 )
+   *      LCL    = X Bar - 3 x ( MR Bar / 1.13 )
+   *      UCL R  = 3.27 x MR Bar
+   */
+  xDoubleBar: number = null;
+  mrBar: number = null;
+  calcUCL: number = null;
+  calcLCL: number = null;
+  calcUCLR: number = null;
   limitNote: string = '';
   loading: boolean = true;
 
@@ -83,10 +95,9 @@ export class ReadingChartsComponent {
   histogramOptions: Partial<ChartOptions> = {};
   mrOptions: Partial<ChartOptions> = {};
 
-  // Individuals ( X ) and Moving Range constants for a subgroup of one.
-  // One audit gives one reading for a location , so this is an I-MR pair.
-  private readonly E2 = 2.66; // X chart  : CL +/- 2.66 x MRbar
-  private readonly D4 = 3.267; // MR chart : UCL = 3.267 x MRbar
+  // the same constants which the Calculations screen uses
+  private readonly D2 = 1.13; // X chart  : X Bar +/- 3 x ( MR Bar / 1.13 )
+  private readonly D4 = 3.27; // MR chart : UCL R = 3.27 x MR Bar
 
   constructor(
     public dialogRef: MatDialogRef<ReadingChartsComponent>,
@@ -126,6 +137,7 @@ export class ReadingChartsComponent {
     this.readings = [];
     this.labels = [];
     this.vinLabels = [];
+    this.remarks = [];
     if (!this.selectedParameterId) {
       this.loading = false;
       return;
@@ -155,18 +167,13 @@ export class ReadingChartsComponent {
             const no = r.VIN_No ? r.VIN_No : r.Body_No;
             return no ? no : 'Audit ' + r.Audit_ID;
           });
+          this.remarks = list.map((r) => (r.Remark ? String(r.Remark) : ''));
           if (list.length) {
             this.LSL = this.num(list[0].MinVal);
             this.USL = this.num(list[0].MaxVal);
-            this.specLCL = this.num(list[0].LCL);
-            this.specUCL = this.num(list[0].UCL);
-            this.specUCLR = this.num(list[0].UCLR);
           } else {
             this.LSL = null;
             this.USL = null;
-            this.specLCL = null;
-            this.specUCL = null;
-            this.specUCLR = null;
           }
           this.buildAll();
           this.loading = false;
@@ -179,6 +186,7 @@ export class ReadingChartsComponent {
 
   buildAll() {
     this.calculateStats();
+    this.calculateControlLimits();
     this.buildXbarChart();
     this.buildHistogram();
     this.buildMrChart();
@@ -211,13 +219,66 @@ export class ReadingChartsComponent {
     return Math.sqrt(variance);
   }
 
-  // |x2 - x1| , |x3 - x2| ...  used by the MR chart and by the control limits
+  // |x2 - x1| , |x3 - x2| ...  this is what the MR chart plots
   private movingRanges(): number[] {
     const mr: number[] = [];
     for (let i = 1; i < this.readings.length; i++) {
       mr.push(Math.abs(this.readings[i] - this.readings[i - 1]));
     }
     return mr;
+  }
+
+  /*  Control limits , worked out from the readings which are on the screen.
+   *  Same formula as MM_SpecificationMaster / UpdateCalculation :
+   *      - only the readings marked OK are used
+   *      - a moving range of zero is left out of the average
+   *      - MR Bar is rounded to 2 decimals before the limits are built
+   */
+  calculateControlLimits() {
+    this.xDoubleBar = null;
+    this.mrBar = null;
+    this.calcUCL = null;
+    this.calcLCL = null;
+    this.calcUCLR = null;
+    this.limitNote = '';
+
+    const okReadings: number[] = [];
+    this.readings.forEach((value, index) => {
+      const remark = this.remarks[index];
+      if (!remark || remark.toUpperCase() === 'OK') {
+        okReadings.push(value);
+      }
+    });
+
+    if (!okReadings.length) {
+      this.limitNote =
+        'No reading is marked OK in this range , so the control limits can not be worked out.';
+      return;
+    }
+
+    this.xDoubleBar = this.mean(okReadings);
+
+    // moving ranges of the OK readings , a zero difference is not counted
+    const ranges: number[] = [];
+    for (let i = 1; i < okReadings.length; i++) {
+      const diff = Math.abs(okReadings[i] - okReadings[i - 1]);
+      if (diff !== 0) {
+        ranges.push(diff);
+      }
+    }
+
+    if (!ranges.length) {
+      this.limitNote =
+        okReadings.length < 2
+          ? 'Control limits need at least two OK readings.'
+          : 'Every OK reading is the same value , so there is no moving range to build the control limits from.';
+      return;
+    }
+
+    this.mrBar = Math.round(this.mean(ranges) * 100) / 100;
+    this.calcUCL = this.xDoubleBar + 3 * (this.mrBar / this.D2);
+    this.calcLCL = this.xDoubleBar - 3 * (this.mrBar / this.D2);
+    this.calcUCLR = this.D4 * this.mrBar;
   }
 
   calculateStats() {
@@ -301,32 +362,10 @@ export class ReadingChartsComponent {
 
   // ********************************** X bar Chart Section Start *******************************//
   buildXbarChart() {
-    const mean = this.stats.mean;
-    const mr = this.movingRanges();
-    const mrBar = mr.length ? this.mean(mr) : 0;
-
-    /*  The control limits come from the Specification Master first , because
-     *  that is where the plant maintains them ( Calculations screen ).
-     *  If they are empty there , they are worked out from the average moving
-     *  range , which is the standard Individuals chart formula.
-     *  If the readings never change , the moving range is zero and there are
-     *  no limits to draw at all - that is when the note is shown.
-     */
-    let ucl = this.specUCL;
-    let lcl = this.specLCL;
-    this.limitNote = '';
-
-    if (ucl === null || lcl === null) {
-      if (mrBar > 0) {
-        ucl = ucl === null ? mean + this.E2 * mrBar : ucl;
-        lcl = lcl === null ? mean - this.E2 * mrBar : lcl;
-      } else {
-        this.limitNote =
-          this.readings.length < 2
-            ? 'Control limits need at least two readings.'
-            : 'Every reading is the same , so there is no spread to build the control limits from. Set LCL / UCL in the Specification Master to show them here.';
-      }
-    }
+    // X Bar is the centre line of the limits , so the same value is used
+    const mean = this.xDoubleBar !== null ? this.xDoubleBar : this.stats.mean;
+    const ucl = this.calcUCL;
+    const lcl = this.calcLCL;
 
     // only the control limits are drawn here , the specification lines
     // ( LSL / USL ) are shown on the histogram instead
@@ -588,23 +627,18 @@ export class ReadingChartsComponent {
   // ********************************** MR Chart Section Start *******************************//
   buildMrChart() {
     const mr = this.movingRanges();
-    const mrBar = mr.length ? this.mean(mr) : 0;
-
-    // UCL R is maintained in the Specification Master , it is used when present
-    const useSpec = this.specUCLR !== null;
-    const ucl = useSpec ? this.specUCLR : this.D4 * mrBar;
+    const mrBar = this.mrBar;
+    const ucl = this.calcUCLR;
 
     const annotations: any = { yaxis: [] };
-    annotations.yaxis.push(
-      this.line(mrBar, '#1976d2', 'MR ' + this.round(mrBar))
-    );
-    if (ucl !== null && (useSpec || mrBar > 0)) {
+    if (mrBar !== null) {
       annotations.yaxis.push(
-        this.line(
-          ucl,
-          '#f57c00',
-          (useSpec ? 'UCL R ' : 'UCL ') + this.round(ucl)
-        )
+        this.line(mrBar, '#1976d2', 'MR Bar ' + this.round(mrBar))
+      );
+    }
+    if (ucl !== null) {
+      annotations.yaxis.push(
+        this.line(ucl, '#f57c00', 'UCL R ' + this.round(ucl))
       );
     }
 
