@@ -50,8 +50,6 @@ export class VehicleimagereportComponent {
   //               'lastn' = last N audits
   reportType: string = 'vin';
   lastNCount: number = 10;
-  // how many recent vehicles are offered in the VIN / BIW dropdown
-  private readonly VIN_LIST_SIZE = 500;
   startdate: string;
   enddate: string;
   startDateValue: Date;
@@ -222,9 +220,9 @@ export class VehicleimagereportComponent {
   // ********************************** Date Section End *******************************//
 
   // ********************************** Vehicle Section Start *******************************//
-  //  VIN mode   -> recent vehicles for the dropdown
-  //  Last N mode -> the last N audits , the count is the list size
+  //  VIN mode    -> vehicles audited between the two dates , they fill the dropdown
   //  Range mode  -> the audits between the two dates , the count is the list size
+  //  Last N mode -> the last N audits , the dates are not used
   getAuditedVehicles() {
     this.vehicleList = [];
     this.vehicleCount = 0;
@@ -232,9 +230,7 @@ export class VehicleimagereportComponent {
       return;
     }
     let topn = 0;
-    if (this.reportType === 'vin') {
-      topn = this.VIN_LIST_SIZE;
-    } else if (this.reportType === 'lastn') {
+    if (this.reportType === 'lastn') {
       topn = this.lastNCount > 0 ? this.lastNCount : 1;
     } else if (!this.startdate || !this.enddate) {
       return;

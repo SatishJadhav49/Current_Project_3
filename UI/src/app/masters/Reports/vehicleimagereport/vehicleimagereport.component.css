@@ -399,24 +399,8 @@ mat-form-field {
   filter: drop-shadow(0 1px 0 #dde4e4);
 }
 
-.vr-pin:hover /* deviation from the specification , shown next to the point in the
-   " Not Ok only " view ( same place where the master shows the location name ) */
-.vr-pin-dev {
-  position: absolute;
-  top: 18px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 1px 7px;
-  border-radius: 10px;
-  background: #d32f2f;
-  white-space: nowrap;
-  color: #fff;
-  font-size: 10px;
-  font-weight: bold;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
-}
-
-.vr-pin-tip {
+/* the tooltip is shown only while the point is hovered */
+.vr-pin:hover .vr-pin-tip {
   visibility: visible;
   opacity: 1;
 }

@@ -58,22 +58,13 @@
         </button>
       </div>
 
-      <!-- the input changes as per the selected report -->
-      <div class="vr-filter-item vr-vin-item" *ngIf="reportType === 'vin'">
-        <mat-form-field appearance="fill">
-          <mat-label>VIN / BIW No.</mat-label>
-          <mat-select
-            [(ngModel)]="selectedVehicle"
-            (selectionChange)="selectVehicle($event.value)"
-          >
-            <mat-option *ngFor="let v of vehicleList" [value]="v">
-              {{ vehicleLabel(v) }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-      <div class="vr-filter-item" *ngIf="reportType === 'range'">
+      <!-- the input changes as per the selected report.
+           VIN / BIW wise also uses the two dates , the dropdown then shows
+           only the vehicles which were audited inside that range. -->
+      <div
+        class="vr-filter-item"
+        *ngIf="reportType === 'vin' || reportType === 'range'"
+      >
         <mat-form-field appearance="fill">
           <mat-label>Start date</mat-label>
           <input
@@ -88,7 +79,10 @@
         </mat-form-field>
       </div>
 
-      <div class="vr-filter-item" *ngIf="reportType === 'range'">
+      <div
+        class="vr-filter-item"
+        *ngIf="reportType === 'vin' || reportType === 'range'"
+      >
         <mat-form-field appearance="fill">
           <mat-label>End date</mat-label>
           <input
@@ -100,6 +94,23 @@
           <mat-datepicker-toggle matIconSuffix [for]="picker2">
           </mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="vr-filter-item vr-vin-item" *ngIf="reportType === 'vin'">
+        <mat-form-field appearance="fill">
+          <mat-label>VIN / BIW No.</mat-label>
+          <mat-select
+            [(ngModel)]="selectedVehicle"
+            (selectionChange)="selectVehicle($event.value)"
+          >
+            <mat-option *ngFor="let v of vehicleList" [value]="v">
+              {{ vehicleLabel(v) }}
+            </mat-option>
+          </mat-select>
+          <mat-hint *ngIf="!vehicleList.length">
+            No vehicle audited in this range
+          </mat-hint>
         </mat-form-field>
       </div>
 
