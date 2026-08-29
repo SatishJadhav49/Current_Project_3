@@ -81,6 +81,8 @@
         </div>
       </div>
 
+      <div class="rc-note" *ngIf="limitNote">{{ limitNote }}</div>
+
       <div class="rc-note" *ngIf="stats.cp === null">
         Cp / Cpk need both LSL and USL and more than one distinct reading , so
         they are not shown for this location.

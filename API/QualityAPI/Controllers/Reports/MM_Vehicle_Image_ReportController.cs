@@ -314,7 +314,7 @@ namespace QualityAPI.Controllers.Reports
                     SELECT   " + (topn > 0 ? "TOP (@TopN)" : "") + @"
                              va.Audit_ID , va.Audit_Date , va.VIN_No , va.Body_No ,
                              TRY_CONVERT(decimal(18,4) , ts.Reading) AS Reading ,
-                             sp.MinVal , sp.MaxVal
+                             sp.MinVal , sp.MaxVal , sp.LCL , sp.UCL , sp.UCLR
                     FROM     MM_Vehicle_Audit va
                              INNER JOIN MM_Track_Sheet ts
                                      ON ts.Audit_ID      = va.Audit_ID
@@ -378,7 +378,10 @@ namespace QualityAPI.Controllers.Reports
                                 Body_No = Str(dr, "Body_No"),
                                 Reading = Dec(dr, "Reading"),
                                 MinVal = NullDec(dr, "MinVal"),
-                                MaxVal = NullDec(dr, "MaxVal")
+                                MaxVal = NullDec(dr, "MaxVal"),
+                                LCL = NullDec(dr, "LCL"),
+                                UCL = NullDec(dr, "UCL"),
+                                UCLR = NullDec(dr, "UCLR")
                             });
                         }
                     }
@@ -439,8 +442,13 @@ namespace QualityAPI.Controllers.Reports
         public string VIN_No { get; set; }
         public string Body_No { get; set; }
         public decimal Reading { get; set; }
+        // specification limits
         public Nullable<decimal> MinVal { get; set; }
         public Nullable<decimal> MaxVal { get; set; }
+        // control limits kept in the Specification Master ( Calculations screen )
+        public Nullable<decimal> LCL { get; set; }
+        public Nullable<decimal> UCL { get; set; }
+        public Nullable<decimal> UCLR { get; set; }
     }
 
     public class ImageReportRow

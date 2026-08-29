@@ -54,6 +54,13 @@ export class ReadingChartsComponent {
   vinLabels: string[] = []; // VIN / BIW number , shown inside the tooltip
   LSL: number = null;
   USL: number = null;
+  // control limits maintained in the Specification Master ( Calculations screen ).
+  // When they are empty the chart falls back to the calculated ones.
+  specLCL: number = null;
+  specUCL: number = null;
+  specUCLR: number = null;
+  // told to the user when the limits could not be worked out at all
+  limitNote: string = '';
   loading: boolean = true;
 
   // what is written on the top of the popup
@@ -149,17 +156,17 @@ export class ReadingChartsComponent {
             return no ? no : 'Audit ' + r.Audit_ID;
           });
           if (list.length) {
-            this.LSL =
-              list[0].MinVal === null || list[0].MinVal === undefined
-                ? null
-                : Number(list[0].MinVal);
-            this.USL =
-              list[0].MaxVal === null || list[0].MaxVal === undefined
-                ? null
-                : Number(list[0].MaxVal);
+            this.LSL = this.num(list[0].MinVal);
+            this.USL = this.num(list[0].MaxVal);
+            this.specLCL = this.num(list[0].LCL);
+            this.specUCL = this.num(list[0].UCL);
+            this.specUCLR = this.num(list[0].UCLR);
           } else {
             this.LSL = null;
             this.USL = null;
+            this.specLCL = null;
+            this.specUCL = null;
+            this.specUCLR = null;
           }
           this.buildAll();
           this.loading = false;
@@ -179,6 +186,15 @@ export class ReadingChartsComponent {
   // ********************************** Data Section End *******************************//
 
   // ********************************** Calculation Section Start *******************************//
+  // null / undefined stay null , everything else becomes a number
+  private num(value: any): number {
+    if (value === null || value === undefined || value === '') {
+      return null;
+    }
+    const n = Number(value);
+    return isNaN(n) ? null : n;
+  }
+
   private mean(data: number[]): number {
     if (!data.length) {
       return 0;
@@ -288,17 +304,46 @@ export class ReadingChartsComponent {
     const mean = this.stats.mean;
     const mr = this.movingRanges();
     const mrBar = mr.length ? this.mean(mr) : 0;
-    // for readings taken one at a time the control limits come from the
-    // average moving range , this is the standard Individuals chart
-    const ucl = mean + this.E2 * mrBar;
-    const lcl = mean - this.E2 * mrBar;
+
+    /*  The control limits come from the Specification Master first , because
+     *  that is where the plant maintains them ( Calculations screen ).
+     *  If they are empty there , they are worked out from the average moving
+     *  range , which is the standard Individuals chart formula.
+     *  If the readings never change , the moving range is zero and there are
+     *  no limits to draw at all - that is when the note is shown.
+     */
+    let ucl = this.specUCL;
+    let lcl = this.specLCL;
+    this.limitNote = '';
+
+    if (ucl === null || lcl === null) {
+      if (mrBar > 0) {
+        ucl = ucl === null ? mean + this.E2 * mrBar : ucl;
+        lcl = lcl === null ? mean - this.E2 * mrBar : lcl;
+      } else {
+        this.limitNote =
+          this.readings.length < 2
+            ? 'Control limits need at least two readings.'
+            : 'Every reading is the same , so there is no spread to build the control limits from. Set LCL / UCL in the Specification Master to show them here.';
+      }
+    }
 
     // only the control limits are drawn here , the specification lines
     // ( LSL / USL ) are shown on the histogram instead
     const annotations: any = { yaxis: [] };
-    annotations.yaxis.push(this.line(mean, '#1976d2', 'CL ' + this.round(mean)));
-    annotations.yaxis.push(this.line(ucl, '#f57c00', 'UCL ' + this.round(ucl)));
-    annotations.yaxis.push(this.line(lcl, '#f57c00', 'LCL ' + this.round(lcl)));
+    annotations.yaxis.push(
+      this.line(mean, '#1976d2', 'X Bar ' + this.round(mean))
+    );
+    if (ucl !== null) {
+      annotations.yaxis.push(
+        this.line(ucl, '#f57c00', 'UCL ' + this.round(ucl))
+      );
+    }
+    if (lcl !== null) {
+      annotations.yaxis.push(
+        this.line(lcl, '#f57c00', 'LCL ' + this.round(lcl))
+      );
+    }
 
     this.xbarOptions = {
       series: [{ name: 'Reading', type: 'line', data: this.readings }],
@@ -316,7 +361,9 @@ export class ReadingChartsComponent {
         // the chart now carries the control limits only , so a point is
         // marked red when it falls outside those limits
         discrete: this.readings.map((value, index) => {
-          if (value > ucl || value < lcl) {
+          const high = ucl !== null && value > ucl;
+          const low = lcl !== null && value < lcl;
+          if (high || low) {
             return {
               seriesIndex: 0,
               dataPointIndex: index,
@@ -542,13 +589,24 @@ export class ReadingChartsComponent {
   buildMrChart() {
     const mr = this.movingRanges();
     const mrBar = mr.length ? this.mean(mr) : 0;
-    const ucl = this.D4 * mrBar;
+
+    // UCL R is maintained in the Specification Master , it is used when present
+    const useSpec = this.specUCLR !== null;
+    const ucl = useSpec ? this.specUCLR : this.D4 * mrBar;
 
     const annotations: any = { yaxis: [] };
     annotations.yaxis.push(
       this.line(mrBar, '#1976d2', 'MR ' + this.round(mrBar))
     );
-    annotations.yaxis.push(this.line(ucl, '#f57c00', 'UCL ' + this.round(ucl)));
+    if (ucl !== null && (useSpec || mrBar > 0)) {
+      annotations.yaxis.push(
+        this.line(
+          ucl,
+          '#f57c00',
+          (useSpec ? 'UCL R ' : 'UCL ') + this.round(ucl)
+        )
+      );
+    }
 
     this.mrOptions = {
       series: [{ name: 'Moving Range', type: 'line', data: mr }],
