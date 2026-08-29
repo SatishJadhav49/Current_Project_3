@@ -367,6 +367,8 @@ export class ReadingChartsComponent {
     const ucl = this.calcUCL;
     const lcl = this.calcLCL;
 
+    const yRange = this.axisRange(this.readings, [ucl, lcl]);
+
     // only the control limits are drawn here , the specification lines
     // ( LSL / USL ) are shown on the histogram instead
     const annotations: any = { yaxis: [] };
@@ -419,7 +421,16 @@ export class ReadingChartsComponent {
         labels: { rotate: -45, style: { fontSize: '9px' } },
         tickAmount: 12,
       },
-      yaxis: { labels: { formatter: (val) => this.round(val, 2) } },
+      /*  The y axis is fixed on purpose. It normally scales to the readings
+       *  only , and ApexCharts hides a y axis annotation which falls outside
+       *  the axis , so UCL / LCL were being drawn off the plot and looked
+       *  missing. The range below always covers the limit lines.
+       */
+      yaxis: {
+        min: yRange.min,
+        max: yRange.max,
+        labels: { formatter: (val) => this.round(val, 2) },
+      },
       grid: { borderColor: '#e7e7e7' },
       // the axis carries the date , so the VIN / BIW is put in the tooltip
       tooltip: {
@@ -441,6 +452,32 @@ export class ReadingChartsComponent {
       annotations: annotations,
       title: { text: 'X Chart ( Individual Readings )', align: 'center' },
     };
+  }
+
+  /*  Range for a chart axis which has to hold the plotted values and the
+   *  limit lines together , with a little padding on both sides.
+   *  Returns undefined when there is nothing to measure , which leaves
+   *  ApexCharts on its own automatic scale.
+   */
+  private axisRange(
+    values: number[],
+    extras: number[]
+  ): { min: number; max: number } {
+    const all = (values ? values : []).slice();
+    (extras ? extras : []).forEach((v) => {
+      if (v !== null && v !== undefined && !isNaN(v)) {
+        all.push(v);
+      }
+    });
+    if (!all.length) {
+      return { min: undefined, max: undefined };
+    }
+    let min = Math.min(...all);
+    let max = Math.max(...all);
+    const pad = max - min > 0 ? (max - min) * 0.1 : Math.abs(max) * 0.1 || 1;
+    min = min - pad;
+    max = max + pad;
+    return { min: min, max: max };
   }
 
   private line(y: number, color: string, text: string) {
@@ -630,6 +667,8 @@ export class ReadingChartsComponent {
     const mrBar = this.mrBar;
     const ucl = this.calcUCLR;
 
+    const mrRange = this.axisRange(mr, [ucl, mrBar]);
+
     const annotations: any = { yaxis: [] };
     if (mrBar !== null) {
       annotations.yaxis.push(
@@ -660,8 +699,10 @@ export class ReadingChartsComponent {
         labels: { rotate: -45, style: { fontSize: '9px' } },
         tickAmount: 12,
       },
+      // fixed for the same reason as the X chart , so that UCL R stays visible
       yaxis: {
         min: 0,
+        max: mrRange.max,
         labels: { formatter: (val) => this.round(val, 2) },
       },
       grid: { borderColor: '#e7e7e7' },
