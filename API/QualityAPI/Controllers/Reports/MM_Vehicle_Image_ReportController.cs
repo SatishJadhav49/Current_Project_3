@@ -15,9 +15,10 @@ namespace QualityAPI.Controllers.Reports
      *  Shows the actual audit readings on the same picture on which the locations
      *  were mapped in the Vehicle Image Master.
      *
-     *  Two modes :
-     *      1) VIN / BIW wise  - reading of that one vehicle
-     *      2) Date range wise - average of every reading taken in that range
+     *  Three modes :
+     *      1) VIN / BIW wise   - reading of that one vehicle
+     *      2) Date range wise  - average of every reading taken between two dates
+     *      3) Last N audits    - average of the readings of the last N audits
      *
      *  One mapped location can have a Gap reading and a Flushness reading , so one
      *  row is returned per Location + Parameter. The UI groups them back per location
@@ -40,17 +41,28 @@ namespace QualityAPI.Controllers.Reports
 
         // GET : vehicles audited for this model in the given range
         //       used for the VIN / BIW dropdown and for the " vehicles audited " count
-        [Route("api/MM_Vehicle_Image_Report/GetAuditedVehicles/{plantid},{audittypeid},{modelid},{fromdate},{todate}")]
+        //  topn > 0 -> the last N audits of the model , the two dates are ignored
+        //  topn = 0 -> every audit between the two dates
+        [Route("api/MM_Vehicle_Image_Report/GetAuditedVehicles/{plantid},{audittypeid},{modelid},{fromdate},{todate},{topn}")]
         [HttpGet]
         [ActionName("GetAuditedVehicles")]
-        public IHttpActionResult GetAuditedVehicles(decimal plantid, decimal audittypeid, decimal modelid, DateTime fromdate, DateTime todate)
+        public IHttpActionResult GetAuditedVehicles(decimal plantid, decimal audittypeid, decimal modelid, DateTime fromdate, DateTime todate, int topn)
         {
             try
             {
-                const string sql = @"
+                string sql = topn > 0
+                    ? @"
+                    SELECT   TOP (@TopN) va.Audit_ID , va.VIN_No , va.Body_No , va.Audit_Date
+                    FROM     MM_Vehicle_Audit va
+                    WHERE    va.Plant_ID         = @Plant_ID
+                             AND va.Audit_Type_Id = @Audit_Type_Id
+                             AND va.Model_ID      = @Model_ID
+                             AND ISNULL(va.Is_Deleted , 0) = 0
+                    ORDER BY va.Audit_Date DESC , va.Audit_ID DESC"
+                    : @"
                     SELECT   va.Audit_ID , va.VIN_No , va.Body_No , va.Audit_Date
                     FROM     MM_Vehicle_Audit va
-                    WHERE    va.Plant_ID      = @Plant_ID
+                    WHERE    va.Plant_ID         = @Plant_ID
                              AND va.Audit_Type_Id = @Audit_Type_Id
                              AND va.Model_ID      = @Model_ID
                              AND va.Audit_Date   >= @FromDate
@@ -66,8 +78,15 @@ namespace QualityAPI.Controllers.Reports
                     cmd.Parameters.AddWithValue("@Plant_ID", plantid);
                     cmd.Parameters.AddWithValue("@Audit_Type_Id", audittypeid);
                     cmd.Parameters.AddWithValue("@Model_ID", modelid);
-                    cmd.Parameters.AddWithValue("@FromDate", fromdate.Date);
-                    cmd.Parameters.AddWithValue("@ToDate", todate.Date.AddDays(1));
+                    if (topn > 0)
+                    {
+                        cmd.Parameters.AddWithValue("@TopN", topn);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@FromDate", fromdate.Date);
+                        cmd.Parameters.AddWithValue("@ToDate", todate.Date.AddDays(1));
+                    }
                     con.Open();
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
@@ -129,20 +148,56 @@ namespace QualityAPI.Controllers.Reports
             }
         }
 
-        /*  Same query for both the reports , only the filter on the audit changes :
+        // GET : average of the readings of the LAST N audits of this model
+        [Route("api/MM_Vehicle_Image_Report/GetLastNReport/{plantid},{audittypeid},{vehicleimageid},{modelid},{topn}")]
+        [HttpGet]
+        [ActionName("GetLastNReport")]
+        public IHttpActionResult GetLastNReport(decimal plantid, decimal audittypeid, decimal vehicleimageid, decimal modelid, int topn)
+        {
+            try
+            {
+                return Ok(GetReportRows(vehicleimageid, plantid, audittypeid, 0, null, null, modelid, topn));
+            }
+            catch (Exception e)
+            {
+                generalLogObj.addControllerException(e, "MM_Vehicle_Image_Report", "GetLastNReport(" + vehicleimageid + "," + topn + ")");
+                return Ok(new List<ImageReportRow>());
+            }
+        }
+
+        /*  Same query for all the three reports , only the filter on the audit changes :
          *      auditid > 0  -> that one vehicle
-         *      auditid = 0  -> every vehicle of this model audited between the two dates
+         *      topn    > 0  -> the last N audits of this model
+         *      otherwise    -> every vehicle of this model audited between the two dates
          *
          *  It is a LEFT JOIN from the mapping , so a mapped location which has no
          *  reading at all still comes back ( with Reading NULL ) and is shown as
          *  " No Data " on the picture instead of quietly disappearing.
          */
         private List<ImageReportRow> GetReportRows(decimal vehicleimageid, decimal plantid, decimal audittypeid,
-                                                   decimal auditid, DateTime? fromdate, DateTime? todate)
+                                                   decimal auditid, DateTime? fromdate, DateTime? todate,
+                                                   decimal modelid = 0, int topn = 0)
         {
-            string auditFilter = auditid > 0
-                ? " AND va.Audit_ID = @Audit_ID "
-                : " AND va.Audit_Date >= @FromDate AND va.Audit_Date < @ToDate ";
+            string auditFilter;
+            if (auditid > 0)
+            {
+                auditFilter = " AND va.Audit_ID = @Audit_ID ";
+            }
+            else if (topn > 0)
+            {
+                auditFilter = @" AND va.Audit_ID IN (
+                                     SELECT TOP (@TopN) x.Audit_ID
+                                     FROM   MM_Vehicle_Audit x
+                                     WHERE  x.Plant_ID         = @Plant_ID
+                                            AND x.Audit_Type_Id = @Audit_Type_Id
+                                            AND x.Model_ID      = @Model_ID
+                                            AND ISNULL(x.Is_Deleted , 0) = 0
+                                     ORDER BY x.Audit_Date DESC , x.Audit_ID DESC ) ";
+            }
+            else
+            {
+                auditFilter = " AND va.Audit_Date >= @FromDate AND va.Audit_Date < @ToDate ";
+            }
 
             string sql = @"
                 SELECT   mp.Mapping_ID , mp.Location_ID , mp.X_Coordinate , mp.Y_Coordinate ,
@@ -193,6 +248,11 @@ namespace QualityAPI.Controllers.Reports
                 if (auditid > 0)
                 {
                     cmd.Parameters.AddWithValue("@Audit_ID", auditid);
+                }
+                else if (topn > 0)
+                {
+                    cmd.Parameters.AddWithValue("@TopN", topn);
+                    cmd.Parameters.AddWithValue("@Model_ID", modelid);
                 }
                 else
                 {

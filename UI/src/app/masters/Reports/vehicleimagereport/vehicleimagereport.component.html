@@ -3,6 +3,7 @@
 
   <div class="container" style="margin-top: 15px">
     <!-- ******************** Filter Section Start ******************** -->
+    <!-- Shop , Model and the report selection are kept together in one row -->
     <div class="vr-filter-bar">
       <div class="vr-filter-item">
         <mat-form-field appearance="fill">
@@ -32,65 +33,32 @@
         </mat-form-field>
       </div>
 
-      <div class="vr-filter-item">
-        <mat-form-field appearance="fill">
-          <mat-label>Start date</mat-label>
-          <input
-            matInput
-            [matDatepicker]="picker1"
-            [value]="startDateValue"
-            (dateChange)="onStartDateChange($event)"
-          />
-          <mat-datepicker-toggle matIconSuffix [for]="picker1">
-          </mat-datepicker-toggle>
-          <mat-datepicker #picker1></mat-datepicker>
-        </mat-form-field>
-      </div>
-
-      <div class="vr-filter-item">
-        <mat-form-field appearance="fill">
-          <mat-label>End date</mat-label>
-          <input
-            matInput
-            [matDatepicker]="picker2"
-            [value]="endDateValue"
-            (dateChange)="onEndDateChange($event)"
-          />
-          <mat-datepicker-toggle matIconSuffix [for]="picker2">
-          </mat-datepicker-toggle>
-          <mat-datepicker #picker2></mat-datepicker>
-        </mat-form-field>
-      </div>
-
-      <div class="vr-filter-btns">
-        <a (click)="refresh()" class="btn-forsave bg-refresh" type="btn">
-          <span> Refresh </span>
-        </a>
-        <a (click)="exit()" class="btn-forsave bg-exit" type="btn">
-          <span> Exit </span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Report type + vehicle -->
-    <div class="vr-filter-bar">
+      <!-- which report -->
       <div class="vr-type-toggle">
         <button
           class="vr-toggle-btn"
           [ngClass]="{ 'vr-toggle-on': reportType === 'vin' }"
-          (click)="reportType = 'vin'; changeReportType()"
+          (click)="changeReportType('vin')"
         >
           VIN / BIW wise
         </button>
         <button
           class="vr-toggle-btn"
           [ngClass]="{ 'vr-toggle-on': reportType === 'range' }"
-          (click)="reportType = 'range'; changeReportType()"
+          (click)="changeReportType('range')"
         >
           Date range wise
         </button>
+        <button
+          class="vr-toggle-btn"
+          [ngClass]="{ 'vr-toggle-on': reportType === 'lastn' }"
+          (click)="changeReportType('lastn')"
+        >
+          Last N audits
+        </button>
       </div>
 
+      <!-- the input changes as per the selected report -->
       <div class="vr-filter-item vr-vin-item" *ngIf="reportType === 'vin'">
         <mat-form-field appearance="fill">
           <mat-label>VIN / BIW No.</mat-label>
@@ -105,36 +73,60 @@
         </mat-form-field>
       </div>
 
-      <div class="vr-range-note" *ngIf="reportType === 'range'">
-        Average of every reading taken between the selected dates.
+      <div class="vr-filter-item" *ngIf="reportType === 'range'">
+        <mat-form-field appearance="fill">
+          <mat-label>Start date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            [value]="startDateValue"
+            (dateChange)="onStartDateChange($event)"
+          />
+          <mat-datepicker-toggle matIconSuffix [for]="picker1">
+          </mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="vr-filter-item" *ngIf="reportType === 'range'">
+        <mat-form-field appearance="fill">
+          <mat-label>End date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            [value]="endDateValue"
+            (dateChange)="onEndDateChange($event)"
+          />
+          <mat-datepicker-toggle matIconSuffix [for]="picker2">
+          </mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="vr-filter-item vr-n-item" *ngIf="reportType === 'lastn'">
+        <mat-form-field appearance="fill">
+          <mat-label>No. of audits</mat-label>
+          <input
+            matInput
+            type="number"
+            min="1"
+            max="500"
+            [(ngModel)]="lastNCount"
+            (change)="changeLastN()"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="vr-filter-btns">
+        <a (click)="refresh()" class="btn-forsave bg-refresh" type="btn">
+          <span> Refresh </span>
+        </a>
+        <a (click)="exit()" class="btn-forsave bg-exit" type="btn">
+          <span> Exit </span>
+        </a>
       </div>
     </div>
     <!-- ******************** Filter Section End ******************** -->
-
-    <!-- ******************** Summary Section Start ******************** -->
-    <div class="vr-tiles" *ngIf="selectedmodel">
-      <div class="vr-tile">
-        <span class="vr-tile-value">{{ vehicleCount }}</span>
-        <span class="vr-tile-label">Vehicles Audited</span>
-      </div>
-      <div class="vr-tile">
-        <span class="vr-tile-value">{{ filteredPoints.length }}</span>
-        <span class="vr-tile-label">Points Shown</span>
-      </div>
-      <div class="vr-tile vr-tile-ok">
-        <span class="vr-tile-value">{{ okCount }}</span>
-        <span class="vr-tile-label">Ok</span>
-      </div>
-      <div class="vr-tile vr-tile-nok">
-        <span class="vr-tile-value">{{ nokCount }}</span>
-        <span class="vr-tile-label">Not Ok</span>
-      </div>
-      <div class="vr-tile vr-tile-na">
-        <span class="vr-tile-value">{{ nodataCount }}</span>
-        <span class="vr-tile-label">No Data</span>
-      </div>
-    </div>
-    <!-- ******************** Summary Section End ******************** -->
 
     <!-- ******************** Image Strip Section Start ******************** -->
     <div *ngIf="selectedmodel" class="vr-card">
@@ -172,15 +164,20 @@
             {{ selectedVehicle ? vehicleLabel(selectedVehicle) : "" }}
           </span>
           <span class="vr-head-note" *ngIf="reportType === 'range'">
-            {{ startdate }} to {{ enddate }}
+            {{ startdate }} to {{ enddate }} &nbsp;&#8226;&nbsp;
+            {{ vehicleCount }} vehicle(s) audited
+          </span>
+          <span class="vr-head-note" *ngIf="reportType === 'lastn'">
+            Last {{ lastNCount }} audits &nbsp;&#8226;&nbsp;
+            {{ vehicleCount }} vehicle(s) found
           </span>
         </h4>
 
         <div class="vr-canvas-tools">
           <span class="vr-legend">
-            <span class="vr-dot-ok"></span> Ok
-            <span class="vr-dot-nok"></span> Not Ok
-            <span class="vr-dot-na"></span> No Data
+            <span class="vr-dot-ok"></span> Ok {{ okCount }}
+            <span class="vr-dot-nok"></span> Not Ok {{ nokCount }}
+            <span class="vr-dot-na"></span> No Data {{ nodataCount }}
           </span>
           <button
             class="vr-tool-btn"
@@ -222,6 +219,15 @@
                   [style.background]="colorOf(point)"
                   title="{{ point.Location_Name }}"
                 ></button>
+
+                <!-- in the Not Ok only view the deviation from the
+                     specification is shown next to the point -->
+                <span
+                  class="vr-pin-dev"
+                  *ngIf="viewMode === 'nok' && point.status === 'nok'"
+                >
+                  {{ deviationText(point) }}
+                </span>
 
                 <div class="vr-pin-tip">
                   <div class="vr-tip-head" [style.color]="colorOf(point)">

@@ -46,8 +46,12 @@ export class VehicleimagereportComponent {
   modelList: Model[] = [];
   selectedmodel: Model;
 
-  // Report type : 'vin' = VIN / BIW wise , 'range' = date range wise
+  // Report type : 'vin' = VIN / BIW wise , 'range' = date range wise ,
+  //               'lastn' = last N audits
   reportType: string = 'vin';
+  lastNCount: number = 10;
+  // how many recent vehicles are offered in the VIN / BIW dropdown
+  private readonly VIN_LIST_SIZE = 500;
   startdate: string;
   enddate: string;
   startDateValue: Date;
@@ -218,10 +222,21 @@ export class VehicleimagereportComponent {
   // ********************************** Date Section End *******************************//
 
   // ********************************** Vehicle Section Start *******************************//
+  //  VIN mode   -> recent vehicles for the dropdown
+  //  Last N mode -> the last N audits , the count is the list size
+  //  Range mode  -> the audits between the two dates , the count is the list size
   getAuditedVehicles() {
     this.vehicleList = [];
     this.vehicleCount = 0;
-    if (!this.selectedmodel || !this.startdate || !this.enddate) {
+    if (!this.selectedmodel) {
+      return;
+    }
+    let topn = 0;
+    if (this.reportType === 'vin') {
+      topn = this.VIN_LIST_SIZE;
+    } else if (this.reportType === 'lastn') {
+      topn = this.lastNCount > 0 ? this.lastNCount : 1;
+    } else if (!this.startdate || !this.enddate) {
       return;
     }
     this.reportsService
@@ -230,11 +245,14 @@ export class VehicleimagereportComponent {
         this.audittypeid,
         this.selectedmodel.Model_ID,
         this.startdate,
-        this.enddate
+        this.enddate,
+        topn
       )
       .subscribe((data) => {
         this.vehicleList = data ? data : [];
-        this.vehicleCount = this.vehicleList.length;
+        // in VIN mode the list is only the dropdown , one vehicle is reported
+        this.vehicleCount =
+          this.reportType === 'vin' ? 1 : this.vehicleList.length;
 
         // keep the same vehicle selected if it is still in the list
         if (this.selectedVehicle) {
@@ -269,9 +287,21 @@ export class VehicleimagereportComponent {
     return (no ? no : 'Audit ' + vehicle.Audit_ID) + ' ( ' + dt + ' )';
   }
 
-  changeReportType() {
+  changeReportType(type: string) {
+    this.reportType = type;
     this.selectedPoint = null;
-    this.loadReport();
+    this.getAuditedVehicles();
+  }
+
+  // typed a new value in " Last N audits "
+  changeLastN() {
+    if (!this.lastNCount || this.lastNCount < 1) {
+      this.lastNCount = 1;
+    }
+    if (this.lastNCount > 500) {
+      this.lastNCount = 500;
+    }
+    this.getAuditedVehicles();
   }
   // ********************************** Vehicle Section End *******************************//
 
@@ -450,6 +480,19 @@ export class VehicleimagereportComponent {
           this.reportRows = data ? data : [];
           this.buildPoints();
         });
+    } else if (this.reportType === 'lastn') {
+      this.reportsService
+        .getLastNImageReport(
+          this.plantid,
+          this.audittypeid,
+          this.selectedImage.Vehicle_Image_ID,
+          this.selectedmodel.Model_ID,
+          this.lastNCount
+        )
+        .subscribe((data) => {
+          this.reportRows = data ? data : [];
+          this.buildPoints();
+        });
     } else {
       if (!this.startdate || !this.enddate) {
         this.toaster.warning('Please select Start date and End date .');
@@ -548,6 +591,34 @@ export class VehicleimagereportComponent {
       return false;
     }
     return row.Reading < row.MinVal || row.Reading > row.MaxVal;
+  }
+
+  // How far the reading is outside the specification.
+  // Positive = above the maximum , negative = below the minimum.
+  deviationOf(row: ImageReportRow): number {
+    if (!this.isReadingNok(row)) {
+      return 0;
+    }
+    if (row.Reading > row.MaxVal) {
+      return row.Reading - row.MaxVal;
+    }
+    return row.Reading - row.MinVal;
+  }
+
+  // worst deviation of the point , this is the label shown next to the red dot
+  deviationText(point: ReportPoint): string {
+    let worst = 0;
+    point.readings.forEach((row) => {
+      const dev = this.deviationOf(row);
+      if (Math.abs(dev) > Math.abs(worst)) {
+        worst = dev;
+      }
+    });
+    if (!worst) {
+      return '';
+    }
+    const value = Math.round(worst * 100) / 100;
+    return (value > 0 ? '+' : '') + value;
   }
 
   applyFilters() {

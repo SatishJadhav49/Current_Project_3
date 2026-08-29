@@ -280,9 +280,11 @@ export class ReportsService {
 
   // ---------- Vehicle Image Report Start ---------------------------//
 
-  // vehicles audited for this model in the range , used for the VIN / BIW
-  // dropdown and for the " vehicles audited " count on the top
-  getAuditedVehicles(plantid, audittypeid, modelid, fromdate, todate) {
+  // vehicles audited for this model , used for the VIN / BIW dropdown and
+  // for the " vehicles audited " count.
+  // topn > 0 -> last N audits ( the two dates are ignored )
+  // topn = 0 -> every audit between the two dates
+  getAuditedVehicles(plantid, audittypeid, modelid, fromdate, todate, topn) {
     return this.apirequest.get(
       'api/MM_Vehicle_Image_Report/GetAuditedVehicles/' +
       plantid +
@@ -293,7 +295,9 @@ export class ReportsService {
       ',' +
       fromdate +
       ',' +
-      todate
+      todate +
+      ',' +
+      topn
     );
   }
 
@@ -324,6 +328,21 @@ export class ReportsService {
       fromdate +
       ',' +
       todate
+    );
+  }
+  // average of the readings of the last N audits
+  getLastNImageReport(plantid, audittypeid, vehicleimageid, modelid, topn) {
+    return this.apirequest.get(
+      'api/MM_Vehicle_Image_Report/GetLastNReport/' +
+      plantid +
+      ',' +
+      audittypeid +
+      ',' +
+      vehicleimageid +
+      ',' +
+      modelid +
+      ',' +
+      topn
     );
   }
   // ---------- Vehicle Image Report End ---------------------------//
