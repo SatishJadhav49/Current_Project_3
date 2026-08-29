@@ -293,16 +293,12 @@ export class ReadingChartsComponent {
     const ucl = mean + this.E2 * mrBar;
     const lcl = mean - this.E2 * mrBar;
 
+    // only the control limits are drawn here , the specification lines
+    // ( LSL / USL ) are shown on the histogram instead
     const annotations: any = { yaxis: [] };
     annotations.yaxis.push(this.line(mean, '#1976d2', 'CL ' + this.round(mean)));
     annotations.yaxis.push(this.line(ucl, '#f57c00', 'UCL ' + this.round(ucl)));
     annotations.yaxis.push(this.line(lcl, '#f57c00', 'LCL ' + this.round(lcl)));
-    if (this.USL !== null) {
-      annotations.yaxis.push(this.line(this.USL, '#d32f2f', 'USL ' + this.USL));
-    }
-    if (this.LSL !== null) {
-      annotations.yaxis.push(this.line(this.LSL, '#d32f2f', 'LSL ' + this.LSL));
-    }
 
     this.xbarOptions = {
       series: [{ name: 'Reading', type: 'line', data: this.readings }],
@@ -317,9 +313,10 @@ export class ReadingChartsComponent {
       colors: ['#1976d2'],
       markers: {
         size: 4,
-        // a reading outside the specification is marked in red
+        // the chart now carries the control limits only , so a point is
+        // marked red when it falls outside those limits
         discrete: this.readings.map((value, index) => {
-          if (this.isOutOfSpec(value)) {
+          if (value > ucl || value < lcl) {
             return {
               seriesIndex: 0,
               dataPointIndex: index,
@@ -360,13 +357,6 @@ export class ReadingChartsComponent {
     };
   }
 
-  private isOutOfSpec(value: number): boolean {
-    if (this.LSL === null || this.USL === null) {
-      return false;
-    }
-    return value < this.LSL || value > this.USL;
-  }
-
   private line(y: number, color: string, text: string) {
     return {
       y: y,
@@ -386,7 +376,9 @@ export class ReadingChartsComponent {
       this.histogramOptions = {};
       return;
     }
-    const bins = this.generateHistogramData(this.readings);
+    // the bins are stretched to cover LSL / USL as well , otherwise a
+    // specification line outside the data range would have nowhere to sit
+    const bins = this.generateHistogramData(this.readings, this.LSL, this.USL);
     const curve = this.generateNormalCurve(
       bins.categories,
       this.stats.mean,
@@ -395,7 +387,26 @@ export class ReadingChartsComponent {
       bins.binWidth
     );
 
+    // vertical specification lines
     const annotations: any = { xaxis: [] };
+    if (this.LSL !== null) {
+      annotations.xaxis.push(
+        this.vline(
+          this.findClosestBin(bins.categories, this.LSL),
+          '#d32f2f',
+          'LSL ' + this.LSL
+        )
+      );
+    }
+    if (this.USL !== null) {
+      annotations.xaxis.push(
+        this.vline(
+          this.findClosestBin(bins.categories, this.USL),
+          '#d32f2f',
+          'USL ' + this.USL
+        )
+      );
+    }
 
     this.histogramOptions = {
       series: [
@@ -431,13 +442,24 @@ export class ReadingChartsComponent {
     };
   }
 
-  private generateHistogramData(data: number[]): {
+  private generateHistogramData(
+    data: number[],
+    lsl: number,
+    usl: number
+  ): {
     categories: string[];
     data: number[];
     binWidth: number;
   } {
-    const min = Math.min(...data);
-    const max = Math.max(...data);
+    let min = Math.min(...data);
+    let max = Math.max(...data);
+    // stretch the range so that the specification always falls inside the chart
+    if (lsl !== null && lsl < min) {
+      min = lsl;
+    }
+    if (usl !== null && usl > max) {
+      max = usl;
+    }
     const binCount = 15;
     let binWidth = (max - min) / binCount;
     if (binWidth <= 0) {
@@ -460,6 +482,39 @@ export class ReadingChartsComponent {
     });
 
     return { categories, data: bins, binWidth };
+  }
+
+  // vertical line on a category axis , it must sit on one of the bins
+  private vline(x: string, color: string, text: string) {
+    return {
+      x: x,
+      borderColor: color,
+      strokeDashArray: 4,
+      label: {
+        text: text,
+        orientation: 'horizontal',
+        position: 'top',
+        style: { color: '#fff', background: color, fontSize: '10px' },
+      },
+    };
+  }
+
+  // the x axis holds the bin start values , so the specification is
+  // drawn on the bin which is nearest to it
+  private findClosestBin(categories: string[], value: number): string {
+    if (!categories.length) {
+      return '';
+    }
+    let closest = categories[0];
+    let minDiff = Math.abs(parseFloat(categories[0]) - value);
+    for (let i = 1; i < categories.length; i++) {
+      const diff = Math.abs(parseFloat(categories[i]) - value);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closest = categories[i];
+      }
+    }
+    return closest;
   }
 
   private generateNormalCurve(

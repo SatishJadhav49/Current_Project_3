@@ -720,10 +720,12 @@ export class VehicleimagereportComponent {
     }
 
     this.dialog.open(ReadingChartsComponent, {
+      // not fully full screen , a small gap is left on the top
       width: '100vw',
       maxWidth: '100vw',
-      height: '100vh',
-      maxHeight: '100vh',
+      height: 'calc(100vh - 40px)',
+      maxHeight: 'calc(100vh - 40px)',
+      position: { top: '40px' },
       panelClass: 'reading-charts-panel',
       enterAnimationDuration: '0ms',
       exitAnimationDuration: '0ms',
