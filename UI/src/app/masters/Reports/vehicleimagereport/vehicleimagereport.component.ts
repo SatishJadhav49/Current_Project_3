@@ -720,8 +720,10 @@ export class VehicleimagereportComponent {
     }
 
     this.dialog.open(ReadingChartsComponent, {
-      width: '92vw',
-      maxWidth: '1250px',
+      width: '100vw',
+      maxWidth: '100vw',
+      height: '100vh',
+      maxHeight: '100vh',
       panelClass: 'reading-charts-panel',
       enterAnimationDuration: '0ms',
       exitAnimationDuration: '0ms',

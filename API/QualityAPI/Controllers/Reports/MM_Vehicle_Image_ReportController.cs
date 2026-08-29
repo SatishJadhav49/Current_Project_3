@@ -310,7 +310,7 @@ namespace QualityAPI.Controllers.Reports
         {
             try
             {
-                string inner = @"
+                string baseSelect = @"
                     SELECT   " + (topn > 0 ? "TOP (@TopN)" : "") + @"
                              va.Audit_ID , va.Audit_Date , va.VIN_No , va.Body_No ,
                              TRY_CONVERT(decimal(18,4) , ts.Reading) AS Reading ,
@@ -329,12 +329,22 @@ namespace QualityAPI.Controllers.Reports
                              AND va.Model_ID      = @Model_ID
                              AND ISNULL(va.Is_Deleted , 0) = 0
                              AND TRY_CONVERT(decimal(18,4) , ts.Reading) IS NOT NULL "
-                    + (topn > 0 ? "" : " AND va.Audit_Date >= @FromDate AND va.Audit_Date < @ToDate ")
-                    + @" ORDER BY va.Audit_Date DESC , va.Audit_ID DESC";
+                    + (topn > 0 ? "" : " AND va.Audit_Date >= @FromDate AND va.Audit_Date < @ToDate ");
 
-                // the newest rows are picked first , then turned back into
-                // audit order so that the charts read left to right by date
-                string sql = "SELECT * FROM ( " + inner + " ) t ORDER BY t.Audit_Date , t.Audit_ID";
+                /*  The charts must read left to right by audit date.
+                 *
+                 *  Last N : the newest N rows are taken first and are then put back
+                 *           into audit order by the outer query. The derived table is
+                 *           allowed here only because it carries TOP - without TOP ,
+                 *           SQL Server rejects an ORDER BY inside a derived table.
+                 *  Range  : no TOP is needed , so it is ordered directly and no
+                 *           derived table is used at all.
+                 */
+                string sql = topn > 0
+                    ? "SELECT * FROM ( " + baseSelect +
+                      " ORDER BY va.Audit_Date DESC , va.Audit_ID DESC ) t " +
+                      " ORDER BY t.Audit_Date , t.Audit_ID"
+                    : baseSelect + " ORDER BY va.Audit_Date , va.Audit_ID";
 
                 var list = new List<LocationReadingRow>();
 

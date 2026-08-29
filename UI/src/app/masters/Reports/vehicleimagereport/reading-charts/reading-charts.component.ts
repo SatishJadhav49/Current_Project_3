@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {
@@ -37,6 +38,7 @@ export type ChartOptions = {
   selector: 'app-reading-charts',
   templateUrl: './reading-charts.component.html',
   styleUrls: ['./reading-charts.component.css'],
+  providers: [DatePipe],
 })
 export class ReadingChartsComponent {
   //Developer = Satish Jadhav
@@ -48,7 +50,8 @@ export class ReadingChartsComponent {
   selectedParameterId: number;
 
   readings: number[] = [];
-  labels: string[] = [];
+  labels: string[] = []; // audit date , this is what the x axis shows
+  vinLabels: string[] = []; // VIN / BIW number , shown inside the tooltip
   LSL: number = null;
   USL: number = null;
   loading: boolean = true;
@@ -81,6 +84,7 @@ export class ReadingChartsComponent {
   constructor(
     public dialogRef: MatDialogRef<ReadingChartsComponent>,
     private reportsService: ReportsService,
+    private datePipe: DatePipe,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -114,6 +118,7 @@ export class ReadingChartsComponent {
     this.loading = true;
     this.readings = [];
     this.labels = [];
+    this.vinLabels = [];
     if (!this.selectedParameterId) {
       this.loading = false;
       return;
@@ -134,9 +139,14 @@ export class ReadingChartsComponent {
         (rows) => {
           const list = rows ? rows : [];
           this.readings = list.map((r) => Number(r.Reading));
-          this.labels = list.map((r) => {
+          this.labels = list.map((r) =>
+            r.Audit_Date
+              ? this.datePipe.transform(r.Audit_Date, 'dd-MMM-yy')
+              : ''
+          );
+          this.vinLabels = list.map((r) => {
             const no = r.VIN_No ? r.VIN_No : r.Body_No;
-            return no ? no : 'A' + r.Audit_ID;
+            return no ? no : 'Audit ' + r.Audit_ID;
           });
           if (list.length) {
             this.LSL =
@@ -297,7 +307,7 @@ export class ReadingChartsComponent {
     this.xbarOptions = {
       series: [{ name: 'Reading', type: 'line', data: this.readings }],
       chart: {
-        height: 300,
+        height: 340,
         type: 'line',
         toolbar: { show: true },
         animations: { enabled: false },
@@ -328,7 +338,22 @@ export class ReadingChartsComponent {
       },
       yaxis: { labels: { formatter: (val) => this.round(val, 2) } },
       grid: { borderColor: '#e7e7e7' },
-      tooltip: { shared: false },
+      // the axis carries the date , so the VIN / BIW is put in the tooltip
+      tooltip: {
+        shared: false,
+        custom: (opt) => {
+          const value = opt.series[opt.seriesIndex][opt.dataPointIndex];
+          const date = this.esc(this.labels[opt.dataPointIndex]);
+          const vin = this.esc(this.vinLabels[opt.dataPointIndex]);
+          return (
+            '<div class="rc-tt">' +
+            '<div class="rc-tt-head">' + date + '</div>' +
+            '<div>' + vin + '</div>' +
+            '<div><b>Reading : ' + this.round(value) + '</b></div>' +
+            '</div>'
+          );
+        },
+      },
       legend: { show: false },
       annotations: annotations,
       title: { text: 'X Chart ( Individual Readings )', align: 'center' },
@@ -378,7 +403,7 @@ export class ReadingChartsComponent {
         { name: 'Normal Distribution', type: 'line', data: curve },
       ],
       chart: {
-        height: 300,
+        height: 330,
         type: 'line',
         toolbar: { show: true },
         animations: { enabled: false },
@@ -391,7 +416,12 @@ export class ReadingChartsComponent {
         categories: bins.categories,
         labels: { style: { fontSize: '9px' } },
       },
-      yaxis: { title: { text: 'Frequency' } },
+      // the normal curve is a fraction , without this the axis prints
+      // a long tail of decimals
+      yaxis: {
+        title: { text: 'Frequency' },
+        labels: { formatter: (val) => this.round(val, 2) },
+      },
       grid: { borderColor: '#e7e7e7' },
       legend: { show: true, position: 'top' },
       markers: { size: 0 },
@@ -468,7 +498,7 @@ export class ReadingChartsComponent {
     this.mrOptions = {
       series: [{ name: 'Moving Range', type: 'line', data: mr }],
       chart: {
-        height: 300,
+        height: 330,
         type: 'line',
         toolbar: { show: true },
         animations: { enabled: false },
@@ -495,6 +525,17 @@ export class ReadingChartsComponent {
     };
   }
   // ********************************** MR Chart Section End *******************************//
+
+  // the tooltip is raw html , so whatever comes from the database is escaped
+  private esc(text: string): string {
+    if (!text) {
+      return '';
+    }
+    return String(text)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
 
   close() {
     this.dialogRef.close();

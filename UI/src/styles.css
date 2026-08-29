@@ -799,14 +799,31 @@ div.dataTables_wrapper div.dataTables_filter label {
 }
 
 /* Vehicle Image Report - reading charts popup.
-   The dialog container has its own padding , the popup draws its own
-   header and body so the padding is removed here. */
-.reading-charts-panel .mat-mdc-dialog-container .mdc-dialog__surface {
+   It is opened full screen , the dialog container has its own padding and
+   rounded corners which are removed here because the popup draws its own
+   header and body. */
+.reading-charts-panel .mat-mdc-dialog-container .mdc-dialog__surface,
+.reading-charts-panel .mat-mdc-dialog-container .mat-mdc-dialog-surface {
   padding: 0px;
+  border-radius: 0px;
   overflow: hidden;
 }
 
-.reading-charts-panel .mat-mdc-dialog-container .mat-mdc-dialog-surface {
+.reading-charts-panel .mat-mdc-dialog-container {
   padding: 0px;
-  overflow: hidden;
+}
+
+/* tooltip of the X chart ( it is raw html given to ApexCharts ) */
+.rc-tt {
+  padding: 7px 10px;
+  color: #3c4646;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.rc-tt-head {
+  margin-bottom: 2px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #eceff0;
+  font-weight: bold;
 }
