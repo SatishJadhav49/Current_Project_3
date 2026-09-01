@@ -132,55 +132,61 @@
   text-align: center;
 }
 
-/* ******************** Statistics box ******************** */
-.rc-stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+/* ******************** Statistics table ******************** */
+/* the global stylesheet paints every tbody grey and forces bold ,
+   so it is switched off here for this table */
+.rc-table tbody {
+  background-color: transparent;
+  font-size: 12px;
+  font-weight: normal !important;
 }
 
-.rc-stat {
-  flex: 1 1 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 8px 6px;
-  border: 1px solid #e3e8e8;
-  border-top: 3px solid #1c84c6;
-  border-radius: 5px;
-  background: #fff;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+.rc-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.rc-stat-label {
-  color: #7a8585;
-  font-size: 10px;
+.rc-table td {
+  padding: 7px 10px;
+  border-bottom: 1px solid #eceff0;
+}
+
+.rc-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* first column : the name */
+.rc-table td:first-child {
+  color: #5b6666;
+  font-size: 11px;
   font-weight: bold;
   text-transform: uppercase;
 }
 
-.rc-stat-value {
+/* second column : the value */
+.rc-table td:last-child {
+  width: 40%;
   color: #2b3333;
-  font-size: 17px;
+  font-size: 13px;
   font-weight: bold;
-  line-height: 22px;
+  text-align: right;
 }
 
-.rc-spec {
-  border-top-color: #9e9e9e;
+.rc-table tr:nth-child(even) td {
+  background: #fafbfb;
 }
 
 /* Cpk quality hint : >= 1.33 good , >= 1 watch , below 1 poor */
 .rc-good {
-  border-top-color: #2e7d32;
+  color: #2e7d32 !important;
 }
 
 .rc-warn {
-  border-top-color: #f57c00;
+  color: #f57c00 !important;
 }
 
 .rc-bad {
-  border-top-color: #d32f2f;
+  color: #d32f2f !important;
 }
 
 .rc-note {
@@ -197,10 +203,7 @@
   .rc-col {
     flex: 1 1 100%;
   }
-  .rc-stat {
-    flex: 1 1 90px;
-  }
-  .rc-stat-value {
-    font-size: 15px;
+  .rc-table td {
+    padding: 6px 8px;
   }
 }
