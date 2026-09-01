@@ -94,16 +94,53 @@
   text-align: center;
 }
 
+/* ******************** Two column layout ********************
+   left  : Histogram on the top , Statistics below it
+   right : X Bar chart on the top , R chart below it            */
+.rc-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.rc-col {
+  flex: 1 1 460px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rc-chart {
+  padding: 6px;
+  border: 1px solid #e3e8e8;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.rc-stats-card {
+  padding: 10px 12px 12px;
+}
+
+.rc-card-title {
+  margin-bottom: 10px;
+  color: #3c4646;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+}
+
 /* ******************** Statistics box ******************** */
 .rc-stats {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 12px;
 }
 
 .rc-stat {
-  flex: 1 1 110px;
+  flex: 1 1 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -147,7 +184,7 @@
 }
 
 .rc-note {
-  margin-bottom: 12px;
+  margin-top: 10px;
   padding: 8px 10px;
   border-left: 3px solid #f57c00;
   border-radius: 3px;
@@ -156,30 +193,8 @@
   font-size: 11px;
 }
 
-/* ******************** Charts ******************** */
-.rc-charts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.rc-chart {
-  flex: 1 1 420px;
-  min-width: 0;
-  padding: 6px;
-  border: 1px solid #e3e8e8;
-  border-radius: 6px;
-  background: #fff;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-/* the X chart is the main one , it takes the full width */
-.rc-chart-wide {
-  flex: 1 1 100%;
-}
-
 @media (max-width: 992px) {
-  .rc-chart {
+  .rc-col {
     flex: 1 1 100%;
   }
   .rc-stat {

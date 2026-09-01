@@ -389,7 +389,7 @@ export class ReadingChartsComponent {
     this.xbarOptions = {
       series: [{ name: 'Reading', type: 'line', data: this.readings }],
       chart: {
-        height: 340,
+        height: 330,
         type: 'line',
         toolbar: { show: true },
         animations: { enabled: false },

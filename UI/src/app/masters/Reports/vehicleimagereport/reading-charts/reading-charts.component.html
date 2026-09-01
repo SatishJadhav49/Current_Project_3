@@ -32,82 +32,9 @@
       No reading found for this location in the selected range.
     </div>
 
-    <div *ngIf="!loading && readings.length">
-      <!-- Statistics box -->
-      <div class="rc-stats">
-        <div class="rc-stat">
-          <span class="rc-stat-label">Sample Size</span>
-          <span class="rc-stat-value">{{ stats.count }}</span>
-        </div>
-        <div class="rc-stat">
-          <span class="rc-stat-label">Mean</span>
-          <span class="rc-stat-value">{{ round(stats.mean) }}</span>
-        </div>
-        <div class="rc-stat">
-          <span class="rc-stat-label">Median</span>
-          <span class="rc-stat-value">{{ round(stats.median) }}</span>
-        </div>
-        <div class="rc-stat">
-          <span class="rc-stat-label">Std. Deviation</span>
-          <span class="rc-stat-value">{{ round(stats.stdDev) }}</span>
-        </div>
-        <div class="rc-stat">
-          <span class="rc-stat-label">Cp</span>
-          <span class="rc-stat-value">{{ round(stats.cp, 2) }}</span>
-        </div>
-        <div class="rc-stat" [ngClass]="cpkClass()">
-          <span class="rc-stat-label">Cpk</span>
-          <span class="rc-stat-value">{{ round(stats.cpk, 2) }}</span>
-        </div>
-        <div class="rc-stat">
-          <span class="rc-stat-label">Min Reading</span>
-          <span class="rc-stat-value">{{ round(stats.min) }}</span>
-        </div>
-        <div class="rc-stat">
-          <span class="rc-stat-label">Max Reading</span>
-          <span class="rc-stat-value">{{ round(stats.max) }}</span>
-        </div>
-        <div class="rc-stat rc-spec">
-          <span class="rc-stat-label">LSL</span>
-          <span class="rc-stat-value">
-            {{ stats.lsl === null ? "-" : stats.lsl }}
-          </span>
-        </div>
-        <div class="rc-stat rc-spec">
-          <span class="rc-stat-label">USL</span>
-          <span class="rc-stat-value">
-            {{ stats.usl === null ? "-" : stats.usl }}
-          </span>
-        </div>
-      </div>
-
-      <div class="rc-note" *ngIf="limitNote">{{ limitNote }}</div>
-
-      <div class="rc-note" *ngIf="stats.cp === null">
-        Cp / Cpk need both LSL and USL and more than one distinct reading , so
-        they are not shown for this location.
-      </div>
-
-      <!-- Charts -->
-      <div class="rc-charts">
-        <div class="rc-chart rc-chart-wide">
-          <apx-chart
-            [series]="xbarOptions.series!"
-            [chart]="xbarOptions.chart!"
-            [dataLabels]="xbarOptions.dataLabels!"
-            [stroke]="xbarOptions.stroke!"
-            [colors]="xbarOptions.colors!"
-            [markers]="xbarOptions.markers!"
-            [xaxis]="xbarOptions.xaxis!"
-            [yaxis]="xbarOptions.yaxis!"
-            [grid]="xbarOptions.grid!"
-            [legend]="xbarOptions.legend!"
-            [tooltip]="xbarOptions.tooltip!"
-            [annotations]="xbarOptions.annotations!"
-            [title]="xbarOptions.title!"
-          ></apx-chart>
-        </div>
-
+    <div *ngIf="!loading && readings.length" class="rc-grid">
+      <!-- ******************** Left : Histogram + Statistics ******************** -->
+      <div class="rc-col">
         <div class="rc-chart">
           <apx-chart
             [series]="histogramOptions.series!"
@@ -124,6 +51,85 @@
             [tooltip]="histogramOptions.tooltip!"
             [annotations]="histogramOptions.annotations!"
             [title]="histogramOptions.title!"
+          ></apx-chart>
+        </div>
+
+        <div class="rc-chart rc-stats-card">
+          <div class="rc-card-title">Statistics</div>
+
+          <div class="rc-stats">
+            <div class="rc-stat">
+              <span class="rc-stat-label">Sample Size</span>
+              <span class="rc-stat-value">{{ stats.count }}</span>
+            </div>
+            <div class="rc-stat">
+              <span class="rc-stat-label">Mean</span>
+              <span class="rc-stat-value">{{ round(stats.mean) }}</span>
+            </div>
+            <div class="rc-stat">
+              <span class="rc-stat-label">Median</span>
+              <span class="rc-stat-value">{{ round(stats.median) }}</span>
+            </div>
+            <div class="rc-stat">
+              <span class="rc-stat-label">Std. Deviation</span>
+              <span class="rc-stat-value">{{ round(stats.stdDev) }}</span>
+            </div>
+            <div class="rc-stat">
+              <span class="rc-stat-label">Cp</span>
+              <span class="rc-stat-value">{{ round(stats.cp, 2) }}</span>
+            </div>
+            <div class="rc-stat" [ngClass]="cpkClass()">
+              <span class="rc-stat-label">Cpk</span>
+              <span class="rc-stat-value">{{ round(stats.cpk, 2) }}</span>
+            </div>
+            <div class="rc-stat">
+              <span class="rc-stat-label">Min Reading</span>
+              <span class="rc-stat-value">{{ round(stats.min) }}</span>
+            </div>
+            <div class="rc-stat">
+              <span class="rc-stat-label">Max Reading</span>
+              <span class="rc-stat-value">{{ round(stats.max) }}</span>
+            </div>
+            <div class="rc-stat rc-spec">
+              <span class="rc-stat-label">LSL</span>
+              <span class="rc-stat-value">
+                {{ stats.lsl === null ? "-" : stats.lsl }}
+              </span>
+            </div>
+            <div class="rc-stat rc-spec">
+              <span class="rc-stat-label">USL</span>
+              <span class="rc-stat-value">
+                {{ stats.usl === null ? "-" : stats.usl }}
+              </span>
+            </div>
+          </div>
+
+          <div class="rc-note" *ngIf="limitNote">{{ limitNote }}</div>
+
+          <div class="rc-note" *ngIf="stats.cp === null">
+            Cp / Cpk need both LSL and USL and more than one distinct reading ,
+            so they are not shown for this location.
+          </div>
+        </div>
+      </div>
+
+      <!-- ******************** Right : X Bar + R chart ******************** -->
+      <div class="rc-col">
+        <div class="rc-chart">
+          <apx-chart
+            [series]="xbarOptions.series!"
+            [chart]="xbarOptions.chart!"
+            [dataLabels]="xbarOptions.dataLabels!"
+            [stroke]="xbarOptions.stroke!"
+            [colors]="xbarOptions.colors!"
+            [markers]="xbarOptions.markers!"
+            [xaxis]="xbarOptions.xaxis!"
+            [yaxis]="xbarOptions.yaxis!"
+            [grid]="xbarOptions.grid!"
+            [legend]="xbarOptions.legend!"
+            [tooltip]="xbarOptions.tooltip!"
+            [annotations]="xbarOptions.annotations!"
+            [title]="xbarOptions.title!"
           ></apx-chart>
         </div>
 
