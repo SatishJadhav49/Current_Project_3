@@ -7,30 +7,65 @@
   max-height: 100%;
 }
 
-/* ******************** Header ******************** */
+/* ******************** Header ********************
+   left  : Gap / Flushness switch
+   centre: Check Point > Location , with the details below it
+   right : close                                              */
 .rc-head {
   flex: 0 0 auto;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   gap: 10px;
   padding: 10px 16px;
   background: darkcyan;
   color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+}
+
+/* the two sides are the same width , so the title stays truly centred */
+.rc-head-side {
+  flex: 0 0 170px;
+  display: flex;
+  align-items: center;
+}
+
+.rc-head-right {
+  justify-content: flex-end;
 }
 
 .rc-title {
   flex: 1 1 auto;
   min-width: 0;
-  font-size: 15px;
-  font-weight: bold;
+  text-align: center;
 }
 
-.rc-title small {
-  display: block;
-  opacity: 0.9;
-  font-size: 11px;
+.rc-title-main {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 17px;
+  font-weight: bold;
+  letter-spacing: 0.2px;
+}
+
+.rc-sep {
+  margin: 0px 4px;
+  opacity: 0.7;
   font-weight: normal;
+}
+
+.rc-title-sub {
+  margin-top: 5px;
+}
+
+.rc-chip {
+  display: inline-block;
+  margin: 2px 3px;
+  padding: 2px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.22);
+  font-size: 11px;
+  font-weight: bold;
 }
 
 .rc-param {
@@ -64,8 +99,8 @@
 
 .rc-close {
   flex: 0 0 auto;
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   border: none;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.2);
@@ -202,6 +237,20 @@
 @media (max-width: 992px) {
   .rc-col {
     flex: 1 1 100%;
+  }
+  .rc-head {
+    flex-wrap: wrap;
+  }
+  .rc-head-side {
+    flex: 0 0 auto;
+  }
+  .rc-title {
+    order: 3;
+    flex: 1 1 100%;
+  }
+  .rc-title-main {
+    white-space: normal;
+    font-size: 15px;
   }
   .rc-table td {
     padding: 6px 8px;

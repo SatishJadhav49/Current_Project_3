@@ -1,27 +1,43 @@
 <div class="rc-wrap">
   <!-- ******************** Header ******************** -->
   <div class="rc-head">
+    <!-- left : Gap / Flushness , shown only when the location has both -->
+    <div class="rc-head-side">
+      <div class="rc-param" *ngIf="parameterList.length > 1">
+        <button
+          *ngFor="let p of parameterList"
+          class="rc-param-btn"
+          [ngClass]="{ 'rc-param-on': isCurrentParameter(p.Parameter_ID) }"
+          (click)="selectParameter(p.Parameter_ID)"
+        >
+          {{ p.Parameter_Type }}
+        </button>
+      </div>
+    </div>
+
+    <!-- centre : Check Point and Location , then the supporting details -->
     <div class="rc-title">
-      {{ data.locationName }}
-      <small>
-        {{ data.partName }} &nbsp;&#8226;&nbsp; {{ data.checkpointName }}
-        &nbsp;&#8226;&nbsp; {{ rangeText }}
-      </small>
+      <div class="rc-title-main">
+        <span *ngIf="data.checkpointName">
+          {{ data.checkpointName }}
+          <span class="rc-sep">&#8250;</span>
+        </span>
+        {{ data.locationName }}
+      </div>
+
+      <div class="rc-title-sub">
+        <span class="rc-chip" *ngIf="data.partName">{{ data.partName }}</span>
+        <span class="rc-chip">{{ rangeText }}</span>
+        <span class="rc-chip" *ngIf="stats.count">
+          {{ stats.count }} reading(s)
+        </span>
+      </div>
     </div>
 
-    <!-- Gap / Flushness , shown only when the location has both -->
-    <div class="rc-param" *ngIf="parameterList.length > 1">
-      <button
-        *ngFor="let p of parameterList"
-        class="rc-param-btn"
-        [ngClass]="{ 'rc-param-on': isCurrentParameter(p.Parameter_ID) }"
-        (click)="selectParameter(p.Parameter_ID)"
-      >
-        {{ p.Parameter_Type }}
-      </button>
+    <!-- right : close -->
+    <div class="rc-head-side rc-head-right">
+      <button class="rc-close" (click)="close()" title="Close">&#10005;</button>
     </div>
-
-    <button class="rc-close" (click)="close()" title="Close">&#10005;</button>
   </div>
 
   <!-- ******************** Body ******************** -->
