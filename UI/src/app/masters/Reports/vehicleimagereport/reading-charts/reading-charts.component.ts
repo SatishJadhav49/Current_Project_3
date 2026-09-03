@@ -519,8 +519,34 @@ export class ReadingChartsComponent {
     // the bins are stretched to cover LSL / USL as well , otherwise a
     // specification line outside the data range would have nowhere to sit
     const bins = this.generateHistogramData(this.readings, this.LSL, this.USL);
+
+    /*  On a category axis the line can only have one point per bar , and with
+     *  about ten bars a bell curve comes out looking like a zig zag.
+     *  So every group is split into SUB slots of the same height : the bars
+     *  look exactly the same ( they touch and form one block ) but the curve
+     *  now has SUB times more points and is drawn smoothly.
+     */
+    const SUB = 5;
+    const subWidth = bins.binWidth / SUB;
+    const subDecimals = this.decimalsFor(subWidth);
+    const subCategories: string[] = [];
+    const subCenters: number[] = [];
+    const subBars: number[] = [];
+
+    for (let i = 0; i < bins.data.length; i++) {
+      const groupStart = bins.centers[i] - bins.binWidth / 2;
+      for (let j = 0; j < SUB; j++) {
+        const from = groupStart + j * subWidth;
+        subCategories.push(from.toFixed(subDecimals));
+        subCenters.push(from + subWidth / 2);
+        // same height across the whole group , so it reads as one bar
+        subBars.push(bins.data[i]);
+      }
+    }
+
+    // scaled on the group width , because the bar heights are group counts
     const curve = this.generateNormalCurve(
-      bins.centers,
+      subCenters,
       this.stats.mean,
       this.stats.stdDev,
       this.readings.length,
@@ -532,7 +558,7 @@ export class ReadingChartsComponent {
     if (this.LSL !== null) {
       annotations.xaxis.push(
         this.vline(
-          this.findClosestBin(bins.centers, bins.categories, this.LSL),
+          this.findClosestBin(subCenters, subCategories, this.LSL),
           '#d32f2f',
           'LSL ' + this.LSL
         )
@@ -541,7 +567,7 @@ export class ReadingChartsComponent {
     if (this.USL !== null) {
       annotations.xaxis.push(
         this.vline(
-          this.findClosestBin(bins.centers, bins.categories, this.USL),
+          this.findClosestBin(subCenters, subCategories, this.USL),
           '#d32f2f',
           'USL ' + this.USL
         )
@@ -550,7 +576,7 @@ export class ReadingChartsComponent {
 
     this.histogramOptions = {
       series: [
-        { name: 'Frequency', type: 'column', data: bins.data },
+        { name: 'Frequency', type: 'column', data: subBars },
         { name: 'Normal Distribution', type: 'line', data: curve },
       ],
       chart: {
@@ -559,16 +585,18 @@ export class ReadingChartsComponent {
         toolbar: { show: true },
         animations: { enabled: false },
       },
-      plotOptions: { bar: { columnWidth: '95%' } },
+      // 100% so the sub slots of one group touch and look like a single bar
+      plotOptions: { bar: { columnWidth: '100%' } },
       dataLabels: { enabled: false },
-      stroke: { width: [1, 3], colors: ['#fff', '#1976d2'], curve: 'smooth' },
+      // no outline on the bars , otherwise the sub slots show as seams
+      stroke: { width: [0, 3], colors: ['#fff', '#1976d2'], curve: 'smooth' },
       colors: ['#7cb5ec', '#1976d2'],
       xaxis: {
-        categories: bins.categories,
+        categories: subCategories,
         labels: { rotate: -45, style: { fontSize: '9px' } },
-        // there can be up to 25 groups , so only some labels are printed
-        tickAmount: bins.categories.length > 10 ? 10 : undefined,
-        title: { text: 'Reading group' },
+        // there are SUB labels per group , so only some of them are printed
+        tickAmount: 10,
+        title: { text: 'Reading' },
       },
       // the normal curve is a fraction , without this the axis prints
       // a long tail of decimals
@@ -711,6 +739,15 @@ export class ReadingChartsComponent {
     });
 
     return { categories, centers, data: bins, binWidth };
+  }
+
+  // decimals needed so that a step of this size still shows distinct labels
+  private decimalsFor(step: number): number {
+    let decimals = Math.max(0, -Math.floor(Math.log10(step)));
+    if (decimals > 4) {
+      decimals = 4;
+    }
+    return decimals;
   }
 
   // the specification line is drawn on the group whose middle is nearest to it
