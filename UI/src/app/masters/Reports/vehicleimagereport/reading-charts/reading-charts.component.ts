@@ -480,6 +480,7 @@ export class ReadingChartsComponent {
     return { min: min, max: max };
   }
 
+  // horizontal line , used for X Bar / UCL / LCL / MR Bar / UCL R
   private line(y: number, color: string, text: string) {
     return {
       y: y,
@@ -487,6 +488,22 @@ export class ReadingChartsComponent {
       strokeDashArray: 4,
       label: {
         text: text,
+        style: { color: '#fff', background: color, fontSize: '10px' },
+      },
+    };
+  }
+
+  // vertical line on a category axis , used for LSL / USL on the histogram.
+  // x has to be one of the group labels , not a number.
+  private vline(x: string, color: string, text: string) {
+    return {
+      x: x,
+      borderColor: color,
+      strokeDashArray: 4,
+      label: {
+        text: text,
+        orientation: 'horizontal',
+        position: 'top',
         style: { color: '#fff', background: color, fontSize: '10px' },
       },
     };
