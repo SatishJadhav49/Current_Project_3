@@ -147,7 +147,12 @@
   gap: 12px;
 }
 
+/*  All four cards are the same height so the two columns line up.
+    344 = the 330px chart + 12px padding + 2px border ( box-sizing is
+    border-box , Bootstrap sets it globally ). If the chart height in the
+    component changes , change this number with it. */
 .rc-chart {
+  height: 344px;
   padding: 6px;
   border: 1px solid #e3e8e8;
   border-radius: 6px;
@@ -155,12 +160,15 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
+/* the statistics card holds a table , not a chart , so it scrolls
+   on its own if the notes make it longer than the others */
 .rc-stats-card {
   padding: 10px 12px 12px;
+  overflow-y: auto;
 }
 
 .rc-card-title {
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   color: #3c4646;
   font-size: 14px;
   font-weight: bold;
@@ -182,7 +190,7 @@
 }
 
 .rc-table td {
-  padding: 7px 10px;
+  padding: 5px 10px;
   border-bottom: 1px solid #eceff0;
 }
 

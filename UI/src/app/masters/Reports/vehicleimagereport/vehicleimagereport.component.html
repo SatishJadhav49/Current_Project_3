@@ -261,9 +261,9 @@
                     </span>
                     <div class="vr-tip-spec">
                       Spec : {{ specText(row) }}
-                      <span *ngIf="reportType === 'range'">
+                      <span *ngIf="reportType !== 'vin'">
                         &nbsp;&#8226;&nbsp; {{ row.Reading_Count }} reading(s) ,
-                        {{ row.Nok_Count }} not ok
+                        {{ row.Nok_Count }} not ok ( {{ nokPercent(row) }} % )
                       </span>
                     </div>
                   </div>

@@ -503,7 +503,7 @@ export class ReadingChartsComponent {
     // specification line outside the data range would have nowhere to sit
     const bins = this.generateHistogramData(this.readings, this.LSL, this.USL);
     const curve = this.generateNormalCurve(
-      bins.categories,
+      bins.centers,
       this.stats.mean,
       this.stats.stdDev,
       this.readings.length,
@@ -515,7 +515,7 @@ export class ReadingChartsComponent {
     if (this.LSL !== null) {
       annotations.xaxis.push(
         this.vline(
-          this.findClosestBin(bins.categories, this.LSL),
+          this.findClosestBin(bins.centers, bins.categories, this.LSL),
           '#d32f2f',
           'LSL ' + this.LSL
         )
@@ -524,7 +524,7 @@ export class ReadingChartsComponent {
     if (this.USL !== null) {
       annotations.xaxis.push(
         this.vline(
-          this.findClosestBin(bins.categories, this.USL),
+          this.findClosestBin(bins.centers, bins.categories, this.USL),
           '#d32f2f',
           'USL ' + this.USL
         )
@@ -542,13 +542,14 @@ export class ReadingChartsComponent {
         toolbar: { show: true },
         animations: { enabled: false },
       },
-      plotOptions: { bar: { columnWidth: '99%' } },
+      plotOptions: { bar: { columnWidth: '92%' } },
       dataLabels: { enabled: false },
       stroke: { width: [1, 3], colors: ['#fff', '#1976d2'], curve: 'smooth' },
       colors: ['#7cb5ec', '#1976d2'],
       xaxis: {
         categories: bins.categories,
-        labels: { style: { fontSize: '9px' } },
+        labels: { rotate: -45, style: { fontSize: '9px' } },
+        title: { text: 'Reading group' },
       },
       // the normal curve is a fraction , without this the axis prints
       // a long tail of decimals
@@ -565,25 +566,42 @@ export class ReadingChartsComponent {
     };
   }
 
+  /*  Grouping for the histogram.
+   *
+   *  The number of groups follows Sturges rule  k = ceil( log2(n) ) + 1 ,
+   *  kept between 3 and 12. That is what makes the bars meaningful : with
+   *  15 readings it gives 5 groups , not 15 thin bars of one reading each.
+   *
+   *  The range is stretched to cover LSL / USL so the specification lines
+   *  always have a bin to sit on.
+   */
   private generateHistogramData(
     data: number[],
     lsl: number,
     usl: number
   ): {
     categories: string[];
+    centers: number[];
     data: number[];
     binWidth: number;
   } {
     let min = Math.min(...data);
     let max = Math.max(...data);
-    // stretch the range so that the specification always falls inside the chart
     if (lsl !== null && lsl < min) {
       min = lsl;
     }
     if (usl !== null && usl > max) {
       max = usl;
     }
-    const binCount = 15;
+
+    let binCount = Math.ceil(Math.log2(data.length > 1 ? data.length : 2)) + 1;
+    if (binCount < 3) {
+      binCount = 3;
+    }
+    if (binCount > 12) {
+      binCount = 12;
+    }
+
     let binWidth = (max - min) / binCount;
     if (binWidth <= 0) {
       // every reading is the same value , keep one readable bin
@@ -592,8 +610,13 @@ export class ReadingChartsComponent {
 
     const bins: number[] = new Array(binCount).fill(0);
     const categories: string[] = [];
+    const centers: number[] = [];
     for (let i = 0; i < binCount; i++) {
-      categories.push((min + i * binWidth).toFixed(2));
+      const start = min + i * binWidth;
+      const end = start + binWidth;
+      // the label is the group , not a single value
+      categories.push(start.toFixed(2) + ' - ' + end.toFixed(2));
+      centers.push(start + binWidth / 2);
     }
 
     data.forEach((value) => {
@@ -604,7 +627,7 @@ export class ReadingChartsComponent {
       bins[index]++;
     });
 
-    return { categories, data: bins, binWidth };
+    return { categories, centers, data: bins, binWidth };
   }
 
   // vertical line on a category axis , it must sit on one of the bins
@@ -622,36 +645,39 @@ export class ReadingChartsComponent {
     };
   }
 
-  // the x axis holds the bin start values , so the specification is
-  // drawn on the bin which is nearest to it
-  private findClosestBin(categories: string[], value: number): string {
-    if (!categories.length) {
+  // the specification line is drawn on the group whose middle is nearest to it
+  private findClosestBin(
+    centers: number[],
+    categories: string[],
+    value: number
+  ): string {
+    if (!centers.length) {
       return '';
     }
-    let closest = categories[0];
-    let minDiff = Math.abs(parseFloat(categories[0]) - value);
-    for (let i = 1; i < categories.length; i++) {
-      const diff = Math.abs(parseFloat(categories[i]) - value);
+    let best = 0;
+    let minDiff = Math.abs(centers[0] - value);
+    for (let i = 1; i < centers.length; i++) {
+      const diff = Math.abs(centers[i] - value);
       if (diff < minDiff) {
         minDiff = diff;
-        closest = categories[i];
+        best = i;
       }
     }
-    return closest;
+    return categories[best];
   }
 
+  // the curve is taken at the middle of every group , so it lines up with the bars
   private generateNormalCurve(
-    categories: string[],
+    centers: number[],
     mean: number,
     stdDev: number,
     totalCount: number,
     binWidth: number
   ): number[] {
     if (!stdDev) {
-      return categories.map(() => 0);
+      return centers.map(() => 0);
     }
-    return categories.map((cat) => {
-      const x = parseFloat(cat);
+    return centers.map((x) => {
       // (1 / (sd * sqrt(2pi))) * e^(-((x - mean)^2 / (2 sd^2)))
       const coefficient = 1 / (stdDev * Math.sqrt(2 * Math.PI));
       const exponent = -Math.pow(x - mean, 2) / (2 * Math.pow(stdDev, 2));

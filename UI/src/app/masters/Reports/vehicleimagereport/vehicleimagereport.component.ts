@@ -758,6 +758,16 @@ export class VehicleimagereportComponent {
     }
   }
 
+  // how many of the readings behind this point were out of specification
+  nokPercent(row: ImageReportRow): string {
+    if (!row.Reading_Count) {
+      return '0';
+    }
+    const pct = (row.Nok_Count / row.Reading_Count) * 100;
+    // one decimal , but a round number stays round ( 60 , not 60.0 )
+    return (Math.round(pct * 10) / 10).toString();
+  }
+
   // shown inside the point tooltip and in the side list
   readingText(row: ImageReportRow): string {
     if (row.Reading === null || row.Reading === undefined) {
