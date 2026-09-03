@@ -542,13 +542,15 @@ export class ReadingChartsComponent {
         toolbar: { show: true },
         animations: { enabled: false },
       },
-      plotOptions: { bar: { columnWidth: '92%' } },
+      plotOptions: { bar: { columnWidth: '95%' } },
       dataLabels: { enabled: false },
       stroke: { width: [1, 3], colors: ['#fff', '#1976d2'], curve: 'smooth' },
       colors: ['#7cb5ec', '#1976d2'],
       xaxis: {
         categories: bins.categories,
         labels: { rotate: -45, style: { fontSize: '9px' } },
+        // there can be up to 25 groups , so only some labels are printed
+        tickAmount: bins.categories.length > 10 ? 10 : undefined,
         title: { text: 'Reading group' },
       },
       // the normal curve is a fraction , without this the axis prints
@@ -566,14 +568,42 @@ export class ReadingChartsComponent {
     };
   }
 
+  /*  A round step near the value asked for : 1 , 2 , 2.5 or 5 times a
+   *  power of ten. 0.05 instead of 0.043 , 0.2 instead of 0.18 , and so on.
+   */
+  private niceStep(raw: number): number {
+    if (!raw || raw <= 0) {
+      return 1;
+    }
+    const power = Math.pow(10, Math.floor(Math.log10(raw)));
+    const norm = raw / power;
+    let nice = 10;
+    if (norm <= 1) {
+      nice = 1;
+    } else if (norm <= 2) {
+      nice = 2;
+    } else if (norm <= 2.5) {
+      nice = 2.5;
+    } else if (norm <= 5) {
+      nice = 5;
+    }
+    return nice * power;
+  }
+
   /*  Grouping for the histogram.
    *
-   *  The number of groups follows Sturges rule  k = ceil( log2(n) ) + 1 ,
-   *  kept between 3 and 12. That is what makes the bars meaningful : with
-   *  15 readings it gives 5 groups , not 15 thin bars of one reading each.
+   *  When the location has a tolerance ( USL - LSL ) the group width is tied
+   *  to it : about ten groups inside the tolerance , snapped to a round step
+   *  and started on a round value. A tolerance of 0.5 gives groups of 0.05 ,
+   *  so the bars are narrow and the shape of the readings is visible.
+   *  The step is doubled if the readings are spread so wide that it would
+   *  make more than 25 bars.
    *
-   *  The range is stretched to cover LSL / USL so the specification lines
-   *  always have a bin to sit on.
+   *  Without a tolerance there is nothing to tie the width to , so it falls
+   *  back to Sturges rule  k = ceil( log2(n) ) + 1 , between 3 and 12.
+   *
+   *  Either way the range is stretched to cover LSL / USL , so the
+   *  specification lines always have a group to sit on.
    */
   private generateHistogramData(
     data: number[],
@@ -594,55 +624,76 @@ export class ReadingChartsComponent {
       max = usl;
     }
 
-    let binCount = Math.ceil(Math.log2(data.length > 1 ? data.length : 2)) + 1;
+    const tolerance =
+      lsl !== null && usl !== null && usl > lsl ? usl - lsl : 0;
+
+    let binWidth: number;
+    let start: number;
+
+    if (tolerance > 0) {
+      binWidth = this.niceStep(tolerance / 10);
+      let guard = 0;
+      while (
+        binWidth > 0 &&
+        (max - min) / binWidth > 25 &&
+        guard < 10
+      ) {
+        binWidth = this.niceStep(binWidth * 2);
+        guard++;
+      }
+      // start on a round multiple of the step
+      start = Math.floor(min / binWidth) * binWidth;
+    } else {
+      let k = Math.ceil(Math.log2(data.length > 1 ? data.length : 2)) + 1;
+      if (k < 3) {
+        k = 3;
+      }
+      if (k > 12) {
+        k = 12;
+      }
+      binWidth = (max - min) / k;
+      start = min;
+    }
+
+    if (!binWidth || binWidth <= 0) {
+      // every reading is the same value , keep one readable group
+      binWidth = 1;
+      start = min - 0.5;
+    }
+
+    let binCount = Math.ceil((max - start) / binWidth + 0.000000001);
     if (binCount < 3) {
       binCount = 3;
     }
-    if (binCount > 12) {
-      binCount = 12;
-    }
 
-    let binWidth = (max - min) / binCount;
-    if (binWidth <= 0) {
-      // every reading is the same value , keep one readable bin
-      binWidth = 1;
+    // how many decimals the labels need , taken from the step itself
+    let decimals = Math.max(0, -Math.floor(Math.log10(binWidth)));
+    if (decimals > 3) {
+      decimals = 3;
     }
 
     const bins: number[] = new Array(binCount).fill(0);
     const categories: string[] = [];
     const centers: number[] = [];
     for (let i = 0; i < binCount; i++) {
-      const start = min + i * binWidth;
-      const end = start + binWidth;
-      // the label is the group , not a single value
-      categories.push(start.toFixed(2) + ' - ' + end.toFixed(2));
-      centers.push(start + binWidth / 2);
+      const from = start + i * binWidth;
+      const to = from + binWidth;
+      categories.push(from.toFixed(decimals) + ' - ' + to.toFixed(decimals));
+      centers.push(from + binWidth / 2);
     }
 
     data.forEach((value) => {
-      const index = Math.min(
-        Math.floor((value - min) / binWidth),
-        binCount - 1
-      );
+      let index = Math.floor((value - start) / binWidth);
+      if (index < 0) {
+        index = 0;
+      }
+      if (index > binCount - 1) {
+        index = binCount - 1;
+      }
       bins[index]++;
     });
 
     return { categories, centers, data: bins, binWidth };
-  }
-
-  // vertical line on a category axis , it must sit on one of the bins
-  private vline(x: string, color: string, text: string) {
-    return {
-      x: x,
-      borderColor: color,
-      strokeDashArray: 4,
-      label: {
-        text: text,
-        orientation: 'horizontal',
-        position: 'top',
-        style: { color: '#fff', background: color, fontSize: '10px' },
-      },
-    };
   }
 
   // the specification line is drawn on the group whose middle is nearest to it
