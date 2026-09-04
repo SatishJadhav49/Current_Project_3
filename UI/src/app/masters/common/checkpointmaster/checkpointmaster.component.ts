@@ -45,6 +45,7 @@ export class CheckpointmasterComponent {
   createCheckPointForm: FormGroup;
   ParameterList: Parameter[] = [];
   isParallelism: boolean = false;
+  isAClass: boolean = false; // A class check point : yes / no
   // area
   searchAreaInput: string;
   AreaList: Area[] = [];
@@ -333,6 +334,7 @@ export class CheckpointmasterComponent {
           Area_ID: this.selectedArea.Area_ID,
           Part_ID: this.selectedpart.Part_ID,
           Is_Active: true,
+          Is_A_Class: this.isAClass,
           SORTORDER: this.createCheckPointForm.get('sortorder').value,
           Parallelism: this.isParallelism
             ? this.createCheckPointForm.value.parallelism
@@ -353,6 +355,7 @@ export class CheckpointmasterComponent {
           this.cpObject.push(temp);
           const tempsort = this.createCheckPointForm.get('sortorder').value;
           this.createCheckPointForm.reset();
+          this.isAClass = false;
           this.ParameterList.forEach((para) => {
             this.createCheckPointForm.get(para.Type).setValue(true);
           });
@@ -407,6 +410,7 @@ export class CheckpointmasterComponent {
             ? this.createCheckPointForm.value.parallelism
             : null,
           Is_Active: true,
+          Is_A_Class: this.isAClass,
         };
         this.ParameterList.forEach((para, index) => {
           temp[`Is_${para.Type}`] = para.Type;
@@ -507,6 +511,7 @@ export class CheckpointmasterComponent {
       this.createCheckPointForm.get('Gap').setValue(temp.Is_Gap);
       this.createCheckPointForm.get('Flushness').setValue(temp.Is_Flushness);
       this.isParallelism = temp.Parallelism ? true : false;
+      this.isAClass = temp.Is_A_Class ? true : false;
       this.selectedShop = this.shoplist.find(
         (shop) => shop.Shop_ID === temp.Shop_ID
       );
@@ -543,6 +548,26 @@ export class CheckpointmasterComponent {
         });
       $(window).scrollTop(0);
     }
+  }
+
+  // A Class toggle of the table , works the same way as the Status toggle
+  onAClassChange(data) {
+    data.Updated_User_ID = this.userid;
+    data.Updated_Host = this.hostname;
+    this.commonService.updateCP(data.Checkpoint_ID, data).subscribe((data) => {
+      if (data !== null && data !== undefined) {
+        if (data.isErrorMessage) {
+          this.toaster.error(data.messageDetail, data.messageTitle);
+        } else if (data.isSuccessMessage) {
+          this.refresh();
+          this.toaster.success(data.messageDetail, data.messageTitle);
+        } else if (data.isAlertMessage) {
+          this.toaster.warning(data.messageDetail, data.messageTitle);
+        } else {
+          this.toaster.error(data.messageDetail, data.messageTitle);
+        }
+      }
+    });
   }
 
   onStatusChange(data) {
@@ -791,6 +816,7 @@ export class CheckpointmasterComponent {
     this.createCheckPointForm.reset();
     this.searchModelInput = null;
     this.isParallelism = false;
+    this.isAClass = false;
     this.getTableData();
     if (this.selectedForDelete || this.modifyFlag) {
       this.selectedForDelete = null;

@@ -239,6 +239,20 @@
                   <label>Parallelism *</label>
                 </div>
               </div>
+              <!-- A Class check point : yes / no -->
+              <div class="col-md-4">
+                <div
+                  class="form-group form-animate-text"
+                  style="margin-top: 10px !important"
+                >
+                  <mat-checkbox
+                    [(ngModel)]="isAClass"
+                    [ngModelOptions]="{ standalone: true }"
+                  >
+                  </mat-checkbox>
+                  A Class
+                </div>
+              </div>
               <ng-container *ngIf="!modifyFlag">
                 <div class="col-md-4">
                   <div
@@ -445,6 +459,7 @@
             <th class="header-background">Check Point</th>
             <th class="header-background">Type</th>
             <th class="header-background">Sort Order</th>
+            <th class="header-background">A Class</th>
             <th class="header-background">Status</th>
             <th class="header-background" style="width: 11%">Action</th>
           </tr>
@@ -474,6 +489,21 @@
               }}
             </td>
             <td>{{ item.SORTORDER }}</td>
+            <td>
+              <mat-checkbox
+                [color]="item.Is_A_Class ? 'success' : 'danger'"
+                (click)="onAClassChange(item)"
+                [(ngModel)]="item.Is_A_Class"
+              >
+                <span
+                  style="font-weight: bold; font-size: 12px"
+                  [style]="
+                    item.Is_A_Class ? { color: 'green' } : { color: 'red' }
+                  "
+                  >{{ item.Is_A_Class ? "Yes" : "No" }}</span
+                >
+              </mat-checkbox>
+            </td>
             <td>
               <mat-checkbox
                 [color]="item.Is_Active ? 'success' : 'danger'"

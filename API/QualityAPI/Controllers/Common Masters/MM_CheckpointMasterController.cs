@@ -62,6 +62,7 @@ namespace QualityAPI.Controllers.Common_Masters
                                area.Area_Name,
                                checkpoint.Checkpoint_Name,
                                checkpoint.Is_Active,
+                               checkpoint.Is_A_Class,
                                checkpoint.SORTORDER,
                                checkpoint.Model_ID,
                                model.Model_Name,
@@ -73,7 +74,8 @@ namespace QualityAPI.Controllers.Common_Masters
                                part.Part_ID,
                                part.Part_Name,
                                checkpoint.Audit_Type_Id,
-                               Status = checkpoint.Is_Active == true?"Active":"In Active"
+                               Status = checkpoint.Is_Active == true?"Active":"In Active",
+                               A_Class_Status = checkpoint.Is_A_Class == true?"Yes":"No"
                        }).ToList();
 
                 messageDataObj.isSuccessMessage = true;
@@ -114,6 +116,7 @@ namespace QualityAPI.Controllers.Common_Masters
                            checkpoint.Area_ID,
                            checkpoint.Checkpoint_Name,
                            checkpoint.Is_Active,
+                           checkpoint.Is_A_Class,
                            checkpoint.SORTORDER,
                            checkpoint.Model_ID,
                            checkpoint.Part_ID,
@@ -205,6 +208,7 @@ namespace QualityAPI.Controllers.Common_Masters
                     obj.Part_ID = mM_CheckpointMaster.Part_ID;
                     obj.Parallelism = mM_CheckpointMaster.Parallelism;
                     obj.Is_Active = mM_CheckpointMaster.Is_Active;
+                    obj.Is_A_Class = mM_CheckpointMaster.Is_A_Class;
                     obj.SORTORDER = mM_CheckpointMaster.SORTORDER;
                     obj.Plant_ID = mM_CheckpointMaster.Plant_ID;
                     obj.Plant_Code = mM_CheckpointMaster.Plant_Code;
@@ -278,6 +282,7 @@ namespace QualityAPI.Controllers.Common_Masters
                     obj.Area_ID = item.Area_ID;
                     obj.Part_ID = item.Part_ID;
                     obj.Is_Active = item.Is_Active;
+                    obj.Is_A_Class = item.Is_A_Class;
                     obj.SORTORDER = item.SORTORDER;
                     obj.Plant_ID = item.Plant_ID;
                     obj.Plant_Code = item.Plant_Code;

@@ -9,6 +9,7 @@ export class CheckPoint {
   public Area_ID: number;
   public Part_ID: number;
   public Is_Active: boolean;
+  public Is_A_Class?: boolean; // A class check point : yes / no
   public Is_Gap?: boolean;
   public Is_Flushness?: boolean;
   public SORTORDER: number;
